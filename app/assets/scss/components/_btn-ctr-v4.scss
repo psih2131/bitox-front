@@ -1,0 +1,55 @@
+.btn-ctr-v4{
+    background: $white;
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 10px 15px 30px;
+    border-radius: 100px;
+    border: none;
+
+    &:hover{
+        .btn-ctr-v4__ar{
+            transform: scale(1.1);
+            transition: all ease 0.3s;
+            svg{
+                transform: rotate(45deg);
+                transition: all ease 0.3s;
+            }
+        }
+    }
+}
+.btn-ctr-v4__ar{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $green1;
+    border-radius: 100px;
+    transition: all ease 0.3s;
+    
+    svg{
+        display: block;  
+     
+        transition: all ease 0.3s;
+    }
+}
+
+.btn-ctr-v4__text{
+    font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+margin-right: 20px;
+color: $green1;
+}
+
+@media only screen and (max-width: 760px) {
+    .btn-ctr-v4{
+        padding: 10px 10px 10px 20px;
+        border-radius: 10px;
+    }
+    .btn-ctr-v4__text{
+        font-size: 14px;
+        margin-right: 20px;
+    }
+}

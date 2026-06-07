@@ -1,0 +1,16 @@
+@font-face {
+	font-family: 'SKNigarRUS';
+	src: url('sknigarrus.eot');
+	/* IE 9 Compatibility Mode */
+	src: url('sknigarrus.eot?#iefix') format('embedded-opentype'),
+		/* IE < 9 */
+		url('sknigarrus.woff2') format('woff2'),
+		/* Super Modern Browsers */
+		url('sknigarrus.woff') format('woff'),
+		/* Firefox >= 3.6, any other modern browser */
+		url('sknigarrus.ttf') format('truetype'),
+		/* Safari, Android, iOS */
+		url('sknigarrus.svg#sknigarrus') format('svg');
+	/* Chrome < 4, Legacy iOS */
+	font-display: swap;
+}

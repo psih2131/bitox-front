@@ -1,0 +1,295 @@
+.inform-hero-sec{
+    padding-top:200px;
+    padding-bottom: 100px;
+    .container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.inform-hero-sec__img-wrapper{
+    width: 592px;
+    height: 430px;
+    border-radius: 25px;
+    overflow: hidden;
+
+    img{
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+}
+.inform-hero-sec__data{
+    width: calc(100% - 592px);
+    padding-right: 28px;
+}
+.inform-hero-sec__title{
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 90%;
+    /* or 40px */
+    letter-spacing: -0.05em;
+    margin-bottom: 20px;
+}
+.inform-hero-sec__subtitle{
+    max-width: 420px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 95%;
+    /* or 15px */
+    letter-spacing: -0.01em;
+    font-family: $secondFonts;
+    margin-bottom: 30px;
+}
+.inform-hero-sec__btns-row{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 30px;
+
+    .btn-ctr-v1{
+        width: 270px;
+    }
+}
+.inform-docs-sec{
+    padding-bottom: 100px;
+}
+.inform-docs-sec__title{
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 90%;
+    /* or 31px */
+    letter-spacing: -0.03em;
+    max-width: 700px;
+    margin-bottom: 40px;
+
+    b{
+        color: $green1;
+        font-weight: 500;
+    }
+}
+.inform-docs-sec__cluster-title{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 90%;
+    /* identical to box height, or 22px */
+    letter-spacing: -0.03em;
+    margin-bottom: 30px;
+}
+.inform-docs-sec__cluster{
+    margin-bottom: 40px;
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+.doc-component{
+    margin-bottom: 20px;
+    padding: 10px 40px 10px 30px;
+    min-height: 68px;
+    border-radius: 25px;
+    background: #F6F6F6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+
+.doc-component__title{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 95%;
+    /* or 15px */
+    letter-spacing: -0.01em;
+    font-family: $secondFonts;
+    color: $black;
+    width: calc(100% - 240px);
+    padding-right: 100px;
+}
+.doc-component__btns-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 240px;
+}
+.doc-component__bnt{
+    background: $green1;
+    color: $white;
+    text-align: center;
+    border-radius: 100px;
+    display: inline-block;
+    padding: 10px 22px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    /* identical to box height, or 16px */
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    transition: all ease 0.3s;
+
+    &:hover{
+        transform: scale(1.05);
+        transition: all ease 0.3s;
+    }
+}
+.doc-component__btns-row-mobile{
+    display: none;
+}
+
+
+
+
+@media only screen and (max-width: 1360px) {
+
+}
+
+@media only screen and (max-width: 1280px) {
+
+}
+
+@media only screen and (max-width: 1240px) {
+    .inform-hero-sec{
+        padding-top: 100px;
+        padding-bottom: 80px;
+    }
+    .inform-hero-sec__img-wrapper{
+        width: 490px;
+        height: 350px;
+        border-radius: 15px;
+    }
+    .inform-hero-sec__data{
+        width: calc(100% - 490px);
+        padding-right: 15px;
+    }
+    .inform-hero-sec__title{
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    .inform-hero-sec__btns-row{
+        row-gap: 20px;
+    }
+    .inform-docs-sec__title{
+        font-size: 30px;
+    }
+    .doc-component__bnt{
+        font-size: 14px;
+    }
+    .doc-component__btns-row{
+        width: 220px;
+    }
+    .doc-component__title{
+        font-size: 14px;
+        width: calc(100% - 220px);
+        padding-right: 80px;
+    }
+    .inform-docs-sec__cluster-title{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .doc-component{
+        border-radius: 15px;
+        padding: 10px 30px 10px 20px;
+        min-height: 58px;
+    }
+    .inform-docs-sec{
+        padding-bottom: 80px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .inform-hero-sec__img-wrapper{
+        width: 400px;
+        height: 280px;
+    }
+    .inform-hero-sec__data{
+        width: calc(100% - 400px);
+    }
+    .inform-hero-sec__title{
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    .inform-hero-sec__btns-row{
+        row-gap: 15px;
+    }
+    .inform-docs-sec__title{
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .inform-hero-sec{
+        padding-top: 113px;
+        padding-bottom: 70px;
+
+        .container{
+            flex-wrap: wrap;
+        }
+    }
+    .inform-hero-sec__data{
+        width: 100%;
+    }
+    .inform-hero-sec__img-wrapper{
+        width: 100%;
+        border-radius: 10px;
+        height: 274px;
+        margin-top: 20px;
+    }
+    .inform-hero-sec__title{
+        margin-bottom: 20px;
+    }
+    .inform-hero-sec__subtitle{
+        font-size: 14px;
+        max-width: 270px;
+        margin-bottom: 30px;
+    }
+    .inform-hero-sec__btns-row .btn-ctr-v1{
+        width: 230px;
+    }
+    .inform-docs-sec__title{
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    .inform-docs-sec__cluster-title{
+        font-size: 18px;
+        margin-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    .doc-component__btns-row{
+        display: none;
+    }
+    .doc-component{
+        padding: 22px 20px ;
+        border-radius: 10px;
+        min-height: 1px;
+    }
+    .doc-component__title{
+        width: calc(100% - 54px);
+        padding-right: 20px;
+        font-size: 13px;
+    }
+    .doc-component__btns-row-mobile{
+        display: flex;
+        align-items: center;
+        width: 56px;
+        justify-content: space-between;
+    }
+    .doc-component__bnt-mob{
+        display: inline-block;
+
+        svg{
+            display: block;
+        }
+    }
+    .inform-docs-sec__cluster{
+        margin-bottom: 20px;
+    }
+    .inform-docs-sec{
+        padding-bottom: 70px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+}

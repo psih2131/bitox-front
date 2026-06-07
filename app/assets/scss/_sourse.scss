@@ -1,0 +1,164 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+}
+
+@media only screen and (max-width: 940px) {
+
+	input,
+	textarea,
+	select {
+		font-size: 16px !important;
+	}
+}
+
+a {
+	text-decoration: none;
+
+}
+
+li {
+	list-style-type: none;
+}
+
+button {
+	cursor: pointer;
+	outline: 0 none !important;
+
+}
+
+body::-webkit-scrollbar {
+	width: 5px;
+}
+
+
+body::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	border-radius: 100px;
+
+}
+
+input {
+	outline: 0 none !important;
+
+}
+
+input[type=text] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+input[type=tel] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+input[type=email] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+input[type=submit] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+select {
+	cursor: pointer;
+	outline: 0 none !important;
+
+}
+
+textarea {
+	outline: 0 none !important;
+
+}
+
+svg {
+	shape-rendering: geometricPrecision;
+}
+
+body {
+	font-family: $mainFont;
+	background: $white;
+	color: $black;
+}
+
+ul {
+	margin-bottom: 0;
+}
+
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.container-v2 {
+	width: 1340px;
+	margin: 0 auto;
+}
+
+.main {
+	min-height: 500px;
+}
+
+
+@media only screen and (max-width: 1360px) {
+	.container-v2 {
+		width: 1240px;
+	}
+}
+
+@media only screen and (max-width: 1280px) {
+	.container-v2 {
+		width: 1200px;
+	}
+}
+
+@media only screen and (max-width: 1240px) {
+
+	.container-v2,
+	.container {
+		width: 900px;
+	}
+}
+
+@media only screen and (max-width: 940px) {
+
+	.container-v2,
+	.container {
+		width: 750px;
+	}
+}
+
+
+
+@media only screen and (max-width: 760px) {
+
+	.container-v2,
+	.container {
+		width: 345px;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+
+	.container-v2,
+	.container {
+		width: 320px;
+	}
+}

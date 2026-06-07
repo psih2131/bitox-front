@@ -1,0 +1,52 @@
+.btn-ctr-v1{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    background: $green1;
+    border-radius: 100px;
+    padding: 10px 15px 10px 20px;
+    border: none;
+    &:hover{
+        .btn-ctr__ar{
+            transform: scale(1.1);
+            transition: all ease 0.3s;
+            svg{
+                transform: rotate(45deg);
+                transition: all ease 0.3s;
+            }
+        }
+    }
+}
+.btn-ctr__text{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    /* identical to box height, or 16px */
+    letter-spacing: -0.02em;
+
+    color: $white;
+}
+.btn-ctr__ar{
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $white;
+    border-radius: 100px;
+    transition: all ease 0.3s;
+    
+    svg{
+        display: block;  
+        transition: all ease 0.3s;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .btn-ctr-v1{
+        .btn-ctr__text{
+      font-size: 14px;
+    }
+    }
+}

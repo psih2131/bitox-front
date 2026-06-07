@@ -1,0 +1,75 @@
+.btn-ctr-v2{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    background: $green1;
+    border-radius: 100px;
+    padding: 10px 10px 10px 20px;
+    border: none;
+
+    &:hover{
+        .btn-ctr-v2__ar{
+            transform: scale(1.1);
+            transition: all ease 0.3s;
+            svg{
+                transform: rotate(45deg);
+                transition: all ease 0.3s;
+            }
+        }
+    }
+}
+.btn-ctr-v2__text{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    /* identical to box height, or 16px */
+    letter-spacing: -0.02em;
+    color: $white;
+}
+.btn-ctr-v2__ar{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $white;
+    border-radius: 100px;
+    transition: all ease 0.3s;
+    
+    svg{
+        display: block;  
+        width: 15px;
+        height: auto;
+        transition: all ease 0.3s;
+    }
+
+   
+}
+
+@media only screen and (max-width: 940px) {
+    .btn-ctr-v2{
+        padding: 9px 6px 9px 15px;
+    }
+    .btn-ctr-v2__text{
+        font-size: 14px;
+    }
+    .btn-ctr-v2__ar{
+        width: 20px;
+        height: 20px;
+        svg{
+            width: 13px;
+            height: auto;
+        }
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .btn-ctr-v2{
+        padding-left: 13px;
+        padding: 7px 6px 7px 13px;
+    }
+    .btn-ctr-v2__text{
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,128 @@
+.specialists-hero-sec {
+    .hero-sec__bg-img{
+        width: 760px;
+        top: 24px;
+        right: -96px;
+    }
+    .hero-sec__text{
+        max-width: 390px;
+    }
+    .hero-sec__content{
+        padding: 70px 30px 130px 30px;
+    }
+    .btn-ctr-v1{
+        width: 274px;
+    }
+}
+.specialists-list-sec{
+    padding-bottom: 100px;
+}
+
+.specialists-list-sec__title{
+    max-width: 790px;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 90%;
+    /* or 31px */
+    letter-spacing: -0.03em;
+
+    color: $black;
+
+    b{
+        font-weight: 500;
+        color: $green1;
+    }
+}
+
+.specialists-list-sec__content{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    row-gap: 20px;
+    margin-top: 40px;
+
+    .specialist-card{
+        width: calc(33.333% - 20px);
+        margin: 0 10px;
+    }
+}
+
+
+
+@media only screen and (max-width: 1360px) {
+	
+}
+
+@media only screen and (max-width: 1280px) {
+
+}
+
+@media only screen and (max-width: 1240px) {
+    .specialists-hero-sec .hero-sec__bg-img{
+        width: 650px;
+    }
+    .specialists-hero-sec .btn-ctr-v1{
+        width: 240px;
+    }
+
+    .specialists-hero-sec .hero-sec__content{
+        padding: 40px 20px 100px 20px;
+    }
+    .specialists-list-sec__title{
+        font-size: 30px;
+    }
+    .specialists-list-sec__content{
+        .specialist-card{
+            width: calc(50% - 20px);
+        }
+    }
+    .specialists-list-sec{
+        padding-bottom: 80px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .specialists-hero-sec .hero-sec__bg-img{
+        width: 550px;
+    }
+    .specialists-list-sec__title{
+        font-size: 26px;
+    }
+
+  
+}
+
+
+
+@media only screen and (max-width: 760px) {
+    .specialists-hero-sec .hero-sec__content{
+        padding: 66px 15px 30px 15px;
+    }
+    .specialists-hero-sec .hero-sec__bg-img{
+        width: 100%;
+        top: auto;
+        bottom: 82px;
+        right: 0;
+    }
+
+    .specialists-list-sec__title{
+        font-size: 22px;
+    }
+    .specialists-list-sec__content{
+        margin-top: 20px;
+        width: 100%;
+        margin-left: 0;
+        .specialist-card{
+            width: 100%;
+            margin: 0;
+        }
+    }
+    .specialists-list-sec{
+        padding-bottom: 70px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+}
