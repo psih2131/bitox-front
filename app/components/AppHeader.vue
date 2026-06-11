@@ -79,7 +79,7 @@ const navLinks = [
   { label: 'Партнерская программа', to: '/partners' },
   { label: 'Частным клиентам' },
   { label: 'Международные расчеты' },
-  { label: 'Обмен криптовалюты' },
+  { label: 'Контакты', to: '/contacts' },
   { label: 'о Bitox', to: '/about' },
 ]
 </script>

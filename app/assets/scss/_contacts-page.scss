@@ -1,511 +1,186 @@
-.contacts-hero-sec{
-    padding-top: 180px;
-    padding-bottom: 100px;
-    .container{
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+.contacts-accounts-sec {
+  padding: 40px 0 80px;
+  background: $bg-platform;
+}
+
+.contacts-accounts-sec__breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 47px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.09;
+}
+
+.contacts-accounts-sec__breadcrumb-link {
+  color: $gray-83;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $gray;
+  }
+}
+
+.contacts-accounts-sec__breadcrumb-sep {
+  color: $gray-83;
+}
+
+.contacts-accounts-sec__breadcrumb-current {
+  font-weight: 800;
+  color: $gray;
+}
+
+.contacts-accounts-sec__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.contacts-accounts-sec__main {
+  width: calc(100% - 325px - 20px);
+  max-width: 785px;
+}
+
+.contacts-accounts-sec__title-wrap {
+  margin-bottom: 35px;
+}
+
+.contacts-accounts-sec__title {
+  position: relative;
+  font-weight: 800;
+  font-size: 80px;
+  line-height: 0.84;
+  color: $gray;
+}
+
+.contacts-accounts-sec__title-line {
+  display: block;
+  width: 100%;
+}
+
+.contacts-accounts-sec__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(219, 219, 219, 0.45);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.09;
+  color: $gray;
+  position: absolute;
+  left: 222px;
+  top: 13px;
+}
+
+.contacts-accounts-sec__badge-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.contacts-accounts-sec__text {
+  max-width: 500px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.23;
+  color: $gray-83;
+}
+
+.contacts-accounts-sec__card {
+  flex-shrink: 0;
+  width: 325px;
+  padding: 12px 24px 24px;
+  border-radius: 20px;
+  background: $white;
+  box-shadow: 0 4px 24px rgba(49, 49, 50, 0.06);
+  text-align: center;
+}
+
+.contacts-accounts-sec__avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 26px;
+  border-radius: 50%;
+  background: #313132;
+}
+
+.contacts-accounts-sec__card-name {
+  margin-bottom: 8px;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.02;
+  color: $gray;
+}
+
+.contacts-accounts-sec__card-role {
+  margin-bottom: 17px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.09;
+  color: $gray-83;
+}
+
+.contacts-accounts-sec__card-login {
+  margin-bottom: 17px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.09;
+  color: $gray-83;
+
+  a {
+    color: $gray;
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
     }
-}
-.contacts-hero-sec__info{
-    width: calc(100% - 590px);
-    padding-right: 30px;
+  }
 }
 
-.contacts-hero-sec__title{
-    font-weight: 500;
-    font-size: 34px;
-    line-height: 90%;
-    /* identical to box height, or 31px */
-    letter-spacing: -0.03em;
-    margin-bottom: 40px;
+.contacts-accounts-sec__card-date {
+  margin: 0;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.1;
+  color: rgba(49, 49, 50, 0.83);
 }
 
-.contacts-hero-sec__subtitle{
-    font-style: normal;
-    font-weight: 400;
+@media (max-width: 1200px) {
+  .contacts-accounts-sec__row {
+    flex-direction: column;
+  }
+
+  .contacts-accounts-sec__main {
+    width: 100%;
+    max-width: none;
+  }
+
+  .contacts-accounts-sec__card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contacts-accounts-sec {
+    padding: 30px 0 60px;
+  }
+
+  .contacts-accounts-sec__title {
+    font-size: 40px;
+  }
+
+  .contacts-accounts-sec__text {
     font-size: 16px;
-    line-height: 95%;
-    /* or 15px */
-    letter-spacing: -0.01em;
-    font-family: $secondFonts;
-    margin-bottom: 40px;
-    max-width: 460px;
-    color: $black;
-}
+  }
 
-.contacts-hero-sec__contacts-list{
-    margin-bottom: 40px;
-}
-
-.contacts-hero-sec__contact-link{
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    max-width: 100%;
-    color: $black;
-    transition: color ease 0.3s;
-
-    &:hover{
-        color: $green1;
-        transition: color ease 0.3s;
-
-        .contacts-hero-sec__contact-link-ar path{
-            stroke: $green1;
-        }
-    }
-
-    & + .contacts-hero-sec__contact-link{
-        margin-top: 30px;
-    }
-}
-
-.contacts-hero-sec__contact-link-text{
-    font-style: normal;
-font-weight: 500;
-font-size: 24px;
-line-height: 90%;
-/* or 22px */
-letter-spacing: -0.03em;
-}
-
-.contacts-hero-sec__contact-link-ar{
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-
-    svg{
-        display: block;
-    }
-
-    path{
-        transition: stroke ease 0.3s;
-    }
-}
-
-.contacts-hero-sec__schedule{
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-weight: 400;
-font-size: 16px;
-line-height: 95%;
-/* or 15px */
-letter-spacing: -0.01em;
-font-family: $secondFonts;
-color: $black;
-}
-
-.contacts-hero-sec__socials{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.contacts-hero-sec__socials-link{
-    display: block;
-    width: 40px;
-    transition: transform ease 0.3s;
-
-    img{
-        width: 100%;
-        display: block;
-    }
-
-    &:hover{
-        transform: scale(1.1);
-        transition: transform ease 0.3s;
-    }
-}
-
-.contacts-hero-sec__form-wrapper{
-    width: 590px;
-    padding: 30px;
-    border-radius: 25px;
-    background: #F6F6F6;
-}
-.contacts-hero-sec__form-title{
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 90%;
-    /* identical to box height, or 22px */
-    letter-spacing: -0.03em;
-    margin-bottom: 20px;
-}
-.contacts-hero-sec__form-subtitle{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 95%;
-    /* or 15px */
-    letter-spacing: -0.01em;
-    margin-bottom: 30px;
-    font-family: $secondFonts;
-    color: $black;
-}
-.contacts-hero-sec__form-fields{
-    width: 360px;
-}
-.contacts-hero-sec__form-inp{
-    width: 100%;
-    margin-bottom: 20px;
-
-    input{
-        width: 100%;
-        padding: 10px 20px;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 95%;
-        /* or 15px */
-        letter-spacing: -0.01em;
-        color: rgba(0, 0, 0, 1);
-        font-family: $secondFonts;
-        background: #FFFFFF;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-        border: none;
-
-        &::placeholder{
-            color: rgba(0, 0, 0, 0.5);
-        }
-    }
-}
-
-.contacts-hero-sec__form-inp{
-    textarea{
-        width: 100%;
-        padding: 10px 20px;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 95%;
-        /* or 15px */
-        letter-spacing: -0.01em;
-        color: rgba(0, 0, 0, 1);
-        font-family: $secondFonts;
-        background: #FFFFFF;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-        border: none;
-        height: 50px;
-        resize: none;
-
-        &::placeholder{
-            color: rgba(0, 0, 0, 0.5);
-        }
-    }
-}
-
-.contacts-hero-sec__form-fields{
-    .btn-ctr-v1{
-        width: 366px;
-    }
-}
-
-.contacts-hero-sec__form-checkbox{
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 30px;
-    cursor: pointer;
-
-    input[type="checkbox"]{
-        flex-shrink: 0;
-        width: 24px;
-        height: 24px;
-        margin-top: 1px;
-        appearance: none;
-        -webkit-appearance: none;
-        background: #FFFFFF;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 6px;
-        border: none;
-        cursor: pointer;
-        transition: background-color ease 0.2s;
-
-        &:checked{
-            background: $green1 url("data:image/svg+xml,%3Csvg width='12' height='10' viewBox='0 0 12 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.2L4.4 8.6L11 1.4' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px 10px no-repeat;
-        }
-    }
-}
-
-.contacts-hero-sec__form-checkbox-text{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 120%;
-    letter-spacing: -0.01em;
-    font-family: $secondFonts;
-    color: rgba(0, 0, 0, 0.5);
-
-    a{
-        color: inherit;
-        text-decoration: none;
-
-        &:hover{
-            color: $green1;
-        }
-    }
-}
-.contacts-hero-sec__contact-link-cluster{
-    margin-bottom: 20px;
-}
-.contacts-map-sec{
-    padding-bottom: 100px;
-}
-.contacts-map-sec__title{
-    font-weight: 500;
-    font-size: 34px;
-    line-height: 90%;
-    /* identical to box height, or 31px */
-    letter-spacing: -0.03em;
-    margin-bottom: 35px;
-}
-.contacts-map-sec__map-wrapper{
-    width: 100%;
-    border-radius: 25px;
-    height: 496px;
-    overflow: hidden;
-}
-
-.contacts-map-sec__map-error{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 30px;
-    text-align: center;
-    font-family: $secondFonts;
-    font-size: 16px;
-    line-height: 120%;
-    color: rgba(0, 0, 0, 0.6);
-    background: #F6F6F6;
-
-    code{
-        font-family: inherit;
-        color: $green1;
-    }
-}
-.contacts-map-sec__images-row{
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    width: calc(100% + 20px);
-    margin-left: -10px;
-    row-gap: 20px;
-}
-.contacts-map-sec__img-wrapper{
-    width: calc(33.333% - 20px);
-    margin: 0 10px;
-    height: 280px;
-    border-radius: 25px;
-    overflow: hidden;
-    position: relative;
-
-    img{
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-    }
-}
-.contacts-map-sec__img-wrapper-link{
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    
-    svg{
-        display: block;
-    }
-}
-
-
-@media only screen and (max-width: 1360px) {
-
-}
-
-@media only screen and (max-width: 1280px) {
-
-}
-
-@media only screen and (max-width: 1240px) {
-    .contacts-hero-sec__form-wrapper{
-        width: 400px;
-        border-radius: 15px;
-    }
-    .contacts-hero-sec__form-fields{
-        width: 100%;
-    }
-    .contacts-hero-sec__form-fields .btn-ctr-v1{
-        width: 100%;
-    }
-    .contacts-hero-sec__info{
-        width: calc(100% - 400px);
-    }
-    .contacts-hero-sec{
-        padding-top: 140px;
-        padding-bottom: 80px;
-    }
-    .contacts-hero-sec__title{
-        font-size: 30px;
-        margin-bottom: 25px;
-    }
-    .contacts-hero-sec__subtitle{
-        margin-bottom: 30px;
-    }
-    .contacts-hero-sec__contact-link-text{
-        font-size: 20px;
-    }
-    .contacts-map-sec__title{
-        font-size: 30px;
-    }
-    .contacts-map-sec__map-wrapper{
-        border-radius: 15px;
-    }
-    .contacts-map-sec__img-wrapper{
-        height: 240px;
-        border-radius: 15px;
-    }
-    .contacts-map-sec{
-        padding-bottom: 80px;
-    }
-    .contacts-hero-sec__form-title{
-        font-size: 22px;
-    }
-   
-}
-
-@media only screen and (max-width: 940px) {
-    .contacts-hero-sec__form-wrapper{
-        width: 370px;
-        padding: 20px;
-        border-radius: 15px;
-    }
-    .contacts-hero-sec__info{
-        width: calc(100% - 370px);
-    }
-    .contacts-map-sec__img-wrapper{
-        height: 200px;
-    }
-
-}
-
-@media only screen and (max-width: 760px) {
-    .contacts-hero-sec{
-        padding-top: 113px;
-        padding-bottom: 70px;
-
-        .container{
-            flex-wrap: wrap;
-        }
-    }
-    .contacts-hero-sec__info{
-        width: 100%;
-    }
-    .contacts-hero-sec__form-wrapper{
-        width: 100%;
-        margin-top: 40px;
-        border-radius: 10px;
-    }
-    .contacts-hero-sec__form-fields{
-        width: 100%;
-    }
-    .contacts-hero-sec__title{
-        font-size: 28px;
-        margin-bottom: 15px;
-    }
-    .contacts-hero-sec__subtitle{
-        font-size: 14px;
-        margin-bottom: 30px;
-    }
-    .contacts-hero-sec__contact-link-text{
-        font-size: 18px;
-    }
-    .contacts-hero-sec__schedule{
-        font-size: 12px;
-        margin-top: 7px;
-        opacity: 0.5;
-        margin-bottom: 15px;
-    }
-    .contacts-hero-sec__contact-link-cluster{
-        margin-bottom: 15px;
-    }
-    .contacts-hero-sec__contacts-list{
-        margin-bottom: 25px;
-    }
-    .contacts-hero-sec__info{
-        padding-right: 0;
-    }
-    .contacts-hero-sec__contact-link{
-        .contacts-hero-sec__contact-link-ar{
-            display: none;
-        }
-    }
-    .contacts-hero-sec__socials-link{
-        width: 48px;
-    }
-    .contacts-hero-sec__form-title{
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-    .contacts-hero-sec__form-subtitle{
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-    .contacts-hero-sec__form-inp {
-        margin-bottom: 20px;
-        input{
-            border-radius: 5px;
-            padding: 12px 15px;
-            font-size: 14px !important;
-        }
-    }
-    .contacts-hero-sec__form-inp {
-        margin-bottom: 20px;
-        textarea{
-            border-radius: 5px;
-            padding: 12px 15px;
-            height: 50px;
-            font-size: 14px !important;
-        }
-    }
-    .contacts-hero-sec__form-checkbox-text{
-        font-size: 12px;
-    }
-    .contacts-hero-sec__form-checkbox{
-        margin-bottom: 30px;
-    }
-    .contacts-map-sec__title{
-        font-size: 22px;
-        margin-bottom: 20px;
-    }
-    .contacts-map-sec__map-wrapper{
-        height: 422px;
-        border-radius: 15px;
-    }
-    .contacts-map-sec__images-row{
-        margin-top: 20px;
-        flex-wrap: wrap;
-        width: 100%;
-      margin-left: 0;
-    }
-    .contacts-map-sec__img-wrapper{
-        margin: 0;
-        width: 100%;
-        height: 233px;
-        border-radius: 10px;
-    }
-    .contacts-map-sec{
-        padding-bottom: 70px;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-
+  .contacts-accounts-sec__card {
+    max-width: none;
+  }
 }
