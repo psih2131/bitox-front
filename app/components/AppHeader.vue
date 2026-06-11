@@ -55,6 +55,26 @@
           <NuxtLink to="/" class="header__logo">Bitox</NuxtLink>
 
           <nav class="header__nav">
+            <div class="header__nav-dropdown">
+              <button
+                type="button"
+                class="header__nav-link header__nav-dropdown-toggle"
+              >
+                Все страницы
+              </button>
+
+              <div class="header__nav-dropdown-menu">
+                <NuxtLink
+                  v-for="page in devPages"
+                  :key="page.to"
+                  :to="page.to"
+                  class="header__nav-dropdown-link"
+                >
+                  {{ page.label }}
+                </NuxtLink>
+              </div>
+            </div>
+
             <template v-for="link in navLinks" :key="link.label">
               <NuxtLink
                 v-if="link.to"
@@ -75,10 +95,21 @@
 </template>
 
 <script setup>
-const navLinks = [
+const devPages = [
+  { label: 'Главная', to: '/' },
+  { label: 'О Bitox', to: '/about' },
+  { label: 'Контакты', to: '/contacts' },
   { label: 'Партнерская программа', to: '/partners' },
+  { label: 'Обмен криптовалюты', to: '/exchange' },
+  { label: 'Блог', to: '/blog' },
+  { label: 'Пост', to: '/blog/1' },
+  { label: 'Услуга', to: '/services/invoice-payment' },
+]
+
+const navLinks = [
   { label: 'Частным клиентам' },
   { label: 'Международные расчеты' },
+  { label: 'Обмен криптовалюты', to: '/exchange' },
   { label: 'Контакты', to: '/contacts' },
   { label: 'о Bitox', to: '/about' },
 ]
