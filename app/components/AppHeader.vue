@@ -55,7 +55,16 @@
           <NuxtLink to="/" class="header__logo">Bitox</NuxtLink>
 
           <nav class="header__nav">
-            <a v-for="link in navLinks" :key="link" href="#" class="header__nav-link">{{ link }}</a>
+            <template v-for="link in navLinks" :key="link.label">
+              <NuxtLink
+                v-if="link.to"
+                :to="link.to"
+                class="header__nav-link"
+              >
+                {{ link.label }}
+              </NuxtLink>
+              <a v-else href="#" class="header__nav-link">{{ link.label }}</a>
+            </template>
           </nav>
 
           <AppButton>Консультация</AppButton>
@@ -67,10 +76,10 @@
 
 <script setup>
 const navLinks = [
-  'Бизнесу',
-  'Частным клиентам',
-  'Международные расчеты',
-  'Обмен криптовалюты',
-  'о Bitox',
+  { label: 'Партнерская программа', to: '/partners' },
+  { label: 'Частным клиентам' },
+  { label: 'Международные расчеты' },
+  { label: 'Обмен криптовалюты' },
+  { label: 'о Bitox' },
 ]
 </script>
