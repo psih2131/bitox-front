@@ -3,5 +3,7 @@
     <AppHeader />
     <slot />
     <AppFooter />
+    <AppCookieBanner />
+    <AppModalController />
   </div>
 </template>

@@ -87,7 +87,7 @@
             </template>
           </nav>
 
-          <AppButton>Консультация</AppButton>
+          <AppButton @click="openConsultationModal">Консультация</AppButton>
         </div>
       </div>
     </div>
@@ -95,6 +95,14 @@
 </template>
 
 <script setup>
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const modalStore = useModalStore()
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
+
 const devPages = [
   { label: 'Главная', to: '/' },
   { label: 'О Bitox', to: '/about' },

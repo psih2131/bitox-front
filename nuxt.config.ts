@@ -27,9 +27,13 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
     {
+      path: '~/components/modals',
+      pathPrefix: false,
+    },
+    {
       path: '~/components',
       pathPrefix: false,
-      ignore: ['buttons/**', 'sections/**', 'faq/**'],
+      ignore: ['buttons/**', 'sections/**', 'faq/**', 'modals/**'],
     },
   ],
 })
