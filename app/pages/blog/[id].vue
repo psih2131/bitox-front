@@ -1,0 +1,4 @@
+<template>
+
+    blog post
+</template>
