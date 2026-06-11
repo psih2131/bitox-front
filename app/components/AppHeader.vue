@@ -80,6 +80,6 @@ const navLinks = [
   { label: 'Частным клиентам' },
   { label: 'Международные расчеты' },
   { label: 'Обмен криптовалюты' },
-  { label: 'о Bitox' },
+  { label: 'о Bitox', to: '/about' },
 ]
 </script>
