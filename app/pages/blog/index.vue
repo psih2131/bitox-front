@@ -22,27 +22,15 @@
 </template>
 
 <script setup>
-import postImage from '~/assets/images/exm-1.jpg'
+import { getBlogListPosts } from '~/data/blog-posts'
 
 useSeoMeta({
   title: 'Блог — Bitox',
   description: 'Статьи и новости Bitox о международных платежах, криптовалюте и финансовых решениях для бизнеса и частных клиентов.',
 })
 
-const postExcerpt =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-
-const createPosts = (prefix, count = 3) => Array.from({ length: count }, (_, index) => ({
-  id: `${prefix}-${index + 1}`,
-  to: `/blog/${prefix}-${index + 1}`,
-  image: postImage,
-  tags: ['Тег', 'Тег'],
-  date: '11.11.2024',
-  title: 'Как принимать оплату в USDT от иностранных клиентов в 2024 году',
-  text: postExcerpt,
-}))
-
-const businessPosts = createPosts('business')
-const individualPosts = createPosts('individual')
-const newsPosts = createPosts('news')
+const blogSections = getBlogListPosts()
+const businessPosts = blogSections[0].posts
+const individualPosts = blogSections[1].posts
+const newsPosts = blogSections[2].posts
 </script>
