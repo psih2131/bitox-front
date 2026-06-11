@@ -17,6 +17,7 @@
 
 a {
 	text-decoration: none;
+	font-family: $mainFont;
 
 }
 
@@ -27,6 +28,7 @@ li {
 button {
 	cursor: pointer;
 	outline: 0 none !important;
+	font-family: $mainFont;
 
 }
 
@@ -43,6 +45,7 @@ body::-webkit-scrollbar-thumb {
 
 input {
 	outline: 0 none !important;
+	font-family: $mainFont;
 
 }
 
@@ -74,12 +77,13 @@ textarea {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+	font-family: $mainFont;
 }
 
 select {
 	cursor: pointer;
 	outline: 0 none !important;
-
+	font-family: $mainFont;
 }
 
 textarea {

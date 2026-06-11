@@ -1,0 +1,81 @@
+<template>
+  <section ref="sectionRef" class="service-hero-sec">
+    <div class="container service-hero-sec__inner">
+      <div class="service-hero-sec__content">
+        <nav class="service-hero-sec__breadcrumbs" aria-label="Хлебные крошки">
+          <NuxtLink to="/" class="service-hero-sec__breadcrumb-link">Главная</NuxtLink>
+          <span class="service-hero-sec__breadcrumb-sep">/</span>
+          <span class="service-hero-sec__breadcrumb-current">Услуги</span>
+        </nav>
+
+        <h1 class="service-hero-sec__title">{{ service.heroTitle || service.title }}</h1>
+
+        <p class="service-hero-sec__text">{{ service.description }}</p>
+      </div>
+
+      <div class="service-hero-sec__media">
+        <img
+          :src="heroImage"
+          alt=""
+          class="service-hero-sec__img"
+          width="606"
+          height="606"
+        />
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import gsap from 'gsap'
+import heroImage from '~/assets/images/gr-6.png'
+
+defineProps({
+  service: {
+    type: Object,
+    required: true,
+  },
+})
+
+const sectionRef = ref(null)
+
+let heroAnimation
+
+onMounted(() => {
+  if (!sectionRef.value) return
+
+  heroAnimation = gsap.context(() => {
+    const timeline = gsap.timeline()
+
+    timeline
+      .from('.service-hero-sec__breadcrumbs', {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+        ease: 'power2.out',
+      })
+      .from('.service-hero-sec__title', {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+        ease: 'power2.out',
+      }, '-=0.3')
+      .from('.service-hero-sec__text', {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        ease: 'power2.out',
+      }, '-=0.35')
+      .from('.service-hero-sec__img', {
+        opacity: 0,
+        scale: 0.92,
+        duration: 0.7,
+        ease: 'power2.out',
+      }, '-=0.4')
+  }, sectionRef.value)
+})
+
+onUnmounted(() => {
+  heroAnimation?.revert()
+})
+</script>
