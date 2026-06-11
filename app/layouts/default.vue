@@ -1,14 +1,7 @@
 <template>
   <div class="app-wrapper">
-    <!-- <headerComponent :dataContacts="aboutData" /> -->
-
+    <AppHeader />
     <slot />
-
-    <!-- <footerComponent :dataContacts="aboutData" /> -->
+    <AppFooter />
   </div>
 </template>
-
-<script setup>
-// import headerComponent from "@/components/header.vue";
-// import footerComponent from "@/components/footer.vue";
-</script>

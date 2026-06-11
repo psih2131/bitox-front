@@ -1,0 +1,30 @@
+.app-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 10px;
+  background: $yellow;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: $gray;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: $yellow-hover;
+  }
+
+  &:active:not(:disabled) {
+    background: $yellow-active;
+  }
+
+  &:disabled {
+    background: $yellow-disabled;
+    color: $gray-disabled;
+    cursor: not-allowed;
+  }
+}

@@ -6,28 +6,16 @@
 
 /* sections */
 
-// @import "./header";
-// @import "./footer";
+@import "./header";
+@import "./components/app-btn";
+@import "./components/app-banner-btn";
+@import "./components/app-client-btn";
+@import "./components/app-consult-btn";
+@import "./footer";
 
 // /* components */
-// @import "./components/btn-ctr-v1";
-// @import "./components/btn-ctr-v2";
-// @import "./components/btn-ctr-v3";
-// @import "./components/hero-sec";
-// @import "./components/specialist-card";
-// @import "./components/banner-v1";
-// @import "./components/btn-ctr-v4";
-// @import "./components/banner-v2";
-// @import "./components/blog-post";
+
 
 // /* pages */
-// @import "home-page";
-// @import "specialists-page";
-// @import "specialist-single";
-// @import "prices";
-// @import "reviews";
-// @import "blog";
-// @import "post-page";
-// @import "inform-page";
-// @import "contacts-page";
-// @import "services-page.scss";
+@import "home-page";
+@import "service-page";
