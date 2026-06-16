@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  ssr: false,
+  ssr: true,
   
   css: ['~/assets/scss/main.scss', 'vue-yandex-maps/css'],
   modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
@@ -39,4 +39,13 @@ export default defineNuxtConfig({
       ignore: ['buttons/**', 'sections/**', 'faq/**', 'modals/**'],
     },
   ],
+
+  runtimeConfig: {
+    // The private keys which are only available within server-side
+
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      apiUrl: 'http://localhost:1337',
+    },
+  },
 })

@@ -421,6 +421,16 @@
   }
 }
 
+.blog-post-sidebar__toc-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .blog-post-article-sec {
   padding: 60px 0 80px;
   background: $bg-section;

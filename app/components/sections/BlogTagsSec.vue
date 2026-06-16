@@ -17,9 +17,9 @@
           class="blog-tags-sec__tag"
           :class="{ 'blog-tags-sec__tag--active': activeTag === tag.id }"
           role="listitem"
-          @click="activeTag = tag.id"
+          @click="activeTagFunction(tag.id)"
         >
-          {{ tag.label }}
+          {{ tag.name }}
         </button>
       </div>
     </div>
@@ -29,15 +29,26 @@
 <script setup>
 import gsap from 'gsap'
 
+const emit = defineEmits(['activeTag'])
+
 const sectionRef = ref(null)
 const activeTag = ref(null)
 
-const tags = Array.from({ length: 12 }, (_, index) => ({
-  id: index + 1,
-  label: 'Тег',
-}))
+const props = defineProps({
+  categories: {
+    type: Array,
+    required: true,
+  },
+})
+
+const tags = props.categories
 
 let sectionAnimation
+
+function activeTagFunction(tagId) {
+  activeTag.value = activeTag.value === tagId ? null : tagId
+  emit('activeTag', activeTag.value)
+}
 
 onMounted(() => {
   if (!sectionRef.value) return

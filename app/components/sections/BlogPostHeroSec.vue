@@ -6,55 +6,41 @@
         <span class="blog-post-hero-sec__breadcrumb-sep">/</span>
         <NuxtLink to="/blog" class="blog-post-hero-sec__breadcrumb-link">Блог</NuxtLink>
         <span class="blog-post-hero-sec__breadcrumb-sep">/</span>
-        <span class="blog-post-hero-sec__breadcrumb-current">Статья</span>
+        <span
+          v-if="post.post_title"
+          class="blog-post-hero-sec__breadcrumb-current"
+        >{{ truncateText(post.post_title) }}</span>
       </nav>
 
       <div class="blog-post-hero-sec__head">
         <div class="blog-post-hero-sec__main">
           <div class="blog-post-hero-sec__meta">
-            <span class="blog-post-hero-sec__date">{{ post.date }}</span>
-
-            <span class="blog-post-hero-sec__stat">
-              <span class="blog-post-hero-sec__stat-icon" aria-hidden="true">♡</span>
-              {{ post.views }}
-            </span>
-
-            <span class="blog-post-hero-sec__stat">
-              <span class="blog-post-hero-sec__stat-icon" aria-hidden="true">💬</span>
-              {{ post.comments }}
-            </span>
-
-            <span class="blog-post-hero-sec__stat">
-              <span class="blog-post-hero-sec__stat-icon" aria-hidden="true">🔖</span>
-              {{ post.likes }}
-            </span>
+            <span class="blog-post-hero-sec__date" v-if="post.publishedAt">{{ formatDate(post.publishedAt) }}</span>
           </div>
 
-          <h1 class="blog-post-hero-sec__title">{{ post.title }}</h1>
+          <h1 class="blog-post-hero-sec__title" v-if="post.post_title" v-html="post.post_title"></h1>
         </div>
 
-        <BlogPostSidebar
+        <BlogPostAuthorSidebar
+          v-if="post.author"
           class="blog-post-hero-sec__author"
           :author="post.author"
           :updated-at="post.updatedAt"
-          :toc="post.toc"
-          :show-toc="false"
+          :time-to-read="post.time_read_post"
+          :views="views"
         />
       </div>
 
       <div class="blog-post-hero-sec__bottom">
         <img
-          :src="post.image"
           alt=""
           class="blog-post-hero-sec__image"
+          :src="`${apiUrl}${post.post_image.url}`"
         />
 
-        <BlogPostSidebar
+        <BlogPostTocSidebar
           class="blog-post-hero-sec__toc"
-          :author="post.author"
-          :updated-at="post.updatedAt"
-          :toc="post.toc"
-          :show-author="false"
+          :data-toc="post.post_content_builder"
         />
       </div>
     </div>
@@ -62,15 +48,22 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
 
 defineProps({
   post: {
     type: Object,
     required: true,
   },
+  views: {
+    type: Number,
+    default: 0,
+  },
 })
 
+import gsap from 'gsap'
+import { formatDate } from '~/utils/formatDate'
+import { truncateText } from '~/utils/truncateText'
+const apiUrl = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
 
 let sectionAnimation

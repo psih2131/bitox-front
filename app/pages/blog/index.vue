@@ -1,36 +1,75 @@
 <template>
   <main class="blog-page">
-    <BlogTagsSec />
+    <BlogTagsSec v-if="categories?.data?.length > 0" :categories="categories.data" @activeTag="activeTagFunction" />
 
-    <BlogCategorySec
-      title="Бизнесу"
-      :posts="businessPosts"
-    />
+    <template v-if="categories?.data?.length > 0">
+      
+      <template v-if="activeTag === null">
+        <template v-for="category in categories.data" :key="category.id" >
 
-    <BlogCategorySec
-      title="Частным лицам"
-      :posts="individualPosts"
-    />
+        <BlogCategorySec
+          :title="category.name"
+          :posts="getCurrentPosts(category.id)"
+        />
 
-    <BlogCategorySec
-      title="Новости"
-      :posts="newsPosts"
-    />
+        </template>
+      </template>
+
+      <template v-else>
+        <template v-for="category in categories.data" :key="category.id"  >
+
+        <BlogCategorySec
+        v-if="+activeTag === +category.id"
+          :title="category.name"
+          :posts="getCurrentPosts(category.id)"
+        />
+
+        </template>
+      </template>
+    
+
+    </template>
 
     <ServiceContactSec />
   </main>
 </template>
 
 <script setup>
-import { getBlogListPosts } from '~/data/blog-posts'
+
+import BlogTagsSec from '~/components/sections/BlogTagsSec.vue'
+import BlogCategorySec from '~/components/sections/BlogCategorySec.vue'
+
+const activeTag = ref(null)
+const urlApi = useRuntimeConfig().public.apiUrl
+const { data: categories } = await useFetch(`${urlApi}/api/categories`)
+console.log('categories', categories.value)
+
+
+const { data: posts } = await useFetch(
+  `${urlApi}/api/blog?status=published&populate[post_image]=true&populate[category]=true`,
+)
+console.log('posts', posts.value)
+
+
+function getCurrentPosts(categoryId) {
+  if (!posts.value?.data?.length) return []
+
+  return posts.value.data.filter(
+    (post) => post.category?.id === categoryId,
+  )
+}
+
+function activeTagFunction(tagId) {
+  activeTag.value = tagId
+  console.log('tagId', tagId)
+
+}
+
+
 
 useSeoMeta({
   title: 'Блог — Bitox',
   description: 'Статьи и новости Bitox о международных платежах, криптовалюте и финансовых решениях для бизнеса и частных клиентов.',
 })
 
-const blogSections = getBlogListPosts()
-const businessPosts = blogSections[0].posts
-const individualPosts = blogSections[1].posts
-const newsPosts = blogSections[2].posts
 </script>

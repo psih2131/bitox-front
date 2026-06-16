@@ -1,57 +1,42 @@
 <template>
   <article class="blog-post-card">
-    <NuxtLink :to="to" class="blog-post-card__link">
+    <NuxtLink :to="{
+      path: `/blog/${postData.slug}`,
+      query: { id: postData.documentId },
+    }" class="blog-post-card__link">
       <div class="blog-post-card__media">
         <img
-          :src="image"
+          :src="`${apiUrl}${postData.post_image.url}`"
           alt=""
           class="blog-post-card__img"
         />
 
-        <div v-if="tags.length" class="blog-post-card__tags">
+        <div v-if="postData.category?.name" class="blog-post-card__tags">
           <span
-            v-for="tag in tags"
-            :key="tag"
             class="blog-post-card__tag"
           >
-            {{ tag }}
+            {{ postData.category.name }}
           </span>
         </div>
       </div>
+      
 
       <div class="blog-post-card__body">
-        <p class="blog-post-card__date">{{ date }}</p>
-        <h3 class="blog-post-card__title">{{ title }}</h3>
-        <p class="blog-post-card__text">{{ text }}</p>
+        <p class="blog-post-card__date">{{ formatDate(postData.publishedAt) }}</p>
+        <h3 class="blog-post-card__title" v-if="postData.post_title" v-html="postData.post_title"></h3>
+        <p class="blog-post-card__text" v-if="postData.post_description" v-html="postData.post_description"></p>
       </div>
     </NuxtLink>
   </article>
 </template>
 
 <script setup>
+import { formatDate } from '~/utils/formatDate'
+
+const apiUrl = useRuntimeConfig().public.apiUrl
 defineProps({
-  to: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  tags: {
-    type: Array,
-    default: () => [],
-  },
-  date: {
-    type: String,
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  text: {
-    type: String,
+  postData: {
+    type: Object,
     required: true,
   },
 })

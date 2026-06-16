@@ -4,38 +4,46 @@
       <div class="blog-post-article-sec__content">
         <div class="blog-post-article-sec__body">
           <div
-            v-for="cluster in post.contentClusters"
-            :key="cluster.id"
+            v-for="block in post.post_content_builder"
+            :id="block.id_for_section"
+            :key="block.id"
             class="blog-post-article-sec__cluster"
-            :class="{ 'blog-post-article-sec__cluster--callout': cluster.variant === 'callout' }"
+            :class="{ 'blog-post-article-sec__cluster--callout': block.__component === 'shared.quote-text' }"
           >
             <div
+              v-if="block.__component === 'shared.text-editor'"
               class="text-editor"
-              v-html="cluster.html"
+              v-html="formatBlogText(block.text_editor)"
+            />
+
+            <div
+              v-else-if="block.__component === 'shared.quote-text'"
+              class="text-editor"
+              v-html="formatBlogText(block.quote_text_element)"
             />
           </div>
         </div>
 
-        <div class="blog-post-article-sec__faq">
-          <h2 class="blog-post-article-sec__faq-title">{{ post.faqTitle }}</h2>
+        <div v-if="post.post_questions_section" class="blog-post-article-sec__faq">
+          <h2 class="blog-post-article-sec__faq-title">{{ post.post_questions_section.title_section }}</h2>
 
-          <div class="blog-post-article-sec__faq-list">
+          <div
+            v-if="post.post_questions_section.post_questions?.length"
+            class="blog-post-article-sec__faq-list"
+          >
             <FaqItem
-              v-for="item in post.faq"
+              v-for="item in post.post_questions_section.post_questions"
               :key="item.id"
-              :question="item.question"
-              :answer="item.answer"
+              :question="item.title"
+              :answer="item.text"
             />
           </div>
         </div>
       </div>
 
-      <BlogPostSidebar
+      <BlogPostTocSidebar
         class="blog-post-article-sec__sidebar blog-post-article-sec__sidebar--sticky"
-        :author="post.author"
-        :updated-at="post.updatedAt"
-        :toc="post.toc"
-        :show-author="false"
+        :data-toc="post.post_content_builder"
       />
     </div>
   </section>
@@ -43,6 +51,7 @@
 
 <script setup>
 import gsap from 'gsap'
+import { formatBlogText } from '~/utils/formatBlogText'
 
 defineProps({
   post: {

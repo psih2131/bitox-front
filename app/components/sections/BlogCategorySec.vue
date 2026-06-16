@@ -7,12 +7,7 @@
         <BlogPostCard
           v-for="post in posts"
           :key="post.id"
-          :to="post.to"
-          :image="post.image"
-          :tags="post.tags"
-          :date="post.date"
-          :title="post.title"
-          :text="post.text"
+          :postData="post"
         />
       </div>
     </div>
@@ -21,6 +16,7 @@
 
 <script setup>
 import gsap from 'gsap'
+import BlogPostCard from '~/components/BlogPostCard.vue'
 
 defineProps({
   title: {
