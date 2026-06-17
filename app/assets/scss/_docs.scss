@@ -1,0 +1,55 @@
+.docs-page-sec{
+    padding-top: 40px;
+    padding-bottom: 100px;
+    min-height: 70vh;
+}
+.docs-page-sec__title{
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 90%;
+    color: #313132;
+    margin-bottom: 47px;
+}
+.docs-page-sec__wrapper{
+    width: 725px;
+    max-width: 100%;
+}
+
+.docs-page-sec__content-wrapper .text-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 1.4;
+        color: $gray-83;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+        font-weight: 800;
+        font-size: 35px;
+        line-height: 0.95;
+        color: $gray;
+    }
+
+    ul,
+    ol {
+        padding-left: 20px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 1.4;
+        color: $gray-83;
+    }
+
+    a {
+        color: $green1;
+        text-decoration: underline;
+    }
+}

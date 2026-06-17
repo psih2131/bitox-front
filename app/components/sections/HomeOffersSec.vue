@@ -2,7 +2,7 @@
   <section ref="sectionRef" class="offers-sec">
     <div class="container">
       <div class="offers-sec__head">
-        <h2 class="offers-sec__title">Спецпредложения</h2>
+        <h2 class="offers-sec__title">{{ sectionTitle }}</h2>
 
         <div class="offers-sec__nav">
           <button
@@ -36,12 +36,10 @@
           <swiper-slide v-for="slide in slides" :key="slide.id">
             <div class="offers-sec__slide">
               <div class="offers-sec__slide-content">
-                <h3 class="offers-sec__slide-title">
-                  {{ slide.title }}<br />
-                  {{ slide.titleLine2 }}
-                </h3>
-                <p class="offers-sec__slide-text">{{ slide.text }}</p>
-                <AppBannerBtn>{{ slide.btn }}</AppBannerBtn>
+                <h3 v-if="slide.title" class="offers-sec__slide-title" v-html="slide.title"></h3>
+                <p v-if="slide.text" class="offers-sec__slide-text" v-html="slide.text"></p>
+                <a v-if="slide.link" :href="slide.link" class="app-banner-btn">{{ slide.btn }}</a>
+                <AppBannerBtn v-else>{{ slide.btn }}</AppBannerBtn>
               </div>
 
               <div class="offers-sec__slide-img">
@@ -57,37 +55,47 @@
 
 <script setup>
 import gsap from 'gsap'
+import AppBannerBtn from '~/components/buttons/AppBannerBtn.vue'
 import banner1 from '~/assets/images/banner-1.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
 
 const sectionRef = ref(null)
 const swiperRef = ref(null)
 
-const slides = [
+const defaultSlides = [
   {
     id: 1,
-    title: 'Скидка -50%',
-    titleLine2: 'на первый платеж',
+    title: 'Скидка -50% на первый платеж',
     text: 'Выгодные условия для новых клиентов',
     btn: 'Узнать подробнее',
-    image: banner1,
-  },
-  {
-    id: 2,
-    title: 'Скидка -50%',
-    titleLine2: 'на первый платеж',
-    text: 'Выгодные условия для новых клиентов',
-    btn: 'Узнать подробнее',
-    image: banner1,
-  },
-  {
-    id: 3,
-    title: 'Скидка -50%',
-    titleLine2: 'на первый платеж',
-    text: 'Выгодные условия для новых клиентов',
-    btn: 'Узнать подробнее',
+    link: null,
     image: banner1,
   },
 ]
+
+const sectionTitle = computed(() => props.section.title_sec || 'Спецпредложения')
+
+const slides = computed(() => {
+  if (!props.section.banners?.length) return defaultSlides
+
+  return props.section.banners.map((banner) => ({
+    id: banner.id,
+    title: banner.title,
+    text: banner.subtitle,
+    btn: banner.button_text,
+    link: banner.button_link || null,
+    image: getStrapiMediaUrl(banner.banner_image, apiUrl) || banner1,
+  }))
+})
 
 const swiperReady = ref(false)
 
@@ -103,6 +111,13 @@ watch(swiperRef, async (el) => {
   await nextTick()
   reInitialize()
   swiperReady.value = true
+})
+
+watch(slides, async () => {
+  if (!swiperRef.value) return
+
+  await nextTick()
+  reInitialize()
 })
 
 let offersAnimation

@@ -1,23 +1,21 @@
 <template>
-  <section ref="sectionRef" class="service-economy-sec">
+  <section v-if="section" ref="sectionRef" class="service-economy-sec">
     <div class="container">
       <div class="service-economy-sec__card">
         <div class="service-economy-sec__content">
           <div class="service-economy-sec__content-top">
-            <h2 class="service-economy-sec__title">
-              Начните экономить<br />
-              на международных платежах уже сегодня
+            <h2 v-if="section.title" class="service-economy-sec__title">
+              {{ section.title }}
             </h2>
 
-            <p class="service-economy-sec__subtitle">
-              Самый удобный способ: выгодно, официально и без рисков.
+            <p v-if="section.subtitle" class="service-economy-sec__subtitle">
+              {{ section.subtitle }}
             </p>
           </div>
-          
 
           <div class="service-economy-sec__actions">
-            <AppClientBtn>Стать клиентом</AppClientBtn>
-            <AppConsultBtn>Бесплатная консультация</AppConsultBtn>
+            <AppClientBtn>{{ section.button_title_yellow || 'Стать клиентом' }}</AppClientBtn>
+            <AppConsultBtn>{{ section.button_title_white || 'Бесплатная консультация' }}</AppConsultBtn>
           </div>
         </div>
 
@@ -28,14 +26,15 @@
             class="service-economy-sec__feature"
           >
             <img
+              v-if="feature.image"
               :src="feature.image"
               alt=""
               class="service-economy-sec__feature-img"
             />
 
             <div class="service-economy-sec__feature-body">
-              <h3 class="service-economy-sec__feature-title">{{ feature.title }}</h3>
-              <p class="service-economy-sec__feature-text">{{ feature.text }}</p>
+              <h3 v-if="feature.title" class="service-economy-sec__feature-title">{{ feature.title }}</h3>
+              <p v-if="feature.text" class="service-economy-sec__feature-text">{{ feature.text }}</p>
             </div>
           </article>
         </div>
@@ -46,32 +45,27 @@
 
 <script setup>
 import gsap from 'gsap'
-import ec1 from '~/assets/images/ec-1.png'
-import ec2 from '~/assets/images/ec-2.png'
-import ec3 from '~/assets/images/ec-3.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const features = computed(() =>
+  (props.section.economy_list_items ?? []).map((item) => ({
+    id: item.id,
+    title: item.title,
+    text: item.text,
+    image: getStrapiMediaUrl(item.image, apiUrl),
+  })),
+)
 
 const sectionRef = ref(null)
-
-const features = [
-  {
-    id: 1,
-    image: ec1,
-    title: 'Платите в рублях внутри РФ',
-    text: 'Вы платите в рублях внутри РФ. Bitox оплачивает инвойс вашему поставщику с зарубежного счёта.',
-  },
-  {
-    id: 2,
-    image: ec2,
-    title: 'На основании агентского договора',
-    text: 'Bitox оплачивает счет от своего имени. Так вы не попадаете под прямую проверку зарубежного банка.',
-  },
-  {
-    id: 3,
-    image: ec3,
-    title: 'Персональный менеджер',
-    text: 'На каждом этапе к вам будет прикреплен персональный менеджер, который будет консультировать по всем вопросам',
-  },
-]
 
 let sectionAnimation
 

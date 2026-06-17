@@ -868,6 +868,12 @@
   background: $bg-platform;
 }
 
+.exchange-seo-sec__block {
+  &:not(:last-child) {
+    margin-bottom: 60px;
+  }
+}
+
 .exchange-seo-sec__title {
   margin-bottom: 27px;
   font-weight: 800;

@@ -2,13 +2,11 @@
   <section ref="sectionRef" class="team-sec">
     <div class="container">
       <div class="team-sec__head">
-        <h2 class="team-sec__title">Наша команда</h2>
-        <p class="team-sec__subtitle">
-          За 3 года&nbsp; работы наши специалисты накопили огромный опыт и решают любые задачи клиентов эффективно и в срок
-        </p>
+        <h2 class="team-sec__title">{{ sectionTitle }}</h2>
+        <p class="team-sec__subtitle">{{ sectionSubtitle }}</p>
       </div>
 
-      <div class="team-sec__grid">
+      <div v-if="team.length" class="team-sec__grid">
         <article
           v-for="member in team"
           :key="member.id"
@@ -16,13 +14,14 @@
         >
           <div class="team-sec__card-media">
             <img
+              v-if="member.image"
               :src="member.image"
               :alt="member.name"
               class="team-sec__card-img"
               width="365"
               height="404"
             />
-            <span class="team-sec__card-badge">{{ member.role }}</span>
+            <span v-if="member.role" class="team-sec__card-badge">{{ member.role }}</span>
           </div>
 
           <h3 class="team-sec__card-name">{{ member.name }}</h3>
@@ -35,35 +34,38 @@
 
 <script setup>
 import gsap from 'gsap'
-import teamMember1 from '~/assets/images/team/team-member-1-227797.png'
-import teamMember2 from '~/assets/images/team/team-member-2-575ead.png'
-import teamMember3 from '~/assets/images/team/team-member-3.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const { data: teamsResponse } = await useFetch(`${apiUrl}/api/teams?populate[image]=true`)
+
+const sectionTitle = computed(() => props.section?.title ?? 'Наша команда')
+const sectionSubtitle = computed(
+  () => props.section?.subtitle
+    ?? 'За 3 года работы наши специалисты накопили огромный опыт и решают любые задачи клиентов эффективно и в срок',
+)
+
+const team = computed(() => {
+  const data = teamsResponse.value?.data ?? []
+
+  return data.map((member) => ({
+    id: member.id,
+    name: member.name,
+    role: member.postition,
+    text: member.description,
+    image: getStrapiMediaUrl(member.image, apiUrl),
+  }))
+})
 
 const sectionRef = ref(null)
-
-const team = [
-  {
-    id: 1,
-    name: 'Дмитрий Воронов',
-    role: 'Генеральный директор',
-    image: teamMember1,
-    text: 'Предприниматель, в крипте с 2014 года. Запустил bitox.global в 2023 году. Отвечает за стратегию и направления развития компании',
-  },
-  {
-    id: 2,
-    name: 'Дмитрий Воронов',
-    role: 'Генеральный директор',
-    image: teamMember2,
-    text: 'Предприниматель, в крипте с 2014 года. Запустил bitox.global в 2023 году. Отвечает за стратегию и направления развития компании',
-  },
-  {
-    id: 3,
-    name: 'Дмитрий Воронов',
-    role: 'Генеральный директор',
-    image: teamMember3,
-    text: 'Предприниматель, в крипте с 2014 года. Запустил bitox.global в 2023 году. Отвечает за стратегию и направления развития компании',
-  },
-]
 
 let teamAnimation
 

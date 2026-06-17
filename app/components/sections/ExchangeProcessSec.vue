@@ -2,9 +2,9 @@
   <section ref="sectionRef" class="exchange-process-sec">
     <div class="container">
       <div class="exchange-process-sec__head">
-        <h2 class="exchange-process-sec__title">Как происходит обмен</h2>
-        <p class="exchange-process-sec__subtitle">
-          Весь процесс занимает в среднем 15 минут — от заявки до получения средств
+        <h2 v-if="section.title_sec" class="exchange-process-sec__title">{{ section.title_sec }}</h2>
+        <p v-if="section.subtitle_sec" class="exchange-process-sec__subtitle">
+          {{ section.subtitle_sec }}
         </p>
       </div>
 
@@ -27,33 +27,24 @@
 <script setup>
 import gsap from 'gsap'
 
-const steps = [
-  {
-    id: 'request',
-    num: '01',
-    title: 'Оставьте заявку',
-    text: 'Введите сумму, валюту и контакт в калькуляторе. Менеджер свяжется в течение 5 минут.',
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
   },
-  {
-    id: 'rate',
-    num: '02',
-    title: 'Подтвердите курс',
-    text: 'Согласуйте курс и маршрут.',
-  },
-  {
-    id: 'transfer',
-    num: '03',
-    title: 'Передайте средства',
-    text: 'Оплата принимается в криптовалюте или наличными. Перевод осуществляется согласно предоставленным реквизитам. Внесение наличных средств возможно по адресу офиса.',
-  },
-  {
-    id: 'receive',
-    num: '04',
-    title: 'Получите обмен',
-    text: 'Получите средства на свой кошелёк, карту или наличными в офисе.',
-    dark: true,
-  },
-]
+})
+
+const steps = computed(() => {
+  const elements = props.section.staps_elements ?? []
+
+  return elements.map((step, index) => ({
+    id: step.id,
+    num: String(index + 1).padStart(2, '0'),
+    title: step.title,
+    text: step.subtitle,
+    dark: index === elements.length - 1,
+  }))
+})
 
 const sectionRef = ref(null)
 

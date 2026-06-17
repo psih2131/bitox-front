@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="contacts-accounts-sec">
+  <section v-if="section" ref="sectionRef" class="contacts-accounts-sec">
     <div class="container">
       <nav class="contacts-accounts-sec__breadcrumbs" aria-label="Хлебные крошки">
         <NuxtLink to="/" class="contacts-accounts-sec__breadcrumb-link">Главная</NuxtLink>
@@ -9,64 +9,40 @@
 
       <div class="contacts-accounts-sec__row">
         <div class="contacts-accounts-sec__main">
-          <div class="contacts-accounts-sec__title-wrap">
-            <h1 class="contacts-accounts-sec__title">
-              Наши
-              <span class="contacts-accounts-sec__badge">
-                <svg
-                  class="contacts-accounts-sec__badge-icon"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M8 1.5L14.5 13.5H1.5L8 1.5Z"
-                    stroke="#FFDD2D"
-                    stroke-width="1.4"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M8 6.2V9.2"
-                    stroke="#FFDD2D"
-                    stroke-width="1.4"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="8" cy="11.4" r="0.8" fill="#FFDD2D" />
-                </svg>
-                Защита от мошенников
-              </span>
-              <span class="contacts-accounts-sec__title-line">официальные</span>
-              <span class="contacts-accounts-sec__title-line">аккаунты</span>
-            </h1>
+          <div v-if="section.title" class="contacts-accounts-sec__title-wrap">
+            <h1 class="contacts-accounts-sec__title" v-html="section.title" />
           </div>
 
-          <p class="contacts-accounts-sec__text">
-            Наши сотрудники никогда не пишут первыми. Если вам написали от имени bitox
-            или у вас возникли сомнения в аккаунте — сверьте его с данными на этой странице.
+          <p v-if="section.subtitle" class="contacts-accounts-sec__text">
+            {{ section.subtitle }}
           </p>
         </div>
 
         <article class="contacts-accounts-sec__card">
-        <div class="contacts-accounts-sec__avatar" aria-hidden="true" />
+          <div
+            class="contacts-accounts-sec__avatar"
+            :style="avatarUrl ? { backgroundImage: `url(${avatarUrl})`, backgroundSize: 'cover' } : undefined"
+            aria-hidden="true"
+          />
 
-        <h2 class="contacts-accounts-sec__card-name">Менеджер | «ФИО»</h2>
-        <p class="contacts-accounts-sec__card-role">
-          Специалист по первичной обработке заявок
-        </p>
+          <h2 v-if="section.telegram_title" class="contacts-accounts-sec__card-name">
+            {{ section.telegram_title }}
+          </h2>
 
-        <p class="contacts-accounts-sec__card-login">
-          Логин:<br>
-          <a href="#">@bitox_ved</a>,
-          а также
-          <a href="#">@bitox_ved2</a>
-        </p>
+          <p v-if="section.telegram_subtitle" class="contacts-accounts-sec__card-role">
+            {{ section.telegram_subtitle }}
+          </p>
 
-        <p class="contacts-accounts-sec__card-date">
-          Дата загрузки последней фотографии в профиле: 12.05.2026
-        </p>
+          <p class="contacts-accounts-sec__card-login">
+            Логин:<br>
+            <a href="https://t.me/bitox_ved" target="_blank" rel="noopener noreferrer">@bitox_ved</a>,
+            а также
+            <a href="https://t.me/bitox_ved2" target="_blank" rel="noopener noreferrer">@bitox_ved2</a>
+          </p>
+
+          <p v-if="section.telegram_subtitle_2" class="contacts-accounts-sec__card-date">
+            {{ section.telegram_subtitle_2 }}
+          </p>
         </article>
       </div>
     </div>
@@ -75,6 +51,18 @@
 
 <script setup>
 import gsap from 'gsap'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const avatarUrl = computed(() => getStrapiMediaUrl(props.section.telegram_img, apiUrl))
 
 const sectionRef = ref(null)
 

@@ -7,7 +7,7 @@
         <span class="about-hero-sec__breadcrumb-current">О компании</span>
       </nav>
 
-      <h1 class="about-hero-sec__title">О Bitox в цифрах</h1>
+      <h1 class="about-hero-sec__title">{{ section.section_title }}</h1>
 
       <div class="about-hero-sec__cards-wrap">
         <img
@@ -20,22 +20,26 @@
 
         <div class="about-hero-sec__grid">
           <article
-            v-for="card in cards"
+            v-for="(card, index) in section.box_list_element"
             :key="card.id"
             class="about-hero-sec__card"
-            :class="{ 'about-hero-sec__card--dark': card.dark }"
+            :class="{ 'about-hero-sec__card--dark': index === section.box_list_element.length - 1 }"
           >
             <span
               class="about-hero-sec__card-icon"
-              :class="card.dark ? 'about-hero-sec__card-icon--light' : 'about-hero-sec__card-icon--dark'"
+              :class="index === section.box_list_element.length - 1
+                ? 'about-hero-sec__card-icon--light'
+                : 'about-hero-sec__card-icon--dark'"
             >
-              <img :src="card.dark ? confBlack : confWhite" alt="" />
+              <img
+                :src="index === section.box_list_element.length - 1 ? confBlack : confWhite"
+                alt=""
+              />
             </span>
             <div class="about-hero-sec__data">
-              <p class="about-hero-sec__card-value">{{ card.value }}</p>
-              <p class="about-hero-sec__card-text">{{ card.text }}</p>
+              <p class="about-hero-sec__card-value">{{ card.title }}</p>
+              <p class="about-hero-sec__card-text">{{ card.subtitle }}</p>
             </div>
-            
           </article>
         </div>
       </div>
@@ -49,31 +53,14 @@ import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
 import heroImage from '~/assets/images/gr-13.png'
 
-const sectionRef = ref(null)
+defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
 
-const cards = [
-  {
-    id: 'years',
-    value: '3 года',
-    text: 'На рынке международных платежей с 2023 года',
-  },
-  {
-    id: 'clients',
-    value: '20000+',
-    text: 'Бизнесов и частных лиц доверили нам свои платежи',
-  },
-  {
-    id: 'volume',
-    value: '$ 480M+',
-    text: 'Объём обработанных операций',
-  },
-  {
-    id: 'countries',
-    value: '180+ стран',
-    text: 'География клиентов и маршрутов',
-    dark: true,
-  },
-]
+const sectionRef = ref(null)
 
 let heroAnimation
 

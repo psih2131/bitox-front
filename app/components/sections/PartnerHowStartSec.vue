@@ -1,17 +1,21 @@
 <template>
-  <section ref="sectionRef" class="partner-how-start-sec">
+  <section v-if="section" ref="sectionRef" class="partner-how-start-sec">
     <div class="container">
-      <h2 class="partner-how-start-sec__title">Как стать партнёром</h2>
+      <h2 v-if="section.section_title" class="partner-how-start-sec__title">
+        {{ section.section_title }}
+      </h2>
 
       <div class="partner-how-start-sec__grid">
         <div class="partner-how-start-sec__row partner-how-start-sec__row--top">
           <article class="partner-how-start-sec__card partner-how-start-sec__card--white">
             <div class="partner-how-start-sec__card-head">
               <span class="partner-how-start-sec__card-num">01</span>
-              <h3 class="partner-how-start-sec__card-title">Уточните условия</h3>
+              <h3 v-if="section.card_title_1" class="partner-how-start-sec__card-title">
+                {{ section.card_title_1 }}
+              </h3>
             </div>
-            <p class="partner-how-start-sec__card-text">
-              Обратитесь к нашему менеджеру для разъяснения условий и любых вопросов
+            <p v-if="section.card_text_1" class="partner-how-start-sec__card-text">
+              {{ section.card_text_1 }}
             </p>
           </article>
 
@@ -21,10 +25,12 @@
             <div class="partner-how-start-sec__card-content">
               <div class="partner-how-start-sec__card-head">
                 <span class="partner-how-start-sec__card-num">02</span>
-                <h3 class="partner-how-start-sec__card-title">Приведите клиентов</h3>
+                <h3 v-if="section.card_title_2" class="partner-how-start-sec__card-title">
+                  {{ section.card_title_2 }}
+                </h3>
               </div>
-              <p class="partner-how-start-sec__card-text">
-                Порекомендуйте bitox компаниям или частным лицам, которым нужен международный платеж.
+              <p v-if="section.card_text_2" class="partner-how-start-sec__card-text">
+                {{ section.card_text_2 }}
               </p>
             </div>
 
@@ -44,20 +50,24 @@
           <article class="partner-how-start-sec__card partner-how-start-sec__card--gray">
             <div class="partner-how-start-sec__card-head">
               <span class="partner-how-start-sec__card-num">03</span>
-              <h3 class="partner-how-start-sec__card-title">Проведите первую сделку</h3>
+              <h3 v-if="section.card_title_3" class="partner-how-start-sec__card-title">
+                {{ section.card_title_3 }}
+              </h3>
             </div>
-            <p class="partner-how-start-sec__card-text">
-              В паре с нашим менеджером поможем провести первую сделку и зафиксировать привязку клиента.
+            <p v-if="section.card_text_3" class="partner-how-start-sec__card-text">
+              {{ section.card_text_3 }}
             </p>
           </article>
 
           <article class="partner-how-start-sec__card partner-how-start-sec__card--dark">
             <div class="partner-how-start-sec__card-head">
               <span class="partner-how-start-sec__card-num partner-how-start-sec__card-num--light">04</span>
-              <h3 class="partner-how-start-sec__card-title">Получайте вознаграждение</h3>
+              <h3 v-if="section.card_title_4" class="partner-how-start-sec__card-title">
+                {{ section.card_title_4 }}
+              </h3>
             </div>
-            <p class="partner-how-start-sec__card-text">
-              С каждого платежа закреплённого за вами клиента моментально начисляем выплату. Получить выплату можно удобным способом по итогу месяца.
+            <p v-if="section.card_text_4" class="partner-how-start-sec__card-text">
+              {{ section.card_text_4 }}
             </p>
           </article>
         </div>
@@ -69,6 +79,13 @@
 <script setup>
 import gsap from 'gsap'
 import illustration from '~/assets/images/gr-12.png'
+
+defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
 
 const sectionRef = ref(null)
 

@@ -2,7 +2,7 @@
   <section class="stats-sec">
     <div class="container">
       <div ref="statsGridRef" class="stats-sec__grid">
-        <div v-for="item in stats" :key="item.value" class="stats-sec__item">
+        <div v-for="item in stats" :key="item.id ?? item.value" class="stats-sec__item">
           <p class="stats-sec__value">{{ item.value }}</p>
           <p class="stats-sec__text">{{ item.text }}</p>
         </div>
@@ -14,14 +14,31 @@
 <script setup>
 import gsap from 'gsap'
 
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
 const statsGridRef = ref(null)
 
-const stats = [
+const defaultStats = [
   { value: '70+', text: 'Платежных компаний' },
   { value: '20000+', text: 'Бизнесов и частных лиц доверили нам свои платежи' },
   { value: 'от 2 часов', text: 'Оплатим быстро — даже в критически сжатые сроки' },
   { value: '99%', text: 'Платежей доходят без задержек' },
 ]
+
+const stats = computed(() => {
+  if (!props.section?.stats_element?.length) return defaultStats
+
+  return props.section.stats_element.map((item) => ({
+    id: item.id,
+    value: item.title,
+    text: item.subtitle,
+  }))
+})
 
 let statsAnimation
 

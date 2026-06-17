@@ -1,21 +1,21 @@
 <template>
-  <section ref="sectionRef" class="service-hero-sec">
+  <section v-if="section" ref="sectionRef" class="service-hero-sec">
     <div class="container service-hero-sec__inner">
       <div class="service-hero-sec__content">
         <nav class="service-hero-sec__breadcrumbs" aria-label="Хлебные крошки">
           <NuxtLink to="/" class="service-hero-sec__breadcrumb-link">Главная</NuxtLink>
           <span class="service-hero-sec__breadcrumb-sep">/</span>
-          <span class="service-hero-sec__breadcrumb-current">Услуги</span>
+          <span class="service-hero-sec__breadcrumb-current">{{ section.title }}</span>
         </nav>
 
-        <h1 class="service-hero-sec__title">{{ service.heroTitle || service.title }}</h1>
+        <h1 v-if="section.title" class="service-hero-sec__title">{{ section.title }}</h1>
 
-        <p class="service-hero-sec__text">{{ service.description }}</p>
+        <p v-if="section.subtitle" class="service-hero-sec__text">{{ section.subtitle }}</p>
       </div>
 
-      <div class="service-hero-sec__media">
+      <div v-if="heroImageUrl" class="service-hero-sec__media">
         <img
-          :src="heroImage"
+          :src="heroImageUrl"
           alt=""
           class="service-hero-sec__img"
           width="606"
@@ -28,14 +28,21 @@
 
 <script setup>
 import gsap from 'gsap'
-import heroImage from '~/assets/images/gr-6.png'
+import fallbackHeroImage from '~/assets/images/gr-6.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
-defineProps({
-  service: {
+const props = defineProps({
+  section: {
     type: Object,
     required: true,
   },
 })
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const heroImageUrl = computed(
+  () => getStrapiMediaUrl(props.section.image, apiUrl) || fallbackHeroImage,
+)
 
 const sectionRef = ref(null)
 

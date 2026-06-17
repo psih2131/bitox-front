@@ -1,36 +1,49 @@
 <template>
   <Teleport to="body">
     <div
-      v-if="modalStore.popup.isOpen"
+      v-if="isOpen"
       class="modal-controller"
       @click.self="modalStore.close()"
     >
-      <ConsultationModal
-        v-if="modalStore.popup.name === MODAL_NAMES.consultation"
+      <component
+        :is="activeModal"
+        v-if="activeModal"
       />
     </div>
   </Teleport>
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import ConsultationModal from '~/components/modals/ConsultationModal.vue'
+import CallbackModal from '~/components/modals/CallbackModal.vue'
+import FormResultModal from '~/components/modals/FormResultModal.vue'
+import TextContentModal from '~/components/modals/TextContentModal.vue'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
 const modalStore = useModalStore()
+const { name, isOpen } = storeToRefs(modalStore)
+
+const MODAL_COMPONENTS = {
+  [MODAL_NAMES.consultation]: ConsultationModal,
+  [MODAL_NAMES.callback]: CallbackModal,
+  [MODAL_NAMES.formResult]: FormResultModal,
+  [MODAL_NAMES.textContent]: TextContentModal,
+}
+
+const activeModal = computed(() => MODAL_COMPONENTS[name.value] ?? null)
 
 function onKeydown(event) {
-  if (event.key === 'Escape' && modalStore.popup.isOpen) {
+  if (event.key === 'Escape' && isOpen.value) {
     modalStore.close()
   }
 }
 
-watch(
-  () => modalStore.popup.isOpen,
-  (isOpen) => {
-    if (import.meta.client) {
-      document.body.style.overflow = isOpen ? 'hidden' : ''
-    }
-  },
-)
+watch(isOpen, (open) => {
+  if (import.meta.client) {
+    document.body.style.overflow = open ? 'hidden' : ''
+  }
+})
 
 onMounted(() => {
   window.addEventListener('keydown', onKeydown)

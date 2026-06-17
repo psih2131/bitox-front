@@ -1,8 +1,12 @@
 <template>
-  <section ref="sectionRef" class="partner-offers-sec">
+  <section v-if="section" ref="sectionRef" class="partner-offers-sec">
     <div class="container">
-      <h2 class="partner-offers-sec__title">Что мы предлагаем</h2>
-      <p class="partner-offers-sec__subtitle">Условия партнёрской программы bitox</p>
+      <h2 v-if="section.section_title" class="partner-offers-sec__title">
+        {{ section.section_title }}
+      </h2>
+      <p v-if="section.subtitle_section" class="partner-offers-sec__subtitle">
+        {{ section.subtitle_section }}
+      </p>
 
       <div class="partner-offers-sec__grid">
         <article
@@ -11,13 +15,14 @@
           class="partner-offers-sec__card"
         >
           <img
+            v-if="card.image"
             :src="card.image"
             alt=""
             class="partner-offers-sec__card-img"
           />
 
-          <h3 class="partner-offers-sec__card-title">{{ card.title }}</h3>
-          <p class="partner-offers-sec__card-text">{{ card.text }}</p>
+          <h3 v-if="card.title" class="partner-offers-sec__card-title">{{ card.title }}</h3>
+          <p v-if="card.subtitle" class="partner-offers-sec__card-text">{{ card.subtitle }}</p>
         </article>
       </div>
     </div>
@@ -26,32 +31,27 @@
 
 <script setup>
 import gsap from 'gsap'
-import gr9 from '~/assets/images/gr-9.png'
-import gr10 from '~/assets/images/gr-10.png'
-import gr11 from '~/assets/images/gr-11.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const cards = computed(() =>
+  (props.section.partnership_offer_items ?? []).map((item) => ({
+    id: item.id,
+    title: item.title,
+    subtitle: item.subtitle,
+    image: getStrapiMediaUrl(item.image, apiUrl),
+  })),
+)
 
 const sectionRef = ref(null)
-
-const cards = [
-  {
-    id: 1,
-    image: gr9,
-    title: 'Выгодная комиссия',
-    text: 'Гибкий процент с каждой сделки, индивидуально под каждого партнёра. До 30% от прибыли bitox',
-  },
-  {
-    id: 2,
-    image: gr10,
-    title: 'Прозрачные условия',
-    text: 'Индивидуальный процент комиссии в зависимости от объёма. Все начисления видны в личном кабинете.',
-  },
-  {
-    id: 3,
-    image: gr11,
-    title: 'Готовые инструменты',
-    text: 'Личный кабинет с дашбордом по доходам, реферальные ссылки, промо-материалы и сопровождение менеджера.',
-  },
-]
 
 let sectionAnimation
 

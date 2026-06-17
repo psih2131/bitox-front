@@ -1,7 +1,7 @@
 <template>
   <section ref="sectionRef" class="benefits-sec">
     <div class="container">
-      <h2 class="benefits-sec__title">Выгоды работы с нами</h2>
+      <h2 class="benefits-sec__title">{{ sectionTitle }}</h2>
 
       <div class="benefits-sec__grid">
         <article
@@ -48,9 +48,16 @@ import gr3 from '~/assets/images/gr-3.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
 const sectionRef = ref(null)
 
-const cards = [
+const defaultCards = [
   {
     id: 'security',
     title: 'Безопасность',
@@ -80,6 +87,21 @@ const cards = [
     dark: true,
   },
 ]
+
+const sectionTitle = computed(() => props.section?.title_section || 'Выгоды работы с нами')
+
+const cards = computed(() => {
+  if (!props.section?.benefits_items?.length) return defaultCards
+
+  const items = props.section.benefits_items
+
+  return items.map((item, index) => ({
+    id: item.id,
+    title: item.title,
+    text: item.subtitle,
+    dark: index === items.length - 1,
+  }))
+})
 
 let benefitsAnimation
 

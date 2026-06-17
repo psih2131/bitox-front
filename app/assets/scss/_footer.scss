@@ -122,6 +122,12 @@
   }
 }
 
+.app-footer__col-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 @media only screen and (max-width: 991px) {
   .app-footer__card {
     min-height: auto;

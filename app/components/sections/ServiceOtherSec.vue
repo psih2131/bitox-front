@@ -1,18 +1,21 @@
 <template>
-  <section ref="sectionRef" class="service-other-sec">
+  <section v-if="otherServices.length" ref="sectionRef" class="service-other-sec">
     <div class="container">
       <h2 class="service-other-sec__title">Другие наши услуги</h2>
 
       <div class="service-other-sec__grid">
         <NuxtLink
           v-for="item in otherServices"
-          :key="item.slug"
-          :to="`/services/${item.slug}`"
+          :key="item.documentId"
+          :to="{
+            path: `/services/${item.slug}`,
+            query: { id: item.documentId },
+          }"
           class="service-other-sec__card"
         >
           <div class="service-other-sec__preview">
             <img
-              :src="previewImage"
+              :src="item.image || previewImage"
               alt=""
               class="service-other-sec__preview-img"
             />
@@ -20,7 +23,7 @@
 
           <div class="service-other-sec__body">
             <h3 class="service-other-sec__card-title">{{ item.title }}</h3>
-            <p class="service-other-sec__card-text">{{ item.subtitle }}</p>
+            <p v-if="item.subtitle" class="service-other-sec__card-text">{{ item.subtitle }}</p>
           </div>
         </NuxtLink>
       </div>
@@ -30,8 +33,8 @@
 
 <script setup>
 import gsap from 'gsap'
-import { services } from '~/data/services'
 import previewImage from '~/assets/images/serv-prev.jpg'
+import { mapStrapiServices } from '~/utils/strapi'
 
 const props = defineProps({
   currentSlug: {
@@ -40,11 +43,19 @@ const props = defineProps({
   },
 })
 
+const urlApi = useRuntimeConfig().public.apiUrl
+
+const { data: servicesResponse } = await useFetch(
+  `${urlApi}/api/services?populate[service_hero_sec][populate]=image&pagination[pageSize]=100`,
+)
+
 const sectionRef = ref(null)
 
-const otherServices = computed(() => (
-  services.filter((service) => service.slug !== props.currentSlug).slice(0, 4)
-))
+const otherServices = computed(() => {
+  const services = mapStrapiServices(servicesResponse.value?.data ?? [], urlApi)
+
+  return services.filter((service) => service.slug !== props.currentSlug)
+})
 
 let sectionAnimation
 

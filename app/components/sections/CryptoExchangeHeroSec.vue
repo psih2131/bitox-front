@@ -8,21 +8,22 @@
           <span class="crypto-hero-sec__breadcrumb-current">Обмен криптовалюты</span>
         </nav>
 
-        <h1 class="crypto-hero-sec__title">
-          Обмен
-          криптовалюты
+        <h1 v-if="section.title" class="crypto-hero-sec__title">
+          {{ section.title }}
         </h1>
 
-        <p class="crypto-hero-sec__text">
-          Пункты приёма и выдачи наличных в России и по всему миру.
-          Для бизнеса и частных лиц.
+        <p v-if="section.subtitle" class="crypto-hero-sec__text">
+          {{ section.subtitle }}
         </p>
 
-        <AppClientBtn class="crypto-hero-sec__btn">Заявка на обмен</AppClientBtn>
+        <AppClientBtn v-if="section.button_text" class="crypto-hero-sec__btn">
+          {{ section.button_text }}
+        </AppClientBtn>
       </div>
 
       <img
-        :src="heroImage"
+        v-if="heroImageUrl"
+        :src="heroImageUrl"
         alt=""
         class="crypto-hero-sec__img"
         width="520"
@@ -34,7 +35,21 @@
 
 <script setup>
 import gsap from 'gsap'
-import heroImage from '~/assets/images/gr-15.png'
+import fallbackHeroImage from '~/assets/images/gr-15.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const heroImageUrl = computed(
+  () => getStrapiMediaUrl(props.section.image_section, apiUrl) || fallbackHeroImage,
+)
 
 const sectionRef = ref(null)
 

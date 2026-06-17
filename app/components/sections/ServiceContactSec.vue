@@ -61,9 +61,9 @@
         <button
           type="submit"
           class="app-client-btn service-contact-sec__submit"
-          :disabled="!consent"
+          :disabled="!canSubmit || isSubmitting"
         >
-          Стать клиентом
+          {{ isSubmitting ? 'Отправка...' : 'Стать клиентом' }}
         </button>
       </form>
     </div>
@@ -74,14 +74,33 @@
 import gsap from 'gsap'
 
 const sectionRef = ref(null)
+const { isSubmitting, submit } = useFormSubmit()
 
 const firstName = ref('')
 const lastName = ref('')
 const phone = ref('')
 const consent = ref(false)
 
-function handleSubmit() {
-  if (!consent.value) return
+const canSubmit = computed(
+  () => consent.value && phone.value.trim(),
+)
+
+async function handleSubmit() {
+  if (!canSubmit.value || isSubmitting.value) return
+
+  const success = await submit('/api/forms/contact', {
+    firstName: firstName.value.trim(),
+    lastName: lastName.value.trim(),
+    phone: phone.value.trim(),
+    consent: consent.value,
+  })
+
+  if (!success) return
+
+  firstName.value = ''
+  lastName.value = ''
+  phone.value = ''
+  consent.value = false
 }
 
 let sectionAnimation

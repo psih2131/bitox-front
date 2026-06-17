@@ -1230,6 +1230,15 @@ display: block;
   font-size: 13px;
   line-height: 1.2;
   color: $gray-83;
+
+  &[href] {
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
 }
 
 .home-reviews-sec__pagination {

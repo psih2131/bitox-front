@@ -42,7 +42,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // The private keys which are only available within server-side
-
+    botToken: process.env.NUXT_BOT_TOKEN,
+    groupId: process.env.NUXT_GROUP_ID,
     // Keys within public, will be also exposed to the client-side
     public: {
       apiUrl: 'http://localhost:1337',

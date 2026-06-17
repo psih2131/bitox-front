@@ -21,7 +21,7 @@
       <label class="consultation-modal__field">
         <span class="consultation-modal__label">Номер телефона</span>
 
-        <div class="consultation-modal__phone">
+        <div class="consultation-modal__control consultation-modal__control--phone">
           <img :src="flagRu" alt="" class="consultation-modal__flag" width="24" height="16" />
           <input
             v-model="phone"
@@ -58,9 +58,9 @@
       <button
         type="submit"
         class="app-btn consultation-modal__submit"
-        :disabled="!canSubmit"
+        :disabled="!canSubmit || isSubmitting"
       >
-        Отправить
+        {{ isSubmitting ? 'Отправка...' : 'Отправить' }}
       </button>
     </form>
   </div>
@@ -68,9 +68,10 @@
 
 <script setup>
 import { useModalStore } from '~/stores/modal'
-import flagRu from '~/assets/images/flags/x3.jpg'
+import flagRu from '~/assets/images/flags/russian.png'
 
 const modalStore = useModalStore()
+const { isSubmitting, submit } = useFormSubmit()
 
 const phone = ref('')
 const personalConsent = ref(true)
@@ -81,8 +82,14 @@ const canSubmit = computed(
   () => phone.value.trim() && personalConsent.value && offerConsent.value,
 )
 
-function handleSubmit() {
-  if (!canSubmit.value) return
-  modalStore.close()
+async function handleSubmit() {
+  if (!canSubmit.value || isSubmitting.value) return
+
+  await submit('/api/forms/consultation', {
+    phone: phone.value.trim(),
+    personalConsent: personalConsent.value,
+    offerConsent: offerConsent.value,
+    marketingConsent: marketingConsent.value,
+  })
 }
 </script>

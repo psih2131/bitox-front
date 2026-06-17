@@ -1,31 +1,30 @@
 <template>
-  <section ref="sectionRef" class="about-offices-sec">
+  <section v-if="section" ref="sectionRef" class="about-offices-sec">
     <div class="container">
-      <h2 class="about-offices-sec__title">Более 30 офисов по всей стране</h2>
+      <h2 class="about-offices-sec__title">{{ section.title_sec }}</h2>
 
       <div class="about-offices-sec__inner">
-
         <div class="about-offices-sec__map-wrapper">
-            <img
-            :src="mapImage"
+          <img
+            v-if="mapImageUrl"
+            :src="mapImageUrl"
             alt="Карта офисов Bitox по России"
             class="about-offices-sec__map"
             width="555"
             height="420"
           />
         </div>
-        
 
         <div class="about-offices-sec__list-card">
           <h3 class="about-offices-sec__list-title">Список всех городов</h3>
 
           <ul class="about-offices-sec__list">
             <li
-              v-for="city in cities"
-              :key="city"
+              v-for="office in section.offices_list"
+              :key="office.id"
               class="about-offices-sec__city"
             >
-              {{ city }}
+              {{ office.name_office }}
             </li>
           </ul>
         </div>
@@ -36,44 +35,20 @@
 
 <script setup>
 import gsap from 'gsap'
-import mapImage from '@/assets/images/map-about-2.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const mapImageUrl = computed(() => getStrapiMediaUrl(props.section.offices_map_image, apiUrl))
 
 const sectionRef = ref(null)
-
-const cities = [
-  'Москва',
-  'Санкт-Петербург',
-  'Екатеринбург',
-  'Тюмень',
-  'Саратов',
-  'Самара',
-  'Пермь',
-  'Челябинск',
-  'Омск',
-  'Краснодар',
-  'Ростов',
-  'Ижевск',
-  'Новосибирск',
-  'Барнаул',
-  'Красноярск',
-  'Волгоград',
-  'Томск',
-  'Воронеж',
-  'Казань',
-  'Иркутск',
-  'Хабаровск',
-  'Владивосток',
-  'Сочи',
-  'Севастополь',
-  'Симферополь',
-  'Ставрополь',
-  'Пятигорск',
-  'Махачкала',
-  'Грозный',
-  'Новороссийск',
-  'Якутск',
-]
 
 let sectionAnimation
 

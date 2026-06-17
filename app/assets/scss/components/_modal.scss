@@ -77,10 +77,9 @@
   color: $gray-83;
 }
 
-.consultation-modal__phone {
+.consultation-modal__control {
   display: flex;
   align-items: center;
-  gap: 12px;
   min-height: 55px;
   padding: 0 16px;
   border: 1px solid $light-gray;
@@ -91,12 +90,16 @@
   &:focus-within {
     border-color: $gray;
   }
+
+  &--phone {
+    gap: 12px;
+  }
 }
 
 .consultation-modal__flag {
   flex-shrink: 0;
-  width: 24px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 2px;
   object-fit: cover;
   display: block;
@@ -169,6 +172,133 @@
   }
 
   .consultation-modal__title {
+    font-size: 28px;
+  }
+}
+
+.form-result-modal {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 32px 32px;
+  border-radius: 20px;
+  background: $white;
+  text-align: center;
+}
+
+.form-result-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $gray-83;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $gray;
+  }
+}
+
+.form-result-modal__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+
+  &--success {
+    background: rgba(255, 221, 45, 0.2);
+    color: $gray;
+  }
+
+  &--error {
+    background: rgba(235, 87, 87, 0.12);
+    color: #eb5757;
+  }
+}
+
+.form-result-modal__title {
+  margin: 0 0 12px;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.05;
+  color: $gray;
+}
+
+.form-result-modal__text {
+  margin: 0 0 28px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.35;
+  color: $gray-83;
+}
+
+.form-result-modal__btn {
+  width: 100%;
+  min-height: 55px;
+}
+
+.text-content-modal {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  max-height: calc(100vh - 48px);
+  padding: 48px 40px 40px;
+  border-radius: 20px;
+  background: $white;
+  overflow-y: auto;
+}
+
+.text-content-modal__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $gray-83;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $gray;
+  }
+}
+
+.text-content-modal__title {
+  margin: 0 0 28px;
+  padding-right: 40px;
+  font-weight: 800;
+  font-size: 35px;
+  line-height: 0.95;
+  color: $gray;
+}
+
+.text-content-modal__body {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .text-content-modal {
+    padding: 28px 20px 24px;
+  }
+
+  .text-content-modal__title {
     font-size: 28px;
   }
 }

@@ -2,7 +2,8 @@
   <section ref="sectionRef" class="about-company-sec">
     <div class="container about-company-sec__inner">
       <img
-        :src="companyImage"
+        v-if="imageUrl"
+        :src="imageUrl"
         alt=""
         class="about-company-sec__img"
         width="520"
@@ -10,24 +11,11 @@
       />
 
       <div class="about-company-sec__content">
-        <h2 class="about-company-sec__title">О компании</h2>
+        <h2 class="about-company-sec__title">{{ section.section_title }}</h2>
 
         <div class="text-editor">
-          <p>
-            Bitox — финтех-компания, которая помогает бизнесу и частным клиентам
-            проводить международные расчёты и обмен криптовалюты быстро, прозрачно
-            и в рамках законодательства.
-          </p>
-          <p>
-            Мы запустили bitox.global в 2023 году и за три года выстроили
-            инфраструктуру с доступом к 70+ платёжным компаниям в разных странах.
-            Наша задача — убрать лишние барьеры между вами и вашими контрагентами
-            за рубежом.
-          </p>
-          <p>
-            Команда работает с импортом, экспортом, валютным контролем и крипто-расчётами
-            ежедневно. Мы не продаём «волшебные схемы» — мы даём понятные маршруты,
-            документы и сопровождение на каждом этапе сделки.
+          <p v-for="(paragraph, index) in paragraphs" :key="index">
+            {{ paragraph }}
           </p>
         </div>
       </div>
@@ -37,7 +25,19 @@
 
 <script setup>
 import gsap from 'gsap'
-import companyImage from '~/assets/images/gr-14.png'
+import { getStrapiMediaUrl, splitParagraphs } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const imageUrl = computed(() => getStrapiMediaUrl(props.section.section_image, apiUrl))
+const paragraphs = computed(() => splitParagraphs(props.section.description))
 
 const sectionRef = ref(null)
 

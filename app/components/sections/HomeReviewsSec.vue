@@ -1,40 +1,55 @@
 <template>
-  <section ref="sectionRef" class="home-reviews-sec">
+  <section v-if="apiReviews.length" ref="sectionRef" class="home-reviews-sec">
     <div class="container">
       <h2 class="home-reviews-sec__title">Отзывы</h2>
 
       <div class="home-reviews-sec__filters">
         <a
           href="#"
-          class="home-reviews-sec__filter home-reviews-sec__filter--pill"
-          :class="{ 'is-active': activeFilter === 'all' }"
-          @click.prevent="activeFilter = 'all'"
+          class="home-reviews-sec__filter home-reviews-sec__filter--pill is-active"
+          @click.prevent
         >
           Все отзывы
         </a>
 
         <div class="home-reviews-sec__filter-platforms">
-          <a
-            v-for="filter in platformFilters"
-            :key="filter.id"
-            :href="filter.href"
-            class="home-reviews-sec__filter home-reviews-sec__filter--platform"
-            :class="{ 'is-active': activeFilter === filter.id }"
-            @click.prevent="activeFilter = filter.id"
-          >
-            <img
-              :src="filter.icon"
-              :alt="filter.alt"
-              width="34"
-              height="34"
-              class="home-reviews-sec__filter-icon"
-            />
-            <span class="home-reviews-sec__filter-label">{{ filter.label }}</span>
-          </a>
+          <template v-for="filter in platformFilters" :key="filter.id">
+            <a
+              v-if="filter.href"
+              :href="filter.href"
+              class="home-reviews-sec__filter home-reviews-sec__filter--platform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                v-if="filter.icon"
+                :src="filter.icon"
+                :alt="filter.alt"
+                width="34"
+                height="34"
+                class="home-reviews-sec__filter-icon"
+              />
+              <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
+            </a>
+            <span
+              v-else
+              class="home-reviews-sec__filter home-reviews-sec__filter--platform"
+            >
+              <img
+                v-if="filter.icon"
+                :src="filter.icon"
+                :alt="filter.alt"
+                width="34"
+                height="34"
+                class="home-reviews-sec__filter-icon"
+              />
+              <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
+            </span>
+          </template>
         </div>
       </div>
 
-      <p class="home-reviews-sec__count">42 отзыва из 3 источников</p>
+      <p class="home-reviews-sec__count">{{ reviewsCountText }}</p>
     </div>
 
     <div class="home-reviews-sec__slider-outer">
@@ -60,7 +75,7 @@
             }"
           >
             <article
-              v-for="review in reviews"
+              v-for="review in apiReviews"
               :key="review.id"
               class="home-reviews-sec__card"
               :style="{ width: `${slideWidth}px` }"
@@ -74,7 +89,7 @@
                     {{ review.initials }}
                   </div>
 
-                  <div class="home-reviews-sec__stars" aria-label="Оценка 5 из 5">
+                  <div class="home-reviews-sec__stars" :aria-label="`Оценка ${review.rate ?? 5} из 5`">
                     <svg
                       v-for="n in 5"
                       :key="n"
@@ -87,7 +102,7 @@
                     >
                       <path
                         d="M8 1.3335L9.88533 5.8855L14.6667 6.51216L11.3333 9.8855L12.228 14.6668L8 12.5122L3.772 14.6668L4.66667 9.8855L1.33333 6.51216L6.11467 5.8855L8 1.3335Z"
-                        fill="#FFDD2D"
+                        :fill="n <= (review.rate ?? 5) ? '#FFDD2D' : '#E5E7EB'"
                       />
                     </svg>
                   </div>
@@ -100,7 +115,16 @@
               <p class="home-reviews-sec__text">{{ review.text }}</p>
 
               <footer class="home-reviews-sec__footer">
-                <span class="home-reviews-sec__source">{{ review.source }}</span>
+                <a
+                  v-if="review.link"
+                  :href="review.link"
+                  class="home-reviews-sec__source"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ review.source }}
+                </a>
+                <span v-else class="home-reviews-sec__source">{{ review.source }}</span>
               </footer>
             </article>
           </div>
@@ -142,107 +166,70 @@ import gsap from 'gsap'
 import logo2gis from '~/assets/images/logos/review-2gis.svg'
 import logoZoon from '~/assets/images/logos/review-zoon.svg'
 import logoYandex from '~/assets/images/logos/review-yandex.svg'
+import { mapStrapiReviewCategories, mapStrapiReviews } from '~/utils/strapi'
+
+const urlApi = useRuntimeConfig().public.apiUrl
+
+const reviewsPopulate = [
+  'populate[reviews_category][populate]=img',
+  'pagination[pageSize]=100',
+].join('&')
+
+const [{ data: reviewsResponse }, { data: categoriesResponse }] = await Promise.all([
+  useFetch(`${urlApi}/api/reviews?${reviewsPopulate}`),
+  useFetch(`${urlApi}/api/reviews-categories?populate[img]=true&pagination[pageSize]=100`),
+])
 
 const sectionRef = ref(null)
 const viewportRef = ref(null)
-const activeFilter = ref('all')
 const currentIndex = ref(0)
 const visibleCount = ref(4)
 const slideWidth = ref(0)
 const gap = ref(18)
 const offset = ref(0)
 
-const platformFilters = [
+const defaultPlatformFilters = [
   { id: '2gis', label: '5.0', href: '#', icon: logo2gis, alt: '2ГИС' },
   { id: 'zoon', label: '4.7', href: '#', icon: logoZoon, alt: 'Zoon' },
   { id: 'yandex', label: '5.0', href: '#', icon: logoYandex, alt: 'Яндекс' },
 ]
 
-const reviews = [
-  {
-    id: 1,
-    initials: 'АК',
-    name: 'Артем Конов',
-    date: '12 мая 2026 г.',
-    avatarColor: '#9A9A9A',
-    text: 'Пользуемся сервисом уже больше года. Платежи проходят быстро, менеджеры всегда на связи и помогают с документами. Для нашего бизнеса это очень удобно.',
-    source: 'Отзыв из Zoon',
-  },
-  {
-    id: 2,
-    initials: 'БА',
-    name: 'Борис Андреев',
-    date: '8 мая 2026 г.',
-    avatarColor: '#4A7FD4',
-    text: 'Отличный сервис для международных переводов. Всё прозрачно, без скрытых комиссий. Оплата поставщику из Китая прошла за пару часов.',
-    source: 'Отзыв из 2ГИС',
-  },
-  {
-    id: 3,
-    initials: 'МС',
-    name: 'Максим Соколов',
-    date: '3 мая 2026 г.',
-    avatarColor: '#0073FA',
-    text: 'Рекомендую. Удобный личный кабинет, понятные тарифы и быстрая обработка заявок. Несколько раз выручали в срочных ситуациях.',
-    source: 'Отзыв из Яндекс',
-  },
-  {
-    id: 4,
-    initials: 'ОК',
-    name: 'Ольга Кузнецова',
-    date: '28 апреля 2026 г.',
-    avatarColor: '#F5A623',
-    text: 'Переводили крупную сумму за оборудование — всё прошло без задержек. Поддержка ответила на все вопросы по валютному контролю.',
-    source: 'Отзыв из Zoon',
-  },
-  {
-    id: 5,
-    initials: 'ДВ',
-    name: 'Дмитрий Волков',
-    date: '22 апреля 2026 г.',
-    avatarColor: '#6B7280',
-    text: 'Надёжный партнёр для регулярных платежей. За полгода ни одного срыва сроков. Документооборот организован чётко.',
-    source: 'Отзыв из 2ГИС',
-  },
-  {
-    id: 6,
-    initials: 'ЕМ',
-    name: 'Елена Морозова',
-    date: '15 апреля 2026 г.',
-    avatarColor: '#8B5CF6',
-    text: 'Первый раз работали с валютными платежами — всё объяснили и сопроводили на каждом этапе. Очень благодарна команде.',
-    source: 'Отзыв из Яндекс',
-  },
-  {
-    id: 7,
-    initials: 'ИП',
-    name: 'Игорь Петров',
-    date: '10 апреля 2026 г.',
-    avatarColor: '#10B981',
-    text: 'Скорость обработки впечатляет. Заявку подали утром, к обеду деньги уже ушли получателю. Будем продолжать сотрудничество.',
-    source: 'Отзыв из Zoon',
-  },
-  {
-    id: 8,
-    initials: 'НС',
-    name: 'Наталья Смирнова',
-    date: '5 апреля 2026 г.',
-    avatarColor: '#EC4899',
-    text: 'Удобно, что можно отслеживать статус платежа в реальном времени. Курс фиксируется сразу, без неприятных сюрпризов.',
-    source: 'Отзыв из 2ГИС',
-  },
-  {
-    id: 9,
-    initials: 'СЛ',
-    name: 'Сергей Лебедев',
-    date: '1 апреля 2026 г.',
-    avatarColor: '#3B82F6',
-    text: 'Работаем с bitox уже третий квартал. Всё стабильно, документы готовят быстро, менеджеры всегда на связи.',
-    source: 'Отзыв из Яндекс',
-  },
-]
+const platformFilters = computed(() => {
+  const categories = mapStrapiReviewCategories(categoriesResponse.value?.data ?? [], urlApi)
 
-const maxIndex = computed(() => Math.max(0, reviews.length - visibleCount.value))
+  return categories.length ? categories : defaultPlatformFilters
+})
+
+const apiReviews = computed(() => mapStrapiReviews(reviewsResponse.value?.data ?? [], urlApi))
+
+function pluralizeReviews(count) {
+  const mod10 = count % 10
+  const mod100 = count % 100
+
+  if (mod10 === 1 && mod100 !== 11) return 'отзыв'
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'отзыва'
+
+  return 'отзывов'
+}
+
+function pluralizeSources(count) {
+  const mod10 = count % 10
+  const mod100 = count % 100
+
+  if (mod10 === 1 && mod100 !== 11) return 'источник'
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'источника'
+
+  return 'источников'
+}
+
+const reviewsCountText = computed(() => {
+  const count = apiReviews.value.length
+  const sources = platformFilters.value.length
+
+  return `${count} ${pluralizeReviews(count)} из ${sources} ${pluralizeSources(sources)}`
+})
+
+const maxIndex = computed(() => Math.max(0, apiReviews.value.length - visibleCount.value))
 const isBeginning = computed(() => currentIndex.value === 0)
 const isEnd = computed(() => currentIndex.value >= maxIndex.value)
 const paginationCount = computed(() => maxIndex.value + 1)

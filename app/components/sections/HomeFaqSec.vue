@@ -5,7 +5,7 @@
     :style="bgColor ? { backgroundColor: bgColor } : undefined"
   >
     <div class="container">
-      <h2 class="faq-sec__title">Часто задаваемые вопросы</h2>
+      <h2 class="faq-sec__title">{{ faqTitle }}</h2>
 
       <div class="faq-sec__list">
         <FaqItem
@@ -22,16 +22,20 @@
 <script setup>
 import gsap from 'gsap'
 
-defineProps({
+const props = defineProps({
   bgColor: {
     type: String,
     default: '',
+  },
+  section: {
+    type: Object,
+    default: null,
   },
 })
 
 const sectionRef = ref(null)
 
-const faqItems = [
+const defaultFaqItems = [
   {
     id: 1,
     question: 'Чем перевод через Bitox отличается от прямого SWIFT-перевода через российский банк?',
@@ -53,6 +57,18 @@ const faqItems = [
     answer: 'Еженедельный отчёт содержит сводку по всем проведённым операциям: суммы, валюты, статусы платежей и закрывающие документы. Отчёт формируется автоматически и отправляется на указанную почту каждый понедельник.',
   },
 ]
+
+const faqTitle = computed(() => props.section?.title || 'Часто задаваемые вопросы')
+
+const faqItems = computed(() => {
+  if (!props.section?.questions_list?.length) return defaultFaqItems
+
+  return props.section.questions_list.map((item) => ({
+    id: item.id,
+    question: item.title,
+    answer: item.text,
+  }))
+})
 
 let faqAnimation
 

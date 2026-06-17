@@ -1,21 +1,21 @@
 <template>
-  <section ref="sectionRef" class="media-sec">
+  <section v-if="section || allPublications.length" ref="sectionRef" class="media-sec">
     <div class="container">
       <div class="media-sec__head">
-        
-        <h2 class="media-sec__title">СМИ о нас
-
-          <span class="media-sec__badge">Публикации о bitox</span>
+        <h2 class="media-sec__title">
+          {{ sectionTitle }}
+          <span v-if="sectionSubtitle" class="media-sec__badge">{{ sectionSubtitle }}</span>
         </h2>
       </div>
 
       <div class="media-sec__grid">
         <a
-          v-for="item in publications"
+          v-for="item in visiblePublications"
           :key="item.id"
           :href="item.href"
           class="media-sec__card"
-          :class="{ 'media-sec__card--featured': item.featured }"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <div class="media-sec__card-header">
             <img
@@ -37,8 +37,8 @@
         </a>
       </div>
 
-      <div class="media-sec__btn-wrap">
-        <AppButton>Все публикации</AppButton>
+      <div v-if="hasMorePublications && !showAll" class="media-sec__btn-wrap">
+        <AppButton type="button" @click="showAll = true">Все публикации</AppButton>
       </div>
     </div>
   </section>
@@ -47,16 +47,26 @@
 <script setup>
 import gsap from 'gsap'
 import logoRbk from '~/assets/images/media/logo-rbk.svg'
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
-const sectionRef = ref(null)
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
 
-const publications = [
+const apiUrl = useRuntimeConfig().public.apiUrl
+const DEFAULT_VISIBLE_COUNT = 3
+
+const showAll = ref(false)
+
+const defaultPublications = [
   {
     id: 1,
     href: '#',
     source: 'РБК',
     logo: logoRbk,
-    featured: true,
     title: 'Промышленная революция: как крипто-обмен в России вышли на новый этап',
   },
   {
@@ -64,7 +74,6 @@ const publications = [
     href: '#',
     source: 'Forbes',
     logo: null,
-    featured: false,
     title: '«Обречена на популярность»: перспективы технологии криптовалютных расчётов',
   },
   {
@@ -72,10 +81,36 @@ const publications = [
     href: '#',
     source: 'РБК',
     logo: logoRbk,
-    featured: false,
     title: 'Самый простой путь в крипто-обмен: на примере компании bitox.global',
   },
 ]
+
+const sectionTitle = computed(() => props.section?.title || 'СМИ о нас')
+const sectionSubtitle = computed(() => props.section?.subtitle || 'Публикации о bitox')
+
+const allPublications = computed(() => {
+  if (!props.section?.posts?.length) return defaultPublications
+
+  return props.section.posts.map((post) => ({
+    id: post.id,
+    href: post.link || '#',
+    source: post.logo?.alternativeText || '',
+    logo: getStrapiMediaUrl(post.logo, apiUrl),
+    title: post.title,
+  }))
+})
+
+const hasMorePublications = computed(() => allPublications.value.length > DEFAULT_VISIBLE_COUNT)
+
+const visiblePublications = computed(() => {
+  if (showAll.value || !hasMorePublications.value) {
+    return allPublications.value
+  }
+
+  return allPublications.value.slice(0, DEFAULT_VISIBLE_COUNT)
+})
+
+const sectionRef = ref(null)
 
 let mediaAnimation
 

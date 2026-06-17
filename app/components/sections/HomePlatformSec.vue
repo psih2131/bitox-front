@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="platform-sec">
+  <section v-if="columns.length" ref="sectionRef" class="platform-sec">
     <div class="container">
       <h2 class="platform-sec__title">
         Единая платформа для бизнеса и частных клиентов
@@ -13,54 +13,58 @@
         >
           <div class="platform-sec__card-head">
             <div class="platform-sec__card-text">
-              <h3 class="platform-sec__card-title">{{ column.title }}</h3>
-              <p class="platform-sec__card-subtitle">{{ column.subtitle }}</p>
+              <h3 v-if="column.title" class="platform-sec__card-title">{{ column.title }}</h3>
+              <p v-if="column.subtitle" class="platform-sec__card-subtitle">{{ column.subtitle }}</p>
             </div>
 
             <img
+              v-if="column.image"
               :src="column.image"
               alt=""
               class="platform-sec__card-img"
             />
           </div>
 
-          <ul class="platform-sec__list">
+          <ul v-if="column.services.length" class="platform-sec__list">
             <li
               v-for="service in column.services"
               :key="service.slug"
             >
               <NuxtLink
-                :to="`/services/${service.slug}`"
+                :to="{
+                  path: `/services/${service.slug}`,
+                  query: { id: service.documentId },
+                }"
                 class="platform-sec__item"
               >
-              <div class="platform-sec__item-content">
-                <p class="platform-sec__item-title">{{ service.title }}</p>
-                <p class="platform-sec__item-text">{{ service.text }}</p>
-              </div>
+                <div class="platform-sec__item-content">
+                  <p class="platform-sec__item-title">{{ service.title }}</p>
+                  <p v-if="service.text" class="platform-sec__item-text">{{ service.text }}</p>
+                </div>
 
-              <span class="platform-sec__item-btn" aria-hidden="true">
-                <svg
-                  class="platform-sec__item-btn-icon platform-sec__item-btn-icon--default"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M3.5 12.5L12.5 3.5M12.5 3.5H6.5M12.5 3.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                <span class="platform-sec__item-btn" aria-hidden="true">
+                  <svg
+                    class="platform-sec__item-btn-icon platform-sec__item-btn-icon--default"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M3.5 12.5L12.5 3.5M12.5 3.5H6.5M12.5 3.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
 
-                <svg
-                  class="platform-sec__item-btn-icon platform-sec__item-btn-icon--hover"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </span>
+                  <svg
+                    class="platform-sec__item-btn-icon platform-sec__item-btn-icon--hover"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
               </NuxtLink>
             </li>
           </ul>
@@ -75,12 +79,19 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gr1 from '~/assets/images/gr-1.png'
 import gr2 from '~/assets/images/gr-2.png'
+import { mapStrapiServiceCategories } from '~/utils/strapi'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const urlApi = useRuntimeConfig().public.apiUrl
+
+const { data: categoriesResponse } = await useFetch(
+  `${urlApi}/api/services-categories?populate[image]=true&populate[services]=true&pagination[pageSize]=100`,
+)
+
 const sectionRef = ref(null)
 
-const columns = [
+const defaultColumns = [
   {
     id: 'business',
     title: 'Бизнесу',
@@ -148,6 +159,12 @@ const columns = [
     ],
   },
 ]
+
+const columns = computed(() => {
+  const categories = mapStrapiServiceCategories(categoriesResponse.value?.data ?? [], urlApi)
+
+  return categories.length ? categories : defaultColumns
+})
 
 let platformAnimation
 

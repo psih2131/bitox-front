@@ -16,9 +16,18 @@
 </template>
 
 <script setup>
-const isVisible = ref(true)
+const COOKIE_BANNER_KEY = 'cookie-banner-accepted'
+
+const isVisible = ref(false)
+
+onMounted(() => {
+  if (!sessionStorage.getItem(COOKIE_BANNER_KEY)) {
+    isVisible.value = true
+  }
+})
 
 function acceptCookies() {
+  sessionStorage.setItem(COOKIE_BANNER_KEY, '1')
   isVisible.value = false
 }
 </script>

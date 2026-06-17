@@ -3,30 +3,32 @@ import { defineStore } from 'pinia'
 
 export const MODAL_NAMES = {
   consultation: 'consultation',
+  callback: 'callback',
+  formResult: 'formResult',
+  textContent: 'textContent',
 }
 
 export const useModalStore = defineStore('modal', () => {
-  const popup = ref({
-    name: '',
-    isOpen: false,
-  })
+  const name = ref('')
+  const isOpen = ref(false)
+  const payload = ref(null)
 
-  function open(name) {
-    popup.value = {
-      name,
-      isOpen: true,
-    }
+  function open(modalName, data = null) {
+    name.value = modalName
+    payload.value = data
+    isOpen.value = true
   }
 
   function close() {
-    popup.value = {
-      name: '',
-      isOpen: false,
-    }
+    name.value = ''
+    payload.value = null
+    isOpen.value = false
   }
 
   return {
-    popup,
+    name,
+    isOpen,
+    payload,
     open,
     close,
   }

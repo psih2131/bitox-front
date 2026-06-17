@@ -2,7 +2,7 @@
   <section ref="sectionRef" class="service-examples-sec">
     <div class="container">
       <div class="service-examples-sec__head">
-        <h2 class="service-examples-sec__title">Примеры оплат инвойсов</h2>
+        <h2 class="service-examples-sec__title">{{ sectionTitle }}</h2>
 
         <div class="service-examples-sec__arrows">
           <button
@@ -50,12 +50,12 @@
             >
               <div class="service-examples-sec__card-media">
                 <img
-                  :src="exampleImage"
+                  :src="example.image"
                   alt=""
                   class="service-examples-sec__card-img"
                 />
 
-                <div class="service-examples-sec__tags">
+                <div v-if="example.tags?.length" class="service-examples-sec__tags">
                   <span
                     v-for="tag in example.tags"
                     :key="tag"
@@ -81,7 +81,12 @@
                   </div>
                 </div>
 
-                <button type="button" class="app-btn service-examples-sec__btn">
+                <button
+                  v-if="example.hasFullDescription"
+                  type="button"
+                  class="app-btn service-examples-sec__btn"
+                  @click="openFullDescription(example)"
+                >
                   Читать подробнее
                 </button>
               </div>
@@ -96,6 +101,19 @@
 <script setup>
 import gsap from 'gsap'
 import exampleImage from '~/assets/images/exm-1.jpg'
+import { MODAL_NAMES, useModalStore } from '~/stores/modal'
+import { hasRichTextContent } from '~/utils/formatBlogText'
+import { formatShortDate, getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+const modalStore = useModalStore()
 
 const sectionRef = ref(null)
 const viewportRef = ref(null)
@@ -105,11 +123,12 @@ const slideWidth = ref(0)
 const gap = ref(20)
 const offset = ref(0)
 
-const examples = [
+const defaultExamples = [
   {
     id: 1,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
+    image: exampleImage,
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -122,6 +141,7 @@ const examples = [
     id: 2,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
+    image: exampleImage,
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -134,6 +154,7 @@ const examples = [
     id: 3,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
+    image: exampleImage,
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -146,6 +167,7 @@ const examples = [
     id: 4,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
+    image: exampleImage,
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -156,7 +178,40 @@ const examples = [
   },
 ]
 
-const maxIndex = computed(() => Math.max(0, examples.length - visibleCount.value))
+const sectionTitle = computed(() => props.section?.title || 'Примеры оплат инвойсов')
+
+function mapExampleFields(item) {
+  return [
+    { label: 'Клиент', value: item.client },
+    { label: 'Страна перевода', value: item.country },
+    { label: 'Сумма', value: item.price },
+    { label: 'Срок исполнения', value: item.time },
+  ].filter((field) => field.value)
+}
+
+const examples = computed(() => {
+  if (!props.section?.examples_items?.length) return defaultExamples
+
+  return props.section.examples_items.map((item) => ({
+    id: item.id,
+    title: item.title,
+    date: formatShortDate(item.date),
+    image: getStrapiMediaUrl(item.image, apiUrl) || exampleImage,
+    fields: mapExampleFields(item),
+    tags: [],
+    fullDescription: item.full_description || '',
+    hasFullDescription: hasRichTextContent(item.full_description),
+  }))
+})
+
+function openFullDescription(example) {
+  modalStore.open(MODAL_NAMES.textContent, {
+    title: example.title,
+    content: example.fullDescription,
+  })
+}
+
+const maxIndex = computed(() => Math.max(0, examples.value.length - visibleCount.value))
 const isBeginning = computed(() => currentIndex.value === 0)
 const isEnd = computed(() => currentIndex.value >= maxIndex.value)
 

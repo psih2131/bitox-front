@@ -2,10 +2,8 @@
   <section ref="sectionRef" class="about-life-sec">
     <div class="container">
       <div class="about-life-sec__head">
-        <h2 class="about-life-sec__title">Из жизни компании</h2>
-        <p class="about-life-sec__subtitle">
-          Команда, офис, мероприятия, партнёрские встречи
-        </p>
+        <h2 class="about-life-sec__title">{{ section.title }}</h2>
+        <p class="about-life-sec__subtitle">{{ section.subtitle }}</p>
       </div>
 
       <div ref="galleryRef" class="about-life-sec__gallery">
@@ -45,7 +43,7 @@
         </div>
       </div>
 
-      <div v-if="hasMore" class="about-life-sec__more">
+      <div v-if="hasMore && moreImages.length" class="about-life-sec__more">
         <AppClientBtn type="button" @click="showMore">
           Показать больше
         </AppClientBtn>
@@ -56,25 +54,42 @@
 
 <script setup>
 import gsap from 'gsap'
-import galleryImage from '~/assets/images/exm-1.jpg'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
 
 const { $fancybox } = useNuxtApp()
+const apiUrl = useRuntimeConfig().public.apiUrl
 
 const sectionRef = ref(null)
 const galleryRef = ref(null)
 const hasMore = ref(true)
 
-const mainImages = [
-  { id: 1, thumb: galleryImage, full: galleryImage, caption: 'Команда Bitox', layout: 'large' },
-  { id: 2, thumb: galleryImage, full: galleryImage, caption: 'Рабочий процесс', layout: 'top-left' },
-  { id: 3, thumb: galleryImage, full: galleryImage, caption: 'Офис', layout: 'top-right' },
-  { id: 4, thumb: galleryImage, full: galleryImage, caption: 'Встреча с партнёрами', layout: 'wide' },
-]
+const layoutOrder = ['large', 'top-left', 'top-right', 'wide']
 
-const moreImages = [
-  { id: 5, thumb: galleryImage, full: galleryImage, caption: 'Мероприятие' },
-  { id: 6, thumb: galleryImage, full: galleryImage, caption: 'Корпоратив' },
-]
+const galleryImages = computed(() => {
+  return (props.section.img_gallery ?? [])
+    .filter((item) => item.image)
+    .map((item, index) => {
+      const url = getStrapiMediaUrl(item.image, apiUrl)
+
+      return {
+        id: item.id,
+        thumb: url,
+        full: url,
+        caption: item.image.alternativeText || item.image.name || '',
+        layout: layoutOrder[index] ?? 'more',
+      }
+    })
+})
+
+const mainImages = computed(() => galleryImages.value.slice(0, 4))
+const moreImages = computed(() => galleryImages.value.slice(4))
 
 let sectionAnimation
 

@@ -1,9 +1,8 @@
 <template>
   <section ref="sectionRef" class="countries-sec">
     <div class="container countries-sec__top">
-      <h2 class="countries-sec__title">
-        Международные платежи<br />
-        по всему миру
+      <h2 v-if="sectionTitle" class="countries-sec__title">
+        {{ sectionTitle }}
       </h2>
 
       <div class="countries-sec__search-wrap">
@@ -69,7 +68,7 @@
     </div>
 
     <div class="container countries-sec__bottom">
-      <AppBannerBtn>Узнать как сэкономить на платеже</AppBannerBtn>
+      <AppBannerBtn>{{ buttonTitle }}</AppBannerBtn>
     </div>
   </section>
 </template>
@@ -83,13 +82,23 @@ import flag3 from '~/assets/images/flags/x3.jpg'
 import flag4 from '~/assets/images/flags/x4.jpg'
 import flag5 from '~/assets/images/flags/x5.jpg'
 import flag6 from '~/assets/images/flags/x6.jpg'
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
 
 const sectionRef = ref(null)
 const query = ref('')
 
-const countries = [
+const defaultCountries = [
   { id: 'italy', name: 'Италия', flag: flag1, keywords: ['ит', 'ital'] },
   { id: 'england', name: 'Англия', flag: flag2, keywords: ['анг', 'eng'] },
   { id: 'turkey', name: 'Турция', flag: flag3, keywords: ['ty', 'тур', 'tur'] },
@@ -99,14 +108,31 @@ const countries = [
   { id: 'china', name: 'Китай', flag: flag4, keywords: ['кит', 'chi', 'ki'] },
 ]
 
-// Дублируем внутри группы, чтобы ширина была больше экрана
-const sliderGroup = Array.from({ length: 3 }, () => countries).flat()
+const sectionTitle = computed(() => props.section?.title || 'Международные платежи по всему миру')
+const buttonTitle = computed(() => props.section?.button_title || 'Узнать как сэкономить на платеже')
+
+const countries = computed(() => {
+  if (!props.section?.countries_list?.length) return defaultCountries
+
+  return props.section.countries_list.map((item) => {
+    const name = item.title || ''
+
+    return {
+      id: item.id,
+      name,
+      flag: getStrapiMediaUrl(item.image, apiUrl),
+      keywords: [name.toLowerCase().slice(0, 3)].filter(Boolean),
+    }
+  })
+})
+
+const sliderGroup = computed(() => Array.from({ length: 3 }, () => countries.value).flat())
 
 const filteredCountries = computed(() => {
   const value = query.value.trim().toLowerCase()
   if (!value) return []
 
-  return countries.filter((country) => {
+  return countries.value.filter((country) => {
     const nameMatch = country.name.toLowerCase().includes(value)
     const keywordMatch = country.keywords.some((keyword) => keyword.includes(value) || value.includes(keyword))
     return nameMatch || keywordMatch

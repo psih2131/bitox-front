@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="partner-hero-sec">
+  <section v-if="section" ref="sectionRef" class="partner-hero-sec">
     <div class="container partner-hero-sec__inner">
       <div class="partner-hero-sec__content">
         <nav class="partner-hero-sec__breadcrumbs" aria-label="Хлебные крошки">
@@ -9,25 +9,25 @@
         </nav>
 
         <div class="partner-hero-sec__title-wrap">
-          <h1 class="partner-hero-sec__title">
-            Партнерская
-            программа для
-            агентов до 30%
+          <h1 v-if="section.title" class="partner-hero-sec__title">
+            {{ section.title }}
           </h1>
 
           <span class="partner-hero-sec__badge">Станьте партнёром bitox</span>
         </div>
 
-        <p class="partner-hero-sec__text">
-          Вы приводите клиентов на обмен криптовалюты или международный платеж,
-          а мы платим вам комиссию с каждой сделки — без потолка по объёму
+        <p v-if="section.subtitle" class="partner-hero-sec__text">
+          {{ section.subtitle }}
         </p>
 
-        <AppClientBtn class="partner-hero-sec__btn">Обсудить условия</AppClientBtn>
+        <AppClientBtn v-if="section.button_text" class="partner-hero-sec__btn">
+          {{ section.button_text }}
+        </AppClientBtn>
       </div>
 
       <img
-        :src="heroImage"
+        v-if="heroImageUrl"
+        :src="heroImageUrl"
         alt=""
         class="partner-hero-sec__img"
         width="647"
@@ -39,7 +39,21 @@
 
 <script setup>
 import gsap from 'gsap'
-import heroImage from '~/assets/images/gr-8.png'
+import fallbackHeroImage from '~/assets/images/gr-8.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  section: {
+    type: Object,
+    required: true,
+  },
+})
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const heroImageUrl = computed(
+  () => getStrapiMediaUrl(props.section.image, apiUrl) || fallbackHeroImage,
+)
 
 const sectionRef = ref(null)
 
