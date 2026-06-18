@@ -46,7 +46,7 @@ export default defineNuxtConfig({
     groupId: process.env.NUXT_GROUP_ID,
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiUrl: 'http://localhost:1337',
+      apiUrl: process.env.PUBLIC_API_URL || 'http://localhost:1337',
     },
   },
 })
