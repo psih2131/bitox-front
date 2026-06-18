@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
 
   yandexMaps: {
-    apikey: 'af5a38a2-5bf8-44de-bfbe-b30e278e9df4',
+    apikey: process.env.NUXT_PUBLIC_YANDEX_MAPS_API_KEY || '',
   },
 
   build: {
@@ -44,9 +44,9 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     botToken: process.env.NUXT_BOT_TOKEN,
     groupId: process.env.NUXT_GROUP_ID,
-    // Keys within public, will be also exposed to the client-side
     public: {
       apiUrl: process.env.PUBLIC_API_URL || 'http://localhost:1337',
+      yandexMapsApiKey: process.env.NUXT_PUBLIC_YANDEX_MAPS_API_KEY || '',
     },
   },
 })
