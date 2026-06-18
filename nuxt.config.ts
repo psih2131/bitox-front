@@ -4,12 +4,29 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   ssr: true,
+
+  app: {
+    head: {
+      meta: [
+        { name: 'robots', content: 'noindex, nofollow' },
+        { name: 'googlebot', content: 'noindex, nofollow' },
+      ],
+    },
+  },
+
+  routeRules: {
+    '/**': {
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet',
+      },
+    },
+  },
   
   css: ['~/assets/scss/main.scss', 'vue-yandex-maps/css'],
   modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
 
   yandexMaps: {
-    apikey: process.env.NUXT_PUBLIC_YANDEX_MAPS_API_KEY || '',
+    apikey: 'af5a38a2-5bf8-44de-bfbe-b30e278e9df4',
   },
 
   build: {
@@ -44,9 +61,10 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     botToken: process.env.NUXT_BOT_TOKEN,
     groupId: process.env.NUXT_GROUP_ID,
+    yandexMapsApiKey: process.env.NUXT_YANDEX_MAPS_API_KEY,
+    // Keys within public, will be also exposed to the client-side
     public: {
       apiUrl: process.env.PUBLIC_API_URL || 'http://localhost:1337',
-      yandexMapsApiKey: process.env.NUXT_PUBLIC_YANDEX_MAPS_API_KEY || '',
     },
   },
 })
