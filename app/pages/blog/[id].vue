@@ -9,6 +9,7 @@
 <script setup>
 import BlogPostHeroSec from '~/components/sections/BlogPostHeroSec.vue'
 import BlogPostArticleSec from '~/components/sections/BlogPostArticleSec.vue'
+import { getStrapiMediaUrl, getStrapiSeoPopulateParts } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const route = useRoute()
@@ -22,7 +23,7 @@ const populate = [
   'populate[author]=true',
   'populate[post_content_builder]=true',
   'populate[post_questions_section][populate]=post_questions',
-  'populate[seo_cluster]=true',
+  ...getStrapiSeoPopulateParts('seo_cluster'),
 ].join('&')
 
 const { data: postData } = await useFetch(
@@ -30,4 +31,15 @@ const { data: postData } = await useFetch(
   { watch: [postId] },
 )
 
+const post = postData.value?.data
+
+if (post) {
+  useStrapiSeo(post.seo_cluster, {
+    apiUrl: urlApi,
+    fallbackTitle: post.post_title || 'Bitox',
+    fallbackDescription: post.post_description || 'Bitox',
+    fallbackOgType: 'article',
+    fallbackOgImage: getStrapiMediaUrl(post.post_image, urlApi) || undefined,
+  })
+}
 </script>

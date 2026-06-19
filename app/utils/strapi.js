@@ -4,6 +4,21 @@ export function getStrapiMediaUrl(media, apiUrl) {
   return `${apiUrl}${media.url}`
 }
 
+export function getStrapiSeoPopulateParts(fieldName = 'Seo') {
+  return [
+    `populate[${fieldName}][populate][shareImage]=true`,
+    `populate[${fieldName}][populate][twitterImage]=true`,
+  ]
+}
+
+export const STRAPI_SEO_POPULATE_PARTS = getStrapiSeoPopulateParts('Seo')
+
+export function formatSeoRobots(value) {
+  if (!value) return 'index, follow'
+
+  return value.replace(/,\s*/g, ', ')
+}
+
 export function parseMapCoordinates(value) {
   if (!value) return null
 
@@ -108,6 +123,16 @@ export function mapStrapiServices(items, apiUrl) {
     title: item.title,
     subtitle: item.subtitle,
     image: getStrapiMediaUrl(item.service_hero_sec?.image, apiUrl),
+  }))
+}
+
+export function mapStrapiInvoices(items, apiUrl) {
+  return items.map((item) => ({
+    id: item.id,
+    documentId: item.documentId,
+    slug: item.slug,
+    name: item.title,
+    flag: getStrapiMediaUrl(item.flag, apiUrl),
   }))
 }
 

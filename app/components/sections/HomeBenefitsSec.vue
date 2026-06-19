@@ -100,6 +100,7 @@ const cards = computed(() => {
     title: item.title,
     text: item.subtitle,
     dark: index === items.length - 1,
+    image: index === 1 ? gr3 : null,
   }))
 })
 

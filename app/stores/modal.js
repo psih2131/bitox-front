@@ -5,7 +5,6 @@ export const MODAL_NAMES = {
   consultation: 'consultation',
   callback: 'callback',
   formResult: 'formResult',
-  textContent: 'textContent',
 }
 
 export const useModalStore = defineStore('modal', () => {

@@ -1,0 +1,75 @@
+.business-countries-sec {
+  position: relative;
+  padding: 100px 0 80px;
+  overflow: hidden;
+  background-color: #F6F7F8;
+  background-image: url('../images/map-bg.jpg');
+  background-size: 1637px auto;
+  background-repeat: no-repeat;
+}
+
+.business-countries-sec__title {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 50px;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  color: $gray;
+}
+
+.business-countries-sec__list {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.business-countries-sec__pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px 10px 10px;
+  border: 1px solid $light-gray;
+  border-radius: 100px;
+  background: $white;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(49, 49, 50, 0.1);
+  }
+}
+
+.business-countries-sec__pill:not(:has(.business-countries-sec__flag)) {
+  padding: 10px 24px;
+}
+
+.business-countries-sec__flag {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.business-countries-sec__name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.1;
+  color: $gray;
+  white-space: nowrap;
+}
+
+.business-countries-sec__more {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}

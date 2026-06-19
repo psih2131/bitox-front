@@ -48,61 +48,50 @@
           <NuxtLink to="/" class="header__logo">{{ header?.text_logo }}</NuxtLink>
 
           <nav class="header__nav">
-            <div class="header__nav-dropdown header__nav-dropdown--services">
-              <span class="header__nav-link header__nav-dropdown-toggle">Бизнесу</span>
-            </div>
-
-            <NuxtLink
-              v-for="link in navLinks"
-              :key="link.to"
-              :to="link.to"
-              class="header__nav-link"
+            <div
+              v-for="item in navItems"
+              :key="item.label"
+              class="header__nav-item"
+              :class="{ 'header__nav-item--has-mega': item.mega?.length }"
             >
-              {{ link.label }}
-            </NuxtLink>
+              <NuxtLink :to="item.to" class="header__nav-link">
+                {{ item.label }}
+              </NuxtLink>
+
+              <div v-if="item.mega?.length" class="header__mega">
+                <div class="container">
+                  <div class="header__mega-inner">
+                    <div
+                      v-for="card in item.mega"
+                      :key="card.id"
+                      class="header__mega-card"
+                    >
+                      <p v-if="card.title" class="header__mega-card-title">{{ card.title }}</p>
+
+                      <ul v-if="card.links.length" class="header__mega-list">
+                        <li v-for="link in card.links" :key="link.key">
+                          <NuxtLink :to="link.to" class="header__mega-link">
+                            {{ link.label }}
+                          </NuxtLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="header__mega-cta">
+                      <AppBannerBtn type="button" @click="openConsultationModal">
+                        Заказать консультацию
+                      </AppBannerBtn>
+                      <p class="header__mega-cta-text">
+                        Подберем оптимальное решение вашей задачи
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </nav>
 
           <AppButton @click="openConsultationModal">{{ header?.ctr_button_text }}</AppButton>
-        </div>
-      </div>
-
-      <div v-if="serviceCategories.length" class="header__mega">
-        <div class="container">
-          <div class="header__mega-inner">
-            <div
-              v-for="category in serviceCategories"
-              :key="category.id"
-              class="header__mega-card"
-            >
-              <p v-if="category.title" class="header__mega-card-title">{{ category.title }}</p>
-
-              <ul v-if="category.services.length" class="header__mega-list">
-                <li
-                  v-for="service in category.services"
-                  :key="service.documentId"
-                >
-                  <NuxtLink
-                    :to="{
-                      path: `/services/${service.slug}`,
-                      query: { id: service.documentId },
-                    }"
-                    class="header__mega-link"
-                  >
-                    {{ service.title }}
-                  </NuxtLink>
-                </li>
-              </ul>
-            </div>
-
-            <div class="header__mega-cta">
-              <AppBannerBtn type="button" @click="openConsultationModal">
-                Заказать консультацию
-              </AppBannerBtn>
-              <p class="header__mega-cta-text">
-                Подберем оптимальное решение вашей задачи
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -111,22 +100,16 @@
 
 <script setup>
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
-import { mapStrapiServiceCategories } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 
-const [{ data: headerResponse }, { data: categoriesResponse }] = await Promise.all([
-  useFetch(`${urlApi}/api/header-component?populate[header_contacts_list]=true`),
-  useFetch(`${urlApi}/api/services-categories?populate[services]=true&pagination[pageSize]=100`),
-])
+const { data: headerResponse } = await useFetch(
+  `${urlApi}/api/header-component?populate[header_contacts_list]=true`,
+)
 
 const header = computed(() => headerResponse.value?.data)
 
 const contacts = computed(() => header.value?.header_contacts_list ?? [])
-
-const serviceCategories = computed(() =>
-  mapStrapiServiceCategories(categoriesResponse.value?.data ?? [], urlApi),
-)
 
 function isPhoneContact(contact) {
   return contact.link?.startsWith('tel:')
@@ -142,11 +125,54 @@ function openCallbackModal() {
   modalStore.open(MODAL_NAMES.callback)
 }
 
-const navLinks = [
-  { label: 'Партнерская программа', to: '/partners' },
+const businessMega = [
+  {
+    id: 'business-1',
+    title: 'Импортерам',
+    links: [
+      { key: 'business-invoice', label: 'Оплата инвойсов', to: '/business/invoice' },
+      { key: 'business-contract', label: 'Оплата валютного контракта', to: '/business/oplata-valyutnogo-kontrakta' },
+      { key: 'business-consulting', label: 'Консалтинг ВЭД', to: '/business/konsalting-ved' },
+    ],
+  },
+  {
+    id: 'business-2',
+    title: 'Экспортерам',
+    links: [
+      { key: 'business-return', label: 'Возврат валютной выручки', to: '/business/vozvrat-valyutnoj-vyruchki' },
+    ],
+  },
+]
+
+// TODO: заменить ссылки на реальные страницы, когда они будут готовы
+const privateClientsMega = [
+  {
+    id: 'private-1',
+    title: 'Покупка и продажа',
+    links: [
+      { key: 'private-buy', label: 'Покупка криптовалюты', to: '/' },
+      { key: 'private-sell', label: 'Продажа криптовалюты', to: '/' },
+      { key: 'private-exchange', label: 'Обмен валют', to: '/' },
+    ],
+  },
+  {
+    id: 'private-2',
+    title: 'Хранение и сервис',
+    links: [
+      { key: 'private-storage', label: 'Безопасное хранение', to: '/' },
+      { key: 'private-wallet', label: 'Создание кошелька', to: '/' },
+      { key: 'private-support', label: 'Поддержка 24/7', to: '/' },
+    ],
+  },
+]
+
+const navItems = computed(() => [
+  { label: 'Бизнесу', to: '/business', mega: businessMega },
+  { label: 'Частным клиентам', to: '/', mega: privateClientsMega },
+  { label: 'Международные расчеты', to: '/' },
   { label: 'Обмен криптовалюты', to: '/exchange' },
   { label: 'Блог', to: '/blog' },
   { label: 'Контакты', to: '/contacts' },
   { label: 'о Bitox', to: '/about' },
-]
+])
 </script>

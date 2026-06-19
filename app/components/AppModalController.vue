@@ -18,7 +18,6 @@ import { storeToRefs } from 'pinia'
 import ConsultationModal from '~/components/modals/ConsultationModal.vue'
 import CallbackModal from '~/components/modals/CallbackModal.vue'
 import FormResultModal from '~/components/modals/FormResultModal.vue'
-import TextContentModal from '~/components/modals/TextContentModal.vue'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
 const modalStore = useModalStore()
@@ -28,7 +27,6 @@ const MODAL_COMPONENTS = {
   [MODAL_NAMES.consultation]: ConsultationModal,
   [MODAL_NAMES.callback]: CallbackModal,
   [MODAL_NAMES.formResult]: FormResultModal,
-  [MODAL_NAMES.textContent]: TextContentModal,
 }
 
 const activeModal = computed(() => MODAL_COMPONENTS[name.value] ?? null)

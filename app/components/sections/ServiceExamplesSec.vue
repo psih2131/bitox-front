@@ -81,14 +81,13 @@
                   </div>
                 </div>
 
-                <button
-                  v-if="example.hasFullDescription"
-                  type="button"
+                <NuxtLink
+                  v-if="example.postLink"
+                  :to="example.postLink"
                   class="app-btn service-examples-sec__btn"
-                  @click="openFullDescription(example)"
                 >
                   Читать подробнее
-                </button>
+                </NuxtLink>
               </div>
             </article>
           </div>
@@ -101,8 +100,6 @@
 <script setup>
 import gsap from 'gsap'
 import exampleImage from '~/assets/images/exm-1.jpg'
-import { MODAL_NAMES, useModalStore } from '~/stores/modal'
-import { hasRichTextContent } from '~/utils/formatBlogText'
 import { formatShortDate, getStrapiMediaUrl } from '~/utils/strapi'
 
 const props = defineProps({
@@ -113,7 +110,6 @@ const props = defineProps({
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl
-const modalStore = useModalStore()
 
 const sectionRef = ref(null)
 const viewportRef = ref(null)
@@ -192,24 +188,24 @@ function mapExampleFields(item) {
 const examples = computed(() => {
   if (!props.section?.examples_items?.length) return defaultExamples
 
-  return props.section.examples_items.map((item) => ({
-    id: item.id,
-    title: item.title,
-    date: formatShortDate(item.date),
-    image: getStrapiMediaUrl(item.image, apiUrl) || exampleImage,
-    fields: mapExampleFields(item),
-    tags: [],
-    fullDescription: item.full_description || '',
-    hasFullDescription: hasRichTextContent(item.full_description),
-  }))
-})
+  return props.section.examples_items
+    .filter((item) => item.blog)
+    .map((item) => {
+      const post = item.blog
 
-function openFullDescription(example) {
-  modalStore.open(MODAL_NAMES.textContent, {
-    title: example.title,
-    content: example.fullDescription,
-  })
-}
+      return {
+        id: item.id,
+        title: post.post_title,
+        date: formatShortDate(post.publishedAt),
+        image: getStrapiMediaUrl(post.post_image, apiUrl) || exampleImage,
+        fields: mapExampleFields(item),
+        postLink: {
+          path: `/blog/${post.slug}`,
+          query: { id: post.documentId },
+        },
+      }
+    })
+})
 
 const maxIndex = computed(() => Math.max(0, examples.value.length - visibleCount.value))
 const isBeginning = computed(() => currentIndex.value === 0)

@@ -117,6 +117,11 @@
   gap: 20px;
 }
 
+.header__nav-item {
+  display: flex;
+  align-items: center;
+}
+
 .header__nav-link {
   font-weight: 600;
   font-size: 16px;
@@ -132,63 +137,15 @@
   }
 }
 
-.header__nav-dropdown {
-  position: relative;
+.header__nav-item--has-mega .header__nav-link {
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.header__nav-dropdown--services {
-  .header__nav-dropdown-toggle {
-    padding: 6px 12px;
-    border-radius: 10px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-  }
-
-  &:hover .header__nav-dropdown-toggle {
-    background: $bg-section;
-    transform: none;
-  }
-}
-
-.header__nav-dropdown-toggle {
-  display: inline-block;
-  cursor: default;
-}
-
-.header__nav-dropdown-menu {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 260px;
-  max-height: 420px;
-  padding: 12px;
-  border-radius: 12px;
-  background: $white;
-  box-shadow: 0 12px 32px rgba(49, 49, 50, 0.12);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  overflow-y: auto;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-}
-
-.header__nav-dropdown-link {
-  display: block;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.2;
-  color: $gray;
-  text-decoration: none;
-  transition: background 0.2s ease;
-
-  &:hover {
-    background: $bg-section;
-  }
+.header__nav-item--has-mega:hover .header__nav-link {
+  background: $bg-section;
+  transform: none;
 }
 
 .header__mega {
@@ -205,11 +162,9 @@
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.header__main:has(.header__nav-dropdown--services:hover) .header__mega,
-.header__mega:hover {
+.header__nav-item--has-mega:hover .header__mega {
   opacity: 1;
   visibility: visible;
-  pointer-events: auto;
 }
 
 .header__mega-inner {
@@ -220,6 +175,8 @@
   border-radius: 20px;
   background: $white;
   box-shadow: 0 16px 48px rgba(49, 49, 50, 0.12);
+  // только видимый контент перехватывает клики, прозрачный отступ сверху пропускает их к ссылке
+  pointer-events: auto;
 }
 
 .header__mega-card {
