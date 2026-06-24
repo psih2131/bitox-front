@@ -3,14 +3,14 @@
     <ServiceHeroSec v-if="business.service_hero_sec" :section="business.service_hero_sec" />
     <HomeStatsSec v-if="business.service_stats_sec" :section="business.service_stats_sec" />
     <ServiceInvoicesSec v-if="business.services_invoice_sec" :section="business.services_invoice_sec" />
-    <ServiceEconomySec v-if="business.service_economy_sec" :section="business.service_economy_sec" />
-    <HomeBenefitsSec v-if="business.services_benefits_sec" :section="business.services_benefits_sec" />
+    <ServiceEconomySec />
+    <HomeBenefitsSec />
     <BusinessCountriesSec
       v-if="invoices.length"
       :title="business.service_county_sec_v2?.title_section"
       :countries="invoices"
     />
-    <ServiceOtherSec current-slug="" />
+    <ServiceOtherSec />
     <ServiceExamplesSec
       v-if="business.services_invoice_example_sec"
       :section="business.services_invoice_example_sec"
@@ -32,8 +32,6 @@ const populate = [
   'populate[service_stats_sec][populate]=stats_element',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_image]=true',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_element_list_items]=true',
-  'populate[service_economy_sec][populate][economy_list_items][populate]=image',
-  'populate[services_benefits_sec][populate]=benefits_items',
   'populate[service_county_sec_v2]=true',
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',

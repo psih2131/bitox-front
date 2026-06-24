@@ -1,7 +1,7 @@
 <template>
   <main class="blog-post-page">
-    <BlogPostHeroSec v-if="postData?.data" :post="postData.data" :views="views" />
-    <BlogPostArticleSec v-if="postData?.data" :post="postData.data" />
+    <BlogPostHeroSec v-if="post" :post="post" :views="views" />
+    <BlogPostArticleSec v-if="post" :post="post" />
     <ServiceContactSec />
   </main>
 </template>
@@ -9,13 +9,12 @@
 <script setup>
 import BlogPostHeroSec from '~/components/sections/BlogPostHeroSec.vue'
 import BlogPostArticleSec from '~/components/sections/BlogPostArticleSec.vue'
-import { getStrapiMediaUrl, getStrapiSeoPopulateParts } from '~/utils/strapi'
+import { buildStrapiSlugFilter, getStrapiMediaUrl, getStrapiSeoPopulateParts } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const route = useRoute()
 
-const postId = computed(() => route.query.id)
-const { views } = usePostViews(postId)
+const slug = computed(() => route.params.id)
 
 const populate = [
   'populate[post_image]=true',
@@ -27,19 +26,26 @@ const populate = [
 ].join('&')
 
 const { data: postData } = await useFetch(
-  () => `${urlApi}/api/blog/${postId.value}?${populate}`,
-  { watch: [postId] },
+  () => (slug.value ? `${urlApi}/api/blog?${buildStrapiSlugFilter(slug.value)}&${populate}` : null),
+  { watch: [slug] },
 )
 
-const post = postData.value?.data
+const post = computed(() => postData.value?.data?.[0])
+const postDocumentId = computed(() => post.value?.documentId)
+const { views } = usePostViews(postDocumentId)
 
-if (post) {
-  useStrapiSeo(post.seo_cluster, {
-    apiUrl: urlApi,
-    fallbackTitle: post.post_title || 'Bitox',
-    fallbackDescription: post.post_description || 'Bitox',
-    fallbackOgType: 'article',
-    fallbackOgImage: getStrapiMediaUrl(post.post_image, urlApi) || undefined,
+if (!slug.value || !post.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Статья не найдена',
   })
 }
+
+useStrapiSeo(post.value.seo_cluster, {
+  apiUrl: urlApi,
+  fallbackTitle: post.value.post_title || 'Bitox',
+  fallbackDescription: post.value.post_description || 'Bitox',
+  fallbackOgType: 'article',
+  fallbackOgImage: getStrapiMediaUrl(post.value.post_image, urlApi) || undefined,
+})
 </script>

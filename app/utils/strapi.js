@@ -4,6 +4,12 @@ export function getStrapiMediaUrl(media, apiUrl) {
   return `${apiUrl}${media.url}`
 }
 
+export function buildStrapiSlugFilter(slug) {
+  if (!slug) return ''
+
+  return `filters[slug][$eq]=${encodeURIComponent(slug)}`
+}
+
 export function getStrapiSeoPopulateParts(fieldName = 'Seo') {
   return [
     `populate[${fieldName}][populate][shareImage]=true`,
@@ -76,7 +82,7 @@ export function mapStrapiReviews(items, apiUrl) {
       categoryId: item.reviews_category?.id ?? null,
       initials: getReviewInitials(item.first_name, item.last_name),
       name: [item.first_name, item.last_name].filter(Boolean).join(' ').trim(),
-      date: formatReviewDate(item.publishedAt || item.createdAt),
+      date: formatReviewDate(item.date || item.publishedAt || item.createdAt),
       avatarColor: REVIEW_AVATAR_COLORS[index % REVIEW_AVATAR_COLORS.length],
       text: item.text,
       rate: item.rate ?? 5,
@@ -123,6 +129,27 @@ export function mapStrapiServices(items, apiUrl) {
     title: item.title,
     subtitle: item.subtitle,
     image: getStrapiMediaUrl(item.service_hero_sec?.image, apiUrl),
+  }))
+}
+
+export function mapStrapiBusinessPages(items, apiUrl) {
+  return items.map((item) => ({
+    id: item.id,
+    documentId: item.documentId,
+    slug: item.slug,
+    title: item.title,
+    type: item.type_business_page,
+    subtitle: item.subtitle,
+    image: apiUrl ? getStrapiMediaUrl(item.preview_image, apiUrl) : null,
+  }))
+}
+
+export function mapStrapiIndividualsPages(items) {
+  return items.map((item) => ({
+    id: item.id,
+    documentId: item.documentId,
+    slug: item.slug,
+    title: item.title,
   }))
 }
 

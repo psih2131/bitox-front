@@ -10,7 +10,7 @@
 
     <HomeCountriesSec v-if="home?.home_countries_sec" :section="home.home_countries_sec" />
 
-    <HomeBenefitsSec v-if="home?.home_benefits_sec" :section="home.home_benefits_sec" />
+    <HomeBenefitsSec />
 
     <HomeReviewsSec />
 
@@ -36,7 +36,6 @@ const populate = [
   'populate[home_stats_sec][populate]=stats_element',
   'populate[home_offers_banners_sec][populate][banners][populate]=banner_image',
   'populate[home_countries_sec][populate][countries_list][populate]=image',
-  'populate[home_benefits_sec][populate]=benefits_items',
   'populate[home_media_about_us][populate][posts][populate]=logo',
   'populate[home_team_sec]=true',
   'populate[home_how_start_sec][populate][clusters][populate]=items',

@@ -12,10 +12,7 @@
           class="business-countries-sec__item"
         >
           <NuxtLink
-            :to="{
-              path: `/business/invoice/${country.slug}`,
-              query: { id: country.documentId },
-            }"
+            :to="`${linkBase}/${country.slug}`"
             class="business-countries-sec__pill"
           >
             <img
@@ -52,6 +49,10 @@ const props = defineProps({
   countries: {
     type: Array,
     default: () => [],
+  },
+  linkBase: {
+    type: String,
+    default: '/business/invoice',
   },
 })
 

@@ -7,10 +7,7 @@
         <NuxtLink
           v-for="item in otherServices"
           :key="item.documentId"
-          :to="{
-            path: `/services/${item.slug}`,
-            query: { id: item.documentId },
-          }"
+          :to="`/business/${item.slug}`"
           class="service-other-sec__card"
         >
           <div class="service-other-sec__preview">
@@ -34,27 +31,31 @@
 <script setup>
 import gsap from 'gsap'
 import previewImage from '~/assets/images/serv-prev.jpg'
-import { mapStrapiServices } from '~/utils/strapi'
-
-const props = defineProps({
-  currentSlug: {
-    type: String,
-    required: true,
-  },
-})
+import { mapStrapiBusinessPages } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
+const route = useRoute()
 
-const { data: servicesResponse } = await useFetch(
-  `${urlApi}/api/services?populate[service_hero_sec][populate]=image&pagination[pageSize]=100`,
+const { data: businessPagesResponse } = await useFetch(
+  `${urlApi}/api/business-pages?fields[0]=title&fields[1]=slug&fields[2]=subtitle&populate=preview_image&pagination[pageSize]=100`,
 )
 
 const sectionRef = ref(null)
 
-const otherServices = computed(() => {
-  const services = mapStrapiServices(servicesResponse.value?.data ?? [], urlApi)
+const excludedSlug = computed(() => {
+  const match = route.path.match(/^\/business\/([^/]+)$/)
 
-  return services.filter((service) => service.slug !== props.currentSlug)
+  return match?.[1] ?? null
+})
+
+const otherServices = computed(() => {
+  const pages = mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [], urlApi)
+
+  if (!excludedSlug.value) {
+    return pages
+  }
+
+  return pages.filter((page) => page.slug !== excludedSlug.value)
 })
 
 let sectionAnimation

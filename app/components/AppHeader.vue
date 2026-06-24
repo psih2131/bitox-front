@@ -54,9 +54,19 @@
               class="header__nav-item"
               :class="{ 'header__nav-item--has-mega': item.mega?.length }"
             >
-              <NuxtLink :to="item.to" class="header__nav-link">
+              <NuxtLink
+                v-if="item.clickable !== false"
+                :to="item.to"
+                class="header__nav-link"
+              >
                 {{ item.label }}
               </NuxtLink>
+              <span
+                v-else
+                class="header__nav-link header__nav-link--static"
+              >
+                {{ item.label }}
+              </span>
 
               <div v-if="item.mega?.length" class="header__mega">
                 <div class="container">
@@ -100,12 +110,27 @@
 
 <script setup>
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+import { mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 
-const { data: headerResponse } = await useFetch(
-  `${urlApi}/api/header-component?populate[header_contacts_list]=true`,
-)
+const [
+  { data: headerResponse },
+  { data: businessPagesResponse },
+  { data: individualsPagesResponse },
+  { data: transfersPagesResponse },
+] = await Promise.all([
+  useFetch(`${urlApi}/api/header-component?populate[header_contacts_list]=true`),
+  useFetch(
+    `${urlApi}/api/business-pages?fields[0]=title&fields[1]=slug&fields[2]=type_business_page&pagination[pageSize]=100`,
+  ),
+  useFetch(
+    `${urlApi}/api/individuals-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
+  ),
+  useFetch(
+    `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
+  ),
+])
 
 const header = computed(() => headerResponse.value?.data)
 
@@ -125,51 +150,76 @@ function openCallbackModal() {
   modalStore.open(MODAL_NAMES.callback)
 }
 
-const businessMega = [
-  {
-    id: 'business-1',
-    title: 'Импортерам',
-    links: [
-      { key: 'business-invoice', label: 'Оплата инвойсов', to: '/business/invoice' },
-      { key: 'business-contract', label: 'Оплата валютного контракта', to: '/business/oplata-valyutnogo-kontrakta' },
-      { key: 'business-consulting', label: 'Консалтинг ВЭД', to: '/business/konsalting-ved' },
-    ],
-  },
-  {
-    id: 'business-2',
-    title: 'Экспортерам',
-    links: [
-      { key: 'business-return', label: 'Возврат валютной выручки', to: '/business/vozvrat-valyutnoj-vyruchki' },
-    ],
-  },
-]
+const businessMega = computed(() => {
+  const pages = mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [])
 
-// TODO: заменить ссылки на реальные страницы, когда они будут готовы
-const privateClientsMega = [
-  {
-    id: 'private-1',
-    title: 'Покупка и продажа',
-    links: [
-      { key: 'private-buy', label: 'Покупка криптовалюты', to: '/' },
-      { key: 'private-sell', label: 'Продажа криптовалюты', to: '/' },
-      { key: 'private-exchange', label: 'Обмен валют', to: '/' },
-    ],
-  },
-  {
-    id: 'private-2',
-    title: 'Хранение и сервис',
-    links: [
-      { key: 'private-storage', label: 'Безопасное хранение', to: '/' },
-      { key: 'private-wallet', label: 'Создание кошелька', to: '/' },
-      { key: 'private-support', label: 'Поддержка 24/7', to: '/' },
-    ],
-  },
-]
+  const importLinks = [
+    { key: 'business-invoice', label: 'Оплата инвойсов', to: '/business/invoice' },
+    ...pages
+      .filter((page) => page.type === 'import')
+      .map((page) => ({
+        key: page.documentId,
+        label: page.title,
+        to: `/business/${page.slug}`,
+      })),
+  ]
+
+  const exportLinks = pages
+    .filter((page) => page.type === 'export')
+    .map((page) => ({
+      key: page.documentId,
+      label: page.title,
+      to: `/business/${page.slug}`,
+    }))
+
+  return [
+    {
+      id: 'business-1',
+      title: 'Импортерам',
+      links: importLinks,
+    },
+    {
+      id: 'business-2',
+      title: 'Экспортерам',
+      links: exportLinks,
+    },
+  ]
+})
+
+const privateClientsMega = computed(() => {
+  const individualsPages = mapStrapiIndividualsPages(individualsPagesResponse.value?.data ?? [])
+  const transfersPages = transfersPagesResponse.value?.data ?? []
+
+  const servicesLinks = individualsPages.map((page) => ({
+    key: page.documentId,
+    label: page.title,
+    to: `/individuals/${page.slug}`,
+  }))
+
+  const transfersLinks = transfersPages.map((page) => ({
+    key: page.documentId,
+    label: page.title,
+    to: `/transfers/${page.slug}`,
+  }))
+
+  return [
+    {
+      id: 'private-1',
+      title: 'Все услуги',
+      links: servicesLinks,
+    },
+    {
+      id: 'private-2',
+      title: 'Переводы в страны',
+      links: transfersLinks,
+    },
+  ]
+})
 
 const navItems = computed(() => [
-  { label: 'Бизнесу', to: '/business', mega: businessMega },
-  { label: 'Частным клиентам', to: '/', mega: privateClientsMega },
-  { label: 'Международные расчеты', to: '/' },
+  { label: 'Бизнесу', to: '/business', mega: businessMega.value },
+  { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
+  { label: 'Международные расчеты', to: '/transfers' },
   { label: 'Обмен криптовалюты', to: '/exchange' },
   { label: 'Блог', to: '/blog' },
   { label: 'Контакты', to: '/contacts' },

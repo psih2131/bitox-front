@@ -135,6 +135,14 @@
     transform: translateY(-5px);
     transition: transform ease 0.3s;
   }
+
+  &--static {
+    cursor: default;
+
+    &:hover {
+      transform: none;
+    }
+  }
 }
 
 .header__nav-item--has-mega .header__nav-link {

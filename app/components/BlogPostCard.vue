@@ -1,9 +1,6 @@
 <template>
   <article class="blog-post-card">
-    <NuxtLink :to="{
-      path: `/blog/${postData.slug}`,
-      query: { id: postData.documentId },
-    }" class="blog-post-card__link">
+    <NuxtLink :to="`/blog/${postData.slug}`" class="blog-post-card__link">
       <div class="blog-post-card__media">
         <img
           :src="`${apiUrl}${postData.post_image.url}`"

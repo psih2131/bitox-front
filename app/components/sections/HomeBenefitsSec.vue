@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="benefits-sec">
+  <section v-if="cards.length" ref="sectionRef" class="benefits-sec">
     <div class="container">
       <h2 class="benefits-sec__title">{{ sectionTitle }}</h2>
 
@@ -48,52 +48,21 @@ import gr3 from '~/assets/images/gr-3.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const props = defineProps({
-  section: {
-    type: Object,
-    default: null,
-  },
-})
-
+const urlApi = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
 
-const defaultCards = [
-  {
-    id: 'security',
-    title: 'Безопасность',
-    text: 'Соблюдение чистоты на всех уровнях, от шифрования на серверах до документооборота',
-  },
-  {
-    id: 'sanctions',
-    title: 'Отсутствие санкционного следа',
-    text: 'Подберем плательщика из 70+ компаний из разных стран без связей с Россией',
-    wide: true,
-    image: gr3,
-  },
-  {
-    id: 'deadlines',
-    title: 'Сроки',
-    text: 'От 2 часов до 5 дней',
-  },
-  {
-    id: 'service',
-    title: 'Сервис',
-    text: 'Персональный менеджер по Телефону и в удобном для вас мессенджере, поддержка на нескольких языках',
-  },
-  {
-    id: 'convenience',
-    title: 'Удобство',
-    text: 'Предложим удобный для вас способ оплаты',
-    dark: true,
-  },
-]
+const { data: benefitsResponse } = await useFetch(
+  `${urlApi}/api/benefits-component?populate[benefits_sec][populate]=benefits_items`,
+)
 
-const sectionTitle = computed(() => props.section?.title_section || 'Выгоды работы с нами')
+const section = computed(() => benefitsResponse.value?.data?.benefits_sec)
+
+const sectionTitle = computed(() => section.value?.title_section || 'Выгоды работы с нами')
 
 const cards = computed(() => {
-  if (!props.section?.benefits_items?.length) return defaultCards
+  const items = section.value?.benefits_items
 
-  const items = props.section.benefits_items
+  if (!items?.length) return []
 
   return items.map((item, index) => ({
     id: item.id,

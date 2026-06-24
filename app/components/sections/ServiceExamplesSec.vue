@@ -199,10 +199,7 @@ const examples = computed(() => {
         date: formatShortDate(post.publishedAt),
         image: getStrapiMediaUrl(post.post_image, apiUrl) || exampleImage,
         fields: mapExampleFields(item),
-        postLink: {
-          path: `/blog/${post.slug}`,
-          query: { id: post.documentId },
-        },
+        postLink: `/blog/${post.slug}`,
       }
     })
 })

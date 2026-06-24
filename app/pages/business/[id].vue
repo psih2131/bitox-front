@@ -1,23 +1,35 @@
 <template>
-  <main v-if="invoice" class="service-page">
-    <ServiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" />
-    <HomeStatsSec v-if="invoice.service_stats_sec" :section="invoice.service_stats_sec" />
-    <ServiceInvoicesSec v-if="invoice.services_invoice_sec" :section="invoice.services_invoice_sec" />
+  <main v-if="businessPage" class="service-page">
+
+    <ServiceHeroSec v-if="businessPage.service_hero_sec" :section="businessPage.service_hero_sec" />
+
+    <HomeStatsSec v-if="businessPage.service_stats_sec" :section="businessPage.service_stats_sec" />
+
+    <ServiceInvoicesSec v-if="businessPage.services_invoice_sec" :section="businessPage.services_invoice_sec" />
+
     <ServiceEconomySec />
+
     <HomeBenefitsSec />
+
     <BusinessCountriesSec
       v-if="invoices.length"
-      :title="invoice.service_county_sec_v2?.title_section"
+      :title="businessPage.service_county_sec_v2?.title_section"
       :countries="invoices"
     />
+
     <ServiceOtherSec />
+
     <ServiceExamplesSec
-      v-if="invoice.services_invoice_example_sec"
-      :section="invoice.services_invoice_example_sec"
+      v-if="businessPage.services_invoice_example_sec"
+      :section="businessPage.services_invoice_example_sec"
     />
+
     <HomeReviewsSec />
-    <HomeMediaSec v-if="invoice.service_media_about_us_sec" :section="invoice.service_media_about_us_sec" />
-    <HomeFaqSec v-if="invoice.services_faq_sec" :section="invoice.services_faq_sec" />
+
+    <HomeMediaSec v-if="businessPage.service_media_about_us_sec" :section="businessPage.service_media_about_us_sec" />
+
+    <HomeFaqSec v-if="businessPage.services_faq_sec" :section="businessPage.services_faq_sec" />
+
     <ServiceContactSec />
   </main>
 </template>
@@ -42,28 +54,27 @@ const populate = [
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
 
-const { data: invoiceResponse } = await useFetch(
-  () => (slug.value ? `${urlApi}/api/invoices?${buildStrapiSlugFilter(slug.value)}&${populate}` : null),
+const { data: businessPageResponse } = await useFetch(
+  () => (slug.value ? `${urlApi}/api/business-pages?${buildStrapiSlugFilter(slug.value)}&${populate}` : null),
   { watch: [slug] },
 )
 
-// список всех инвойсов (стран) для секции BusinessCountriesSec
 const { data: invoicesResponse } = await useFetch(
   `${urlApi}/api/invoices?fields[0]=title&fields[1]=slug&populate=flag&pagination[pageSize]=100`,
 )
 
-const invoice = computed(() => invoiceResponse.value?.data?.[0])
+const businessPage = computed(() => businessPageResponse.value?.data?.[0])
 
 const invoices = computed(() =>
   mapStrapiInvoices(invoicesResponse.value?.data ?? [], urlApi),
 )
 
-if (!slug.value || !invoice.value) {
+if (!slug.value || !businessPage.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Инвойс не найден',
+    statusMessage: 'Страница не найдена',
   })
 }
 
-useStrapiSeo(invoice.value.Seo, { apiUrl: urlApi })
+useStrapiSeo(businessPage.value.Seo, { apiUrl: urlApi })
 </script>

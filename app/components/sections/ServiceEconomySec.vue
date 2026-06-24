@@ -47,25 +47,23 @@
 import gsap from 'gsap'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
-const props = defineProps({
-  section: {
-    type: Object,
-    required: true,
-  },
-})
-
 const apiUrl = useRuntimeConfig().public.apiUrl
+const sectionRef = ref(null)
+
+const { data: economyResponse } = await useFetch(
+  `${apiUrl}/api/economy-component?populate[economy_section][populate][economy_list_items][populate]=image`,
+)
+
+const section = computed(() => economyResponse.value?.data?.economy_section)
 
 const features = computed(() =>
-  (props.section.economy_list_items ?? []).map((item) => ({
+  (section.value?.economy_list_items ?? []).map((item) => ({
     id: item.id,
     title: item.title,
     text: item.text,
     image: getStrapiMediaUrl(item.image, apiUrl),
   })),
 )
-
-const sectionRef = ref(null)
 
 let sectionAnimation
 
