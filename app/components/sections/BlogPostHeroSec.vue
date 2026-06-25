@@ -27,7 +27,6 @@
           :author="post.author"
           :updated-at="post.updatedAt"
           :time-to-read="post.time_read_post"
-          :views="views"
         />
       </div>
 
@@ -53,10 +52,6 @@ defineProps({
   post: {
     type: Object,
     required: true,
-  },
-  views: {
-    type: Number,
-    default: 0,
   },
 })
 

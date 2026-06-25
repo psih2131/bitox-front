@@ -13,10 +13,6 @@
 
           <div class="blog-post-sidebar__stats">
             <span class="blog-post-sidebar__stat">
-              <span class="blog-post-sidebar__stat-icon" aria-hidden="true">👁</span>
-              {{ formattedViews }}
-            </span>
-            <span class="blog-post-sidebar__stat">
               <span class="blog-post-sidebar__stat-icon" aria-hidden="true">🕒</span>
               {{ timeToRead || '5 мин чтения' }}
             </span>
@@ -53,16 +49,7 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  views: {
-    type: Number,
-    default: 0,
-  },
 })
 
 const {data: authorData} = await useFetch(`${urlApi}/api/authors/${props.author.documentId}?populate=avatar`)
-console.log('authorData', authorData.value)
-
-
-
-const formattedViews = computed(() => props.views.toLocaleString('ru-RU'))
 </script>

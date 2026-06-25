@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <p class="home-reviews-sec__count">{{ reviewsCountText }}</p>
+      <p class="home-reviews-sec__count" v-if="reviewsCountStore">{{ reviewsCountStore  }}</p>
     </div>
 
     <div class="home-reviews-sec__slider-outer">
@@ -167,6 +167,12 @@ import logo2gis from '~/assets/images/logos/review-2gis.svg'
 import logoZoon from '~/assets/images/logos/review-zoon.svg'
 import logoYandex from '~/assets/images/logos/review-yandex.svg'
 import { mapStrapiReviewCategories, mapStrapiReviews } from '~/utils/strapi'
+
+import {useCounterStore} from '~/stores/counter'
+
+const store = useCounterStore()
+const reviewsCountStore = store.globalInfo.reviews_counter_text
+console.log('reviewsCountStore', store.globalInfo)
 
 const urlApi = useRuntimeConfig().public.apiUrl
 

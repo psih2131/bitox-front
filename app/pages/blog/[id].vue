@@ -1,6 +1,6 @@
 <template>
   <main class="blog-post-page">
-    <BlogPostHeroSec v-if="post" :post="post" :views="views" />
+    <BlogPostHeroSec v-if="post" :post="post" />
     <BlogPostArticleSec v-if="post" :post="post" />
     <ServiceContactSec />
   </main>
@@ -31,8 +31,6 @@ const { data: postData } = await useFetch(
 )
 
 const post = computed(() => postData.value?.data?.[0])
-const postDocumentId = computed(() => post.value?.documentId)
-const { views } = usePostViews(postDocumentId)
 
 if (!slug.value || !post.value) {
   throw createError({

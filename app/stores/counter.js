@@ -1,19 +1,17 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCounterStore = defineStore('counter', () => {
-    const serverUrlDomainRequest = ref('https://red-angels-server.ru')
+  const serverUrlDomainRequest = ref('https://red-angels-server.ru')
+  const globalInfo = ref(null)
 
+  function setGlobalInfo(data) {
+    globalInfo.value = data
+  }
 
-
-    // const changeOptionData = (newData) => {
-    //     optionsData.value = newData
-    //     console.log('new value store', optionsData.value)
-    // }
-
-
-
-    return {
-        serverUrlDomainRequest,
-    }
+  return {
+    serverUrlDomainRequest,
+    globalInfo,
+    setGlobalInfo,
+  }
 })
