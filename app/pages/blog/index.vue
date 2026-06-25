@@ -31,14 +31,18 @@
 import BlogTagsSec from '~/components/sections/BlogTagsSec.vue'
 import BlogCategorySec from '~/components/sections/BlogCategorySec.vue'
 
+import { STRAPI_BLOG_POSTS_API } from '~/utils/strapi'
+
 const activeTag = ref(null)
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const { data: categories } = await useFetch(`${urlApi}/api/categories`)
 
 const { data: posts } = await useFetch(
-  `${urlApi}/api/blog?status=published&populate[post_image]=true&populate[category]=true`,
+  `${urlApi}/api/blog-posts?status=published&populate[post_image]=true&populate[category]=true`,
 )
+
+console.log('posts', posts.value)
 
 function getCurrentPosts(categoryId) {
   if (!posts.value?.data?.length) return []

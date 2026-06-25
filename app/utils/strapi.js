@@ -10,6 +10,8 @@ export function buildStrapiSlugFilter(slug) {
   return `filters[slug][$eq]=${encodeURIComponent(slug)}`
 }
 
+export const STRAPI_BLOG_POSTS_API = '/api/blog-posts'
+
 export function getStrapiSeoPopulateParts(fieldName = 'Seo') {
   return [
     `populate[${fieldName}][populate][shareImage]=true`,

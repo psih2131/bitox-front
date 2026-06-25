@@ -9,7 +9,7 @@
 <script setup>
 import BlogPostHeroSec from '~/components/sections/BlogPostHeroSec.vue'
 import BlogPostArticleSec from '~/components/sections/BlogPostArticleSec.vue'
-import { buildStrapiSlugFilter, getStrapiMediaUrl, getStrapiSeoPopulateParts } from '~/utils/strapi'
+import { buildStrapiSlugFilter, getStrapiMediaUrl, getStrapiSeoPopulateParts, STRAPI_BLOG_POSTS_API } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const route = useRoute()
@@ -26,7 +26,7 @@ const populate = [
 ].join('&')
 
 const { data: postData } = await useFetch(
-  () => (slug.value ? `${urlApi}/api/blog?${buildStrapiSlugFilter(slug.value)}&${populate}` : null),
+  () => (slug.value ? `${urlApi}${STRAPI_BLOG_POSTS_API}?${buildStrapiSlugFilter(slug.value)}&${populate}` : null),
   { watch: [slug] },
 )
 
