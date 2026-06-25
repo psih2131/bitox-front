@@ -17,7 +17,7 @@
       :countries="invoices"
     />
 
-    <ServiceOtherSec />
+    <BusinessOtherSec />
 
     <ServiceExamplesSec
       v-if="businessPage.services_invoice_example_sec"

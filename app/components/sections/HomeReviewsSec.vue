@@ -168,12 +168,9 @@ import logoZoon from '~/assets/images/logos/review-zoon.svg'
 import logoYandex from '~/assets/images/logos/review-yandex.svg'
 import { mapStrapiReviewCategories, mapStrapiReviews } from '~/utils/strapi'
 
-import {useCounterStore} from '~/stores/counter'
+import { useCounterStore } from '~/stores/counter'
 
 const store = useCounterStore()
-const reviewsCountStore = store.globalInfo.reviews_counter_text
-console.log('reviewsCountStore', store.globalInfo)
-
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const reviewsPopulate = [
@@ -234,6 +231,8 @@ const reviewsCountText = computed(() => {
 
   return `${count} ${pluralizeReviews(count)} из ${sources} ${pluralizeSources(sources)}`
 })
+
+const reviewsCountStore = computed(() => store.globalInfo?.reviews_counter_text || reviewsCountText.value)
 
 const maxIndex = computed(() => Math.max(0, apiReviews.value.length - visibleCount.value))
 const isBeginning = computed(() => currentIndex.value === 0)

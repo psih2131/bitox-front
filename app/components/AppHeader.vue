@@ -70,7 +70,10 @@
 
               <div v-if="item.mega?.length" class="header__mega">
                 <div class="container">
-                  <div class="header__mega-inner">
+                  <div
+                    class="header__mega-inner"
+                    :class="{ 'header__mega-inner--single': item.mega.length === 1 }"
+                  >
                     <div
                       v-for="card in item.mega"
                       :key="card.id"
@@ -119,6 +122,7 @@ const [
   { data: businessPagesResponse },
   { data: individualsPagesResponse },
   { data: transfersPagesResponse },
+  { data: exchangePagesResponse },
 ] = await Promise.all([
   useFetch(`${urlApi}/api/header-component?populate[header_contacts_list]=true`),
   useFetch(
@@ -129,6 +133,9 @@ const [
   ),
   useFetch(
     `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
+  ),
+  useFetch(
+    `${urlApi}/api/exchange-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
   ),
 ])
 
@@ -216,11 +223,31 @@ const privateClientsMega = computed(() => {
   ]
 })
 
+const exchangeMega = computed(() => {
+  const pages = mapStrapiIndividualsPages(exchangePagesResponse.value?.data ?? [])
+
+  const links = pages.map((page) => ({
+    key: page.documentId,
+    label: page.title,
+    to: `/crypto-exchange/${page.slug}`,
+  }))
+
+  if (!links.length) return []
+
+  return [
+    {
+      id: 'exchange-1',
+      title: 'Обмен криптовалюты',
+      links,
+    },
+  ]
+})
+
 const navItems = computed(() => [
   { label: 'Бизнесу', to: '/business', mega: businessMega.value },
   { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
   { label: 'Международные расчеты', to: '/transfers' },
-  { label: 'Обмен криптовалюты', to: '/exchange' },
+  { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
   { label: 'Блог', to: '/blog' },
   { label: 'Контакты', to: '/contacts' },
   { label: 'о Bitox', to: '/about' },

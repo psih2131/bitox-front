@@ -185,6 +185,12 @@
   box-shadow: 0 16px 48px rgba(49, 49, 50, 0.12);
   // только видимый контент перехватывает клики, прозрачный отступ сверху пропускает их к ссылке
   pointer-events: auto;
+
+  &--single {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
 }
 
 .header__mega-card {

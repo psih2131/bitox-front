@@ -6,7 +6,7 @@
 
     <HomeOffersSec v-if="home?.home_offers_banners_sec" :section="home.home_offers_banners_sec" />
 
-    <HomePlatformSec />
+    <HomePlatformSec :section="home?.home_platform_sec" />
 
     <HomeCountriesSec v-if="home?.home_countries_sec" :section="home.home_countries_sec" />
 
@@ -35,7 +35,8 @@ const populate = [
   'populate[home_hero_sec][populate]=home_hero_card_items',
   'populate[home_stats_sec][populate]=stats_element',
   'populate[home_offers_banners_sec][populate][banners][populate]=banner_image',
-  'populate[home_countries_sec][populate][countries_list][populate]=image',
+  'populate[home_countries_sec]=true',
+  'populate[home_platform_sec]=true',
   'populate[home_media_about_us][populate][posts][populate]=logo',
   'populate[home_team_sec]=true',
   'populate[home_how_start_sec][populate][clusters][populate]=items',

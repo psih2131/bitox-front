@@ -820,6 +820,26 @@ display: block;
   }
 }
 
+.countries-sec__result-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.countries-sec__pill {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: $gray;
+  }
+}
+
 .countries-sec__result-flag,
 .countries-sec__pill-flag {
   width: 55px;
@@ -847,11 +867,8 @@ display: block;
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: countries-slider 50s linear infinite;
-
-  &:hover {
-    animation-play-state: paused;
-  }
+  animation: countries-slider 100s linear infinite;
+  // длительность задаётся инлайном (зависит от кол-ва элементов для постоянной скорости)
 }
 
 .countries-sec__slider-group {

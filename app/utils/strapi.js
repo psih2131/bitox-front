@@ -146,12 +146,14 @@ export function mapStrapiBusinessPages(items, apiUrl) {
   }))
 }
 
-export function mapStrapiIndividualsPages(items) {
+export function mapStrapiIndividualsPages(items, apiUrl) {
   return items.map((item) => ({
     id: item.id,
     documentId: item.documentId,
     slug: item.slug,
     title: item.title,
+    subtitle: item.subtitle,
+    image: apiUrl ? getStrapiMediaUrl(item.preview_image, apiUrl) : null,
   }))
 }
 

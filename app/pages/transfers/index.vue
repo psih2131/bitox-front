@@ -11,7 +11,7 @@
       :countries="transfersPages"
       link-base="/transfers"
     />
-    <ServiceOtherSec />
+    <BusinessOtherSec />
     <ServiceExamplesSec
       v-if="transfer.services_invoice_example_sec"
       :section="transfer.services_invoice_example_sec"

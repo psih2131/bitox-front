@@ -40,29 +40,41 @@
             :key="country.id"
             class="countries-sec__result"
           >
-            <img :src="country.flag" alt="" class="countries-sec__result-flag" />
-            <span class="countries-sec__result-name">{{ country.name }}</span>
+            <NuxtLink
+              v-if="country.slug"
+              :to="`/transfers/${country.slug}`"
+              class="countries-sec__result-link"
+            >
+              <img :src="country.flag" alt="" class="countries-sec__result-flag" />
+              <span class="countries-sec__result-name">{{ country.name }}</span>
+            </NuxtLink>
+
+            <template v-else>
+              <img :src="country.flag" alt="" class="countries-sec__result-flag" />
+              <span class="countries-sec__result-name">{{ country.name }}</span>
+            </template>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="countries-sec__slider">
-      <div class="countries-sec__slider-track">
+      <div class="countries-sec__slider-track" :style="{ animationDuration: sliderDuration }">
         <div
           v-for="groupIndex in 2"
           :key="groupIndex"
           class="countries-sec__slider-group"
           :aria-hidden="groupIndex === 2"
         >
-          <div
+          <NuxtLink
             v-for="(country, index) in sliderGroup"
             :key="`${groupIndex}-${country.id}-${index}`"
+            :to="`/transfers/${country.slug}`"
             class="countries-sec__pill"
           >
             <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
             <span class="countries-sec__pill-name">{{ country.name }}</span>
-          </div>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -82,7 +94,7 @@ import flag3 from '~/assets/images/flags/x3.jpg'
 import flag4 from '~/assets/images/flags/x4.jpg'
 import flag5 from '~/assets/images/flags/x5.jpg'
 import flag6 from '~/assets/images/flags/x6.jpg'
-import { getStrapiMediaUrl } from '~/utils/strapi'
+import { mapStrapiInvoices } from '~/utils/strapi'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -111,22 +123,28 @@ const defaultCountries = [
 const sectionTitle = computed(() => props.section?.title || 'Международные платежи по всему миру')
 const buttonTitle = computed(() => props.section?.button_title || 'Узнать как сэкономить на платеже')
 
+const { data: transfersPagesResponse } = await useFetch(
+  `${apiUrl}/api/transfers-pages?fields[0]=title&fields[1]=slug&populate=flag&pagination[pageSize]=100`,
+)
+
 const countries = computed(() => {
-  if (!props.section?.countries_list?.length) return defaultCountries
+  const transfersCountries = mapStrapiInvoices(transfersPagesResponse.value?.data ?? [], apiUrl)
 
-  return props.section.countries_list.map((item) => {
-    const name = item.title || ''
+  if (!transfersCountries.length) return defaultCountries
 
-    return {
-      id: item.id,
-      name,
-      flag: getStrapiMediaUrl(item.image, apiUrl),
-      keywords: [name.toLowerCase().slice(0, 3)].filter(Boolean),
-    }
-  })
+  return transfersCountries.map((item) => ({
+    id: item.id,
+    name: item.name,
+    slug: item.slug,
+    flag: item.flag,
+    keywords: [(item.name || '').toLowerCase().slice(0, 3)].filter(Boolean),
+  }))
 })
 
 const sliderGroup = computed(() => Array.from({ length: 3 }, () => countries.value).flat())
+
+const SECONDS_PER_PILL = 4
+const sliderDuration = computed(() => `${Math.max(sliderGroup.value.length, 1) * SECONDS_PER_PILL}s`)
 
 const filteredCountries = computed(() => {
   const value = query.value.trim().toLowerCase()
@@ -179,12 +197,6 @@ onMounted(() => {
         stagger: 0.04,
         ease: 'power2.out',
       }, '-=0.2')
-      .from('.countries-sec__bottom', {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power2.out',
-      }, '-=0.3')
   }, sectionRef.value)
 })
 

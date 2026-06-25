@@ -10,7 +10,7 @@
       :title="invoiceSingle.service_county_sec_v2?.title_section"
       :countries="invoices"
     />
-    <ServiceOtherSec />
+    <BusinessOtherSec />
     <ServiceExamplesSec
       v-if="invoiceSingle.services_invoice_example_sec"
       :section="invoiceSingle.services_invoice_example_sec"
