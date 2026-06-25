@@ -64,7 +64,7 @@ export default defineNuxtConfig({
     yandexMapsApiKey: process.env.NUXT_YANDEX_MAPS_API_KEY,
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiUrl: process.env.PUBLIC_API_URL || 'http://localhost:1337',
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || process.env.PUBLIC_API_URL || 'http://localhost:1337',
     },
   },
 })
