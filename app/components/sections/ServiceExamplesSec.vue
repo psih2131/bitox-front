@@ -114,7 +114,7 @@ const apiUrl = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
 const viewportRef = ref(null)
 const currentIndex = ref(0)
-const visibleCount = ref(3)
+const visibleCount = ref(2)
 const slideWidth = ref(0)
 const gap = ref(20)
 const offset = ref(0)
@@ -209,21 +209,22 @@ const isBeginning = computed(() => currentIndex.value === 0)
 const isEnd = computed(() => currentIndex.value >= maxIndex.value)
 
 function getVisibleCount(width) {
-  if (width >= 1200) return 3
-  if (width >= 768) return 2
+  if (width >= 760) return 2
   return 1
 }
 
 function getGap(width) {
-  return width >= 768 ? 20 : 12
+  return width >= 760 ? 20 : 12
 }
 
 function updateSlider() {
   if (!viewportRef.value) return
 
   const width = viewportRef.value.offsetWidth
-  visibleCount.value = getVisibleCount(width)
-  gap.value = getGap(width)
+  const screenWidth = window.innerWidth
+
+  visibleCount.value = getVisibleCount(screenWidth)
+  gap.value = getGap(screenWidth)
 
   const count = visibleCount.value
   slideWidth.value = (width - gap.value * (count - 1)) / count
@@ -258,6 +259,8 @@ onMounted(() => {
     resizeObserver.observe(viewportRef.value)
   }
 
+  window.addEventListener('resize', updateSlider)
+
   if (!sectionRef.value) return
 
   sectionAnimation = gsap.context(() => {
@@ -272,6 +275,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   resizeObserver?.disconnect()
+  window.removeEventListener('resize', updateSlider)
   sectionAnimation?.revert()
 })
 </script>

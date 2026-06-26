@@ -298,6 +298,55 @@
   color: $gray;
 }
 
+.service-other-sec__nav {
+  display: none;
+}
+
+.service-other-sec__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: $gray;
+  line-height: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.service-other-sec__slider-wrap {
+  display: none;
+}
+
+.service-other-sec__slider {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+
+  swiper-slide {
+    height: auto;
+  }
+}
+
 .service-other-sec__grid {
   display: flex;
   flex-wrap: wrap;
@@ -657,53 +706,544 @@
   margin-top: 14px;
 }
 
-@media only screen and (max-width: 1280px) {
-  .service-other-sec__card {
-    width: calc((100% - 17px) / 2);
-  }
 
-  .service-contact-sec__inner {
-    flex-direction: column;
-  }
 
-  .service-contact-sec__content,
-  .service-contact-sec__form {
-    width: 100%;
+.business-countries-sec {
+  position: relative;
+  padding: 100px 0 80px;
+  overflow: hidden;
+  background-color: #F6F7F8;
+  background-image: url('../images/map-bg.jpg');
+  background-size: 1637px auto;
+  background-repeat: no-repeat;
+}
+
+.business-countries-sec__title {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 50px;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  color: $gray;
+}
+
+.business-countries-sec__list {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.business-countries-sec__pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px 10px 10px;
+  border: 1px solid $light-gray;
+  border-radius: 100px;
+  background: $white;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(49, 49, 50, 0.1);
   }
 }
 
-@media only screen and (max-width: 991px) {
-  .service-invoices-sec__title,
-  .service-other-sec__title,
-  .service-examples-sec__title,
-  .service-economy-sec__title,
-  .service-contact-sec__title {
-    font-size: 48px;
-  }
+.business-countries-sec__pill:not(:has(.business-countries-sec__flag)) {
+  padding: 10px 24px;
+}
 
-  .service-contact-sec__row {
-    flex-direction: column;
-  }
+.business-countries-sec__flag {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 
-  .service-invoices-sec__grid {
-    grid-template-columns: 1fr;
-  }
+.business-countries-sec__name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.1;
+  color: $gray;
+  white-space: nowrap;
+}
 
-  .service-economy-sec__card {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 32px 24px;
+.business-countries-sec__more {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 1150px) {
+  .service-hero-sec__title{
+    font-size: 55px;
+    margin-bottom: 40px;
+  }
+  .service-hero-sec__text{
+    font-size: 20px;
+  }
+  .service-hero-sec__media{
+    width: 350px;
+    top: 65px;
+  }
+  .service-hero-sec__content{
+    max-width: 500px;
+  }
+  .service-hero-sec{
+    min-height: 450px;
+  }
+  .service-invoices-sec{
+    padding: 60px 0;
+  }
+  .service-invoices-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .service-invoices-sec__card-body{
+    padding: 15px 20px 20px 20px;
+  }
+  .service-invoices-sec__card-title{
+    font-size: 18px;
+  }
+  .service-invoices-sec__card-text{
+    font-size: 14px;
+  }
+  .service-invoices-sec__tag{
+    font-size: 14px;
+  }
+  .service-economy-sec{
+    padding: 60px 0;
+  }
+  .service-economy-sec__content{
+    display: contents;
+  }
+  .service-economy-sec__content-top{
+    width: 100%;
+  }
+  .service-economy-sec__card{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .service-economy-sec__actions{
+    width: 100%;
+    order: 3;
+  }
+  .service-economy-sec__title{
+    font-size: 30px;
+    margin-bottom: 20px;
+    max-width: 600px;
+  }
+  .service-economy-sec__card{
+    padding: 35px;
+  }
+  .service-economy-sec__features{
+    width: 100%;
+  }
+  .service-economy-sec__feature-img{
+    width: 80px;
+  }
+  .service-economy-sec__feature-title{
+    font-size: 18px;
+  }
+  .service-economy-sec__feature-text{
+    font-size: 14px;
+  }
+  .business-countries-sec{
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  .business-countries-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .service-other-sec{
+    padding-top:80px;
+    padding-bottom: 60px;
+  }
+  .service-other-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .service-other-sec__preview{
+    height: 150px;
+  }
+  .service-other-sec__card-title{
+    font-size: 16px;
+  }
+  .service-other-sec__card-text{
+    font-size: 12px;
+  }
+  .service-examples-sec{
+    padding: 60px 0;
+  }
+  .service-examples-sec__title{
+    font-size: 40px;
+  }
+  .service-examples-sec__btn{
+    font-size: 14px;
+    padding: 10px 20px;
+    min-height: 50px;
+  }
+  .service-contact-sec{
+    padding: 80px 0;
+  }
+  .service-contact-sec__title{
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  .service-contact-sec__subtitle{
+    font-size: 14px;
+  }
+  .service-contact-sec__content{
+    width: 350px;
+  }
+  .service-contact-sec__form{}
+  .service-contact-sec__input{
+    min-height: 50px;
+    font-size: 14px;
   }
 }
 
-@media only screen and (max-width: 575px) {
-  .service-other-sec__card {
+@media only screen and (max-width: 880px) {
+  .service-hero-sec__media{
+    width: 300px;
+  }
+  .service-hero-sec__content{
+    width: 450px;
+  }
+  .service-hero-sec__breadcrumbs{
+    font-size: 14px;
+  }
+  .service-hero-sec__title{
+    font-size: 40px;
+  }
+  .service-hero-sec__text{
+    max-width: 350px;
+    font-size: 16px;
+  }
+  .service-hero-sec{
+    min-height: 400px;
+  }
+  .service-invoices-sec__title{
+    font-size: 36px;
+  }
+  .service-invoices-sec__tag{
+    font-size: 12px;
+  }
+  .business-countries-sec__title{
+    font-size: 36px;
+  }
+  .service-other-sec__title{
+    font-size: 36px;
+  }
+  .service-other-sec{
+    padding: 60px 0;
+  }
+  .service-other-sec__grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .service-other-sec__card{
+    width: calc((100% - 32px) / 3);
+  }
+  .service-examples-sec__title{
+    font-size: 36px;
+  }
+  .service-examples-sec__head{
+    margin-bottom: 30px;
+  }
+  .service-examples-sec__card-title{
+    font-size: 18px;
+  }
+  .service-examples-sec__btn{
     width: 100%;
+    text-align: center;
+  }
+  .service-contact-sec{
+    padding: 60px 0;
+  }
+  .service-contact-sec__title{
+    font-size: 36px;
+  }
+  .service-contact-sec__form{
+    width: calc(100% - 320px);
+  }
+  .service-contact-sec__content{
+    width: 320px;
+  }
+ 
+
+}
+
+@media only screen and (max-width: 760px) {
+  .service-hero-sec__inner{
+    padding-top: 25px;
+    padding-bottom: 337px;
+  }
+  .service-hero-sec{
+    min-height: 0;
+  }
+  .service-invoices-sec{
+    padding: 50px 0;
   }
 
-  .service-examples-sec__head {
-    flex-direction: column;
+  .service-hero-sec__media{
+    width: 100%;
+    right: auto;
+    left: 0;
+    top: auto;
+    bottom: 44px;
+    display: flex;
+    justify-content: center;
+    img{
+      max-height: 280px;
+      max-width: 100%;
+      display: block;
+    }
+  }
+  .service-hero-sec::after{
+    height: 223px;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+  }
+  .service-hero-sec__breadcrumbs{
+    margin-bottom: 20px;
+  }
+  .service-hero-sec__title{
+    margin-bottom: 20px;
+  }
+  .service-hero-sec__text{
+    font-size: 16px;
+  }
+  .service-invoices-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .service-invoices-sec__grid{
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .service-invoices-sec__card-title{
+    margin-bottom: 10px;
+  }
+  .service-invoices-sec__card-text{
+    max-width: 240px;
+    margin: 0 auto;
+    margin-bottom: 35px;
+  }
+  .service-invoices-sec__card-img{
+    height: 105px;
+  }
+  .service-invoices-sec__tag{
+    padding: 10px;
+    font-size: 12px;
+  }
+  .service-economy-sec{
+    padding: 50px 0;
+  }
+  .service-economy-sec__card{
+    padding: 25px ;
+  }
+  .service-economy-sec__title{
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+  .service-economy-sec__subtitle{
+    font-size: 15px;
+  }
+  .service-economy-sec__card{
+    gap:30px;
+  }
+  .service-economy-sec__feature-img{
+    width: 60px;
+  }
+  .service-economy-sec__feature{
     align-items: flex-start;
   }
+  .service-economy-sec__feature-body{
+    padding: 12px 8px 12px 5px;
+  }
+  .service-economy-sec__feature-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .service-economy-sec__actions .app-client-btn, .service-economy-sec__actions .app-consult-btn{
+    width: 100%;
+    min-height: 50px;
+  }
+  .service-economy-sec__actions{
+    gap: 10px;
+  }
+  .business-countries-sec{
+    padding: 50px 0;
+  }
+  .business-countries-sec__title{
+    font-size: 30px;
+  }
+  .business-countries-sec__pill{
+    padding: 3px;
+  }
+  .business-countries-sec__name{
+    font-size: 16px;
+    padding-right: 15px;
+  }
+  .service-other-sec{
+    padding: 50px 0;
+  }
+  .service-other-sec__title{
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .service-other-sec__nav{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .service-other-sec__grid{
+    display: none;
+  }
+  .service-other-sec__slider-wrap{
+    display: block;
+  }
+  .service-other-sec__card--slide{
+    width: 100%;
+
+    &:hover {
+      transform: none;
+    }
+  }
+  .service-other-sec__preview{
+    height: 180px;
+  }
+  .service-other-sec__card-title{
+    font-size: 18px;
+  }
+  .service-other-sec__card-text{
+    font-size: 14px;
+  }
+  .service-other-sec__arrow{
+    width: 35px;
+    height: 35px;
+  }
+  .service-other-sec__preview{
+    height: 200px;
+  }
+  .service-examples-sec{
+    padding: 50px 0;
+  }
+  .service-examples-sec__head{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .service-examples-sec__title{
+    font-size: 30px;
+    text-align: center;
+  }
+  .service-examples-sec__arrow{
+    width: 35px;
+    height: 35px;
+  }
+  .service-examples-sec__card-media{
+    aspect-ratio: 0;
+    width: 100%;
+    height: 162px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .service-examples-sec__card{
+    padding: 5px;
+  }
+  .service-examples-sec__card-body{
+    padding: 20px 10px 10px 10px;
+  }
+  .service-examples-sec__card-date{
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+  .service-examples-sec__card-title{
+    font-size: 16px;
+  }
+  .service-examples-sec__meta-cell{
+    padding: 7px 10px;
+    width: 100%;
+  }
+  .service-examples-sec__meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .service-examples-sec__meta-value{
+    font-size: 14px;
+  }
+  .service-examples-sec__meta{
+    margin-bottom: 30px;
+  }
+  .service-contact-sec{
+    padding: 50px 0;
+  }
+  .service-contact-sec__inner{
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .service-contact-sec__content{
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .service-contact-sec__title{
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+  .service-contact-sec__form{
+    width: 100%;
+  }
+  .service-contact-sec__row{
+    display: block;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .service-contact-sec__field{
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+  .service-contact-sec__field{
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .service-contact-sec__checkbox{
+    margin-top: 0;
+  }
+  .service-contact-sec__submit{
+    width: 100%;
+    min-height: 50px;
+  }
 }
+
+@media only screen and (max-width: 365px) {
+
+}
+
+
 
