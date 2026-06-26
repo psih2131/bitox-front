@@ -28,3 +28,11 @@
     cursor: not-allowed;
   }
 }
+
+@media only screen and (max-width: 1150px) {
+  .app-btn{
+    padding: 10px 20px;
+    font-size: 14px;
+    min-width: 200px;
+  }
+}

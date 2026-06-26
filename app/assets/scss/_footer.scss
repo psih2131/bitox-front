@@ -127,8 +127,19 @@
   flex-direction: column;
   gap: 8px;
 }
+.app-footer__col-4{
+  display: none;
+}
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1150px) {
+  .app-footer__contact-link{
+    font-size: 18px;
+  }
+  .app-footer__logo{
+    font-size: 25px;
+  }
+}
+@media only screen and (max-width: 880px) {
   .app-footer__card {
     min-height: auto;
     padding: 32px 28px 28px;
@@ -148,8 +159,7 @@
     margin-top: 32px;
   }
 }
-
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 760px) {
   .app-footer__card {
     padding: 28px 20px 24px;
     border-radius: 16px 16px 0 0;
@@ -166,5 +176,64 @@
 
   .app-footer__logo {
     font-size: 26px;
+  }
+
+  .app-footer__grid{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .app-footer__col-1{
+  width: 100%;
+    .footer_copy{
+      display: none;
+    }
+  }
+  .app-footer__logo{
+    font-size: 20px;
+  }
+  .app-footer__card{
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .app-footer__grid{
+    gap: 30px;
+    position: relative;
+  }
+  .app-footer__col-2{
+    width: 100%;
+    .app-footer__col-legal{
+      display: none;
+    }
+  }
+  .app-footer__label{
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .app-footer__nav-link{
+    font-size: 14px;
+  }
+  .app-footer__nav{
+    gap: 5px;
+  }
+  .app-footer__contact-link{
+    font-size: 16px;
+  }
+  .app-footer__socials{
+    position: absolute;
+    top: 0;
+    margin-top: 0;
+    right: 0;
+  }
+  .app-footer__col-3{
+    .app-footer__col-legal{
+      display: none;
+    }
+  }
+  .app-footer__col-4{
+    display: block;
+  }
+  .app-footer__col-legal{
+    gap: 5px;
+    margin-top: 5px;
   }
 }

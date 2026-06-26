@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="countries-sec__slider">
+    <div id="countries-slider-main" class="countries-sec__slider">
       <div class="countries-sec__slider-track" :style="{ animationDuration: sliderDuration }">
         <div
           v-for="groupIndex in 2"
@@ -69,6 +69,30 @@
           <NuxtLink
             v-for="(country, index) in sliderGroup"
             :key="`${groupIndex}-${country.id}-${index}`"
+            :to="`/transfers/${country.slug}`"
+            class="countries-sec__pill"
+          >
+            <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
+            <span class="countries-sec__pill-name">{{ country.name }}</span>
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+
+    <div id="countries-slider-reverse" class="countries-sec__slider countries-sec__slider--reverse">
+      <div
+        class="countries-sec__slider-track countries-sec__slider-track--reverse"
+        :style="{ animationDuration: sliderDuration }"
+      >
+        <div
+          v-for="groupIndex in 2"
+          :key="`reverse-${groupIndex}`"
+          class="countries-sec__slider-group"
+          :aria-hidden="groupIndex === 2"
+        >
+          <NuxtLink
+            v-for="(country, index) in sliderGroup"
+            :key="`reverse-${groupIndex}-${country.id}-${index}`"
             :to="`/transfers/${country.slug}`"
             class="countries-sec__pill"
           >
@@ -169,13 +193,9 @@ onMounted(() => {
   if (!sectionRef.value) return
 
   countriesAnimation = gsap.context(() => {
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.value,
-        start: 'top 80%',
-        once: true,
-      },
-    })
+    const isMobile = window.matchMedia('(max-width: 760px)').matches
+
+    const timeline = gsap.timeline({ paused: true })
 
     timeline
       .from('.countries-sec__title', {
@@ -190,13 +210,28 @@ onMounted(() => {
         duration: 0.6,
         ease: 'power2.out',
       }, '-=0.3')
-      .from('.countries-sec__pill', {
+      .from('#countries-slider-main', {
         opacity: 0,
         y: 16,
-        duration: 0.5,
-        stagger: 0.04,
+        duration: 0.6,
         ease: 'power2.out',
       }, '-=0.2')
+
+    if (isMobile) {
+      timeline.from('#countries-slider-reverse', {
+        opacity: 0,
+        y: 16,
+        duration: 0.6,
+        ease: 'power2.out',
+      }, '-=0.25')
+    }
+
+    ScrollTrigger.create({
+      trigger: sectionRef.value,
+      start: 'top 80%',
+      once: true,
+      animation: timeline,
+    })
   }, sectionRef.value)
 })
 

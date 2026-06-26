@@ -540,6 +540,7 @@
 .platform-sec {
   padding: 100px 0 0;
   background: $bg-platform;
+  overflow: hidden;
 }
 
 .platform-sec__title {
@@ -861,6 +862,10 @@ a.countries-sec__pill {
 .countries-sec__slider {
   width: 100%;
   margin-bottom: 55px;
+
+  &--reverse {
+    display: none;
+  }
 }
 
 .countries-sec__slider-track {
@@ -869,6 +874,10 @@ a.countries-sec__pill {
   will-change: transform;
   animation: countries-slider 100s linear infinite;
   // длительность задаётся инлайном (зависит от кол-ва элементов для постоянной скорости)
+
+  &--reverse {
+    animation-direction: reverse;
+  }
 }
 
 .countries-sec__slider-group {
@@ -1458,6 +1467,55 @@ a.countries-sec__pill {
   gap: 20px;
 }
 
+.team-sec__nav {
+  display: none;
+}
+
+.team-sec__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: $gray;
+  line-height: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.team-sec__slider-wrap {
+  display: none;
+}
+
+.team-sec__slider {
+  display: block;
+  width: 100%;
+  overflow: visible;
+
+  swiper-slide {
+    height: auto;
+  }
+}
+
 .team-sec__card-media {
   position: relative;
   margin-bottom: 20px;
@@ -1751,18 +1809,1130 @@ a.countries-sec__pill {
 
 
 @media only screen and (max-width: 1150px) {
+  .home-hero-sec__title{
+    font-size: 50px;
+  }
+  .home-hero-sec__inner{
+    padding-top: 45px;
+    gap: 70px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .home-hero-sec__stats{
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .home-hero-sec__badge{
+    padding: 10px 15px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+  .home-hero-sec__subtitle-text{
+    font-size: 16px;
+  }
+  .home-hero-sec__subtitle-icon{
+    height: auto;
+    width: 40px;
+  }
+  .home-hero-sec__subtitle{
+    margin-bottom: 40px;
+  }
+  .home-hero-sec__stat-value{
+    font-size: 18px;
+  }
+  .home-hero-sec__stat{
+    border-radius: 10px;
+  }
+  .home-hero-sec__right{
+    width: auto;
+    margin: 0 auto;
+  }
+  .home-hero-sec{
+    &::after{
+      width: 100%;
+      height: 200px;
+      left: 0;
+      right: auto;
+      top: auto;
+      bottom: 0;
+    }
+  }
+  .payment-calc__form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .payment-calc{
+    width: 100%;
+    border-radius: 10px;
+  }
+  .payment-calc__btn{
+    margin-bottom: 0;
+    margin-top: 26px;
+  }
+  .payment-calc__note{
+    width: 100%;
+    max-width: 100%;
+  }
+  .home-hero-sec__right{
+    min-height: 300px;
+  }
+  .home-hero-sec__decor-cards{
+    width: 126px;
+    top: -42px;
+    right: -17px;
+    left: auto;
+    bottom: auto;
+  }
+  .home-hero-sec__decor-coin--1{
+    left: auto;
+    right: -25px;
+    top: 200px;
+  }
+  .home-hero-sec__decor-coin--2{
+    left: auto;
+    right: 20px;
+    top: 220px;
+  }
+  .home-hero-sec__deals{
+    display: none;
+  }
+  .stats-sec{
+    padding: 60px 0;
+  }
+  .stats-sec__value{
+    font-size: 26px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .stats-sec__text{
+    font-size: 14px;
+    line-height: 1.09;
+  }
+  .stats-sec__item{
+    padding: 20px 10px;
+    border-radius: 10px;
+    min-height: 100px;
+  }
+  .offers-sec{
+    padding: 60px 0;
+  }
+  .offers-sec__title{
+    font-size: 40px;
+  }
+  .offers-sec__head{
+    margin-bottom: 30px;
+  }
+  .offers-sec__slide-title{
+    font-size: 30px;
+  }
+  .offers-sec__slide-text{
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+  .offers-sec__slide{
+    padding-left: 40px;
+    border-radius: 15px;
+  }
+  .offers-sec__slide-img{
+    width: 55%;  
 
+  }
+  .offers-sec__slide-content{
+    width: 40%;
+  
+  }
+  .offers-sec__slide{
+    min-height: 200px;
+  }
+  .platform-sec{
+    padding: 60px 0;
+  }
+  .platform-sec__title{
+    font-size: 40px;
+    max-width: 700px;
+  }
+
+  .platform-sec__card{
+    border-radius: 15px;
+    padding: 30px;
+  }
+  .platform-sec__card-img{
+    width: 120px;
+    top: -30px;
+    right: -30px;
+  }
+  .platform-sec__card-text{
+    width: 100%;
+    max-width: 100%;
+    padding-right: 100px;
+  }
+  .platform-sec__card-title{
+    font-size: 26px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .platform-sec__card-subtitle{
+    font-size: 14px;
+    line-height: 1.09;
+  }
+  .platform-sec__card-head{
+    min-height: 90px;
+  }
+  .platform-sec__item{
+    min-height: 0;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .platform-sec__item-title{
+    font-size: 16px;
+    line-height: 1.09;
+    margin-bottom: 5px;
+  }
+  .platform-sec__item-text{
+    font-size: 14px;
+    line-height: 1.09;
+  }
+  .platform-sec__item-btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background: $gray;
+    color: $white;
+    transition: all ease 0.3s;
+  }
+  .platform-sec__card{
+    padding: 20px;
+    border-radius: 15px;
+  }
+  .countries-sec{
+    padding: 60px 0;
+  }
+  .countries-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .countries-sec__result-flag, .countries-sec__pill-flag{
+    width: 40px;
+    height: 40px;
+  }
+  .countries-sec__result-name, .countries-sec__pill-name{
+    font-size: 16px;
+  }
+  .countries-sec__find-btn{
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.09;
+    margin-bottom: 0;
+  }
+
+  .countries-sec__input{
+    padding: 15px 20px;
+  }
+  .benefits-sec{
+    padding: 60px 0;
+  }
+  .benefits-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .benefits-sec__card-text{
+    font-size: 14px;
+  }
+  .benefits-sec__card-title{
+    font-size: 18px;
+  }
+  .benefits-sec__card{
+    min-height: 200px;
+    border-radius: 10px;
+  }
+  .benefits-sec__card-img{
+    width: 260px;
+  }
+  .benefits-sec__card:nth-child(2){
+    .benefits-sec__card-text{
+      max-width: 250px;
+    }
+    .benefits-sec__card-title{
+      max-width: 250px;
+    }
+  }
+  .benefits-sec__card-icon {
+    width: 30px;
+    height: 30px;
+
+    img{
+      width: 25px;
+    }
+  }
+
+  .home-reviews-sec{
+    padding: 60px 0 80px 0;
+  }
+  .home-reviews-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .home-reviews-sec__dot{
+    width: 6px;
+    height: 6px;
+    &.is-active{
+      width: 10px;
+      height: 10px;
+    }
+  }
+  .home-reviews-sec__pagination{
+    margin-top: 25px;
+    gap: 5px;
+  }
+  .home-reviews-sec__arrow--next{
+    right: calc(50% - 425px);
+    bottom: -70px;
+    top: auto;
+  }
+  .home-reviews-sec__arrow--prev{
+    left: calc(50% - 425px);
+    bottom: -70px;
+    top: auto;
+  }
+  .media-sec{
+    padding: 60px 0 80px 0;
+  }
+  .media-sec__title{
+    font-size: 40px;
+  }
+  .media-sec__badge{
+    top: -35px;
+    right: -60px;
+    font-size: 12px;
+    padding: 8px 12px;
+    max-width: 100px;
+    border-radius: 10px;
+  }
+  .media-sec__head{
+    margin-bottom: 30px;
+  }
+  .media-sec__card-title{
+    font-size: 18px;
+  }
+  .media-sec__card{
+    min-height: 0;
+    border-radius: 10px;
+    padding-bottom: 20px;
+  }
+  .media-sec__card-header{
+    padding: 10px;
+  }
+  .media-sec__card-header{
+    min-height: 50px;
+    max-height: 50px;
+    height: 50px;
+  }
+  .media-sec__card-arrow{
+    width: 30px;
+    height: 30px;
+  }
+  .media-sec__card-logo{
+    max-width: 150px;
+    max-height: 100%;
+  }
+  .media-sec__btn-wrap{
+    margin-top: 30px;
+  }
+  .team-sec{
+    padding: 60px 0;
+  }
+  .team-sec__title{
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  .team-sec__card-img{
+    height: 300px;
+    border-radius: 10px;
+  }
+  .team-sec__card-badge{
+    font-size: 11px;
+    max-width: 100px;
+    border-radius: 5px;
+  }
+  .team-sec__card-name{
+    font-size: 18px;
+    line-height: 1.09;
+    margin-bottom: 10px;
+  }
+  .how-start-sec{
+    padding: 60px 0;
+  }
+  .how-start-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .how-start-sec__tab{
+    font-size: 16px;
+    line-height: 1.09;
+    padding: 14px 15px;
+    border-radius: 5px;
+  }
+  .how-start-sec__tabs{
+    margin-bottom: 40px;
+  }
+  .how-start-sec__card{
+    min-height: 200px;
+    border-radius: 10px;
+  }
+  .faq-sec{
+    padding: 60px 0;
+  }
+  .faq-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .faq-sec__item{
+    border-radius: 10px;
+  }
+  .faq-item__toggle{
+    width: 40px;
+    height: 40px;
+
+  }
+  .faq-item__question{
+    font-size: 18px;
+  }
+  .faq-item__answer{
+    font-size: 14px;
+  }
+  .faq-item__body{
+    padding-bottom: 30px;
+  }
+  .cta-sec{
+    padding: 80px 0;
+  }
+  .cta-sec__img{
+    width: 400px;
+    left: 0;
+    top: -50px;
+  }
+  .cta-sec__content{
+   margin-left: 0;
+   width: 100%;
+   max-width: 100%;
+   padding-left: calc(400px);
+  }
+  .cta-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .how-start-sec__btn-wrap .app-btn{
+    min-height: 45px;
+    min-width: 0;
+  }
+  .how-start-sec__btn-wrap{
+    margin-top: 30px;
+  }
+  .media-sec__btn-wrap .app-btn{
+    min-height: 45px;
+  }
+ 
+  .home-hero-sec__decor-coin--3{
+    top:28px;
+    right: -15px;
+    bottom: auto;
+    left: auto;
+  }
+  .home-hero-sec__right{
+    min-height: 0;
+    padding-bottom: 30px;
+  }
 }
 
 @media only screen and (max-width: 880px) {
-
+  .home-hero-sec__title{
+    font-size: 40px;
+  }
+  .home-hero-sec__badge--crypto{
+    top: 25px;
+  }
+  .payment-calc__field{
+    width: calc(50% - 10px);
+  }
+  .payment-calc__btn{
+    margin-top: 0;
+    min-height: 45px;
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+  .payment-calc__note{
+    margin-top: 15px;
+   
+  }
+  .payment-calc__input{
+    padding: 0 10px;
+    font-size: 14px;
+    min-height: 45px;
+  }
+  .payment-calc__currency{
+    min-height: 45px;
+  }
+  .payment-calc__input-wrap{
+    min-height: 45px;
+  }
+  .offers-sec__title{
+    font-size: 36px;
+  }
+  .stats-sec__value{
+    font-size: 24px;
+  }
+  .offers-sec__slide-title{
+    font-size: 26px;
+  }
+  .platform-sec__title{
+    font-size: 36px;
+  }
+  .countries-sec__title{
+    font-size: 36px;
+  }
+  .benefits-sec__title{
+    font-size: 36px;
+  }
+  .benefits-sec__card-img{
+    right: -50px;
+  }
+  .benefits-sec__card:nth-child(2) .benefits-sec__card-title{
+    max-width: 200px;
+  }
+  .home-reviews-sec__title{
+    font-size: 36px;
+  }
+  .home-reviews-sec__arrow--next {
+    right: calc(50% - (750px / 2));
+  }
+  .home-reviews-sec__arrow--prev {
+    left: calc(50% - (750px / 2));
+  }
+  .media-sec__title{
+    font-size: 36px;
+  }
+  .media-sec__card-title{
+    font-size: 16px;
+  }
+  .media-sec{
+    padding-bottom: 60px;
+  }
+  .team-sec__title{
+    font-size: 36px;
+  }
+  .team-sec__card-img{
+    height: 250px;
+  }
+  .how-start-sec__title{
+    font-size: 36px;
+  }
+  .how-start-sec__card-step{
+    margin-bottom: 30px;
+  }
+  .faq-sec__title{
+    font-size: 36px;
+  }
+  .cta-sec__title{
+    font-size: 36px;
+  }  
+  .cta-sec{
+    padding: 60px 0;
+  }
+  .cta-sec__img{
+    width: 350px;
+  }
+  .cta-sec__content{
+    padding-left: 350px;
+  }
 }
 
 @media only screen and (max-width: 760px) {
+  .home-hero-sec__inner{
+    padding-top: 44px;
+  }
+  .home-hero-sec__title{
+    font-size: 40px;
+    line-height: 0.93;
+    margin-bottom: 24px;
+  }
+  .home-hero-sec__badge--transfers{
+    top: -30px;
+    left: 37px;
+    bottom: auto;
+  }
+  .home-hero-sec__badge{
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .home-hero-sec__badge--crypto{
+    top: 72px;
+    right: 0;
+  }
+  .home-hero-sec__title-wrap{
+    margin-bottom: 24px;
+  }
+  .home-hero-sec__subtitle-text{
+    font-size: 16px;
+  }
+  .home-hero-sec__subtitle-icon{
+    width: 43px;
+  }
+  .home-hero-sec__subtitle{
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .home-hero-sec__stats{
+    display: none;
+  }
+  .home-hero-sec__inner{
+    gap:78px;
+  }
+  .home-hero-sec__right{
+    width: 100%;
+  }
+  .payment-calc{
+    width: 100%;
+    padding: 20px 15px ;
+    border-radius: 20px;
+  }
+  .payment-calc__title{
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  .home-hero-sec__decor-cards{
+    
+  }
+  .payment-calc__field{
+    width: 100%;
+    min-height: 50px;
+  }
+  .payment-calc__input{
+    min-height: 50px;
+  }
+  .payment-calc__currency{
+    min-height: 50px;
+  }
+  .payment-calc__btn{
+    width: 100%;
+    text-align: center;
+    min-height: 50px;
+    margin-top: 10px;
+  }
+  .payment-calc__field{
+    margin-bottom: 15px;
+  }
+  .payment-calc__note{
+    font-size: 10px;
+    margin-top: 10px;
+  }
+  .home-hero-sec__right{
+    padding-bottom: 60px;
+  }
+  .home-hero-sec::after{
+    height: 323px;
+  }
+  .home-hero-sec__decor-coin--2{
+    width: 43px;
+    top: auto;
+    bottom: 44px;
+    transform: scaleX(-1);
+  }
+  .home-hero-sec__decor-coin--1{
+    top: auto;
+    width: 43px;
+    bottom: 76px;
+  }
+  .home-hero-sec__decor-coin--3{
+    width: 26px;
+    right: -15px;
+    top: 28px;
+    transform: scaleX(-1);
+  }
+  .stats-sec{
+    padding: 50px 0;
+  }
+  .stats-sec__grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .stats-sec__value{
+    font-size: 25px;
+    margin-bottom: 0px;
+  }
+  .stats-sec__text{
+    font-size: 14px;
+  }
+  .stats-sec__item{
+    padding: 20px 10px;
+    border-radius: 20px;
+    min-height: 0;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .offers-sec{
+    padding: 50px 0;
+
+    .container{
+      position: relative;
+    }
+  }
+  .offers-sec__nav{
+    position: absolute;
+  }
+  .offers-sec__head{
+    margin-bottom: 25px;
+  }
+  .offers-sec__title{
+    font-size: 30px;
+  }
+  .offers-sec__slide{
+    min-height: 410px;
+    border-radius: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    justify-content: space-between;
+    
+  }
+  .offers-sec__slide-content{
+    width: 100%;
+    padding: 25px 25px 0 25px;
+  }
+  .offers-sec__slide-title{
+    font-size: 25px;
+    margin-bottom: 15px;
+    line-height: 1;
+  }
+  .offers-sec__slide-text{
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .offers-sec__slide-img{
+    height: 227px;
+    width: 100%;
+  }
+  .offers-sec .container{
+    padding-bottom: 60px;
+  }
+  .offers-sec__nav{
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .offers-sec__arrow{
+    width: 35px;
+    height: 35px;
+  }
+  .platform-sec{
+    padding: 50px 0;
+  }
+  .platform-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .platform-sec__grid{
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .platform-sec__card{
+    padding: 25px 20px ;
+    border-radius: 20px;
+  }
+  .platform-sec__card-title{
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+  .platform-sec__card-img{
+    width: 130px;
+    right: -35px;
+    top: -33px;
+  }
+  .platform-sec__card-img {
+      width: 130px;
+      right: -35px;
+      top: -50px;
+  }
+
+  .platform-sec__card-text {
+      width: 100%;
+      max-width: 100%;
+      padding-right: 84px;
+  }
+  .platform-sec__card-head{
+    min-height: 0;
+    margin-bottom: 30px;
+  }
+  .platform-sec__item-btn{
+    width: 35px;
+    height: 35px;
+  }
+  .platform-sec__item{
+    padding: 10px;
+    border-radius: 10px;
+
+  }
+  .platform-sec__item-title{
+    font-size: 16px;
+  }
+  .platform-sec__item-text{
+    font-weight: 600;
+  }
+  .countries-sec{
+    padding: 50px 0;
+  }
+  .countries-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .countries-sec{
+    background-size: 860px auto;
+  }
+  .countries-sec__input{
+    font-size: 14px;
+  }
+  .countries-sec__search-wrap{
+    margin-bottom: 30px;
+  }
+  .countries-sec__slider{
+    margin-bottom: 12px;
+
+    &--reverse {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 35px;
+    }
+  }
+  .countries-sec__result-flag, .countries-sec__pill-flag{
+    width: 48px;
+    height: 48px;
+  }
+  .countries-sec__pill{
+    padding: 3px;
+  }
+  .countries-sec__pill-name{
+    padding-right: 35px;
+    font-size: 16px;
+  }
+  .countries-sec__bottom{
+    .app-banner-btn{
+      width: 100%;
+      text-align: center;
+      min-height: 50px;
+   
+    }
+  }
+  .benefits-sec{
+    padding: 50px 0;
+  }
+  .benefits-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .benefits-sec__grid{
+    display: block;
+  }
+  .benefits-sec__card{
+    width: 100%;
+    padding: 15px 15px 28px 15px;
+    border-radius: 20px;
+    min-height: 0;
+    margin-bottom: 10px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  .benefits-sec__card-text{
+    max-width: 300px;
+    margin-top: 30px;
+  }
+  .benefits-sec__card-title{
+    font-size: 16px;
+  }
+  .benefits-sec__card:nth-child(2){
+    min-height: 293px;
+    .benefits-sec__card-inner{
+      width: 100%;
+    }
+    .benefits-sec__card-img{
+      height: 177px;
+      width: auto;
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 64px;
+      
+    }
+  }
+  .benefits-sec__card-inner{
+    display: block;
+  }
+  .benefits-sec__card:nth-child(2) .benefits-sec__card-text{
+    max-width: 100%;
+  }
+  .home-reviews-sec{
+    padding: 50px 0;
+    padding-bottom: 65px;
+  }
+  .home-reviews-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .home-reviews-sec__filter--pill{
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  .home-reviews-sec__filter-platforms{
+    display: contents;
+  }
+  .home-reviews-sec__filters{
+    row-gap: 20px;
+    column-gap: 10px;
+    margin-bottom: 30px;
+  }
+  .home-reviews-sec__count{
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .home-reviews-sec__pagination{
+    padding: 0 50px 0 50px;
+  }
+
+  .home-reviews-sec__arrow--next{
+    right: calc(50% - (365px / 2));
+  } 
+  .home-reviews-sec__arrow--prev{
+    left: calc(50% - (365px / 2));
+  }
+  .media-sec{
+    padding: 50px 0;
+  }
+  .media-sec__title{
+    font-size: 30px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .media-sec__badge{
+    right: 0;
+    top: -25px;
+  }
+  .media-sec__head{
+    margin-bottom: 25px;
+  }
+  .media-sec__grid{
+    display: block  ;
+  }
+  .media-sec__card{
+    min-height: 0;
+margin-bottom: 10px;
+    display: block;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  .media-sec__card-title{
+    font-size: 16px;
+  }
+  .media-sec__card-header{
+    margin-bottom: 30px;
+  }
+  .media-sec__btn-wrap{
+    margin-top: 30px;
+    .app-btn{
+      width: 100%;
+      text-align: center;
+      min-height: 50px;
+    }
+  }
+  .team-sec{
+    padding: 50px 0;
+  }
+  .team-sec__title{
+    font-size: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .team-sec__subtitle{
+    font-size: 14px;
+    text-align: center;
+    max-width: none;
+    margin: 0 auto;
+  }
+  .team-sec__head{
+    margin-bottom: 30px;
+  }
+  .team-sec__nav{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .team-sec__grid{
+    display: none;
+  }
+  .team-sec__slider-wrap{
+    display: block;
+  }
+  .team-sec__card-img{
+    height: 374px;
+    border-radius: 20px;
+  }
+  .team-sec__card-badge{
+    top: -8зч;
+    left: 13px;
+    right: auto;
+    max-width: 127px;
+    padding: 11px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  .team-sec__card-name{
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .team-sec__card-text{
+    max-width: none;
+    font-size: 14px;
+  }
+  .team-sec__card--slide{
+    padding-top: 25px;
+  }
+  .team-sec__card-name{
+    font-size: 18px;
+  }
+  .team-sec__card-text{
+    max-width: 300px;
+  }
+  .team-sec__arrow{
+    width: 35px;
+    height: 35px;
+  }
+  .team-sec__nav{
+    margin-top: 25px;
+  }
+  .team-sec__head{
+    margin-bottom:20px;
+  }
+  .how-start-sec{
+    padding: 50px 0;
+  }
+  .how-start-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .how-start-sec__tabs{
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 33px;
+  }
+  .how-start-sec__tab{
+    width: 100%;
+    padding: 17px;
+    font-size: 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .how-start-sec__card{
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px;
+    padding-bottom: 28px;
+
+
+
+    &:nth-child(-n+2){
+      width: 100%;
+    }
+  }
+  .how-start-sec__card-step{
+    margin-bottom: 34px;
+  }
+  .how-start-sec__card-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .how-start-sec__grid{
+    gap: 10px;
+  }
+  .how-start-sec__btn-wrap{
+    margin-top: 40px;
+    .app-btn{
+      width: 100%;
+      text-align: center;
+      min-height: 50px;
+    }
+  }
+  .faq-sec{
+    padding: 50px 0;
+  }
+  .faq-sec__title{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .faq-item__toggle{
+    width: 43px;
+    height: 43px;
+  }
+  .faq-item__question{
+    font-size: 16px;
+  }
+  .faq-item__answer{
+    font-size: 14px;
+  }
+  .faq-item__body{
+   padding: 0 22px 20px 15px;
+  }
+  .faq-item__header{
+    padding: 13px 15px;
+  }
+  .cta-sec{
+    padding: 50px 0;
+  }
+  .cta-sec__content{
+    padding: 0;
+  }
+  .cta-sec__title{
+    font-size: 30px;
+    margin-bottom: 220px;
+    line-height: 0.92;
+  }
+  .cta-sec__actions{
+    width: 100%;
+    row-gap: 10px;
+
+    button{
+      width: 100%;
+      text-align: center;
+      min-height: 50px;
+    }
+  }
+  .cta-sec__img{
+    width: 340px;
+    top: 67px;
+    left: 13px;
+  }
 
 }
 
 @media only screen and (max-width: 365px) {
 
-
+  .home-reviews-sec__arrow--next{
+    right: calc(50% - (325px / 2));
+  }
+  .home-reviews-sec__arrow--prev{
+    left: calc(50% - (325px / 2));
+  }
+  .cta-sec__img{
+    width: 325px;
+    left: 0;
+  }
 }

@@ -28,3 +28,23 @@
     cursor: not-allowed;
   }
 }
+
+@media only screen and (max-width: 1150px) {
+  .app-banner-btn{
+    padding: 10px 20px;
+    font-size: 14px;
+    min-height: 45px;
+    min-width: 200px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .app-banner-btn{
+    padding: 13px 16px;
+    font-size: 14px;
+    min-height: 0;
+    min-width: 0;
+    line-height: 1.3;
+  }
+  
+}

@@ -3,12 +3,12 @@
     <div class="container">
       <div class="app-footer__card">
         <div class="app-footer__grid">
-          <div class="app-footer__col">
+          <div class="app-footer__col app-footer__col-1">
             <NuxtLink to="/" class="app-footer__logo">{{ footer?.logo_text }}</NuxtLink>
-            <p class="app-footer__legal">© 2026 Bitox</p>
+            <p class="app-footer__legal footer_copy">© 2026 Bitox</p>
           </div>
 
-          <div class="app-footer__col">
+          <div class="app-footer__col app-footer__col-2">
             <div class="app-footer__col-main">
               <p class="app-footer__label">Навигация</p>
 
@@ -36,7 +36,7 @@
             </div>
           </div>
 
-          <div class="app-footer__col">
+          <div class="app-footer__col app-footer__col-3 ">
             <div class="app-footer__col-main">
               <div v-if="contacts.length" class="app-footer__contacts">
                 <a
@@ -73,6 +73,21 @@
             <div v-if="docsPagesCol3.length" class="app-footer__col-legal">
               <NuxtLink
                 v-for="page in docsPagesCol3"
+                :key="page.documentId"
+                :to="`/docs/${page.slug}`"
+                class="app-footer__legal app-footer__legal--link"
+              >
+                {{ page.title }}
+              </NuxtLink>
+            </div>
+          </div>
+
+          <div class="app-footer__col app-footer__col-4 ">
+            <p class="app-footer__legal footer_copy">© 2026 Bitox</p>
+
+            <div v-if="docsPages.length" class="app-footer__col-legal">
+              <NuxtLink
+                v-for="page in docsPages"
                 :key="page.documentId"
                 :to="`/docs/${page.slug}`"
                 class="app-footer__legal app-footer__legal--link"
