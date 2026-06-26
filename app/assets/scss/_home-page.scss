@@ -1283,23 +1283,8 @@ a.countries-sec__pill {
   }
 }
 
-@media only screen and (max-width: 1234px) {
-  .home-reviews-sec__arrow {
-    &--prev {
-      left: 16px;
-    }
 
-    &--next {
-      right: 16px;
-    }
-  }
-}
 
-@media only screen and (max-width: 991px) {
-  .home-reviews-sec__card {
-    min-height: 320px;
-  }
-}
 
 .media-sec {
   padding: 100px 0 80px;
@@ -1757,316 +1742,27 @@ a.countries-sec__pill {
   gap: 16px;
 }
 
-@media only screen and (max-width: 991px) {
-  .home-hero-sec {
-    min-height: auto;
 
-    &::before {
-      width: 100%;
-      height: 62%;
-    }
 
-    &::after {
-      top: auto;
-      bottom: 0;
-      width: 100%;
-      height: 38%;
-    }
-  }
 
-  .home-hero-sec__inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 48px 0 32px;
-  }
 
-  .home-hero-sec__right {
-    min-height: auto;
-    position: relative;
-  }
 
-  .payment-calc {
-    width: 100%;
-    max-width: 394px;
-    margin: 0 auto;
-  }
 
-  .home-hero-sec__decor {
-    display: none;
-  }
 
-  .home-hero-sec__deals {
-    position: static;
-    width: 100%;
-    max-width: 394px;
-    margin: 24px auto 0;
-  }
 
-  .home-hero-sec__stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: none;
-  }
+@media only screen and (max-width: 1150px) {
 
-  .home-hero-sec__title {
-    font-size: 56px;
-  }
-
-  .media-sec__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .team-sec__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .how-start-sec__tab {
-    min-width: 0;
-    flex: 1;
-    font-size: 16px;
-  }
-
-  .how-start-sec__card,
-  .how-start-sec__card:nth-child(-n+2) {
-    width: calc((100% - 20px) / 2);
-  }
-
-  .cta-sec__content {
-    margin-left: 320px;
-    max-width: none;
-  }
-
-  .cta-sec__title {
-    font-size: 48px;
-  }
 }
 
-@media only screen and (max-width: 575px) {
-  .home-hero-sec__inner {
-    padding: 32px 0 24px;
-  }
+@media only screen and (max-width: 880px) {
 
-  .home-hero-sec__title {
-    font-size: 40px;
-  }
+}
 
-  .home-hero-sec__badge {
-    position: static;
-    display: inline-flex;
-    margin-top: 12px;
-    margin-right: 8px;
-  }
+@media only screen and (max-width: 760px) {
 
-  .home-hero-sec__title-wrap {
-    margin-bottom: 32px;
-  }
+}
 
-  .home-hero-sec__subtitle {
-    margin-bottom: 32px;
-  }
+@media only screen and (max-width: 365px) {
 
-  .home-hero-sec__subtitle-text {
-    font-size: 16px;
-  }
 
-  .home-hero-sec__stats {
-    grid-template-columns: 1fr;
-  }
-
-  .home-hero-sec__deals-value {
-    font-size: 32px;
-  }
-
-  .media-sec {
-    padding: 60px 0 50px;
-  }
-
-  .media-sec__title {
-    font-size: 40px;
-  }
-
-  .media-sec__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-sec {
-    padding: 60px 0;
-  }
-
-  .team-sec__title {
-    font-size: 40px;
-  }
-
-  .team-sec__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-sec__card-badge {
-    top: 12px;
-    right: 12px;
-    min-width: auto;
-    min-height: auto;
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-
-  .media-sec__card-title {
-    font-size: 18px;
-  }
-
-  .media-sec__btn-wrap {
-    margin-top: 40px;
-  }
-
-  .home-reviews-sec {
-    padding: 60px 0 50px;
-  }
-
-  .home-reviews-sec__title {
-    margin-bottom: 24px;
-    font-size: 40px;
-  }
-
-  .home-reviews-sec__filters {
-    gap: 16px;
-  }
-
-  .home-reviews-sec__filter-platforms {
-    gap: 20px;
-  }
-
-  .home-reviews-sec__count {
-    margin-bottom: 32px;
-  }
-
-  .home-reviews-sec__card {
-    min-height: 280px;
-  }
-
-  .home-reviews-sec__arrow {
-    &--prev {
-      left: 12px;
-    }
-
-    &--next {
-      right: 12px;
-    }
-  }
-
-  .how-start-sec {
-    padding: 60px 0;
-  }
-
-  .how-start-sec__title {
-    margin-bottom: 32px;
-    font-size: 40px;
-  }
-
-  .how-start-sec__tabs {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    margin-bottom: 40px;
-  }
-
-  .how-start-sec__tab {
-    width: 100%;
-    min-height: 48px;
-    font-size: 16px;
-  }
-
-  .how-start-sec__card,
-  .how-start-sec__card:nth-child(-n+2) {
-    width: 100%;
-    min-height: auto;
-  }
-
-  .how-start-sec__card-step {
-    margin-bottom: 32px;
-  }
-
-  .how-start-sec__btn-wrap {
-    margin-top: 40px;
-
-    .app-btn {
-      width: 100%;
-      min-width: 0;
-    }
-  }
-
-  .faq-sec {
-    padding: 60px 0;
-  }
-
-  .faq-sec__title {
-    margin-bottom: 32px;
-    font-size: 40px;
-  }
-
-  .faq-item__header {
-    gap: 16px;
-    padding: 12px 12px 12px 20px;
-  }
-
-  .faq-item__question {
-    font-size: 18px;
-  }
-
-  .faq-item__toggle {
-    width: 44px;
-    height: 44px;
-
-    svg {
-      width: 44px;
-      height: 44px;
-    }
-  }
-
-  .faq-item__body {
-    padding: 0 20px 16px;
-  }
-
-  .faq-item--open .faq-item__body {
-    padding-top: 20px;
-  }
-
-  .faq-item__answer {
-    max-width: none;
-    font-size: 14px;
-  }
-
-  .cta-sec {
-    padding: 80px 0 60px;
-  }
-
-  .cta-sec__inner {
-    min-height: auto;
-  }
-
-  .cta-sec__img {
-    position: static;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto 32px;
-  }
-
-  .cta-sec__content {
-    margin-left: 0;
-  }
-
-  .cta-sec__title {
-    margin-bottom: 32px;
-    font-size: 36px;
-    text-align: center;
-  }
-
-  .cta-sec__actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .app-client-btn,
-  .app-consult-btn {
-    width: 100%;
-    min-width: 0;
-  }
 }

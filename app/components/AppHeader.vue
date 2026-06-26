@@ -105,26 +105,155 @@
           </nav>
 
           <AppButton @click="openConsultationModal">{{ header?.ctr_button_text }}</AppButton>
+          
+          <div class="header__burger" 
+          @click="toggleBurgerMenu"
+          :class="{ 'header__burger--active': toggleBurger }"
+          >
+            <span class="header__burger-line header__burger-line--v1"></span>
+            <span class="header__burger-line header__burger-line--v2"></span>
+            <span class="header__burger-line header__burger-line--v3"></span>
+          </div>
+
         </div>
       </div>
     </div>
   </header>
+
+  <div class="mob-menu" :class="{ 'mob-menu--active': toggleBurger }">
+    <div class="mob-menu__panel">
+      <div class="container">
+ 
+
+        <nav class="mob-menu__nav">
+          <div
+            v-for="item in navItems"
+            :key="item.label"
+            class="mob-menu__nav-group"
+          >
+            <button
+              v-if="item.mega?.length"
+              type="button"
+              class="mob-menu__nav-item"
+              :class="{ 'mob-menu__nav-item--open': openMobAccordion === item.label }"
+              @click="toggleMobAccordion(item.label)"
+            >
+              <span>{{ item.label }}</span>
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 2.5L4.5 6.5L8 2.5" fill="#606061" />
+              </svg>
+            </button>
+
+            <NuxtLink
+              v-else
+              :to="item.to"
+              class="mob-menu__nav-item"
+              @click="closeMobMenu"
+            >
+              <span>{{ item.label }}</span>
+            </NuxtLink>
+
+            <div
+              v-if="item.mega?.length && openMobAccordion === item.label"
+              class="mob-menu__mega"
+            >
+              <div
+                v-for="card in item.mega"
+                :key="card.id"
+                class="mob-menu__mega-card"
+              >
+                <p v-if="card.title" class="mob-menu__mega-title">{{ card.title }}</p>
+
+                <ul v-if="card.links.length" class="mob-menu__mega-list">
+                  <li v-for="link in card.links" :key="link.key">
+                    <NuxtLink
+                      :to="link.to"
+                      class="mob-menu__mega-link"
+                      @click="closeMobMenu"
+                    >
+                      {{ link.label }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="mob-menu__cta">
+          <p class="mob-menu__cta-text">Подберем оптимальное решение вашей задачи</p>
+
+          <AppBannerBtn type="button" @click="openConsultationModalFromMenu">
+            Заказать консультацию
+          </AppBannerBtn>
+        </div>
+
+        <div class="mob-menu__contacts">
+          <div v-if="header?.address" class="mob-menu__contact">
+            <svg width="19" height="23" viewBox="0 0 9 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4.5 0C2.01866 0 0 1.87171 0 4.17241C0 8.11762 4.09132 10.8183 4.26549 10.9314C4.33585 10.9772 4.41808 11 4.5 11C4.58192 11 4.66415 10.9772 4.73451 10.9314C4.90868 10.8183 9 8.11762 9 4.17241C9 1.87171 6.98134 0 4.5 0ZM4.5 6.06897C3.37224 6.06897 2.45455 5.21808 2.45455 4.17241C2.45455 3.12675 3.37224 2.27586 4.5 2.27586C5.62776 2.27586 6.54545 3.12675 6.54545 4.17241C6.54545 5.21808 5.62776 6.06897 4.5 6.06897Z" fill="#313132" />
+            </svg>
+
+            <div class="mob-menu__contact-body">
+              <span>{{ header.address }}</span>
+              <span v-if="header?.time_work">{{ header.time_work }}</span>
+            </div>
+          </div>
+
+          <a
+            v-for="contact in mobMenuContacts"
+            :key="contact.id"
+            :href="contact.link || '#'"
+            class="mob-menu__contact mob-menu__contact--link"
+          >
+            <span v-if="contact.svg_icon" v-html="contact.svg_icon" />
+            <span>{{ contact.text }}</span>
+          </a>
+        </div>
+
+        <div v-if="socials.length" class="mob-menu__socials">
+          <a
+            v-for="social in socials"
+            :key="social.id"
+            :href="social.link || '#'"
+            class="mob-menu__social-link"
+            :aria-label="social.name"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              v-if="social.icon"
+              :src="social.icon"
+              :alt="social.name"
+              width="18"
+              height="18"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
-import { mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
+import { getStrapiMediaUrl, mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 
+const toggleBurger = ref(false)
+const openMobAccordion = ref(null)
+
 const [
   { data: headerResponse },
+  { data: footerResponse },
   { data: businessPagesResponse },
   { data: individualsPagesResponse },
   { data: transfersPagesResponse },
   { data: exchangePagesResponse },
 ] = await Promise.all([
   useFetch(`${urlApi}/api/header-component?populate[header_contacts_list]=true`),
+  useFetch(`${urlApi}/api/footer-component?populate[socials_media_links][populate]=icon`),
   useFetch(
     `${urlApi}/api/business-pages?fields[0]=title&fields[1]=slug&fields[2]=type_business_page&pagination[pageSize]=100`,
   ),
@@ -142,6 +271,44 @@ const [
 const header = computed(() => headerResponse.value?.data)
 
 const contacts = computed(() => header.value?.header_contacts_list ?? [])
+
+const socials = computed(() =>
+  (footerResponse.value?.data?.socials_media_links ?? []).map((item) => ({
+    id: item.id,
+    link: item.link,
+    name: item.icon?.alternativeText || '',
+    icon: getStrapiMediaUrl(item.icon, urlApi),
+  })),
+)
+
+const mobMenuContacts = computed(() =>
+  contacts.value.filter((contact) => {
+    const link = contact.link || ''
+    return link.startsWith('mailto:') || link.startsWith('tel:')
+  }),
+)
+
+function closeMobMenu() {
+  toggleBurger.value = false
+  openMobAccordion.value = null
+}
+
+function toggleBurgerMenu() {
+  toggleBurger.value = !toggleBurger.value
+
+  if (!toggleBurger.value) {
+    openMobAccordion.value = null
+  }
+}
+
+function toggleMobAccordion(label) {
+  openMobAccordion.value = openMobAccordion.value === label ? null : label
+}
+
+function openConsultationModalFromMenu() {
+  closeMobMenu()
+  openConsultationModal()
+}
 
 function isPhoneContact(contact) {
   return contact.link?.startsWith('tel:')
@@ -252,4 +419,8 @@ const navItems = computed(() => [
   { label: 'Контакты', to: '/contacts' },
   { label: 'о Bitox', to: '/about' },
 ])
+
+const route = useRoute()
+
+watch(() => route.path, closeMobMenu)
 </script>
