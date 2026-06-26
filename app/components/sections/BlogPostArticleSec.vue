@@ -13,13 +13,13 @@
             <div
               v-if="block.__component === 'shared.text-editor'"
               class="text-editor"
-              v-html="formatBlogText(block.text_editor)"
+              v-html="renderMarkdown(block.text_editor)"
             />
 
             <div
               v-else-if="block.__component === 'shared.quote-text'"
               class="text-editor"
-              v-html="formatBlogText(block.quote_text_element)"
+              v-html="renderMarkdown(block.quote_text_element)"
             />
           </div>
         </div>
@@ -51,7 +51,9 @@
 
 <script setup>
 import gsap from 'gsap'
-import { formatBlogText } from '~/utils/formatBlogText'
+import MarkdownIt from 'markdown-it';
+
+
 
 defineProps({
   post: {
@@ -59,6 +61,17 @@ defineProps({
     required: true,
   },
 })
+
+const md = new MarkdownIt();
+
+function renderMarkdown(text) {
+    if (!text) {
+        return '';
+    }
+
+    return md.render(text);
+}
+
 
 const sectionRef = ref(null)
 
