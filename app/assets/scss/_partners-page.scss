@@ -108,6 +108,7 @@
 .partner-calc-sec {
   padding: 95px 0 80px;
   background: $bg-section;
+  overflow: hidden;
 }
 
 .partner-calc-sec__title {
@@ -402,48 +403,6 @@
 
 }
 
-@media only screen and (max-width: 1280px) {
-  .partner-calc-sec__card {
-    flex-direction: column;
-    padding: 32px 24px;
-  }
-
-  .partner-calc-sec__form,
-  .partner-calc-sec__result {
-    width: 100%;
-  }
-
-  .partner-calc-sec__decor-cards {
-    top: -40px;
-    right: 0;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .partner-calc-sec__title {
-    font-size: 48px;
-  }
-
-  .partner-calc-sec__actions {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .partner-calc-sec__btn {
-    width: 100%;
-    min-width: 0;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-  .partner-calc-sec {
-    padding: 64px 0 56px;
-  }
-
-  .partner-calc-sec__title {
-    font-size: 36px;
-  }
-}
 
 .partner-offers-sec {
   padding: 80px 0;
@@ -511,29 +470,11 @@
   color: $gray-83;
 }
 
-@media only screen and (max-width: 991px) {
-  .partner-offers-sec__title {
-    font-size: 48px;
-  }
-
-  .partner-offers-sec__card {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-  .partner-offers-sec {
-    padding: 64px 0;
-  }
-
-  .partner-offers-sec__title {
-    font-size: 36px;
-  }
-}
 
 .partner-how-start-sec {
   padding: 80px 0;
   background: $bg-platform;
+  overflow: hidden;
 }
 
 .partner-how-start-sec__title {
@@ -691,81 +632,349 @@
   height: 100%;
   width: auto;display: block;
 }
+.partner-calc-sec__result-box--mob{
+  display: none;
+}
 
-@media only screen and (max-width: 1280px) {
-  .partner-how-start-sec__card-media {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
+
+
+
+@media only screen and (max-width: 1150px) {
+  .partner-hero-sec__inner{
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+  .partner-hero-sec__title{
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  .partner-hero-sec__text{
+    font-size: 18px;
+  }
+  .partner-hero-sec__content{
+    max-width: 500px;
+  }
+  .partner-hero-sec__img{
+    width: 350px;
+    top: 90px;
+    right: 0;
+  }
+  .partner-hero-sec__badge{
+    top: -20px;
+    right: 30px;
     left: auto;
-    min-height: 220px;
-    margin-top: 8px;
+    width: 120px;
+    min-height: 45px;
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 10px;
   }
-
-  .partner-how-start-sec__card--media {
-    padding: 23px 30px 0;
+  .partner-hero-sec{
+    min-height: 0;
   }
-
-  .partner-how-start-sec__card-content {
-    max-width: none;
-    padding-right: 0;
+  .partner-calc-sec{
+    padding: 60px 0;
   }
-
-  .partner-how-start-sec__img {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    height: auto;
-    max-height: 220px;
-    margin: 0 auto;
-    object-position: center bottom;
+  .partner-calc-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
   }
-
-  .partner-how-start-sec__badge {
-    top: 0;
-    right: 12px;
+  .partner-calc-sec__form{
+    width: 65%;
   }
-}
-
-@media only screen and (max-width: 991px) {
-  .partner-how-start-sec__title {
-    font-size: 48px;
+  .partner-calc-sec__result{
+    width: 35%;
   }
-
-  .partner-how-start-sec__row {
-    flex-direction: column;
-  }
-
-  .partner-how-start-sec__row--top .partner-how-start-sec__card {
-    flex: none;
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-  .partner-how-start-sec {
-    padding: 80px 0;
-  }
-
-  .partner-how-start-sec__title {
+  .partner-calc-sec__result-value{
     font-size: 36px;
   }
-
-  .partner-how-start-sec__card {
-    min-height: 0;
-    padding: 20px;
+  .partner-offers-sec{
+    padding: 60px 0;
   }
-
-  .partner-how-start-sec__card--media {
-    padding: 20px;
+  .partner-offers-sec__title{
+    font-size: 40px;
+    margin-bottom: 15px;
   }
-
-  .partner-how-start-sec__card-head {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
+  .partner-offers-sec__subtitle{
+    margin-bottom: 30px;
   }
+  .partner-offers-sec__card-text{
+    font-size: 14px;
+  }
+  .partner-offers-sec__card-title{
+    font-size: 18px;
+  }
+  .partner-how-start-sec{
+    padding: 60px 0;
+  }
+  .partner-how-start-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .partner-how-start-sec__card-title{
+    font-size: 18px;
+  }
+  .partner-how-start-sec__card-text{
+    font-size: 14px;
+  }
+  .partner-how-start-sec__card-media{
+    height: auto;
+    width: 200px;
+    right: 20px;
+
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+  .partner-how-start-sec__card{
+    min-height: 200px;
+  }
+  .partner-how-start-sec__badge{
+    top: -20px;
+    right: 20px;
+    width: 120px;
+    min-height: 45px;
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+  .partner-how-start-sec__card-num{
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+ 
+  
 }
 
+@media only screen and (max-width: 880px) {
+
+
+  .partner-hero-sec__content{
+    max-width: 430px;
+  }
+  .partner-hero-sec__img{
+    width: 300px;
+  }
+  .partner-hero-sec__title{
+    margin-bottom: 30px;
+    font-size: 40px;
+  }
+  .partner-hero-sec__text{
+    font-size: 16px;
+    max-width: 350px;
+  }
+  .partner-hero-sec__breadcrumbs{
+    font-size: 14px;
+  }
+  .partner-calc-sec__title{
+    font-size: 30px;
+  }
+  .partner-calc-sec__btn{
+    font-size: 14px;
+    max-width: 200px;
+    min-height: 50px;
+  }
+  .partner-calc-sec__decor-cards{
+    width: 150px;
+    right: -40px;
+    top: -70px;
+  }
+  .partner-calc-sec__result-value{
+    font-size: 30px;
+  }
+  .partner-calc-sec__card{
+    padding-bottom: 20px;
+    padding-left: 30px;
+  }
+  .partner-offers-sec__title{
+    font-size: 30px;
+  }
+  .partner-offers-sec__card-img{
+    height: 120px;
+  }
+  .partner-offers-sec__card{
+    padding: 12px 20px 30px 20px;
+  }
+  .partner-how-start-sec__title{
+    font-size: 30px;
+  }
+  .partner-how-start-sec__card-media{
+    width: 160px;
+  }
+
+
+
+ 
+}
+
+@media only screen and (max-width: 760px) {
+  .partner-hero-sec__inner{
+    padding-top: 25px;
+    padding-bottom: 35px;
+  }
+  .partner-hero-sec__img{
+    width: 100%;
+    right: auto;
+    top: auto;
+    position: relative;
+  }
+  .partner-hero-sec__breadcrumbs{
+    margin-bottom: 20px;
+  }
+  .partner-hero-sec__title{
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  .partner-hero-sec__text{
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+  .partner-hero-sec__badge {
+      top: 8px;
+      right: -19px;
+      left: auto;
+      width: 116px;
+      min-height: 45px;
+      padding: 8px 10px;
+      font-size: 12px;
+      border-radius: 10px;
+  }
+  .partner-hero-sec__btn{
+    width: 100%;
+    text-align: center;
+  }
+  .partner-hero-sec__img{
+    margin-top: 40px;
+  }
+  .partner-calc-sec__card{
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .partner-calc-sec__form{
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .partner-calc-sec__result{
+    width: 100%;
+    display: none;
+  }
+  .partner-calc-sec__actions{
+    flex-wrap: wrap;
+    gap:16px;
+  }
+  .partner-calc-sec__btn{
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .partner-calc-sec__result-box--mob{
+    display: block;
+   padding: 27px;
+    min-height: 0;
+    margin-bottom: 23px;
+  }
+  .partner-calc-sec__result-value{
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  .partner-calc-sec__input-wrap{
+    min-height: 50px;
+  }
+  .partner-calc-sec__card{
+    padding: 20px 15px;
+  }
+  .partner-offers-sec{
+    padding: 50px 0;
+  }
+  .partner-offers-sec__subtitle{
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  .partner-offers-sec__title{
+    margin-bottom: 10px;
+  }
+  .partner-offers-sec__grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .partner-offers-sec__card{
+    width: 100%;
+    min-height: 0;
+  }
+  .partner-offers-sec__card-img{
+    height: 110px;
+    margin-bottom: 11px;
+  }
+  .partner-offers-sec__card-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .partner-offers-sec__card-text{
+  max-width: 270px;
+  }
+  .partner-how-start-sec{
+    padding: 50px 0;
+  }
+  .partner-how-start-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .partner-how-start-sec__grid{
+    display: block;
+  }
+  .partner-how-start-sec__row{
+    flex-wrap: wrap;
+    gap: 10px;
+    &:first-child{
+      margin-bottom: 10px;
+    }
+  }
+  .partner-how-start-sec__card{
+    padding: 15px;
+    padding-bottom: 22px;
+    width: 100%;
+    min-height: 0;
+  }
+  .partner-how-start-sec__card-title{
+    font-size: 16px;
+  }
+  .partner-how-start-sec__row--top .partner-how-start-sec__card:first-child{
+    flex: auto;
+  }
+  .partner-how-start-sec__card-head{
+    padding-bottom: 30px;
+  }
+  .partner-how-start-sec__card-media{
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    height: 167px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -20px;
+
+    img{
+      height: 100%;
+      width: auto;
+      display: block;
+    }
+  }
+  .partner-how-start-sec__card-content{
+    padding: 0;
+  }
+  .partner-how-start-sec__badge{
+    bottom: 116px;
+    top: auto;
+    right: 30px;
+    font-size: 14px;
+  }
+
+}
+
+@media only screen and (max-width: 365px) {
+
+}

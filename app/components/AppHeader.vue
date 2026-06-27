@@ -415,8 +415,6 @@ const navItems = computed(() => [
   { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
   { label: 'Международные расчеты', to: '/transfers' },
   { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
-  { label: 'Блог', to: '/blog' },
-  { label: 'Контакты', to: '/contacts' },
   { label: 'о Bitox', to: '/about' },
 ])
 

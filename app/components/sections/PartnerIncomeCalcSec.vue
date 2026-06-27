@@ -111,6 +111,11 @@
             />
           </label>
 
+          <div class="partner-calc-sec__result-box partner-calc-sec__result-box--mob">
+            <p class="partner-calc-sec__result-value">{{ formattedIncome }}</p>
+            <p class="partner-calc-sec__result-label">Доход от сделки</p>
+          </div>
+
           <div class="partner-calc-sec__actions">
             <button type="submit" class="app-btn partner-calc-sec__btn">Рассчитать</button>
 
