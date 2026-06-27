@@ -91,42 +91,6 @@
   
 }
 
-@media (max-width: 1200px) {
-  .crypto-hero-sec {
-    min-height: auto;
-
-    &::after {
-      display: none;
-    }
-  }
-
-  .crypto-hero-sec__img {
-    position: relative;
-    top: auto;
-    right: auto;
-    width: min(100%, 420px);
-    margin-top: 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .crypto-hero-sec__inner {
-    padding: 30px 0 60px;
-  }
-
-  .crypto-hero-sec__title {
-    font-size: 48px;
-  }
-
-  .crypto-hero-sec__text {
-    font-size: 16px;
-  }
-
-  .crypto-hero-sec__btn {
-    width: 100%;
-    min-width: 0;
-  }
-}
 
 .exchange-calc-sec {
   padding: 116px 0 0;
@@ -419,39 +383,12 @@
   margin-top: auto;
 }
 
-@media (max-width: 1200px) {
-  .exchange-calc-sec__layout {
-    flex-direction: column;
-  }
 
-  .exchange-calc-sec__sidebar {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .exchange-calc-sec {
-    padding-top: 80px;
-  }
-
-  .exchange-calc-sec__title {
-    font-size: 28px;
-  }
-
-  .exchange-calc-sec__tabs {
-    flex-direction: column;
-    border-radius: 20px;
-  }
-
-  .exchange-calc-sec__row--2 {
-    grid-template-columns: 1fr;
-  }
-}
 
 .exchange-benefits-sec {
   padding: 80px 0;
   background: $bg-section;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .exchange-benefits-sec__title {
@@ -637,41 +574,7 @@
   min-width: 238px;
 }
 
-@media (max-width: 1200px) {
-  .exchange-benefits-sec__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 
-  .exchange-benefits-sec__card,
-  .exchange-benefits-sec__card--wide {
-    grid-column: span 1;
-  }
-
-  .exchange-benefits-sec__decor {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin: 0 auto 20px;
-  }
-
-  .exchange-benefits-sec__cols {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .exchange-benefits-sec {
-    padding: 60px 0;
-  }
-
-  .exchange-benefits-sec__title {
-    font-size: 40px;
-  }
-
-  .exchange-benefits-sec__grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .exchange-clients-sec {
   padding: 80px 0;
@@ -744,21 +647,77 @@
   color: $gray-83;
 }
 
-@media (max-width: 992px) {
-  .exchange-clients-sec__card {
-    flex-direction: column;
+.exchange-clients-sec__nav {
+  display: none;
+}
+
+.exchange-clients-sec__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: $gray;
+  line-height: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+    pointer-events: none;
   }
 
-  .exchange-clients-sec__aside {
-    flex: none;
-    max-width: none;
-    width: 100%;
+  &:hover:not(:disabled) {
+    opacity: 0.85;
   }
 
-  .exchange-clients-sec__text {
-    padding: 0;
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 }
+
+.exchange-clients-sec__slider-wrap {
+  display: none;
+}
+
+.exchange-clients-sec__slider {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+
+  swiper-slide {
+    height: auto;
+  }
+}
+
+.exchange-clients-sec__pagination {
+  display: none;
+}
+
+.exchange-clients-sec__dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #CDD3D7;
+  cursor: pointer;
+  transition: background 0.2s ease, width 0.2s ease, height 0.2s ease;
+
+  &.is-active {
+    width: 16px;
+    height: 16px;
+    background: $gray;
+  }
+}
+
+
 
 
 .exchange-process-sec {
@@ -839,29 +798,6 @@
   color: $gray-83;
 }
 
-@media (max-width: 1200px) {
-  .exchange-process-sec__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .exchange-process-sec {
-    padding: 60px 0;
-  }
-
-  .exchange-process-sec__title {
-    font-size: 40px;
-  }
-
-  .exchange-process-sec__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .exchange-process-sec__num {
-    margin-bottom: 24px;
-  }
-}
 
 .exchange-seo-sec {
   padding: 100px 0;
@@ -893,12 +829,487 @@
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .exchange-seo-sec {
+
+
+
+@media only screen and (max-width: 1150px) {
+  .crypto-hero-sec__title{
+    font-size: 55px;
+    margin-bottom: 40px;
+  }
+  .crypto-hero-sec__text{
+    font-size: 20px;
+  }
+  .crypto-hero-sec__img{
+    width: 350px;
+    top: 65px;
+    right: 0;
+  }
+  .crypto-hero-sec__content{
+    max-width: 500px;
+  }
+  .crypto-hero-sec__inner{
+    padding: 40px 0 80px 0;
+  }
+  .crypto-hero-sec{
+    min-height: 0;
+  }
+  .exchange-calc-sec{
     padding: 60px 0;
   }
-
-  .exchange-seo-sec__title {
+  .exchange-calc-sec__form-card{
+    width: calc(50% -  10px);
+    padding: 25px;
+  }
+  .exchange-calc-sec__sidebar{
+    width: calc(50% -  10px);
+    padding: 25px;
+  }
+  .exchange-calc-sec__tab{
+    font-size: 14px;
+    line-height: 1;
+    padding: 10px 12px;
+  }
+  .exchange-benefits-sec{
+    padding: 60px 0;
+  }
+  .exchange-benefits-sec__title{
     font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .exchange-benefits-sec__card-title{
+    font-size: 16px;
+  }
+  .exchange-benefits-sec__card-text{
+    font-size: 14px;
+  }
+  .exchange-benefits-sec__list li{
+    font-size: 14px;
+  }
+  .exchange-benefits-sec__fiat-list li{
+    font-size: 14px;
+  }
+  .exchange-benefits-sec__cluster-text{
+    font-size: 14px;
+  }
+  .exchange-benefits-sec__card-icon{
+    width: 30px;
+    height: 30px;
+    img{
+      width: 25px;
+    }
+  }
+
+  .exchange-benefits-sec__card{
+    padding: 20px;
+  }
+  .exchange-benefits-sec__decor{
+    width: 200px;
+    top: -60px;
+  }
+  .exchange-clients-sec{
+    padding: 60px 0;
+  }
+  .exchange-clients-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .exchange-clients-sec__aside-title{
+    font-size: 26px;
+  }
+  .exchange-clients-sec__aside{
+    width: 40%;
+  }
+  .exchange-clients-sec__text{
+    width: 60%;
+    padding-left: 30px;
+    margin-left: 0;
+  }
+
+  .exchange-process-sec{
+    padding: 60px 0;
+  }
+  .exchange-process-sec__title{
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  .exchange-process-sec__num{
+    margin-bottom: 30px;
+  }
+  .exchange-process-sec__card-title{
+    font-size: 16px;
+  }
+  .exchange-process-sec__card-text{
+    font-size: 13px;
+  }
+  .exchange-process-sec__head{
+    margin-bottom: 30px;
+  }
+  .exchange-seo-sec{
+    padding: 60px 0;
+  }
+  .exchange-seo-sec__title{
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  .exchange-seo-sec__text{
+    font-size: 14px;
+    max-width: 500px;
+  }
+ 
+}
+
+@media only screen and (max-width: 880px) {
+  .crypto-hero-sec__content{
+    max-width: 430px;
+  }
+  .crypto-hero-sec__title{
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .crypto-hero-sec__text{
+    font-size: 16px;
+    margin-bottom: 20px;
+    max-width: 350px;
+  }
+  .crypto-hero-sec__img{
+    width: 300px;
+  }
+  .exchange-calc-sec__title{
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .exchange-calc-sec__sidebar-title{
+    font-size: 16px;
+  }
+  .exchange-calc-sec__tab{
+    font-size: 12px;
+    padding: 7px;
+  }
+  .exchange-calc-sec__tabs{
+    margin-bottom: 20px;
+  }
+  .exchange-calc-sec__select{
+    min-height: 50px;
+    font-size: 14px;
+  }
+  .exchange-calc-sec__row{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+  }
+  .exchange-calc-sec__field{
+    width: 100%;
+  }
+  .exchange-calc-sec__select-wrap{
+    width: 100%;
+  }
+  .exchange-calc-sec__input-wrap{
+    width: 100%;
+  }
+  .exchange-calc-sec__input-wrap{
+    min-height: 50px;
+  }
+  .exchange-benefits-sec__title{
+    font-size: 36px;
+  }
+  .exchange-benefits-sec__decor{
+    width: 150px;
+  }
+  .exchange-clients-sec__title{
+    font-size: 36px;
+  }
+  .exchange-clients-sec__aside{
+    padding: 28px;
+  }
+  .exchange-clients-sec__aside-title{
+    font-size: 24px;
+  }
+  .exchange-clients-sec__text{
+    font-size: 14px;
+  }
+  .exchange-process-sec__title{
+    font-size: 36px;
+  }
+  .exchange-process-sec__grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .exchange-seo-sec__title{
+    font-size: 36px;
   }
 }
+
+@media only screen and (max-width: 760px) {
+  .crypto-hero-sec__inner{
+    padding-top: 25px;
+    padding-bottom: 40px;
+  }
+  .crypto-hero-sec__breadcrumbs{
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .crypto-hero-sec__title{
+    font-size: 40px;
+    margin-bottom: 26px;
+  }
+  .crypto-hero-sec__text{
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+  .crypto-hero-sec__content{
+    width: 100%;
+    max-width: 100%;
+  }
+  .crypto-hero-sec__btn{
+    width: 100%;
+    text-align: center;
+  }
+  .crypto-hero-sec__img{
+   display: block;
+   position: relative;
+   top: auto;
+   right: auto;
+   width: 100%;
+   margin-top: 20px;
+  }
+  .crypto-hero-sec::after{
+    width: 100%;
+    height: 250px;
+    left: 0;
+    bottom: 0;
+    right: auto;
+    top:auto
+  }
+  .exchange-calc-sec{
+    padding: 50px 0;
+  }
+  .exchange-calc-sec__layout{
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .exchange-calc-sec__form-card{
+    width: 100%;
+    padding: 20px 15px;
+  }
+  .exchange-calc-sec__sidebar{
+    width: 100%;
+  }
+
+  .exchange-calc-sec__tab{
+    font-size: 14px;
+    padding: 15px 26px;
+    background: #F6F7F8;
+   display: inline-block; 
+
+  }
+  .exchange-calc-sec__tab--active{
+    background: $gray;
+    color: $white;
+  }
+  .exchange-calc-sec__tabs{
+    background: none;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 0;
+    gap: 10px;
+    margin-bottom: 45px;
+  }
+  .exchange-calc-sec__select-wrap, .exchange-calc-sec__input-wrap, .exchange-calc-sec__textarea-wrap{
+    min-height: 45px;
+  }
+  .exchange-calc-sec__sidebar-title{
+    margin-bottom: 19px;
+    width: 100%;
+  }
+  .exchange-calc-sec__result-block{
+    width: calc(50% - 5px);
+  }
+  .exchange-calc-sec__result-block--accent{
+    width: 100%;
+  }
+  .exchange-calc-sec__sidebar{
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 20px 15px;
+    justify-content: space-between;
+  }
+  .exchange-calc-sec__result-value{
+    font-size: 14px;
+  }
+  .exchange-calc-sec__params{
+    width: 100%;
+  }
+  .exchange-calc-sec__params-row strong{
+    font-size: 14px;
+  }
+  .exchange-benefits-sec{
+    padding: 50px 0;
+  }
+  .exchange-benefits-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  .exchange-benefits-sec__grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .exchange-benefits-sec__card{
+    width: 100%;
+    padding: 15px 15px 30px 15px;
+    min-height: 0;
+
+    &:nth-child(2){
+      position: relative;
+
+      &::before{
+        content: '';
+        position: absolute;
+        right: -33px;
+        bottom: 54px;
+        width: 170px;
+        height: 141px;
+        background: url('../images/gr-16.png') no-repeat ;
+        background-size: cover;
+        background-position: center;
+        z-index: 1;
+      }
+    }
+  }
+  .exchange-benefits-sec__card-top{
+    margin-bottom: 30px;
+  }
+  .exchange-benefits-sec__cols{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .exchange-benefits-sec__cluster-title{
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .exchange-benefits-sec__col{
+    row-gap: 20px;
+  }
+  .exchange-benefits-sec__cluster{
+    &:last-child{
+      max-width: 200px;
+    }
+  }
+  .exchange-benefits-sec__decor{
+    display: none;
+  }
+  .exchange-benefits-sec__action{
+    margin-top: 30px;
+  }
+  .exchange-benefits-sec__action .app-client-btn{
+    width: 100%;
+    text-align: center;
+  }
+  .exchange-clients-sec{
+    padding: 50px 0;
+  }
+  .exchange-clients-sec__title{
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  .exchange-clients-sec__nav{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .exchange-clients-sec__arrow{
+    width: 35px;
+    height: 35px;
+  }
+  .exchange-clients-sec__list{
+    display: none;
+  }
+  .exchange-clients-sec__slider-wrap{
+    display: block;
+  }
+  .exchange-clients-sec__card--slide{
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+  }
+  .exchange-clients-sec__card--slide .exchange-clients-sec__aside{
+    width: 100%;
+    min-height: 0;
+    padding: 20px 15px;
+  }
+  .exchange-clients-sec__card--slide .exchange-clients-sec__aside-title{
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .exchange-clients-sec__card--slide .exchange-clients-sec__text{
+    width: 100%;
+    margin-left: 0;
+    padding: 15px 0 0;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .exchange-clients-sec__pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 25px;
+  }
+  .exchange-process-sec{
+    padding: 50px 0;
+  }
+  .exchange-process-sec__title{
+    font-size: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .exchange-process-sec__subtitle{
+    font-size: 14px;
+  }
+  .exchange-process-sec__head{
+    margin-bottom: 25px;
+  }
+  .exchange-process-sec__card{
+    width: 100%;
+    min-height: 0;
+  }
+  .exchange-process-sec__grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .exchange-process-sec__num{
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+  .exchange-process-sec__card-text{
+    max-width: 250px;
+    font-size: 14px;
+  }
+  .exchange-seo-sec{
+    padding: 50px 0;
+  }
+  .exchange-seo-sec__title{
+    font-size: 30px;
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  .exchange-seo-sec__text{
+    font-size: 14px;
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 365px) {
+
+}
+
