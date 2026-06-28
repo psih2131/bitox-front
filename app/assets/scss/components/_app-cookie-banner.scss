@@ -48,11 +48,12 @@ width: 440px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 760px) {
   .cookie-banner {
     right: 16px;
     left: 16px;
     bottom: 16px;
     max-width: none;
+    width: calc(100% - 32px);
   }
 }

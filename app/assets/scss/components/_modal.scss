@@ -166,15 +166,7 @@
   padding: 12px 24px;
 }
 
-@media (max-width: 768px) {
-  .consultation-modal {
-    padding: 28px 20px;
-  }
 
-  .consultation-modal__title {
-    font-size: 28px;
-  }
-}
 
 .form-result-modal {
   position: relative;
@@ -246,4 +238,26 @@
 .form-result-modal__btn {
   width: 100%;
   min-height: 55px;
+}
+
+
+@media (max-width: 760px) {
+  .consultation-modal {
+    padding: 28px 20px;
+  }
+
+  .consultation-modal__title {
+    font-size: 25px;
+  }
+  .consultation-modal__subtitle{
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .consultation-modal__control{
+    min-height: 50px;
+  }
+  .consultation-modal__submit{
+    min-height: 50px;
+  }
+  
 }
