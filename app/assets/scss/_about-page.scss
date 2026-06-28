@@ -769,6 +769,12 @@ $about-life-row-height: calc((#{$about-life-large-height} - #{$about-life-grid-g
 }
 
 @media only screen and (max-width: 365px) {
- 
+  .about-hero-sec__title{
+    font-size: 36px;
+  }
+  .about-hero-sec__globe{
+    width: 90px;
+    bottom: 140px;
+  }
 
 }

@@ -151,36 +151,71 @@
   color: rgba(49, 49, 50, 0.83);
 }
 
-@media (max-width: 1200px) {
-  .contacts-accounts-sec__row {
-    flex-direction: column;
+
+
+@media only screen and (max-width: 1150px) {
+  .contacts-accounts-sec__title{
+    font-size: 55px;
+  }
+  .contacts-accounts-sec__badge {
+    left: 174px;
+    top: -2px;
+  }
+  .contacts-accounts-sec{
+    padding-bottom: 60px;
   }
 
-  .contacts-accounts-sec__main {
-    width: 100%;
-    max-width: none;
-  }
+}
 
-  .contacts-accounts-sec__card {
-    width: 100%;
-    max-width: 400px;
+@media only screen and (max-width: 880px) {
+  .contacts-accounts-sec__title{
+    font-size: 40px;
+  }
+  .contacts-accounts-sec__badge{
+    font-size: 12px;
+    padding: 10px 12px;
+    left: 150px;
+    top: -10px;
+  }
+  .contacts-accounts-sec__row{
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .contacts-accounts-sec__breadcrumbs{
+    font-size: 14px;
   }
 }
 
-@media (max-width: 768px) {
-  .contacts-accounts-sec {
-    padding: 30px 0 60px;
+@media only screen and (max-width: 760px) {
+  .contacts-accounts-sec__main{
+    width: 100%;
   }
+  .contacts-accounts-sec__row{
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .contacts-accounts-sec{
+    padding-top: 25px;
+    padding-bottom: 50px;
+  }
+  .contacts-accounts-sec__breadcrumbs{
+    margin-bottom: 20px;
+  }
+  .contacts-accounts-sec__badge{
+    left: 108px;
+    top: -2px;
+    backdrop-filter: blur(2px);
+  }
+  .contacts-accounts-sec__title-wrap{
+    margin-bottom: 25px;
+  }
+  .contacts-accounts-sec__card{
+    width: 100%;
+  }
+ 
+}
 
-  .contacts-accounts-sec__title {
-    font-size: 40px;
-  }
+@media only screen and (max-width: 365px) {
 
-  .contacts-accounts-sec__text {
-    font-size: 16px;
-  }
-
-  .contacts-accounts-sec__card {
-    max-width: none;
-  }
 }
