@@ -39,6 +39,22 @@
               :alt="mapData.ikonka_karty?.alt || 'Маркер'"
               class="y-map__marker-icon"
             />
+            <svg
+              v-else
+              class="y-map__marker-pin"
+              width="32"
+              height="42"
+              viewBox="0 0 32 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M16 0C8.26801 0 2 6.26801 2 14C2 24.5 16 42 16 42C16 42 30 24.5 30 14C30 6.26801 23.732 0 16 0Z"
+                fill="#FFDD2D"
+              />
+              <circle cx="16" cy="14" r="6" fill="#313132" />
+            </svg>
           </div>
         </yandex-map-marker>
       </yandex-map-clusterer>
@@ -6673,4 +6689,31 @@
   //HOOKS
   onMounted(() => {});
   </script>
+
+  <style scoped lang="scss">
+  .y-map__marker-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -100%);
+  }
+
+  .y-map__marker-pin {
+    margin-top: -42px;
+    margin-left: -16px;
+  }
+
+  .y-map__marker-icon,
+  .y-map__marker-pin {
+    display: block;
+    width: 32px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(49, 49, 50, 0.25));
+  }
+
+  .y-map__marker-icon {
+    max-height: 42px;
+    object-fit: contain;
+  }
+  </style>
   

@@ -36,7 +36,7 @@
       </div>
 
       <div v-if="buttonText" class="how-start-sec__btn-wrap">
-        <AppButton>{{ buttonText }}</AppButton>
+        <AppButton @click="openConsultationModal">{{ buttonText }}</AppButton>
       </div>
     </div>
   </section>
@@ -44,6 +44,15 @@
 
 <script setup>
 import gsap from 'gsap'
+
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const modalStore = useModalStore()
+
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const props = defineProps({
   section: {

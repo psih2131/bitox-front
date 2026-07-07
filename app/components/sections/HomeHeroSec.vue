@@ -67,7 +67,8 @@
             <span class="home-hero-sec__deals-dot" />
             Общая сумма сделок за сегодня
           </p>
-          <p v-if="totalAmountToday" class="home-hero-sec__deals-value">{{ totalAmountToday }}</p>
+
+          <p class="home-hero-sec__deals-value">{{ totalAmountToday }}</p>
         </div>
       </div>
     </div>
@@ -106,7 +107,8 @@ const heroBadge2 = computed(() => props.section?.title_short_text_2 ?? 'Обме
 const heroSubtitle = computed(
   () => props.section?.subtitle ?? 'Работаем там где банки бессильны. В любую точку мира от 0,5%',
 )
-const totalAmountToday = computed(() => props.section?.total_amount_today ?? '2.000.000 $')
+
+const { totalAmountToday } = useDailyDealsCounter()
 
 const statsCards = computed(() => {
   if (!props.section?.home_hero_card_items?.length) return defaultStatsCards

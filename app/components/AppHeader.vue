@@ -72,7 +72,10 @@
                 <div class="container">
                   <div
                     class="header__mega-inner"
-                    :class="{ 'header__mega-inner--single': item.mega.length === 1 }"
+                    :class="{
+                      'header__mega-inner--single': item.mega.length === 1 && !item.mega[0]?.columns,
+                      'header__mega-inner--wide': item.mega.length === 1 && item.mega[0]?.columns,
+                    }"
                   >
                     <div
                       v-for="card in item.mega"
@@ -81,7 +84,11 @@
                     >
                       <p v-if="card.title" class="header__mega-card-title">{{ card.title }}</p>
 
-                      <ul v-if="card.links.length" class="header__mega-list">
+                      <ul
+                        v-if="card.links.length"
+                        class="header__mega-list"
+                        :class="{ [`header__mega-list--cols-${card.columns}`]: card.columns }"
+                      >
                         <li v-for="link in card.links" :key="link.key">
                           <NuxtLink :to="link.to" class="header__mega-link">
                             {{ link.label }}
@@ -91,7 +98,7 @@
                     </div>
 
                     <div class="header__mega-cta">
-                      <AppBannerBtn type="button" @click="openConsultationModal">
+                      <AppBannerBtn type="button" @click="openCallbackModal">
                         Заказать консультацию
                       </AppBannerBtn>
                       <p class="header__mega-cta-text">
@@ -386,6 +393,7 @@ const privateClientsMega = computed(() => {
       id: 'private-2',
       title: 'Переводы в страны',
       links: transfersLinks,
+      columns: 2,
     },
   ]
 })
@@ -410,10 +418,31 @@ const exchangeMega = computed(() => {
   ]
 })
 
+const transfersMega = computed(() => {
+  const transfersPages = transfersPagesResponse.value?.data ?? []
+
+  const links = transfersPages.map((page) => ({
+    key: page.documentId,
+    label: page.title,
+    to: `/transfers/${page.slug}`,
+  }))
+
+  if (!links.length) return []
+
+  return [
+    {
+      id: 'transfers-1',
+      title: 'Переводы в страны',
+      links,
+      columns: 4,
+    },
+  ]
+})
+
 const navItems = computed(() => [
   { label: 'Бизнесу', to: '/business', mega: businessMega.value },
   { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
-  { label: 'Международные расчеты', to: '/transfers' },
+  { label: 'Международные расчеты', to: '/transfers', mega: transfersMega.value },
   { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
   { label: 'о Bitox', to: '/about' },
 ])

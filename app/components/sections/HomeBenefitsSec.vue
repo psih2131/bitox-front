@@ -46,6 +46,9 @@ import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
 import gr3 from '~/assets/images/gr-3.png'
 
+
+
+
 gsap.registerPlugin(ScrollTrigger)
 
 const urlApi = useRuntimeConfig().public.apiUrl

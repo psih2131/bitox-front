@@ -1,7 +1,7 @@
 <template>
   <main v-if="transfer" class="service-page">
     <ServiceHeroSec v-if="transfer.service_hero_sec" :section="transfer.service_hero_sec" />
-    <HomeStatsSec v-if="transfer.service_stats_sec" :section="transfer.service_stats_sec" />
+    <HomeStatsSec />
     <ServiceInvoicesSec v-if="transfer.services_invoice_sec" :section="transfer.services_invoice_sec" />
     <ServiceEconomySec />
     <HomeBenefitsSec />
@@ -30,7 +30,6 @@ const urlApi = useRuntimeConfig().public.apiUrl
 
 const populate = [
   'populate[service_hero_sec][populate]=image',
-  'populate[service_stats_sec][populate]=stats_element',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_image]=true',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_element_list_items]=true',
   'populate[service_county_sec_v2]=true',

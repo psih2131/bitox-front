@@ -17,8 +17,8 @@
         </h2>
 
         <div class="cta-sec__actions">
-          <AppClientBtn>{{ section.button_text_yellow }}</AppClientBtn>
-          <AppConsultBtn>{{ section.button_text_white }}</AppConsultBtn>
+          <AppClientBtn @click="openConsultationModal">{{ section.button_text_yellow }}</AppClientBtn>
+          <AppConsultBtn @click="openCallbackModal">{{ section.button_text_white }}</AppConsultBtn>
         </div>
       </div>
     </div>
@@ -27,7 +27,22 @@
 
 <script setup>
 import gsap from 'gsap'
-import ctaImage from '~/assets/images/gr-4.png'
+import fallbackCtaImage from '~/assets/images/gr-4.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const modalStore = useModalStore()
+const urlApi = useRuntimeConfig().public.apiUrl
+
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
+
+function openCallbackModal() {
+  modalStore.open(MODAL_NAMES.callback)
+}
+
 
 const props = defineProps({
   section: {
@@ -37,6 +52,10 @@ const props = defineProps({
 })
 
 const sectionRef = ref(null)
+
+const ctaImage = computed(() => (
+  getStrapiMediaUrl(props.section?.image, urlApi) || fallbackCtaImage
+))
 
 const sectionTitleLines = computed(() => (
   props.section.title ? props.section.title.split('\n') : []

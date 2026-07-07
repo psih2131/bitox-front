@@ -2,8 +2,8 @@
     <main class="exchange-page">
       <CryptoExchangeHeroSec v-if="exchange?.exchange_hero_sec" :section="exchange.exchange_hero_sec" />
       <CryptoExchangeCalcSec />
-      <HomeStatsSec v-if="exchange?.exchange_stats_sec" :section="exchange.exchange_stats_sec" />
-      <ExchangeBenefitsSec />
+      <HomeStatsSec />
+      <ExchangeBenefitsSec v-if="exchange?.benefits_sec" :section="exchange.benefits_sec" />
       <ExchangeClientsSec v-if="exchange?.exchange_client_use_sec" :section="exchange.exchange_client_use_sec" />
       <ExchangeProcessSec v-if="exchange?.exchange_sec_staps" :section="exchange.exchange_sec_staps" />
       <HomeReviewsSec />
@@ -21,7 +21,7 @@
   
   const exchangePopulate = [
     'populate[exchange_hero_sec][populate]=image_section',
-    'populate[exchange_stats_sec][populate]=stats_element',
+    'populate[benefits_sec][populate]=block_5_list',
     'populate[exchange_client_use_sec][populate]=element',
     'populate[exchange_sec_staps][populate][staps_elements]=true',
     'populate[exchange_sec_staps][populate][exchange_media_about_us][populate][posts][populate]=logo',

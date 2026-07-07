@@ -1,7 +1,7 @@
 <template>
   <main v-if="business" class="service-page">
     <ServiceHeroSec v-if="business.service_hero_sec" :section="business.service_hero_sec" />
-    <HomeStatsSec v-if="business.service_stats_sec" :section="business.service_stats_sec" />
+    <HomeStatsSec />
     <ServiceInvoicesSec v-if="business.services_invoice_sec" :section="business.services_invoice_sec" />
     <ServiceEconomySec />
     <HomeBenefitsSec />
@@ -29,7 +29,6 @@ const urlApi = useRuntimeConfig().public.apiUrl
 
 const populate = [
   'populate[service_hero_sec][populate]=image',
-  'populate[service_stats_sec][populate]=stats_element',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_image]=true',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_element_list_items]=true',
   'populate[service_county_sec_v2]=true',

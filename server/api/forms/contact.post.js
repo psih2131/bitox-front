@@ -4,7 +4,6 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
   const firstName = body?.firstName?.trim()
-  const lastName = body?.lastName?.trim()
   const phone = body?.phone?.trim()
   const consent = Boolean(body?.consent)
 
@@ -25,8 +24,7 @@ export default defineEventHandler(async (event) => {
   const message = [
     '<b>Новая заявка: Стать клиентом</b>',
     '',
-    `<b>Имя:</b> ${escapeHtml(firstName || '—')}`,
-    `<b>Фамилия:</b> ${escapeHtml(lastName || '—')}`,
+    `<b>Как обращаться:</b> ${escapeHtml(firstName || '—')}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
     `<b>Согласие на обработку ПД:</b> ${formatConsent(consent)}`,
   ].join('\n')

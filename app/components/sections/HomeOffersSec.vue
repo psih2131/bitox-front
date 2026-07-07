@@ -39,7 +39,7 @@
                 <h3 v-if="slide.title" class="offers-sec__slide-title" v-html="slide.title"></h3>
                 <p v-if="slide.text" class="offers-sec__slide-text" v-html="slide.text"></p>
                 <a v-if="slide.link" :href="slide.link" class="app-banner-btn">{{ slide.btn }}</a>
-                <AppBannerBtn v-else>{{ slide.btn }}</AppBannerBtn>
+                <AppBannerBtn v-else @click="openConsultationModal">{{ slide.btn }}</AppBannerBtn>
               </div>
 
               <div class="offers-sec__slide-img">
@@ -58,6 +58,9 @@ import gsap from 'gsap'
 import AppBannerBtn from '~/components/buttons/AppBannerBtn.vue'
 import banner1 from '~/assets/images/banner-1.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const modalStore = useModalStore()
 
 const props = defineProps({
   section: {
@@ -65,6 +68,10 @@ const props = defineProps({
     required: true,
   },
 })
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const apiUrl = useRuntimeConfig().public.apiUrl
 

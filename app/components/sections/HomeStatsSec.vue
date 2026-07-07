@@ -1,5 +1,5 @@
 <template>
-  <section class="stats-sec">
+  <section v-if="stats.length" class="stats-sec">
     <div class="container">
       <div ref="statsGridRef" class="stats-sec__grid">
         <div v-for="item in stats" :key="item.id ?? item.value" class="stats-sec__item">
@@ -14,26 +14,19 @@
 <script setup>
 import gsap from 'gsap'
 
-const props = defineProps({
-  section: {
-    type: Object,
-    default: null,
-  },
-})
-
+const urlApi = useRuntimeConfig().public.apiUrl
 const statsGridRef = ref(null)
 
-const defaultStats = [
-  { value: '70+', text: 'Платежных компаний' },
-  { value: '20000+', text: 'Бизнесов и частных лиц доверили нам свои платежи' },
-  { value: 'от 2 часов', text: 'Оплатим быстро — даже в критически сжатые сроки' },
-  { value: '99%', text: 'Платежей доходят без задержек' },
-]
+const { data: statsResponse } = await useFetch(
+  `${urlApi}/api/stats-component?populate[stats_section][populate]=stats_element`,
+)
 
 const stats = computed(() => {
-  if (!props.section?.stats_element?.length) return defaultStats
+  const items = statsResponse.value?.data?.stats_section?.stats_element
 
-  return props.section.stats_element.map((item) => ({
+  if (!items?.length) return []
+
+  return items.map((item) => ({
     id: item.id,
     value: item.title,
     text: item.subtitle,

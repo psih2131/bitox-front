@@ -14,8 +14,8 @@
           </div>
 
           <div class="service-economy-sec__actions">
-            <AppClientBtn>{{ section.button_title_yellow || 'Стать клиентом' }}</AppClientBtn>
-            <AppConsultBtn>{{ section.button_title_white || 'Бесплатная консультация' }}</AppConsultBtn>
+            <AppClientBtn @click="openConsultationModal">{{ section.button_title_yellow || 'Стать клиентом' }}</AppClientBtn>
+            <AppConsultBtn @click="openCallbackModal">{{ section.button_title_white || 'Бесплатная консультация' }}</AppConsultBtn>
           </div>
         </div>
 
@@ -47,6 +47,10 @@
 import gsap from 'gsap'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const modalStore = useModalStore()
+
 const apiUrl = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
 
@@ -64,6 +68,15 @@ const features = computed(() =>
     image: getStrapiMediaUrl(item.image, apiUrl),
   })),
 )
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
+
+function openCallbackModal() {
+  modalStore.open(MODAL_NAMES.callback)
+}
+
 
 let sectionAnimation
 

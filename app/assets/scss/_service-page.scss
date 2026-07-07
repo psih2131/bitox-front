@@ -629,6 +629,10 @@
   display: block;
   flex: 1;
   min-width: 0;
+
+  &--full {
+    width: 100%;
+  }
 }
 
 .service-contact-sec__input {

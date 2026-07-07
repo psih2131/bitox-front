@@ -1,7 +1,7 @@
 <template>
   <main v-if="service" class="service-page">
     <ServiceHeroSec v-if="service.service_hero_sec" :section="service.service_hero_sec" />
-    <HomeStatsSec v-if="service.service_stats_sec" :section="service.service_stats_sec" />
+    <HomeStatsSec />
     <ServiceInvoicesSec v-if="service.services_invoice_sec" :section="service.services_invoice_sec" />
     <ServiceEconomySec />
     <HomeBenefitsSec />
@@ -28,7 +28,6 @@ const serviceId = computed(() => route.query.id)
 
 const populate = [
   'populate[service_hero_sec][populate]=image',
-  'populate[service_stats_sec][populate]=stats_element',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_image]=true',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_element_list_items]=true',
   'populate[services_countries_list][populate][countries_list][populate]=image',

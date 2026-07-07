@@ -159,11 +159,13 @@
   z-index: 10;
   width: 198px;
   height: auto;
+  display: none;
 }
 
 .home-hero-sec__decor-coin {
   position: absolute;
   height: auto;
+  display: none;
 
   &--1 {
     top: 240px;
@@ -1075,13 +1077,15 @@ a.countries-sec__pill {
 
     padding: 17px 35px;
     border-radius: 100px;
-    background: $white;
+    background: rgba($white, 0.55);
     font-weight: 700;
     font-size: 14px;
     line-height: 1.09;
     color: $gray;
 
-   
+    &.is-active {
+      background: $white;
+    }
   }
 
   &--platform {
@@ -1136,6 +1140,10 @@ a.countries-sec__pill {
   flex-wrap: nowrap;
   transition: transform 0.5s ease;
   will-change: transform;
+
+  &.is-resetting {
+    transition: none;
+  }
 }
 
 .home-reviews-sec__arrow {

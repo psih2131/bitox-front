@@ -104,7 +104,7 @@
     </div>
 
     <div class="container countries-sec__bottom">
-      <AppBannerBtn>{{ buttonTitle }}</AppBannerBtn>
+      <AppBannerBtn @click="openCallbackModal">{{ buttonTitle }}</AppBannerBtn>
     </div>
   </section>
 </template>
@@ -119,6 +119,13 @@ import flag4 from '~/assets/images/flags/x4.jpg'
 import flag5 from '~/assets/images/flags/x5.jpg'
 import flag6 from '~/assets/images/flags/x6.jpg'
 import { mapStrapiInvoices } from '~/utils/strapi'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const modalStore = useModalStore()
+
+function openCallbackModal() {
+  modalStore.open(MODAL_NAMES.callback)
+}
 
 gsap.registerPlugin(ScrollTrigger)
 

@@ -6,46 +6,32 @@
       <div class="home-reviews-sec__filters">
         <a
           href="#"
-          class="home-reviews-sec__filter home-reviews-sec__filter--pill is-active"
-          @click.prevent
+          class="home-reviews-sec__filter home-reviews-sec__filter--pill"
+          :class="{ 'is-active': activeCategoryId === null }"
+          @click.prevent="selectCategory(null)"
         >
           Все отзывы
         </a>
 
         <div class="home-reviews-sec__filter-platforms">
-          <template v-for="filter in platformFilters" :key="filter.id">
-            <a
-              v-if="filter.href"
-              :href="filter.href"
-              class="home-reviews-sec__filter home-reviews-sec__filter--platform"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                v-if="filter.icon"
-                :src="filter.icon"
-                :alt="filter.alt"
-                width="34"
-                height="34"
-                class="home-reviews-sec__filter-icon"
-              />
-              <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
-            </a>
-            <span
-              v-else
-              class="home-reviews-sec__filter home-reviews-sec__filter--platform"
-            >
-              <img
-                v-if="filter.icon"
-                :src="filter.icon"
-                :alt="filter.alt"
-                width="34"
-                height="34"
-                class="home-reviews-sec__filter-icon"
-              />
-              <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
-            </span>
-          </template>
+          <a
+            v-for="filter in platformFilters"
+            :key="filter.id"
+            href="#"
+            class="home-reviews-sec__filter home-reviews-sec__filter--platform"
+            :class="{ 'is-active': activeCategoryId === filter.id }"
+            @click.prevent="selectCategory(filter.id)"
+          >
+            <img
+              v-if="filter.icon"
+              :src="filter.icon"
+              :alt="filter.alt"
+              width="34"
+              height="34"
+              class="home-reviews-sec__filter-icon"
+            />
+            <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
+          </a>
         </div>
       </div>
 
@@ -68,15 +54,18 @@
       <div class="container">
         <div ref="viewportRef" class="home-reviews-sec__viewport">
           <div
+            ref="trackRef"
             class="home-reviews-sec__track"
+            :class="{ 'is-resetting': !isTransitionEnabled }"
             :style="{
               gap: `${gap}px`,
               transform: `translateX(-${offset}px)`,
             }"
+            @transitionend="onTrackTransitionEnd"
           >
             <article
-              v-for="review in apiReviews"
-              :key="review.id"
+              v-for="review in loopReviews"
+              :key="review.loopKey"
               class="home-reviews-sec__card"
               :style="{ width: `${slideWidth}px` }"
             >
@@ -151,7 +140,7 @@
           :key="page"
           type="button"
           class="home-reviews-sec__dot"
-          :class="{ 'is-active': currentIndex === page - 1 }"
+          :class="{ 'is-active': logicalIndex === page - 1 }"
           :aria-label="`Слайд ${page}`"
           @click="goToPage(page - 1)"
         />
@@ -185,11 +174,14 @@ const [{ data: reviewsResponse }, { data: categoriesResponse }] = await Promise.
 
 const sectionRef = ref(null)
 const viewportRef = ref(null)
+const trackRef = ref(null)
+const activeCategoryId = ref(null)
 const currentIndex = ref(0)
 const visibleCount = ref(4)
 const slideWidth = ref(0)
 const gap = ref(18)
 const offset = ref(0)
+const isTransitionEnabled = ref(true)
 
 const defaultPlatformFilters = [
   { id: '2gis', label: '5.0', href: '#', icon: logo2gis, alt: '2ГИС' },
@@ -204,6 +196,61 @@ const platformFilters = computed(() => {
 })
 
 const apiReviews = computed(() => mapStrapiReviews(reviewsResponse.value?.data ?? [], urlApi))
+
+const filteredReviews = computed(() => {
+  if (activeCategoryId.value === null) return apiReviews.value
+
+  return apiReviews.value.filter((review) => review.categoryId === activeCategoryId.value)
+})
+
+const baseLength = computed(() => filteredReviews.value.length)
+
+const canLoop = computed(() => baseLength.value > visibleCount.value)
+
+const loopReviews = computed(() => {
+  const reviews = filteredReviews.value
+
+  if (!reviews.length) return []
+
+  if (!canLoop.value) {
+    return reviews.map((review) => ({
+      ...review,
+      loopKey: String(review.id),
+    }))
+  }
+
+  return [0, 1, 2].flatMap((copy) => (
+    reviews.map((review) => ({
+      ...review,
+      loopKey: `${review.id}-${copy}`,
+    }))
+  ))
+})
+
+function getSlideStep() {
+  return slideWidth.value + gap.value
+}
+
+function resetSliderPosition() {
+  if (canLoop.value) {
+    currentIndex.value = baseLength.value
+  } else {
+    currentIndex.value = 0
+  }
+
+  isTransitionEnabled.value = false
+  offset.value = currentIndex.value * getSlideStep()
+
+  nextTick(() => {
+    isTransitionEnabled.value = true
+  })
+}
+
+function selectCategory(categoryId) {
+  activeCategoryId.value = categoryId
+  resetSliderPosition()
+  nextTick(updateSlider)
+}
 
 function pluralizeReviews(count) {
   const mod10 = count % 10
@@ -226,7 +273,15 @@ function pluralizeSources(count) {
 }
 
 const reviewsCountText = computed(() => {
-  const count = apiReviews.value.length
+  const count = filteredReviews.value.length
+
+  if (activeCategoryId.value !== null) {
+    const filter = platformFilters.value.find((item) => item.id === activeCategoryId.value)
+    const sourceName = filter?.alt || 'источника'
+
+    return `${count} ${pluralizeReviews(count)} из ${sourceName}`
+  }
+
   const sources = platformFilters.value.length
 
   return `${count} ${pluralizeReviews(count)} из ${sources} ${pluralizeSources(sources)}`
@@ -234,10 +289,17 @@ const reviewsCountText = computed(() => {
 
 const reviewsCountStore = computed(() => store.globalInfo?.reviews_counter_text || reviewsCountText.value)
 
-const maxIndex = computed(() => Math.max(0, apiReviews.value.length - visibleCount.value))
-const isBeginning = computed(() => currentIndex.value === 0)
-const isEnd = computed(() => currentIndex.value >= maxIndex.value)
-const paginationCount = computed(() => maxIndex.value + 1)
+const maxIndex = computed(() => Math.max(0, baseLength.value - visibleCount.value))
+const logicalIndex = computed(() => (
+  canLoop.value ? currentIndex.value - baseLength.value : currentIndex.value
+))
+const isBeginning = computed(() => !canLoop.value && currentIndex.value === 0)
+const isEnd = computed(() => !canLoop.value && currentIndex.value >= maxIndex.value)
+const paginationCount = computed(() => (
+  canLoop.value
+    ? Math.max(1, baseLength.value - visibleCount.value + 1)
+    : maxIndex.value + 1
+))
 
 function getVisibleCount(width) {
   if (width >= 992) return 4
@@ -261,29 +323,64 @@ function updateSlider() {
 
   const count = visibleCount.value
   slideWidth.value = (width - gap.value * (count - 1)) / count
-  offset.value = currentIndex.value * (slideWidth.value + gap.value)
 
-  if (currentIndex.value > maxIndex.value) {
+  if (!canLoop.value && currentIndex.value > maxIndex.value) {
     currentIndex.value = maxIndex.value
-    offset.value = currentIndex.value * (slideWidth.value + gap.value)
   }
+
+  offset.value = currentIndex.value * getSlideStep()
+}
+
+function normalizeLoopIndex() {
+  const len = baseLength.value
+
+  if (!canLoop.value || !len) return
+
+  if (currentIndex.value >= len * 2) {
+    isTransitionEnabled.value = false
+    currentIndex.value -= len
+    offset.value = currentIndex.value * getSlideStep()
+    nextTick(() => {
+      isTransitionEnabled.value = true
+    })
+  } else if (currentIndex.value < len) {
+    isTransitionEnabled.value = false
+    currentIndex.value += len
+    offset.value = currentIndex.value * getSlideStep()
+    nextTick(() => {
+      isTransitionEnabled.value = true
+    })
+  }
+}
+
+function onTrackTransitionEnd(event) {
+  if (event.propertyName !== 'transform') return
+
+  normalizeLoopIndex()
 }
 
 function prev() {
   if (isBeginning.value) return
+
   currentIndex.value -= 1
-  offset.value = currentIndex.value * (slideWidth.value + gap.value)
+  offset.value = currentIndex.value * getSlideStep()
 }
 
 function next() {
   if (isEnd.value) return
+
   currentIndex.value += 1
-  offset.value = currentIndex.value * (slideWidth.value + gap.value)
+  offset.value = currentIndex.value * getSlideStep()
 }
 
 function goToPage(index) {
-  currentIndex.value = Math.min(index, maxIndex.value)
-  offset.value = currentIndex.value * (slideWidth.value + gap.value)
+  if (canLoop.value) {
+    currentIndex.value = baseLength.value + Math.min(index, paginationCount.value - 1)
+  } else {
+    currentIndex.value = Math.min(index, maxIndex.value)
+  }
+
+  offset.value = currentIndex.value * getSlideStep()
 }
 
 let reviewsAnimation
@@ -291,8 +388,16 @@ let resizeObserver
 
 onMounted(() => {
   updateSlider()
+  resetSliderPosition()
 
-  resizeObserver = new ResizeObserver(updateSlider)
+  resizeObserver = new ResizeObserver(() => {
+    const wasLooping = canLoop.value
+    updateSlider()
+
+    if (wasLooping !== canLoop.value) {
+      resetSliderPosition()
+    }
+  })
   if (viewportRef.value) {
     resizeObserver.observe(viewportRef.value)
   }

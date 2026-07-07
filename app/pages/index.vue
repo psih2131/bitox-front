@@ -2,7 +2,7 @@
   <main class="home-page">
     <HomeHeroSec v-if="home?.home_hero_sec" :section="home.home_hero_sec" />
 
-    <HomeStatsSec v-if="home?.home_stats_sec" :section="home.home_stats_sec" />
+    <HomeStatsSec />
 
     <HomeOffersSec v-if="home?.home_offers_banners_sec" :section="home.home_offers_banners_sec" />
 
@@ -33,7 +33,6 @@ const urlApi = useRuntimeConfig().public.apiUrl
 
 const populate = [
   'populate[home_hero_sec][populate]=home_hero_card_items',
-  'populate[home_stats_sec][populate]=stats_element',
   'populate[home_offers_banners_sec][populate][banners][populate]=banner_image',
   'populate[home_countries_sec]=true',
   'populate[home_platform_sec]=true',
@@ -41,7 +40,7 @@ const populate = [
   'populate[home_team_sec]=true',
   'populate[home_how_start_sec][populate][clusters][populate]=items',
   'populate[home_faq_sec][populate]=questions_list',
-  'populate[home_down_ctr_v1_sec]=true',
+  'populate[home_down_ctr_v1_sec][populate]=image',
   'populate[Seo][populate]=shareImage',
 ].join('&')
 

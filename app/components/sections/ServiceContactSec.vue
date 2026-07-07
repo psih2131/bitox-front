@@ -13,31 +13,18 @@
       </div>
 
       <form class="service-contact-sec__form" @submit.prevent="handleSubmit">
-        <div class="service-contact-sec__row">
-          <label class="service-contact-sec__field">
-            <input
-              v-model="firstName"
-              type="text"
-              class="service-contact-sec__input"
-              placeholder="Как к вам обращаться?"
-              autocomplete="given-name"
-              aria-label="Как к вам обращаться?"
-            />
-          </label>
+        <label class="service-contact-sec__field service-contact-sec__field--full">
+          <input
+            v-model="firstName"
+            type="text"
+            class="service-contact-sec__input"
+            placeholder="Как к вам обращаться?"
+            autocomplete="name"
+            aria-label="Как к вам обращаться?"
+          />
+        </label>
 
-          <label class="service-contact-sec__field">
-            <input
-              v-model="lastName"
-              type="text"
-              class="service-contact-sec__input"
-              placeholder="Как к вам обращаться?"
-              autocomplete="family-name"
-              aria-label="Как к вам обращаться?"
-            />
-          </label>
-        </div>
-
-        <label class="service-contact-sec__field">
+        <label class="service-contact-sec__field service-contact-sec__field--full">
           <input
             v-model="phone"
             type="tel"
@@ -77,7 +64,6 @@ const sectionRef = ref(null)
 const { isSubmitting, submit } = useFormSubmit()
 
 const firstName = ref('')
-const lastName = ref('')
 const phone = ref('')
 const consent = ref(false)
 
@@ -90,7 +76,6 @@ async function handleSubmit() {
 
   const success = await submit('/api/forms/contact', {
     firstName: firstName.value.trim(),
-    lastName: lastName.value.trim(),
     phone: phone.value.trim(),
     consent: consent.value,
   })
@@ -98,7 +83,6 @@ async function handleSubmit() {
   if (!success) return
 
   firstName.value = ''
-  lastName.value = ''
   phone.value = ''
   consent.value = false
 }

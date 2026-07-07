@@ -1,7 +1,7 @@
 <template>
   <main v-if="invoice" class="service-page">
     <ServiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" />
-    <HomeStatsSec v-if="invoice.service_stats_sec" :section="invoice.service_stats_sec" />
+    <HomeStatsSec />
     <ServiceInvoicesSec v-if="invoice.services_invoice_sec" :section="invoice.services_invoice_sec" />
     <ServiceEconomySec />
     <HomeBenefitsSec />
@@ -32,7 +32,6 @@ const slug = computed(() => route.params.id)
 
 const populate = [
   'populate[service_hero_sec][populate]=image',
-  'populate[service_stats_sec][populate]=stats_element',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_image]=true',
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_element_list_items]=true',
   'populate[service_county_sec_v2]=true',

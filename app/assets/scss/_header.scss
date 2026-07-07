@@ -191,6 +191,21 @@
     justify-content: space-between;
     gap: 40px;
   }
+
+  &--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 40px;
+    align-items: stretch;
+
+    .header__mega-card {
+      min-width: 0;
+    }
+
+    .header__mega-cta {
+      width: 260px;
+    }
+  }
 }
 
 .header__mega-card {
@@ -216,6 +231,24 @@
   margin: 0;
   padding: 0;
   list-style: none;
+
+  &--cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 24px;
+  }
+
+  &--cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 24px;
+  }
+
+  &--cols-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px 24px;
+  }
 }
 
 .header__mega-link {
