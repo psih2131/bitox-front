@@ -1,4 +1,5 @@
 <template>
+  <ClientOnly>
     <yandex-map
       v-if="mapData.karta_dolgota && mapData.karta_shirota"
       v-model="map"
@@ -14,12 +15,12 @@
       <yandex-map-default-scheme-layer :settings="{ customization }" />
       <yandex-map-default-features-layer />
   
-      <ClientOnly>
+      
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
         </yandex-map-controls>
         <template #fallback></template>
-      </ClientOnly>
+    
   
       <yandex-map-clusterer
         v-model="clusterer"
@@ -59,6 +60,8 @@
         </yandex-map-marker>
       </yandex-map-clusterer>
     </yandex-map>
+
+  </ClientOnly>
   </template>
   
   <script lang="ts" setup>
