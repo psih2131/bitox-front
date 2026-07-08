@@ -29,17 +29,7 @@ export default defineNuxtConfig({
           key: 'chatapp-widget',
           type: 'text/javascript',
           tagPosition: 'bodyClose',
-          innerHTML: `(function(w,d,u,j){
-            var s=d.createElement('script');s.defer=true;
-            s.onload = function () {
-              var s=d.createElement('script');
-              s.defer=true;s.src=j+'?'+(Date.now()/60000|0);
-              var h=d.getElementsByTagName('script')[0];
-              h.parentNode.insertBefore(s,h);
-            };
-            s.src=u+'?'+(Date.now()/60000|0);
-            var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
-          })(window,document,"https://cdn-us-east-1.chatapp.online/cabinet.chatapp.online/widgetsFiles/83456/2026/07/03/51b84000-95fe-4ce5-b901-c756b326f944.js","https://cdn-us-east-1.chatapp.online/cabinet.chatapp.online/external/widget/v3/index.js")`,
+          innerHTML: `(function(w,d,u,j){ var s=d.createElement('script');s.defer=true; s.onload = function () { var s=d.createElement('script'); s.defer=true;s.src=j+'?'+(Date.now()/60000|0); var h=d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s,h);};s.src=u+'?'+(Date.now()/60000|0); var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h); })(window,document, "https://cdn-us-east-1.chatapp.online/cabinet.chatapp.online/widgetsFiles/83456/2026/07/03/51b84000-95fe-4ce5-b901-c756b326f944.js", "https://cdn-us-east-1.chatapp.online/cabinet.chatapp.online/external/widget/v3/index.js")`,
         },
       ],
     },

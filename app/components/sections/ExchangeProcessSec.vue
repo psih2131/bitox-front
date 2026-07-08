@@ -16,8 +16,8 @@
           :class="{ 'exchange-process-sec__card--dark': step.dark }"
         >
           <span class="exchange-process-sec__num">{{ step.num }}</span>
-          <h3 class="exchange-process-sec__card-title">{{ step.title }}</h3>
-          <p class="exchange-process-sec__card-text">{{ step.text }}</p>
+          <h3 class="exchange-process-sec__card-title" v-html="step.title"></h3>
+          <p class="exchange-process-sec__card-text" v-html="step.text"></p>
         </article>
       </div>
     </div>

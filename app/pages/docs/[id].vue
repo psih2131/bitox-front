@@ -12,7 +12,7 @@
           <h1 class="docs-page-sec__title">{{ doc.title }}</h1>
 
           <div v-if="doc.text_editor" class="docs-page-sec__content-wrapper">
-            <div class="text-editor" v-html="doc.text_editor" />
+            <div class="text-editor" v-html="renderMarkdown(doc.text_editor)" />
           </div>
         </div>
       </div>
@@ -24,11 +24,13 @@
 
 <script setup>
 import { getStrapiMediaUrl } from '~/utils/strapi'
+import MarkdownIt from 'markdown-it';
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const route = useRoute()
 
 const slug = computed(() => route.params.id)
+
 
 const { data: docResponse } = await useFetch(
   () => `${urlApi}/api/docs-pages?filters[slug][$eq]=${slug.value}&populate[seo][populate]=shareImage`,
@@ -43,6 +45,19 @@ if (!slug.value || !docResponse.value?.data?.[0]) {
     statusMessage: 'Страница не найдена',
   })
 }
+
+
+const md = new MarkdownIt();
+
+function renderMarkdown(text) {
+    if (!text) {
+        return '';
+    }
+
+    return md.render(text);
+}
+
+
 
 const pageSeo = docResponse.value.data[0].seo
 

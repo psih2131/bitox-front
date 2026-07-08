@@ -268,7 +268,7 @@ const [
     `${urlApi}/api/individuals-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
   ),
   useFetch(
-    `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
+    `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&fields[2]=title_nav_meny&pagination[pageSize]=100`,
   ),
   useFetch(
     `${urlApi}/api/exchange-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
@@ -331,6 +331,20 @@ function openCallbackModal() {
   modalStore.open(MODAL_NAMES.callback)
 }
 
+function getTransferNavTitle(page) {
+  return page.title_nav_meny?.trim() || page.title
+}
+
+function mapTransferNavLinks(pages) {
+  return [...pages]
+    .map((page) => ({
+      key: page.documentId,
+      label: getTransferNavTitle(page),
+      to: `/transfers/${page.slug}`,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label, 'ru'))
+}
+
 const businessMega = computed(() => {
   const pages = mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [])
 
@@ -377,11 +391,7 @@ const privateClientsMega = computed(() => {
     to: `/individuals/${page.slug}`,
   }))
 
-  const transfersLinks = transfersPages.map((page) => ({
-    key: page.documentId,
-    label: page.title,
-    to: `/transfers/${page.slug}`,
-  }))
+  const transfersLinks = mapTransferNavLinks(transfersPages)
 
   return [
     {
@@ -421,11 +431,7 @@ const exchangeMega = computed(() => {
 const transfersMega = computed(() => {
   const transfersPages = transfersPagesResponse.value?.data ?? []
 
-  const links = transfersPages.map((page) => ({
-    key: page.documentId,
-    label: page.title,
-    to: `/transfers/${page.slug}`,
-  }))
+  const links = mapTransferNavLinks(transfersPages)
 
   if (!links.length) return []
 
