@@ -47,7 +47,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
 
   yandexMaps: {
-    apikey: yandexMapsApiKey,
+    apikey: 'af5a38a2-5bf8-44de-bfbe-b30e278e9df4',
     initializeOn: 'onPluginInit',
     lang: 'ru_RU',
   },
