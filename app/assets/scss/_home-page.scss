@@ -858,6 +858,8 @@ a.countries-sec__pill {
   font-size: 20px;
   line-height: 1.09;
   color: $gray;
+  text-align: center;
+  width: calc(100% - 55px);
   white-space: nowrap;
 }
 
@@ -892,8 +894,9 @@ a.countries-sec__pill {
 .countries-sec__pill {
   display: flex;
   align-items: center;
-  gap: 15px;
+  min-width: 250px;
   padding: 10px;
+  padding-right: 10px;
   border: 1px solid $light-gray;
   border-radius: 100px;
   background: $white;
@@ -2253,6 +2256,15 @@ a.countries-sec__pill {
     min-height: 0;
     padding-bottom: 30px;
   }
+  .countries-sec__pill{
+
+    min-width: 180px;
+  }
+  .countries-sec__result-name, .countries-sec__pill-name{
+    width: calc(100% - 40px);
+  }
+
+
 }
 
 @media only screen and (max-width: 880px) {
@@ -2622,9 +2634,10 @@ a.countries-sec__pill {
   }
   .countries-sec__pill{
     padding: 3px;
+ 
   }
   .countries-sec__pill-name{
-    padding-right: 35px;
+ 
     font-size: 16px;
   }
   .countries-sec__bottom{
