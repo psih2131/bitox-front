@@ -4,7 +4,14 @@
       <div class="app-footer__card">
         <div class="app-footer__grid">
           <div class="app-footer__col app-footer__col-1">
-            <NuxtLink to="/" class="app-footer__logo">{{ footer?.logo_text }}</NuxtLink>
+            <NuxtLink to="/" class="app-footer__logo">
+              <img
+                v-if="footerLogoUrl"
+                :src="footerLogoUrl"
+                :alt="footer?.logo_text || 'Bitox'"
+              />
+              <span v-else>{{ footer?.logo_text || 'Bitox' }}</span>
+            </NuxtLink>
             <p class="app-footer__legal footer_copy">© 2026 Bitox</p>
           </div>
 
@@ -108,11 +115,16 @@ import { getStrapiMediaUrl } from '~/utils/strapi'
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const [{ data: footerResponse }, { data: docsResponse }] = await Promise.all([
-  useFetch(`${urlApi}/api/footer-component?populate[contacts_list]=true&populate[socials_media_links][populate]=icon`),
+  useFetch(`${urlApi}/api/footer-component?populate[contacts_list]=true&populate[socials_media_links][populate]=icon&populate[footer_logo]=true`),
   useFetch(`${urlApi}/api/docs-pages?pagination[pageSize]=100&sort=createdAt:asc`),
 ])
 
 const footer = computed(() => footerResponse.value?.data)
+
+const footerLogoUrl = computed(() =>
+  getStrapiMediaUrl(footer.value?.footer_logo, urlApi),
+)
+
 const docsPages = computed(() => docsResponse.value?.data ?? [])
 
 const docsPagesCol2 = computed(() => docsPages.value.filter((_, index) => index % 2 === 0))

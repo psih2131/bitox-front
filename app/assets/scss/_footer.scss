@@ -30,10 +30,13 @@
 }
 
 .app-footer__logo {
-  font-weight: 800;
-  font-size: 30px;
-  line-height: 1.02;
-  color: $white;
+ height: 30px;
+ display: block;
+
+ img{
+  max-height: 100%;
+  display: block;
+ }
 }
 
 .app-footer__label {
@@ -136,7 +139,7 @@
     font-size: 18px;
   }
   .app-footer__logo{
-    font-size: 25px;
+    height: 25px;
   }
 }
 @media only screen and (max-width: 880px) {
@@ -175,7 +178,7 @@
   }
 
   .app-footer__logo {
-    font-size: 26px;
+    height: 20px;
   }
 
   .app-footer__grid{
@@ -188,9 +191,7 @@
       display: none;
     }
   }
-  .app-footer__logo{
-    font-size: 20px;
-  }
+ 
   .app-footer__card{
     border-radius: 20px;
     padding: 28px;

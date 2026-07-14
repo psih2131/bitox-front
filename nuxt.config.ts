@@ -16,6 +16,8 @@ export default defineNuxtConfig({
       meta: [
         { name: 'robots', content: 'noindex, nofollow' },
         { name: 'googlebot', content: 'noindex, nofollow' },
+        { name: 'google-site-verification', content: '3TtbXpC5IYhG4cn4bzR2ZmTXWVhBR_QTUYWA6vo70co' },
+        { name: 'yandex-verification', content: 'e8028bd58ad2d5fb' },
         { name: 'description', content: 'Bitox - это биржа криптовалют, которая позволяет пользователям покупать и продавать криптовалюты с использованием банковских карт. Bitox - это биржа криптовалют, которая позволяет пользователям покупать и продавать криптовалюты с использованием банковских карт.' },
       ],
       htmlAttrs: {

@@ -45,7 +45,14 @@
     <div class="header__main">
       <div class="container">
         <div class="header__main-inner">
-          <NuxtLink to="/" class="header__logo">{{ header?.text_logo }}</NuxtLink>
+          <NuxtLink to="/" class="header__logo">
+            <img
+              v-if="headerLogoUrl"
+              :src="headerLogoUrl"
+              :alt="header?.text_logo || 'Bitox'"
+            />
+            <span v-else>{{ header?.text_logo || 'Bitox' }}</span>
+          </NuxtLink>
 
           <nav class="header__nav">
             <div
@@ -259,7 +266,7 @@ const [
   { data: transfersPagesResponse },
   { data: exchangePagesResponse },
 ] = await Promise.all([
-  useFetch(`${urlApi}/api/header-component?populate[header_contacts_list]=true`),
+  useFetch(`${urlApi}/api/header-component?populate[header_contacts_list]=true&populate[header_logo_img]=true`),
   useFetch(`${urlApi}/api/footer-component?populate[socials_media_links][populate]=icon`),
   useFetch(
     `${urlApi}/api/business-pages?fields[0]=title&fields[1]=slug&fields[2]=type_business_page&pagination[pageSize]=100`,
@@ -276,6 +283,10 @@ const [
 ])
 
 const header = computed(() => headerResponse.value?.data)
+
+const headerLogoUrl = computed(() =>
+  getStrapiMediaUrl(header.value?.header_logo_img, urlApi),
+)
 
 const contacts = computed(() => header.value?.header_contacts_list ?? [])
 
