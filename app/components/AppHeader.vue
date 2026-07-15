@@ -275,7 +275,7 @@ const [
     `${urlApi}/api/individuals-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
   ),
   useFetch(
-    `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&fields[2]=title_nav_meny&pagination[pageSize]=100`,
+    `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&fields[2]=title_nav_meny&fields[3]=add_to_nav_menu_individual&fields[4]=add_to_nav_menu_import&fields[5]=add_to_nav_menu_export&pagination[pageSize]=100`,
   ),
   useFetch(
     `${urlApi}/api/exchange-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
@@ -358,9 +358,11 @@ function mapTransferNavLinks(pages) {
 
 const businessMega = computed(() => {
   const pages = mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [])
+  const transfersPages = transfersPagesResponse.value?.data ?? []
 
   const importLinks = [
     { key: 'business-invoice', label: 'Оплата инвойсов', to: '/business/invoice' },
+    { key: 'business-invoice-servers', label: 'Платежи для серверов', to: '/business/invoice' },
     ...pages
       .filter((page) => page.type === 'import')
       .map((page) => ({
@@ -368,15 +370,19 @@ const businessMega = computed(() => {
         label: page.title,
         to: `/business/${page.slug}`,
       })),
+    ...mapTransferNavLinks(transfersPages.filter((page) => page.add_to_nav_menu_import)),
   ]
 
-  const exportLinks = pages
-    .filter((page) => page.type === 'export')
-    .map((page) => ({
-      key: page.documentId,
-      label: page.title,
-      to: `/business/${page.slug}`,
-    }))
+  const exportLinks = [
+    ...pages
+      .filter((page) => page.type === 'export')
+      .map((page) => ({
+        key: page.documentId,
+        label: page.title,
+        to: `/business/${page.slug}`,
+      })),
+    ...mapTransferNavLinks(transfersPages.filter((page) => page.add_to_nav_menu_export)),
+  ]
 
   return [
     {
@@ -402,7 +408,9 @@ const privateClientsMega = computed(() => {
     to: `/individuals/${page.slug}`,
   }))
 
-  const transfersLinks = mapTransferNavLinks(transfersPages)
+  const transfersLinks = mapTransferNavLinks(
+    transfersPages.filter((page) => page.add_to_nav_menu_individual),
+  )
 
   return [
     {

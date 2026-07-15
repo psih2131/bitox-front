@@ -111,9 +111,19 @@
 }
 
 .service-invoices-sec__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: calc(100% - 20px);
+  margin-left: -10px;
+  margin-right: -10px;
+  row-gap: 20px;
+  .service-invoices-sec__card {
+    width: calc(100% / 3 - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+ 
 }
 
 .service-invoices-sec__card {
@@ -1242,6 +1252,16 @@
   .service-contact-sec__submit{
     width: 100%;
     min-height: 50px;
+  }
+  .service-invoices-sec__grid {
+    width: 100%;
+    margin: 0;
+    row-gap: 10px;
+    
+    .service-invoices-sec__card {
+      width: 100%;
+      margin: 0;
+    }
   }
 }
 

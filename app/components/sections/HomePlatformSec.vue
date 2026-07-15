@@ -15,7 +15,11 @@
               </p>
             </div>
 
-            <img :src="gr1" alt="" class="platform-sec__card-img" />
+            <img
+              :src="col1Img"
+              :alt="col1Title"
+              class="platform-sec__card-img"
+            />
           </div>
 
           <ul v-if="businessPages.length" class="platform-sec__list">
@@ -63,7 +67,11 @@
               </p>
             </div>
 
-            <img :src="gr2" alt="" class="platform-sec__card-img" />
+            <img
+              :src="col2Img"
+              :alt="col2Title"
+              class="platform-sec__card-img"
+            />
           </div>
 
           <ul v-if="individualsPages.length" class="platform-sec__list">
@@ -111,7 +119,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gr1 from '~/assets/images/gr-1.png'
 import gr2 from '~/assets/images/gr-2.png'
-import { mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
+import { getStrapiMediaUrl, mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -135,6 +143,8 @@ const col2Title = computed(() => props.section?.col_2_title || 'Частным �
 const col2Subtitle = computed(
   () => props.section?.col_2_subtitle || 'от 500$ с удобным процессом и сопровождением до зачисления',
 )
+const col1Img = computed(() => getStrapiMediaUrl(props.section?.col_1_img, urlApi) || gr1)
+const col2Img = computed(() => getStrapiMediaUrl(props.section?.col_2_img, urlApi) || gr2)
 
 const [{ data: businessPagesResponse }, { data: individualsPagesResponse }] = await Promise.all([
   useFetch(

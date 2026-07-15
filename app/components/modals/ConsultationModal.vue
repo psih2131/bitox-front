@@ -24,11 +24,15 @@
         <div class="consultation-modal__control consultation-modal__control--phone">
           <img :src="flagRu" alt="" class="consultation-modal__flag" width="24" height="16" />
           <input
-            v-model="phone"
+            :value="phone"
             type="tel"
+            maxlength="18"
+            inputmode="numeric"
             class="consultation-modal__input"
             placeholder="+7 (999) 999 99 99"
             autocomplete="tel"
+            @keydown="onPhoneKeydown"
+            @input="onPhoneInput"
           />
         </div>
       </label>
@@ -73,14 +77,28 @@ import flagRu from '~/assets/images/flags/russian.png'
 const modalStore = useModalStore()
 const { isSubmitting, submit } = useFormSubmit()
 
-const phone = ref('')
+const phone = ref('+7 ')
 const personalConsent = ref(true)
 const offerConsent = ref(false)
 const marketingConsent = ref(false)
 
 const canSubmit = computed(
-  () => phone.value.trim() && personalConsent.value && offerConsent.value,
+  () => phone.value.replace(/\D/g, '').length === 11 && personalConsent.value && offerConsent.value,
 )
+
+function onPhoneKeydown(event) {
+  const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']
+  if (allowed.includes(event.key) || event.ctrlKey || event.metaKey) return
+  if (!/^\d$/.test(event.key)) event.preventDefault()
+}
+
+function onPhoneInput({ target }) {
+  const n = target.value.replace(/\D/g, '').replace(/^7|^8/, '').slice(0, 10)
+  phone.value = n
+    ? `+7 (${n.slice(0, 3)}${n.length > 3 ? `) ${n.slice(3, 6)}` : ''}${n.length > 6 ? ` ${n.slice(6, 8)}` : ''}${n.length > 8 ? ` ${n.slice(8, 10)}` : ''}`
+    : '+7 '
+  target.value = phone.value
+}
 
 async function handleSubmit() {
   if (!canSubmit.value || isSubmitting.value) return

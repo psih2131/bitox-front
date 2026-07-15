@@ -14,7 +14,8 @@
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const populate = [
-  'populate[section_1__hero][populate]=box_list_element',
+  'populate[section_1__hero][populate][box_list_element]=true',
+  'populate[section_1__hero][populate][image]=true',
   'populate[about_text_sec][populate]=section_image',
   'populate[about_team_sec]=true',
   'populate[about_contacts_sec]=true',

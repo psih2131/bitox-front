@@ -6,7 +6,7 @@
       <label class="payment-calc__field">
         <span class="payment-calc__label">Сумма</span>
         <div class="payment-calc__input-wrap">
-          <span class="payment-calc__currency-symbol">{{ selectedCurrency.symbol }}</span>
+          <span v-if="selectedCurrency?.symbol" class="payment-calc__currency-symbol">{{ selectedCurrency.symbol }}</span>
           <input
             v-model="amount"
             type="text"
@@ -14,7 +14,11 @@
             placeholder=""
           />
 
-          <div ref="currencyRef" class="payment-calc__currency-wrap">
+          <div
+            v-if="currencies.length"
+            ref="currencyRef"
+            class="payment-calc__currency-wrap"
+          >
             <button
               type="button"
               class="payment-calc__currency"
@@ -24,13 +28,14 @@
               @click="toggleCurrency"
             >
               <img
+                v-if="selectedCurrency?.flag"
                 :src="selectedCurrency.flag"
                 :alt="selectedCurrency.code"
                 class="payment-calc__flag"
                 width="21"
                 height="21"
               />
-              <span>{{ selectedCurrency.code }}</span>
+              <span v-if="selectedCurrency?.code">{{ selectedCurrency.code }}</span>
               <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
                 <path d="M4.5 0.5L8.5 8.5H0.5L4.5 0.5Z" fill="#606061" />
               </svg>
@@ -40,18 +45,18 @@
               v-if="isCurrencyOpen"
               class="payment-calc__currency-list"
               role="listbox"
-              :aria-label="`Валюта, выбрано ${selectedCurrency.code}`"
+              :aria-label="`Валюта, выбрано ${selectedCurrency?.code || ''}`"
             >
               <li
                 v-for="currency in currencies"
-                :key="currency.code"
+                :key="currency.id"
                 role="option"
-                :aria-selected="currency.code === selectedCurrency.code"
+                :aria-selected="currency.code === selectedCurrency?.code"
               >
                 <button
                   type="button"
                   class="payment-calc__currency-option"
-                  :class="{ 'payment-calc__currency-option--active': currency.code === selectedCurrency.code }"
+                  :class="{ 'payment-calc__currency-option--active': currency.code === selectedCurrency?.code }"
                   @click="selectCurrency(currency)"
                 >
                   <img
@@ -72,10 +77,14 @@
       <label class="payment-calc__field">
         <span class="payment-calc__label">Телефон</span>
         <input
-          v-model="phone"
+          :value="phone"
           type="tel"
+          maxlength="18"
+          inputmode="numeric"
           class="payment-calc__input payment-calc__input--phone"
           placeholder="+7 (999) 999 99 99"
+          @keydown="onPhoneKeydown"
+          @input="onPhoneInput"
         />
       </label>
 
@@ -96,33 +105,67 @@
 </template>
 
 <script setup>
-import flagUsd from '~/assets/images/flags/x4.jpg'
-import flagEur from '~/assets/images/flags/x1.jpg'
-import flagGbp from '~/assets/images/flags/x2.jpg'
-import flagTry from '~/assets/images/flags/x3.jpg'
-import flagCad from '~/assets/images/flags/x5.jpg'
-import flagCny from '~/assets/images/flags/x6.jpg'
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
+const urlApi = useRuntimeConfig().public.apiUrl
 const amount = ref('')
-const phone = ref('')
+const phone = ref('+7 ')
 const isCurrencyOpen = ref(false)
 const currencyRef = ref(null)
+const selectedCurrency = ref(null)
 const { isSubmitting, submit } = useFormSubmit()
 
-const currencies = [
-  { code: 'USD', symbol: '$', flag: flagUsd },
-  { code: 'EUR', symbol: '€', flag: flagEur },
-  { code: 'GBP', symbol: '£', flag: flagGbp },
-  { code: 'TRY', symbol: '₺', flag: flagTry },
-  { code: 'CAD', symbol: 'C$', flag: flagCad },
-  { code: 'CNY', symbol: '¥', flag: flagCny },
-]
+const { data: additionalDataResponse } = await useFetch(
+  `${urlApi}/api/additional-data?populate[home_hero_form_data][populate]=flag`,
+)
 
-const selectedCurrency = ref(currencies[0])
+const currencies = computed(() => {
+  const items = additionalDataResponse.value?.data?.home_hero_form_data ?? []
+
+  return items
+    .map((item) => ({
+      id: item.id,
+      code: item.title?.trim() || '',
+      symbol: item.symbol?.trim() || '',
+      flag: getStrapiMediaUrl(item.flag, urlApi),
+    }))
+    .filter((item) => item.code && item.flag)
+})
+
+watch(
+  currencies,
+  (list) => {
+    if (!list.length) {
+      selectedCurrency.value = null
+      return
+    }
+
+    const hasCurrent = list.some((item) => item.code === selectedCurrency.value?.code)
+
+    if (!selectedCurrency.value || !hasCurrent) {
+      selectedCurrency.value = list[0]
+    }
+  },
+  { immediate: true },
+)
 
 const canSubmit = computed(
-  () => amount.value.trim() && phone.value.trim(),
+  () => amount.value.trim() && phone.value.replace(/\D/g, '').length === 11,
 )
+
+function onPhoneKeydown(event) {
+  const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']
+  if (allowed.includes(event.key) || event.ctrlKey || event.metaKey) return
+  if (!/^\d$/.test(event.key)) event.preventDefault()
+}
+
+function onPhoneInput({ target }) {
+  const n = target.value.replace(/\D/g, '').replace(/^7|^8/, '').slice(0, 10)
+  phone.value = n
+    ? `+7 (${n.slice(0, 3)}${n.length > 3 ? `) ${n.slice(3, 6)}` : ''}${n.length > 6 ? ` ${n.slice(6, 8)}` : ''}${n.length > 8 ? ` ${n.slice(8, 10)}` : ''}`
+    : '+7 '
+  target.value = phone.value
+}
 
 async function handleSubmit() {
   if (!canSubmit.value || isSubmitting.value) return
@@ -130,14 +173,14 @@ async function handleSubmit() {
   const success = await submit('/api/forms/payment-calc', {
     amount: amount.value.trim(),
     phone: phone.value.trim(),
-    currency: selectedCurrency.value.code,
+    currency: selectedCurrency.value?.code || '',
   })
 
   if (!success) return
 
   amount.value = ''
-  phone.value = ''
-  selectedCurrency.value = currencies[0]
+  phone.value = '+7 '
+  selectedCurrency.value = currencies.value[0] ?? null
 }
 
 function toggleCurrency() {
