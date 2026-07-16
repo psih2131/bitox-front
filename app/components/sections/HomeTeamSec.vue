@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="team-sec">
+  <!-- <section ref="sectionRef" class="team-sec">
     <div class="container">
       <div class="team-sec__head">
         <h2 class="team-sec__title">{{ sectionTitle }}</h2>
@@ -80,7 +80,7 @@
         </ClientOnly>
       </div>
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script setup>
