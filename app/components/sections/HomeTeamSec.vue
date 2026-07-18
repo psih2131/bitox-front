@@ -84,96 +84,96 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { getStrapiMediaUrl } from '~/utils/strapi'
+// import gsap from 'gsap'
+// import { getStrapiMediaUrl } from '~/utils/strapi'
 
-const props = defineProps({
-  section: {
-    type: Object,
-    default: null,
-  },
-})
+// const props = defineProps({
+//   section: {
+//     type: Object,
+//     default: null,
+//   },
+// })
 
-const apiUrl = useRuntimeConfig().public.apiUrl
+// const apiUrl = useRuntimeConfig().public.apiUrl
 
-const { data: teamsResponse } = await useFetch(`${apiUrl}/api/teams?populate[image]=true`)
+// const { data: teamsResponse } = await useFetch(`${apiUrl}/api/teams?populate[image]=true`)
 
-const sectionTitle = computed(() => props.section?.title ?? 'Наша команда')
-const sectionSubtitle = computed(
-  () => props.section?.subtitle
-    ?? 'За 3 года работы наши специалисты накопили огромный опыт и решают любые задачи клиентов эффективно и в срок',
-)
+// const sectionTitle = computed(() => props.section?.title ?? 'Наша команда')
+// const sectionSubtitle = computed(
+//   () => props.section?.subtitle
+//     ?? 'За 3 года работы наши специалисты накопили огромный опыт и решают любые задачи клиентов эффективно и в срок',
+// )
 
-const team = computed(() => {
-  const data = teamsResponse.value?.data ?? []
+// const team = computed(() => {
+//   const data = teamsResponse.value?.data ?? []
 
-  return data.map((member) => ({
-    id: member.id,
-    name: member.name,
-    role: member.postition,
-    text: member.description,
-    image: getStrapiMediaUrl(member.image, apiUrl),
-  }))
-})
+//   return data.map((member) => ({
+//     id: member.id,
+//     name: member.name,
+//     role: member.postition,
+//     text: member.description,
+//     image: getStrapiMediaUrl(member.image, apiUrl),
+//   }))
+// })
 
-const sectionRef = ref(null)
-const swiperRef = ref(null)
-const swiperReady = ref(false)
+// const sectionRef = ref(null)
+// const swiperRef = ref(null)
+// const swiperReady = ref(false)
 
-const { next, prev, isBeginning, isEnd, reInitialize } = useSwiper(swiperRef, {
-  slidesPerView: 1,
-  spaceBetween: 0,
-  speed: 500,
-})
+// const { next, prev, isBeginning, isEnd, reInitialize } = useSwiper(swiperRef, {
+//   slidesPerView: 1,
+//   spaceBetween: 0,
+//   speed: 500,
+// })
 
-watch(swiperRef, async (el) => {
-  if (!el) return
+// watch(swiperRef, async (el) => {
+//   if (!el) return
 
-  await nextTick()
-  reInitialize()
-  swiperReady.value = true
-})
+//   await nextTick()
+//   reInitialize()
+//   swiperReady.value = true
+// })
 
-watch(team, async () => {
-  if (!swiperRef.value) return
+// watch(team, async () => {
+//   if (!swiperRef.value) return
 
-  await nextTick()
-  reInitialize()
-})
+//   await nextTick()
+//   reInitialize()
+// })
 
-let teamAnimation
+// let teamAnimation
 
-onMounted(() => {
-  if (!sectionRef.value) return
+// onMounted(() => {
+//   if (!sectionRef.value) return
 
-  teamAnimation = gsap.context(() => {
-    gsap.from('.team-sec__head', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      ease: 'power2.out',
-    })
+//   teamAnimation = gsap.context(() => {
+//     gsap.from('.team-sec__head', {
+//       opacity: 0,
+//       y: 24,
+//       duration: 0.6,
+//       ease: 'power2.out',
+//     })
 
-    gsap.from('.team-sec__grid .team-sec__card', {
-      opacity: 0,
-      y: 24,
-      duration: 0.5,
-      stagger: 0.1,
-      delay: 0.15,
-      ease: 'power2.out',
-    })
+//     gsap.from('.team-sec__grid .team-sec__card', {
+//       opacity: 0,
+//       y: 24,
+//       duration: 0.5,
+//       stagger: 0.1,
+//       delay: 0.15,
+//       ease: 'power2.out',
+//     })
 
-    gsap.from('.team-sec__slider-wrap', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      delay: 0.15,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
+//     gsap.from('.team-sec__slider-wrap', {
+//       opacity: 0,
+//       y: 24,
+//       duration: 0.6,
+//       delay: 0.15,
+//       ease: 'power2.out',
+//     })
+//   }, sectionRef.value)
+// })
 
-onUnmounted(() => {
-  teamAnimation?.revert()
-})
+// onUnmounted(() => {
+//   teamAnimation?.revert()
+// })
 </script>

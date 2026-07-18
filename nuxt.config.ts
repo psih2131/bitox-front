@@ -17,7 +17,7 @@ export default defineNuxtConfig({
         { name: 'robots', content: 'noindex, nofollow' },
         { name: 'googlebot', content: 'noindex, nofollow' },
         { name: 'google-site-verification', content: '3TtbXpC5IYhG4cn4bzR2ZmTXWVhBR_QTUYWA6vo70co' },
-        { name: 'yandex-verification', content: 'e8028bd58ad2d5fb' },
+        { name: 'yandex-verification', content: 'c5a2c5999ba8a5e0' },
         { name: 'description', content: 'Bitox - это биржа криптовалют, которая позволяет пользователям покупать и продавать криптовалюты с использованием банковских карт. Bitox - это биржа криптовалют, которая позволяет пользователям покупать и продавать криптовалюты с использованием банковских карт.' },
       ],
       htmlAttrs: {
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
       noscript: [
         {
           key: 'yandex-metrika',
-          innerHTML: '<div><img src="https://mc.yandex.ru/watch/110762000" style="position:absolute; left:-9999px;" alt="" /></div>',
+          innerHTML: '<div><img src="https://mc.yandex.ru/watch/110824008" style="position:absolute; left:-9999px;" alt="" /></div>',
         },
       ],
       script: [
@@ -37,7 +37,7 @@ export default defineNuxtConfig({
           key: 'yandex-metrika',
           type: 'text/javascript',
           tagPosition: 'head',
-          innerHTML: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=110762000','ym');ym(110762000,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});`,
+          innerHTML: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=110824008','ym');ym(110824008,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});`,
         },
         {
           key: 'chatapp-widget',
