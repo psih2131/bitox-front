@@ -1,6 +1,5 @@
 <template>
   <section
-    ref="sectionRef"
     class="faq-sec"
     :style="bgColor ? { backgroundColor: bgColor } : undefined"
   >
@@ -20,8 +19,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-
 const props = defineProps({
   bgColor: {
     type: String,
@@ -32,8 +29,6 @@ const props = defineProps({
     default: null,
   },
 })
-
-const sectionRef = ref(null)
 
 const defaultFaqItems = [
   {
@@ -68,34 +63,6 @@ const faqItems = computed(() => {
     question: item.title,
     answer: item.text,
   }))
-})
-
-let faqAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  faqAnimation = gsap.context(() => {
-    gsap.from('.faq-sec__title', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.faq-item', {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      stagger: 0.08,
-      delay: 0.1,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  faqAnimation?.revert()
 })
 </script>
 

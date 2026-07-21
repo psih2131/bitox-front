@@ -1,5 +1,5 @@
 <template>
-  <section v-if="section || allPublications.length" ref="sectionRef" class="media-sec">
+  <section v-if="section || allPublications.length" class="media-sec">
     <div class="container">
       <div class="media-sec__head">
         <h2 class="media-sec__title">
@@ -45,7 +45,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
 import logoRbk from '~/assets/images/media/logo-rbk.svg'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
@@ -110,33 +109,4 @@ const visiblePublications = computed(() => {
   return allPublications.value.slice(0, DEFAULT_VISIBLE_COUNT)
 })
 
-const sectionRef = ref(null)
-
-let mediaAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  mediaAnimation = gsap.context(() => {
-    gsap.from('.media-sec__head', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.media-sec__card', {
-      opacity: 0,
-      y: 24,
-      duration: 0.5,
-      stagger: 0.1,
-      delay: 0.15,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  mediaAnimation?.revert()
-})
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="cta-sec">
+  <section class="cta-sec">
     <div class="container cta-sec__inner">
       <img
         :src="ctaImage"
@@ -26,7 +26,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
 import fallbackCtaImage from '~/assets/images/gr-4.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
@@ -51,8 +50,6 @@ const props = defineProps({
   },
 })
 
-const sectionRef = ref(null)
-
 const ctaImage = computed(() => (
   getStrapiMediaUrl(props.section?.image, urlApi) || fallbackCtaImage
 ))
@@ -60,39 +57,4 @@ const ctaImage = computed(() => (
 const sectionTitleLines = computed(() => (
   props.section.title ? props.section.title.split('\n') : []
 ))
-
-let ctaAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  ctaAnimation = gsap.context(() => {
-    gsap.from('.cta-sec__img', {
-      opacity: 0,
-      x: -32,
-      duration: 0.7,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.cta-sec__title', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      delay: 0.1,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.cta-sec__actions', {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      delay: 0.25,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  ctaAnimation?.revert()
-})
 </script>

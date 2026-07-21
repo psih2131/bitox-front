@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="how-start-sec">
+  <section class="how-start-sec">
     <div class="container">
       <h2 class="how-start-sec__title">{{ sectionTitle }}</h2>
 
@@ -43,8 +43,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
 const modalStore = useModalStore()
@@ -61,7 +59,6 @@ const props = defineProps({
   },
 })
 
-const sectionRef = ref(null)
 const activeTab = ref(null)
 
 const paymentSteps = [
@@ -170,40 +167,4 @@ watch(
 const currentSteps = computed(() => (
   clusters.value.find((cluster) => cluster.id === activeTab.value)?.steps ?? []
 ))
-
-let howStartAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  howStartAnimation = gsap.context(() => {
-    gsap.from('.how-start-sec__title', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.how-start-sec__tabs', {
-      opacity: 0,
-      y: 16,
-      duration: 0.5,
-      delay: 0.1,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.how-start-sec__card', {
-      opacity: 0,
-      y: 24,
-      duration: 0.5,
-      stagger: 0.08,
-      delay: 0.2,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  howStartAnimation?.revert()
-})
 </script>
