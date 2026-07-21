@@ -44,10 +44,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
-import gr3 from '~/assets/images/gr-3.png'
-
-
-
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,12 +52,14 @@ const urlApi = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
 
 const { data: benefitsResponse } = await useFetch(
-  `${urlApi}/api/benefits-component?populate[benefits_sec][populate]=benefits_items`,
+  `${urlApi}/api/benefits-component?populate[benefits_sec][populate][benefits_items]=true&populate[benefits_sec][populate][image_for_box_2]=true`,
 )
 
 const section = computed(() => benefitsResponse.value?.data?.benefits_sec)
 
 const sectionTitle = computed(() => section.value?.title_section || 'Выгоды работы с нами')
+
+const box2Image = computed(() => getStrapiMediaUrl(section.value?.image_for_box_2, urlApi))
 
 const cards = computed(() => {
   const items = section.value?.benefits_items
@@ -72,7 +71,7 @@ const cards = computed(() => {
     title: item.title,
     text: item.subtitle,
     dark: index === items.length - 1,
-    image: index === 1 ? gr3 : null,
+    image: index === 1 ? box2Image.value : null,
   }))
 })
 

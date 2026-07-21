@@ -69,10 +69,16 @@
 
 .service-hero-sec__text {
   max-width: 430px;
+  margin-bottom: 39px;
   font-weight: 600;
   font-size: 25px;
   line-height: 1.23;
   color: $gray-83;
+}
+
+.service-hero-sec__btn {
+  width: 238px;
+  min-width: 238px;
 }
 
 .service-hero-sec__media {
@@ -114,7 +120,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: calc(100% - 20px);
+  width: calc(100% + 20px);
   margin-left: -10px;
   margin-right: -10px;
   row-gap: 20px;
@@ -1006,6 +1012,9 @@
 }
 
 @media only screen and (max-width: 760px) {
+  .service-hero-sec__content{
+    width: 100%;
+  }
   .service-hero-sec__inner{
     padding-top: 25px;
     padding-bottom: 337px;
@@ -1046,6 +1055,11 @@
   }
   .service-hero-sec__text{
     font-size: 16px;
+    margin-bottom: 25px;
+  }
+  .service-hero-sec__btn{
+    width: 100%;
+    text-align: center;
   }
   .service-invoices-sec__title{
     font-size: 30px;

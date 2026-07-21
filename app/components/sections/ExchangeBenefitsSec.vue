@@ -110,7 +110,7 @@
       </div>
 
       <div class="exchange-benefits-sec__action">
-        <AppClientBtn>Начать перевод</AppClientBtn>
+        <AppClientBtn @click="openConsultationModal">Начать перевод</AppClientBtn>
       </div>
     </div>
   </section>
@@ -121,6 +121,7 @@ import gsap from 'gsap'
 import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
 import decorImage from '~/assets/images/gr-16.png'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
 const props = defineProps({
   section: {
@@ -128,6 +129,12 @@ const props = defineProps({
     required: true,
   },
 })
+
+const modalStore = useModalStore()
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const defaultFiatCurrencies = [
   'RUB (₽, Российский рубль)',

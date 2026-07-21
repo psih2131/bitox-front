@@ -11,6 +11,10 @@
         <h1 v-if="section.title" class="service-hero-sec__title">{{ section.title }}</h1>
 
         <p v-if="section.subtitle" class="service-hero-sec__text">{{ section.subtitle }}</p>
+
+        <AppClientBtn class="service-hero-sec__btn" @click="openConsultationModal">
+          Оставить заявку
+        </AppClientBtn>
       </div>
 
       <div v-if="heroImageUrl" class="service-hero-sec__media">
@@ -29,6 +33,7 @@
 <script setup>
 import gsap from 'gsap'
 import fallbackHeroImage from '~/assets/images/gr-6.png'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
 const props = defineProps({
@@ -39,10 +44,15 @@ const props = defineProps({
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl
+const modalStore = useModalStore()
 
 const heroImageUrl = computed(
   () => getStrapiMediaUrl(props.section.image, apiUrl) || fallbackHeroImage,
 )
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const sectionRef = ref(null)
 
@@ -73,6 +83,12 @@ onMounted(() => {
         duration: 0.5,
         ease: 'power2.out',
       }, '-=0.35')
+      .from('.service-hero-sec__btn', {
+        opacity: 0,
+        y: 16,
+        duration: 0.45,
+        ease: 'power2.out',
+      }, '-=0.3')
       .from('.service-hero-sec__img', {
         opacity: 0,
         scale: 0.92,

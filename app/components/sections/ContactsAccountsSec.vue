@@ -33,11 +33,16 @@
             {{ section.telegram_subtitle }}
           </p>
 
-          <p class="contacts-accounts-sec__card-login">
+          <p v-if="tgUsers.length" class="contacts-accounts-sec__card-login">
             Логин:<br>
-            <a href="https://t.me/bitox_ved" target="_blank" rel="noopener noreferrer">@bitox_ved</a>,
-            а также
-            <a href="https://t.me/bitox_ved2" target="_blank" rel="noopener noreferrer">@bitox_ved2</a>
+            <template v-for="(user, index) in tgUsers" :key="user.id ?? index">
+              <template v-if="index > 0">, а также </template>
+              <a
+                :href="user.link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{{ user.title }}</a>
+            </template>
           </p>
 
           <p v-if="section.telegram_subtitle_2" class="contacts-accounts-sec__card-date">
@@ -63,6 +68,10 @@ const props = defineProps({
 const apiUrl = useRuntimeConfig().public.apiUrl
 
 const avatarUrl = computed(() => getStrapiMediaUrl(props.section.telegram_img, apiUrl))
+
+const tgUsers = computed(() =>
+  (props.section.tg_users ?? []).filter((user) => user?.title && user?.link),
+)
 
 const sectionRef = ref(null)
 

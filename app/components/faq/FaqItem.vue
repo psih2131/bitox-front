@@ -41,7 +41,7 @@
     </button>
 
 
-
+    <ClientOnly>
     <Vue3SlideUpDown v-model="isOpen" :duration="400">
 
       <div :id="contentId" class="faq-item__body">
@@ -51,7 +51,7 @@
       </div>
 
     </Vue3SlideUpDown>
-
+    </ClientOnly>
   </article>
 
 </template>

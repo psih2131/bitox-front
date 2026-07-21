@@ -1,6 +1,7 @@
 <template>
   <main v-if="service" class="service-page">
     <ServiceHeroSec v-if="service.service_hero_sec" :section="service.service_hero_sec" />
+    <CryptoExchangeCalcSec />
     <HomeStatsSec />
     <ServiceInvoicesSec v-if="service.services_invoice_sec" :section="service.services_invoice_sec" />
     <ServiceEconomySec />

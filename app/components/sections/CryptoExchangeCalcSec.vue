@@ -220,6 +220,7 @@
                     <input
                       v-model="invoice.purpose"
                       type="text"
+                      maxlength="25"
                       class="exchange-calc-sec__input"
                     />
                   </div>
@@ -340,7 +341,7 @@
             Перейдите в Telegram, чтобы оформить заявку
           </p>
 
-          <AppClientBtn class="exchange-calc-sec__sidebar-btn">
+          <AppClientBtn class="exchange-calc-sec__sidebar-btn" @click="openConsultationModal">
             Перейти к заявке в Telegram
           </AppClientBtn>
         </aside>
@@ -351,9 +352,15 @@
 
 <script setup>
 import gsap from 'gsap'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
+const modalStore = useModalStore()
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const tabs = [
   { id: 'cashless', label: 'Безналичный' },
@@ -375,12 +382,26 @@ const { data: calcResponse } = await useFetch(
   `${urlApi}/api/exchange-calc-component?${calcPopulate}`,
 )
 
+function sortByLabel(items, getLabel = (item) => item) {
+  return [...items].sort((a, b) =>
+    String(getLabel(a)).localeCompare(String(getLabel(b)), 'ru', { sensitivity: 'base' }),
+  )
+}
+
 const calcData = computed(() => calcResponse.value?.data?.calc?.exchange_data)
-const cashlessCountries = computed(() => calcData.value?.without_cache ?? [])
-const cashCountries = computed(() => calcData.value?.cache ?? [])
+const cashlessCountries = computed(() =>
+  sortByLabel(calcData.value?.without_cache ?? [], (item) => item.name_country),
+)
+const cashCountries = computed(() =>
+  sortByLabel(calcData.value?.cache ?? [], (item) => item.name_country),
+)
 const invoiceData = computed(() => calcData.value?.invoices ?? null)
-const invoiceCountries = computed(() => invoiceData.value?.states_list ?? [])
-const invoiceCurrencies = computed(() => invoiceData.value?.money_type_lists ?? [])
+const invoiceCountries = computed(() =>
+  sortByLabel(invoiceData.value?.states_list ?? [], (item) => item.title),
+)
+const invoiceCurrencies = computed(() =>
+  sortByLabel(invoiceData.value?.money_type_lists ?? [], (item) => item.name_money),
+)
 
 const cashless = reactive({
   country: '',
@@ -423,30 +444,37 @@ function getGiveOptions(countries, countryName) {
   const country = getCountryByName(countries, countryName)
   if (!country?.exchange_list?.length) return []
 
-  return country.exchange_list
-    .map((pair) => pair.what_you_give)
-    .filter(Boolean)
+  return sortByLabel(
+    country.exchange_list
+      .map((pair) => pair.what_you_give)
+      .filter(Boolean),
+  )
 }
 
 function getReceiveOptions(countries, countryName, giveValue) {
   const country = getCountryByName(countries, countryName)
   const pair = country?.exchange_list?.find((item) => item.what_you_give === giveValue)
 
-  return (pair?.what_you_get ?? [])
-    .filter((item) => item?.title)
-    .map((item) => ({
-      title: item.title,
-      price: Number(item.price) || 0,
-    }))
+  return sortByLabel(
+    (pair?.what_you_get ?? [])
+      .filter((item) => item?.title)
+      .map((item) => ({
+        title: item.title,
+        price: Number(item.price) || 0,
+      })),
+    (item) => item.title,
+  )
 }
 
 function getCityOptions(countries, countryName) {
   const country = getCountryByName(countries, countryName)
   if (!country?.citys?.length) return []
 
-  return country.citys
-    .map((item) => item.city_name)
-    .filter(Boolean)
+  return sortByLabel(
+    country.citys
+      .map((item) => item.city_name)
+      .filter(Boolean),
+  )
 }
 
 function syncSelectValue(model, field, options, getValue = (item) => item) {
@@ -499,6 +527,8 @@ function formatCalcNumber(value) {
   }).format(value)
 }
 
+const MAX_AMOUNT_DIGITS = 14
+
 function digitsOnly(value) {
   return String(value).replace(/\D/g, '')
 }
@@ -506,11 +536,20 @@ function digitsOnly(value) {
 function onDigitsKeydown(event) {
   const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']
   if (allowed.includes(event.key) || event.ctrlKey || event.metaKey) return
-  if (!/^\d$/.test(event.key)) event.preventDefault()
+  if (!/^\d$/.test(event.key)) {
+    event.preventDefault()
+    return
+  }
+
+  const input = event.target
+  const hasSelection = input.selectionStart !== input.selectionEnd
+  if (!hasSelection && digitsOnly(input.value).length >= MAX_AMOUNT_DIGITS) {
+    event.preventDefault()
+  }
 }
 
 function onAmountInput(event, model, field) {
-  const value = digitsOnly(event.target.value)
+  const value = digitsOnly(event.target.value).slice(0, MAX_AMOUNT_DIGITS)
   model[field] = value
   event.target.value = value
 }

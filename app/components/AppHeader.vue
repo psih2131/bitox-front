@@ -33,7 +33,7 @@
               v-if="header?.call_btn_text"
               type="button"
               class="header__callback"
-              @click="openCallbackModal"
+              @click="openConsultationModal"
             >
               {{ header.call_btn_text }}
             </button>
@@ -275,7 +275,19 @@ const [
     `${urlApi}/api/individuals-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
   ),
   useFetch(
-    `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&fields[2]=title_nav_meny&fields[3]=add_to_nav_menu_individual&fields[4]=add_to_nav_menu_import&fields[5]=add_to_nav_menu_export&pagination[pageSize]=100`,
+    [
+      `${urlApi}/api/transfers-pages?fields[0]=title`,
+      'fields[1]=slug',
+      'fields[2]=title_nav_meny',
+      'fields[3]=add_to_nav_menu_individual',
+      'fields[4]=add_to_nav_menu_import',
+      'fields[5]=add_to_nav_menu_export',
+      'fields[6]=nav_meny_title_individual',
+      'fields[7]=nav_meny_title_import',
+      'fields[8]=nav_meny_title_export',
+      'fields[9]=nav_meny_title_transfers',
+      'pagination[pageSize]=100',
+    ].join('&'),
   ),
   useFetch(
     `${urlApi}/api/exchange-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
@@ -342,15 +354,24 @@ function openCallbackModal() {
   modalStore.open(MODAL_NAMES.callback)
 }
 
-function getTransferNavTitle(page) {
-  return page.title_nav_meny?.trim() || page.title
+const TRANSFER_NAV_TITLE_FIELDS = {
+  individual: 'nav_meny_title_individual',
+  import: 'nav_meny_title_import',
+  export: 'nav_meny_title_export',
+  transfers: 'nav_meny_title_transfers',
 }
 
-function mapTransferNavLinks(pages) {
+function getTransferNavTitle(page, menuKey) {
+  const specificTitle = page[TRANSFER_NAV_TITLE_FIELDS[menuKey]]?.trim()
+
+  return specificTitle || page.title_nav_meny?.trim() || page.title
+}
+
+function mapTransferNavLinks(pages, menuKey) {
   return [...pages]
     .map((page) => ({
       key: page.documentId,
-      label: getTransferNavTitle(page),
+      label: getTransferNavTitle(page, menuKey),
       to: `/transfers/${page.slug}`,
     }))
     .sort((a, b) => a.label.localeCompare(b.label, 'ru'))
@@ -370,7 +391,10 @@ const businessMega = computed(() => {
         label: page.title,
         to: `/business/${page.slug}`,
       })),
-    ...mapTransferNavLinks(transfersPages.filter((page) => page.add_to_nav_menu_import)),
+    ...mapTransferNavLinks(
+      transfersPages.filter((page) => page.add_to_nav_menu_import),
+      'import',
+    ),
   ]
 
   const exportLinks = [
@@ -381,7 +405,10 @@ const businessMega = computed(() => {
         label: page.title,
         to: `/business/${page.slug}`,
       })),
-    ...mapTransferNavLinks(transfersPages.filter((page) => page.add_to_nav_menu_export)),
+    ...mapTransferNavLinks(
+      transfersPages.filter((page) => page.add_to_nav_menu_export),
+      'export',
+    ),
   ]
 
   return [
@@ -410,6 +437,7 @@ const privateClientsMega = computed(() => {
 
   const transfersLinks = mapTransferNavLinks(
     transfersPages.filter((page) => page.add_to_nav_menu_individual),
+    'individual',
   )
 
   return [
@@ -450,7 +478,7 @@ const exchangeMega = computed(() => {
 const transfersMega = computed(() => {
   const transfersPages = transfersPagesResponse.value?.data ?? []
 
-  const links = mapTransferNavLinks(transfersPages)
+  const links = mapTransferNavLinks(transfersPages, 'transfers')
 
   if (!links.length) return []
 
