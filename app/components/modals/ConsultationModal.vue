@@ -104,6 +104,7 @@ async function handleSubmit() {
   if (!canSubmit.value || isSubmitting.value) return
 
   await submit('/api/forms/consultation', {
+    title_form: 'Консультация',
     phone: phone.value.trim(),
     personalConsent: personalConsent.value,
     offerConsent: offerConsent.value,

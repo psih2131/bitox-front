@@ -117,7 +117,9 @@
           </div>
 
           <div class="partner-calc-sec__actions">
-            <button type="submit" class="app-btn partner-calc-sec__btn">Рассчитать</button>
+            <button type="button" class="app-btn partner-calc-sec__btn" @click="openConsultationModal">
+              Рассчитать
+            </button>
 
             <p class="partner-calc-sec__note">
               Приведены ориентировочные значения. Итоговый размер дохода зависит от направления
@@ -157,10 +159,16 @@ import cardsImage from '~/assets/images/gr-5.png'
 import coin1 from '~/assets/images/coin-1.png'
 import coin2 from '~/assets/images/coin-2.png'
 import coin3 from '~/assets/images/coin-3.png'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
+const modalStore = useModalStore()
 const sectionRef = ref(null)
 const currencyRef = ref(null)
 const isCurrencyOpen = ref(false)
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const amount = ref(100000)
 const commission = ref(1.5)

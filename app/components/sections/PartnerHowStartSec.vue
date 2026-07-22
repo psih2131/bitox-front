@@ -36,7 +36,7 @@
 
             <div class="partner-how-start-sec__card-media">
               <img
-                :src="illustration"
+                :src="box2ImageUrl"
                 alt=""
                 class="partner-how-start-sec__img"
                 width="648"
@@ -78,14 +78,21 @@
 
 <script setup>
 import gsap from 'gsap'
-import illustration from '~/assets/images/gr-12.png'
+import fallbackIllustration from '~/assets/images/gr-12.png'
+import { getStrapiMediaUrl } from '~/utils/strapi'
 
-defineProps({
+const props = defineProps({
   section: {
     type: Object,
     required: true,
   },
 })
+
+const apiUrl = useRuntimeConfig().public.apiUrl
+
+const box2ImageUrl = computed(
+  () => getStrapiMediaUrl(props.section.image_for_box_2, apiUrl) || fallbackIllustration,
+)
 
 const sectionRef = ref(null)
 

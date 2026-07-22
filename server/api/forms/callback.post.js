@@ -1,4 +1,4 @@
-import { escapeHtml, formatConsent, sendTelegramMessage } from '../../utils/telegram'
+import { createFormRequest, escapeHtml, formatConsent, notifyTelegramSafe } from '../../utils/form-request'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -8,6 +8,8 @@ export default defineEventHandler(async (event) => {
   const problem = body?.problem?.trim()
   const paymentVolume = body?.paymentVolume?.trim()
   const countriesCurrencies = body?.countriesCurrencies?.trim()
+  const titleForm = body?.title_form?.trim() || 'Обратный звонок'
+  const urlPage = body?.url_page?.trim() || ''
   const personalConsent = Boolean(body?.personalConsent)
   const offerConsent = Boolean(body?.offerConsent)
   const marketingConsent = Boolean(body?.marketingConsent)
@@ -26,9 +28,20 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  await createFormRequest(event, {
+    title_form: titleForm,
+    url_page: urlPage,
+    name,
+    phone,
+    text_1: problem || '',
+    text_2: paymentVolume || '',
+    text_3: countriesCurrencies || '',
+  })
+
   const message = [
-    '<b>Новая заявка: Обратный звонок</b>',
+    `<b>Новая заявка: ${escapeHtml(titleForm)}</b>`,
     '',
+    `<b>Страница:</b> ${escapeHtml(urlPage || '—')}`,
     `<b>Имя:</b> ${escapeHtml(name)}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
     `<b>Проблема:</b> ${escapeHtml(problem || '—')}`,
@@ -40,7 +53,7 @@ export default defineEventHandler(async (event) => {
     `<b>Рекламная рассылка:</b> ${formatConsent(marketingConsent)}`,
   ].join('\n')
 
-  await sendTelegramMessage(event, message)
+  await notifyTelegramSafe(event, message)
 
   return { ok: true }
 })

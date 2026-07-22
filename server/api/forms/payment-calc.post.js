@@ -1,4 +1,4 @@
-import { escapeHtml, sendTelegramMessage } from '../../utils/telegram'
+import { createFormRequest, escapeHtml, notifyTelegramSafe } from '../../utils/form-request'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -6,30 +6,32 @@ export default defineEventHandler(async (event) => {
   const amount = body?.amount?.trim()
   const phone = body?.phone?.trim()
   const currency = body?.currency?.trim()
+  const titleForm = body?.title_form?.trim() || 'Рассчитайте платеж'
+  const urlPage = body?.url_page?.trim() || ''
 
-  if (!amount || !phone) {
+  if (!phone) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Amount and phone are required',
+      statusMessage: 'Phone is required',
     })
   }
 
-  if (!currency) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Currency is required',
-    })
-  }
+  await createFormRequest(event, {
+    title_form: titleForm,
+    url_page: urlPage,
+    phone,
+  })
 
   const message = [
-    '<b>Новая заявка: Рассчитать платеж</b>',
+    `<b>Новая заявка: ${escapeHtml(titleForm)}</b>`,
     '',
-    `<b>Сумма:</b> ${escapeHtml(amount)} ${escapeHtml(currency)}`,
+    `<b>Страница:</b> ${escapeHtml(urlPage || '—')}`,
+    `<b>Сумма:</b> ${escapeHtml(amount || '—')}${currency ? ` ${escapeHtml(currency)}` : ''}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
     '<b>Согласие на обработку ПД и рекламу:</b> Да',
   ].join('\n')
 
-  await sendTelegramMessage(event, message)
+  await notifyTelegramSafe(event, message)
 
   return { ok: true }
 })

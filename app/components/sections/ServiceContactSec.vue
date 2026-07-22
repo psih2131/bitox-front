@@ -75,6 +75,7 @@ async function handleSubmit() {
   if (!canSubmit.value || isSubmitting.value) return
 
   const success = await submit('/api/forms/contact', {
+    title_form: 'Стать клиентом',
     firstName: firstName.value.trim(),
     phone: phone.value.trim(),
     consent: consent.value,

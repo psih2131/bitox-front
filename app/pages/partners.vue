@@ -20,7 +20,7 @@ const urlApi = useRuntimeConfig().public.apiUrl
 const populate = [
   'populate[partnership_hero_sec][populate]=image',
   'populate[partnership_offer_section][populate][partnership_offer_items][populate]=image',
-  'populate[partnership_how_be_partner_sec]=true',
+  'populate[partnership_how_be_partner_sec][populate]=image_for_box_2',
   'populate[partnership_faq_sec][populate]=questions_list',
   'populate[seo_cluster][populate]=shareImage',
 ].join('&')

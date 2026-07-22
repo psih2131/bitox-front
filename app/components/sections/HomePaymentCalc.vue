@@ -171,9 +171,12 @@ async function handleSubmit() {
   if (!canSubmit.value || isSubmitting.value) return
 
   const success = await submit('/api/forms/payment-calc', {
+    title_form: 'Рассчитайте платеж',
     amount: amount.value.trim(),
     phone: phone.value.trim(),
     currency: selectedCurrency.value?.code || '',
+  }, {
+    yandexGoal: 'calc_form',
   })
 
   if (!success) return

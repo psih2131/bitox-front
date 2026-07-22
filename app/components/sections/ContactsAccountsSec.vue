@@ -1,5 +1,5 @@
 <template>
-  <section v-if="section" ref="sectionRef" class="contacts-accounts-sec">
+  <section v-if="sections.length" ref="sectionRef" class="contacts-accounts-sec">
     <div class="container">
       <nav class="contacts-accounts-sec__breadcrumbs" aria-label="Хлебные крошки">
         <NuxtLink to="/" class="contacts-accounts-sec__breadcrumb-link">Главная</NuxtLink>
@@ -7,7 +7,11 @@
         <span class="contacts-accounts-sec__breadcrumb-current">Официальные аккаунты</span>
       </nav>
 
-      <div class="contacts-accounts-sec__row">
+      <div
+        v-for="(section, index) in sections"
+        :key="section.id ?? index"
+        class="contacts-accounts-sec__row"
+      >
         <div class="contacts-accounts-sec__main">
           <div v-if="section.title" class="contacts-accounts-sec__title-wrap">
             <h1 class="contacts-accounts-sec__title" v-html="section.title" />
@@ -21,7 +25,7 @@
         <article class="contacts-accounts-sec__card">
           <div
             class="contacts-accounts-sec__avatar"
-            :style="avatarUrl ? { backgroundImage: `url(${avatarUrl})`, backgroundSize: 'cover' } : undefined"
+            :style="getAvatarStyle(section)"
             aria-hidden="true"
           />
 
@@ -33,10 +37,10 @@
             {{ section.telegram_subtitle }}
           </p>
 
-          <p v-if="tgUsers.length" class="contacts-accounts-sec__card-login">
+          <p v-if="getTgUsers(section).length" class="contacts-accounts-sec__card-login">
             Логин:<br>
-            <template v-for="(user, index) in tgUsers" :key="user.id ?? index">
-              <template v-if="index > 0">, а также </template>
+            <template v-for="(user, userIndex) in getTgUsers(section)" :key="user.id ?? userIndex">
+              <template v-if="userIndex > 0">, а также </template>
               <a
                 :href="user.link"
                 target="_blank"
@@ -58,20 +62,26 @@
 import gsap from 'gsap'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
-const props = defineProps({
-  section: {
-    type: Object,
-    required: true,
+defineProps({
+  sections: {
+    type: Array,
+    default: () => [],
   },
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl
 
-const avatarUrl = computed(() => getStrapiMediaUrl(props.section.telegram_img, apiUrl))
+function getAvatarStyle(section) {
+  const avatarUrl = getStrapiMediaUrl(section?.telegram_img, apiUrl)
 
-const tgUsers = computed(() =>
-  (props.section.tg_users ?? []).filter((user) => user?.title && user?.link),
-)
+  return avatarUrl
+    ? { backgroundImage: `url(${avatarUrl})`, backgroundSize: 'cover' }
+    : undefined
+}
+
+function getTgUsers(section) {
+  return (section?.tg_users ?? []).filter((user) => user?.title && user?.link)
+}
 
 const sectionRef = ref(null)
 

@@ -20,7 +20,11 @@
           {{ section.subtitle }}
         </p>
 
-        <AppClientBtn v-if="section.button_text" class="partner-hero-sec__btn">
+        <AppClientBtn
+          v-if="section.button_text"
+          class="partner-hero-sec__btn"
+          @click="openConsultationModal"
+        >
           {{ section.button_text }}
         </AppClientBtn>
       </div>
@@ -40,6 +44,7 @@
 <script setup>
 import gsap from 'gsap'
 import fallbackHeroImage from '~/assets/images/gr-8.png'
+import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
 const props = defineProps({
@@ -50,10 +55,15 @@ const props = defineProps({
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl
+const modalStore = useModalStore()
 
 const heroImageUrl = computed(
   () => getStrapiMediaUrl(props.section.image, apiUrl) || fallbackHeroImage,
 )
+
+function openConsultationModal() {
+  modalStore.open(MODAL_NAMES.consultation)
+}
 
 const sectionRef = ref(null)
 

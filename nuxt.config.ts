@@ -14,8 +14,8 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: 'robots', content: 'noindex, nofollow' },
-        { name: 'googlebot', content: 'noindex, nofollow' },
+        { name: 'robots', content: 'index, follow' },
+        { name: 'googlebot', content: 'index, follow' },
         { name: 'google-site-verification', content: '3TtbXpC5IYhG4cn4bzR2ZmTXWVhBR_QTUYWA6vo70co' },
         { name: 'yandex-verification', content: 'c5a2c5999ba8a5e0' },
         { name: 'description', content: 'Bitox - это биржа криптовалют, которая позволяет пользователям покупать и продавать криптовалюты с использованием банковских карт. Bitox - это биржа криптовалют, которая позволяет пользователям покупать и продавать криптовалюты с использованием банковских карт.' },
@@ -49,14 +49,6 @@ export default defineNuxtConfig({
     },
   },
 
-  routeRules: {
-    '/**': {
-      headers: {
-        'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet',
-      },
-    },
-  },
-  
   css: ['~/assets/scss/main.scss', 'vue-yandex-maps/css'],
   modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
 

@@ -1,6 +1,6 @@
 <template>
   <main class="contacts-page">
-    <ContactsAccountsSec v-if="contact?.contacts_hero_sec" :section="contact.contacts_hero_sec" />
+    <ContactsAccountsSec v-if="heroSections.length" :sections="heroSections" />
     <AboutContactsSec v-if="contact?.contacts_map_sec" :section="contact.contacts_map_sec" />
     <AboutOfficesSec v-if="contact?.contact_offices_sec" :section="contact.contact_offices_sec" />
     <ServiceContactSec />
@@ -21,6 +21,15 @@ const populate = [
 const { data: contactResponse } = await useFetch(`${urlApi}/api/contact?${populate}`)
 
 const contact = computed(() => contactResponse.value?.data)
+
+const heroSections = computed(() => {
+  const sections = contact.value?.contacts_hero_sec
+
+  if (!sections) return []
+  if (Array.isArray(sections)) return sections.filter(Boolean)
+
+  return [sections]
+})
 
 useSeoMeta({
   title: 'Контакты — Bitox',
