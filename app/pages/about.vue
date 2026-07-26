@@ -2,7 +2,7 @@
   <main class="about-page">
     <AboutHeroSec v-if="about?.section_1__hero" :section="about.section_1__hero" />
     <AboutCompanySec v-if="about?.about_text_sec" :section="about.about_text_sec" />
-    <HomeTeamSec v-if="about?.about_team_sec" :section="about.about_team_sec" />
+    <!-- <HomeTeamSec v-if="about?.about_team_sec" :section="about.about_team_sec" /> -->
     <AboutLifeSec v-if="about?.about_gallery_sec" :section="about.about_gallery_sec" />
     <AboutContactsSec v-if="about?.about_contacts_sec" :section="about.about_contacts_sec" />
     <AboutOfficesSec v-if="about?.about_offices_sec" :section="about.about_offices_sec" />
