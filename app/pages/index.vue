@@ -1,6 +1,6 @@
 <template>
   <main class="home-page">
-    <!-- <HomeHeroSec v-if="home?.home_hero_sec" :section="home.home_hero_sec" />
+    <HomeHeroSec v-if="home?.home_hero_sec" :section="home.home_hero_sec" />
 
     <HomeStatsSec />
 
@@ -14,7 +14,7 @@
 
     <HomeBenefitsSec />
 
-    <HomeReviewsSec /> -->
+    <HomeReviewsSec />
 
     <HomeMediaSec v-if="home?.home_media_about_us" :section="home.home_media_about_us" />
 
@@ -24,7 +24,7 @@
 
     <HomeFaqSec v-if="home?.home_faq_sec" :section="home.home_faq_sec" />
 
-    <!-- <HomeCtaSec v-if="home?.home_down_ctr_v1_sec" :section="home.home_down_ctr_v1_sec" /> -->
+    <HomeCtaSec v-if="home?.home_down_ctr_v1_sec" :section="home.home_down_ctr_v1_sec" />
   </main>
 </template>
 
