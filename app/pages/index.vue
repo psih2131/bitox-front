@@ -15,10 +15,10 @@
     <HomeBenefitsSec />
 
     <HomeReviewsSec /> -->
+<!-- 
+    <HomeMediaSec v-if="home?.home_media_about_us" :section="home.home_media_about_us" /> -->
 
-    <HomeMediaSec v-if="home?.home_media_about_us" :section="home.home_media_about_us" />
-
-    <HomeTeamSec v-if="home?.home_team_sec" :section="home.home_team_sec" />
+    <!-- <HomeTeamSec v-if="home?.home_team_sec" :section="home.home_team_sec" /> -->
 
     <HomeHowStartSec v-if="home?.home_how_start_sec" :section="home.home_how_start_sec" />
 
