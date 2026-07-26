@@ -471,7 +471,7 @@ const exchangeMega = computed(() => {
       id: 'exchange-1',
       title: 'Обмен криптовалюты',
       links,
-      columns: 4,
+      columns: 1,
     },
   ]
 })

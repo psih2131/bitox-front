@@ -5,6 +5,7 @@
     <HomeStatsSec />
     <ServiceInvoicesSec v-if="invoiceSingle.services_invoice_sec" :section="invoiceSingle.services_invoice_sec" />
     <ServiceEconomySec />
+    <HomeChoiceSec />
     <HomeBenefitsSec />
     <BusinessCountriesSec
       v-if="invoices.length"

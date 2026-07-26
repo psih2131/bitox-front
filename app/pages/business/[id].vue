@@ -8,7 +8,7 @@
     <ServiceInvoicesSec v-if="businessPage.services_invoice_sec" :section="businessPage.services_invoice_sec" />
 
     <ServiceEconomySec />
-
+    <HomeChoiceSec />
     <HomeBenefitsSec />
 
     <BusinessCountriesSec

@@ -198,7 +198,7 @@
   &--wide {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 40px;
+    gap: 10px;
     align-items: stretch;
 
     .header__mega-card {
