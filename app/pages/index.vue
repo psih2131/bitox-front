@@ -24,7 +24,7 @@
 
     <HomeFaqSec v-if="home?.home_faq_sec" :section="home.home_faq_sec" />
 
-    <HomeCtaSec v-if="home?.home_down_ctr_v1_sec" :section="home.home_down_ctr_v1_sec" />
+    <!-- <HomeCtaSec v-if="home?.home_down_ctr_v1_sec" :section="home.home_down_ctr_v1_sec" /> -->
   </main>
 </template>
 

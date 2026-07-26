@@ -1,5 +1,5 @@
 <template>
-  <footer class="app-footer">
+  <!-- <footer class="app-footer">
     <div class="container">
       <div class="app-footer__card">
         <div class="app-footer__grid">
@@ -106,7 +106,7 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 </template>
 
 <script setup>
