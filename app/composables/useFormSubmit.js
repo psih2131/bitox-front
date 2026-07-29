@@ -12,6 +12,10 @@ function reachYandexGoal(goal) {
   }
 }
 
+function getErrorStatus(error) {
+  return error?.statusCode || error?.status || error?.response?.status || null
+}
+
 export function useFormSubmit() {
   const modalStore = useModalStore()
   const isSubmitting = ref(false)
@@ -29,6 +33,10 @@ export function useFormSubmit() {
   async function submit(endpoint, body = {}, options = {}) {
     if (isSubmitting.value) return false
 
+    if (typeof options.validate === 'function' && !options.validate()) {
+      return false
+    }
+
     isSubmitting.value = true
 
     try {
@@ -45,7 +53,12 @@ export function useFormSubmit() {
       modalStore.close()
       modalStore.open(MODAL_NAMES.formResult, { type: 'success' })
       return true
-    } catch {
+    } catch (error) {
+      // Невалидные данные — не показываем «ошибку сервера»
+      if (getErrorStatus(error) === 400) {
+        return false
+      }
+
       modalStore.close()
       modalStore.open(MODAL_NAMES.formResult, { type: 'error' })
       return false

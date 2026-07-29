@@ -150,7 +150,10 @@ watch(
 )
 
 const canSubmit = computed(
-  () => amount.value.trim() && phone.value.replace(/\D/g, '').length === 11,
+  () =>
+    amount.value.trim()
+    && phone.value.replace(/\D/g, '').length === 11
+    && Boolean(selectedCurrency.value?.code),
 )
 
 function onPhoneKeydown(event) {
@@ -168,7 +171,7 @@ function onPhoneInput({ target }) {
 }
 
 async function handleSubmit() {
-  if (!canSubmit.value || isSubmitting.value) return
+  if (isSubmitting.value) return
 
   const success = await submit('/api/forms/payment-calc', {
     title_form: 'Рассчитайте платеж',
@@ -177,6 +180,7 @@ async function handleSubmit() {
     currency: selectedCurrency.value?.code || '',
   }, {
     yandexGoal: 'calc_form',
+    validate: () => canSubmit.value,
   })
 
   if (!success) return
