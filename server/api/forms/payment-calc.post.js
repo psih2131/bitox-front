@@ -1,3 +1,4 @@
+import { buildPaymentCalcBitrixFields, notifyBitrixLeadSafe } from '../../utils/bitrix'
 import { createFormRequest, escapeHtml, notifyTelegramSafe } from '../../utils/form-request'
 
 export default defineEventHandler(async (event) => {
@@ -16,12 +17,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  await createFormRequest(event, {
-    title_form: titleForm,
-    url_page: urlPage,
-    phone,
-  })
-
   const message = [
     `<b>Новая заявка: ${escapeHtml(titleForm)}</b>`,
     '',
@@ -31,7 +26,27 @@ export default defineEventHandler(async (event) => {
     '<b>Согласие на обработку ПД и рекламу:</b> Да',
   ].join('\n')
 
-  await notifyTelegramSafe(event, message)
+  const bitrixFields = buildPaymentCalcBitrixFields({
+    title: titleForm,
+    phone,
+    urlPage,
+    amount,
+    currency,
+  })
+
+  const [strapiResult] = await Promise.allSettled([
+    createFormRequest(event, {
+      title_form: titleForm,
+      url_page: urlPage,
+      phone,
+    }),
+    notifyTelegramSafe(event, message),
+    notifyBitrixLeadSafe(event, bitrixFields),
+  ])
+
+  if (strapiResult.status === 'rejected') {
+    throw strapiResult.reason
+  }
 
   return { ok: true }
 })

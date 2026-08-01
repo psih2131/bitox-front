@@ -1,3 +1,4 @@
+import { buildContactBitrixFields, notifyBitrixLeadSafe } from '../../utils/bitrix'
 import { createFormRequest, escapeHtml, formatConsent, notifyTelegramSafe } from '../../utils/form-request'
 
 export default defineEventHandler(async (event) => {
@@ -23,13 +24,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  await createFormRequest(event, {
-    title_form: titleForm,
-    url_page: urlPage,
-    name: firstName || '',
-    phone,
-  })
-
   const message = [
     `<b>Новая заявка: ${escapeHtml(titleForm)}</b>`,
     '',
@@ -39,7 +33,28 @@ export default defineEventHandler(async (event) => {
     `<b>Согласие на обработку ПД:</b> ${formatConsent(consent)}`,
   ].join('\n')
 
-  await notifyTelegramSafe(event, message)
+  const bitrixFields = buildContactBitrixFields({
+    title: titleForm,
+    name: firstName,
+    phone,
+    urlPage,
+    consent,
+  })
+
+  const [strapiResult] = await Promise.allSettled([
+    createFormRequest(event, {
+      title_form: titleForm,
+      url_page: urlPage,
+      name: firstName || '',
+      phone,
+    }),
+    notifyTelegramSafe(event, message),
+    notifyBitrixLeadSafe(event, bitrixFields),
+  ])
+
+  if (strapiResult.status === 'rejected') {
+    throw strapiResult.reason
+  }
 
   return { ok: true }
 })

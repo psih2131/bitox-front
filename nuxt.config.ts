@@ -89,6 +89,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     botToken: process.env.NUXT_BOT_TOKEN,
     groupId: process.env.NUXT_GROUP_ID,
+    bitrixWebhookUrl: process.env.NUXT_BITRIX_WEBHOOK_URL || 'https://bitox.bitrix24.ru/rest/2120/0ocvb8ovrjgwim7z/',
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL || process.env.PUBLIC_API_URL || 'http://localhost:1337',
     },
