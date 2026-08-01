@@ -12,7 +12,11 @@
 const counterStore = useCounterStore()
 const urlApi = useRuntimeConfig().public.apiUrl
 
-const { data: globalInfoResponse } = await useFetch(`${urlApi}/api/global-info`)
+const { data: globalInfoResponse } = await useFetch(
+  `${urlApi}/api/global-info?populate[modal_30_sec][populate]=image`,
+)
 
 counterStore.setGlobalInfo(globalInfoResponse.value?.data ?? null)
+
+usePromoModalTrigger()
 </script>
