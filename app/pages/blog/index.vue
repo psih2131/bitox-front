@@ -56,8 +56,20 @@ function activeTagFunction(tagId) {
   activeTag.value = tagId
 }
 
+const requestUrl = useRequestURL()
+const route = useRoute()
+
 useSeoMeta({
   title: 'Блог — Bitox',
   description: 'Статьи и новости Bitox о международных платежах, криптовалюте и финансовых решениях для бизнеса и частных клиентов.',
+})
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: `${requestUrl.origin}${route.path}`,
+    },
+  ],
 })
 </script>

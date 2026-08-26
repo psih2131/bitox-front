@@ -1,6 +1,6 @@
 <template>
   <div class="payment-calc">
-    <h2 class="payment-calc__title">Рассчитайте платеж</h2>
+    <div class="payment-calc__title">Рассчитайте платеж</div>
 
     <form class="payment-calc__form" @submit.prevent="handleSubmit">
       <label class="payment-calc__field">

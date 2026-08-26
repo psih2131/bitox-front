@@ -52,9 +52,11 @@ const { data: homeResponse } = await useFetch(`${urlApi}/api/home?${populate}`)
 const home = computed(() => homeResponse.value?.data)
 const pageSeo = homeResponse.value?.data?.Seo
 
-useSeoMeta({
-  title: pageSeo?.metaTitle || 'Bitox',
-  description: pageSeo?.metaDescription || 'Bitox',
-  ogImage: getStrapiMediaUrl(pageSeo?.shareImage, urlApi) || undefined,
-})
+// useSeoMeta({
+//   title: pageSeo?.metaTitle || 'Bitox',
+//   description: pageSeo?.metaDescription || 'Bitox',
+//   ogImage: getStrapiMediaUrl(pageSeo?.shareImage, urlApi) || undefined,
+// })
+
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

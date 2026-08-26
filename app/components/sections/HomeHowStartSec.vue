@@ -1,7 +1,17 @@
 <template>
   <section class="how-start-sec">
     <div class="container">
-      <h2 class="how-start-sec__title">{{ sectionTitle }}</h2>
+
+      <div class="how-start-sec__title-wrapper">
+
+        <div class="how-start-sec__title">
+          {{ sectionTitle }}
+
+          <h2  class="how-start-sec__badge">Наши кейсы</h2>
+        </div>
+
+      </div>
+      
 
       <div
         v-if="clusters.length > 1"
@@ -9,7 +19,7 @@
         role="tablist"
         aria-label="Тип операции"
       >
-        <button
+        <h2
           v-for="cluster in clusters"
           :key="cluster.id"
           type="button"
@@ -20,7 +30,7 @@
           @click="activeTab = cluster.id"
         >
           {{ cluster.label }}
-        </button>
+        </h2>
       </div>
 
       <div class="how-start-sec__grid">
@@ -30,7 +40,7 @@
           class="how-start-sec__card"
         >
           <span class="how-start-sec__card-step">Шаг {{ step.step }}</span>
-          <h3 class="how-start-sec__card-title">{{ step.title }}</h3>
+          <div class="how-start-sec__card-title">{{ step.title }}</div>
           <p class="how-start-sec__card-text">{{ step.text }}</p>
         </article>
       </div>

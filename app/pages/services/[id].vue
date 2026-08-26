@@ -1,7 +1,7 @@
 <template>
   <main v-if="service" class="service-page">
     <ServiceHeroSec v-if="service.service_hero_sec" :section="service.service_hero_sec" />
-    <CryptoExchangeCalcSec />
+    <CryptoExchangeCalcSec :countryName="service.title" />
     <HomeStatsSec />
     <ServiceInvoicesSec v-if="service.services_invoice_sec" :section="service.services_invoice_sec" />
     <ServiceEconomySec />
@@ -55,9 +55,11 @@ if (!serviceId.value || !serviceResponse.value?.data) {
 
 const pageSeo = serviceResponse.value.data.Seo
 
-useSeoMeta({
-  title: pageSeo.metaTitle || 'Bitox',
-  description: pageSeo.metaDescription || 'Bitox',
-  ogImage: getStrapiMediaUrl(pageSeo.shareImage, urlApi) || undefined,
-})
+// useSeoMeta({
+//   title: pageSeo.metaTitle || 'Bitox',
+//   description: pageSeo.metaDescription || 'Bitox',
+//   ogImage: getStrapiMediaUrl(pageSeo.shareImage, urlApi) || undefined,
+// })
+
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

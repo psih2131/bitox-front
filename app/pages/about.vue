@@ -11,6 +11,8 @@
 </template>
 
 <script setup>
+import { STRAPI_SEO_POPULATE_PARTS } from '~/utils/strapi'
+
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const populate = [
@@ -22,15 +24,13 @@ const populate = [
   'populate[about_gallery_sec][populate][img_gallery][populate]=image',
   'populate[about_offices_sec][populate][offices_map_image]=true',
   'populate[about_offices_sec][populate][offices_list]=true',
+  ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
 
 const { data: aboutResponse } = await useFetch(`${urlApi}/api/about?${populate}`)
 
 const about = computed(() => aboutResponse.value?.data)
 
-useSeoMeta({
-  title: 'О Bitox — Bitox',
-  description:
-    'О компании Bitox: цифры, команда, офисы и контакты. Международные расчёты и обмен криптовалюты для бизнеса и частных клиентов.',
-})
+const pageSeo = aboutResponse.value?.data?.Seo
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

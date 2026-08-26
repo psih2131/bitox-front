@@ -31,11 +31,13 @@ const partnership = computed(() => partnershipResponse.value?.data)
 
 const pageSeo = partnershipResponse.value?.data?.seo_cluster
 
-useSeoMeta({
-  title: pageSeo?.metaTitle || 'Партнерская программа — Bitox',
-  description:
-    pageSeo?.metaDescription ||
-    'Партнерская программа для агентов до 30%. Приводите клиентов на обмен криптовалюты или международный платеж и получайте комиссию с каждой сделки.',
-  ogImage: getStrapiMediaUrl(pageSeo?.shareImage, urlApi) || undefined,
-})
+// useSeoMeta({
+//   title: pageSeo?.metaTitle || 'Партнерская программа — Bitox',
+//   description:
+//     pageSeo?.metaDescription ||
+//     'Партнерская программа для агентов до 30%. Приводите клиентов на обмен криптовалюты или международный платеж и получайте комиссию с каждой сделки.',
+//   ogImage: getStrapiMediaUrl(pageSeo?.shareImage, urlApi) || undefined,
+// })
+
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

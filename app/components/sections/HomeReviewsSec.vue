@@ -1,7 +1,7 @@
 <template>
   <section v-if="apiReviews.length" ref="sectionRef" class="home-reviews-sec">
     <div class="container">
-      <h2 class="home-reviews-sec__title">Отзывы</h2>
+      <h2 class="home-reviews-sec__title">Отзывы о Bitox</h2>
 
       <div class="home-reviews-sec__filters">
         <a

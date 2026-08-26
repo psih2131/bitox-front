@@ -33,7 +33,7 @@
             </span>
           </div>
 
-          <p class="media-sec__card-title">{{ item.title }}</p>
+          <h3 class="media-sec__card-title">{{ item.title }}</h3>
         </a>
       </div>
 
@@ -85,7 +85,7 @@ const defaultPublications = [
 ]
 
 const sectionTitle = computed(() => props.section?.title || 'СМИ о нас')
-const sectionSubtitle = computed(() => props.section?.subtitle || 'Публикации о bitox')
+const sectionSubtitle = computed(() => props.section?.subtitle || null)
 
 const allPublications = computed(() => {
   if (!props.section?.posts?.length) return defaultPublications

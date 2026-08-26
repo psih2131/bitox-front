@@ -8,6 +8,8 @@
 </template>
 
 <script setup>
+import { STRAPI_SEO_POPULATE_PARTS } from '~/utils/strapi'
+
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const populate = [
@@ -16,6 +18,7 @@ const populate = [
   'populate[contacts_map_sec]=true',
   'populate[contact_offices_sec][populate][offices_map_image]=true',
   'populate[contact_offices_sec][populate][offices_list]=true',
+  ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
 
 const { data: contactResponse } = await useFetch(`${urlApi}/api/contact?${populate}`)
@@ -31,9 +34,6 @@ const heroSections = computed(() => {
   return [sections]
 })
 
-useSeoMeta({
-  title: 'Контакты — Bitox',
-  description:
-    'Официальные аккаунты, контакты и офисы Bitox. Проверьте менеджера, свяжитесь с нами и найдите ближайший офис.',
-})
+const pageSeo = contactResponse.value?.data?.Seo
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

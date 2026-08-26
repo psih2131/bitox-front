@@ -50,11 +50,13 @@ if (!slug.value || !exchange.value) {
 
 const pageSeo = exchange.value?.Seo_cluster?.[0]
 
-useSeoMeta({
-  title: pageSeo?.metaTitle || 'Обмен криптовалюты — Bitox',
-  description:
-    pageSeo?.metaDescription ||
-    'Пункты приёма и выдачи наличных в России и по всему миру. Обмен криптовалюты для бизнеса и частных лиц.',
-  ogImage: getStrapiMediaUrl(pageSeo?.shareImage, urlApi) || undefined,
-})
+// useSeoMeta({
+//   title: pageSeo?.metaTitle || 'Обмен криптовалюты — Bitox',
+//   description:
+//     pageSeo?.metaDescription ||
+//     'Пункты приёма и выдачи наличных в России и по всему миру. Обмен криптовалюты для бизнеса и частных лиц.',
+//   ogImage: getStrapiMediaUrl(pageSeo?.shareImage, urlApi) || undefined,
+// })
+
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

@@ -21,7 +21,7 @@
                   alt=""
                 />
               </span>
-              <h3 class="benefits-sec__card-title">{{ card.title }}</h3>
+              <div class="benefits-sec__card-title">{{ card.title }}</div>
             </div>
 
             <p class="benefits-sec__card-text">{{ card.text }}</p>

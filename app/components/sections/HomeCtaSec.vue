@@ -10,11 +10,11 @@
       />
 
       <div class="cta-sec__content">
-        <h2 v-if="sectionTitleLines.length" class="cta-sec__title">
+        <div v-if="sectionTitleLines.length" class="cta-sec__title">
           <template v-for="(line, index) in sectionTitleLines" :key="index">
             {{ line }}<br v-if="index < sectionTitleLines.length - 1" />
           </template>
-        </h2>
+        </div>
 
         <div class="cta-sec__actions">
           <AppClientBtn @click="openConsultationModal">{{ section.button_text_yellow }}</AppClientBtn>

@@ -39,11 +39,14 @@ if (!slug.value || !post.value) {
   })
 }
 
-useStrapiSeo(post.value.seo_cluster, {
-  apiUrl: urlApi,
-  fallbackTitle: post.value.post_title || 'Bitox',
-  fallbackDescription: post.value.post_description || 'Bitox',
-  fallbackOgType: 'article',
-  fallbackOgImage: getStrapiMediaUrl(post.value.post_image, urlApi) || undefined,
-})
+// useStrapiSeo(post.value.seo_cluster, {
+//   apiUrl: urlApi,
+//   fallbackTitle: post.value.post_title || 'Bitox',
+//   fallbackDescription: post.value.post_description || 'Bitox',
+//   fallbackOgType: 'article',
+//   fallbackOgImage: getStrapiMediaUrl(post.value.post_image, urlApi) || undefined,
+// })
+
+const pageSeo = post.value?.seo_cluster
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

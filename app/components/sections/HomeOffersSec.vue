@@ -36,7 +36,7 @@
           <swiper-slide v-for="slide in slides" :key="slide.id">
             <div class="offers-sec__slide">
               <div class="offers-sec__slide-content">
-                <h3 v-if="slide.title" class="offers-sec__slide-title" v-html="slide.title"></h3>
+                <div v-if="slide.title" class="offers-sec__slide-title" v-html="slide.title"></div>
                 <p v-if="slide.text" class="offers-sec__slide-text" v-html="slide.text"></p>
                 <a v-if="slide.link" :href="slide.link" class="app-banner-btn">{{ slide.btn }}</a>
                 <AppBannerBtn v-else @click="openConsultationModal">{{ slide.btn }}</AppBannerBtn>

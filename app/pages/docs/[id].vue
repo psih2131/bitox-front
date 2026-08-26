@@ -61,9 +61,10 @@ function renderMarkdown(text) {
 
 const pageSeo = docResponse.value.data[0].seo
 
-useSeoMeta({
-  title: pageSeo.metaTitle,
-  description: pageSeo.metaDescription,
-  ogImage: getStrapiMediaUrl(pageSeo.shareImage, urlApi),
-})
+// useSeoMeta({
+//   title: pageSeo.metaTitle,
+//   description: pageSeo.metaDescription,
+//   ogImage: getStrapiMediaUrl(pageSeo.shareImage, urlApi),
+// })
+useStrapiSeo(pageSeo, { apiUrl: urlApi })
 </script>

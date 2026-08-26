@@ -3,7 +3,8 @@
     <div class="container">
       <div class="exchange-calc-sec__layout">
         <div class="exchange-calc-sec__form-card">
-          <h2 class="exchange-calc-sec__title">Калькулятор заявки</h2>
+          <h2 class="exchange-calc-sec__title"  v-if="countryName">Калькулятор перевода в {{ countryName }}</h2>
+          <h2 class="exchange-calc-sec__title"  v-else>Калькулятор перевода</h2>
 
           <div class="exchange-calc-sec__tabs" role="tablist" aria-label="Тип заявки">
             <button
@@ -353,6 +354,13 @@
 <script setup>
 import gsap from 'gsap'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const props = defineProps({
+  countryName: {
+    type: String,
+    required: true,
+  },
+})
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
