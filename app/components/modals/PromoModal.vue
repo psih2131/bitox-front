@@ -171,6 +171,7 @@ async function handleSubmit() {
     offerConsent: offerConsent.value,
     marketingConsent: false,
   }, {
+    yandexGoal: 'popup_success',
     validate: () => canSubmit.value,
   })
 }

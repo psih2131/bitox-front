@@ -50,7 +50,7 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/scss/main.scss', 'vue-yandex-maps/css'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt', '@nuxtjs/sitemap'],
 
   yandexMaps: {
     apikey: 'af5a38a2-5bf8-44de-bfbe-b30e278e9df4',
@@ -85,6 +85,77 @@ export default defineNuxtConfig({
       ignore: ['buttons/**', 'sections/**', 'faq/**', 'modals/**'],
     },
   ],
+
+  
+
+  site: {
+    url: 'https://bitox.global',
+  },
+
+
+  sitemap: {
+
+    sitemaps: {
+      pages: {
+        sources: [
+          '/api/__sitemap__/urls',
+        ]
+      },
+
+      posts: {
+        sources: [
+          '/api/__sitemap__/blog-posts',
+        ]
+      },
+
+      crypto_exchange: {
+        sources: [
+          '/api/__sitemap__/crypto-exchange',
+        ]
+      },
+
+      business_pages: {
+        sources: [
+          '/api/__sitemap__/business-pages',
+        ]
+      },
+
+      business_invoices: {
+        sources: [
+          '/api/__sitemap__/business-invoices',
+        ]
+      },
+
+      docs: {
+        sources: [
+          '/api/__sitemap__/docs',
+        ]
+      },
+
+      individuals: {
+        sources: [
+          '/api/__sitemap__/individuals',
+        ]
+      },
+
+      services: {
+        sources: [
+          '/api/__sitemap__/services',
+        ]
+      },
+
+      transfers: {
+        sources: [
+          '/api/__sitemap__/transfers',
+        ]
+      },
+
+
+
+    }
+
+  },
+
 
   runtimeConfig: {
     botToken: process.env.NUXT_BOT_TOKEN,

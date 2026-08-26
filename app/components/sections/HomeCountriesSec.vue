@@ -66,15 +66,15 @@
           class="countries-sec__slider-group"
           :aria-hidden="groupIndex === 2"
         >
-          <NuxtLink
+          <div
             v-for="(country, index) in sliderGroup"
             :key="`${groupIndex}-${country.id}-${index}`"
-            :to="`/transfers/${country.slug}`"
             class="countries-sec__pill"
+            @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
           >
             <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
             <span class="countries-sec__pill-name">{{ country.name }}</span>
-          </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -90,15 +90,15 @@
           class="countries-sec__slider-group"
           :aria-hidden="groupIndex === 2"
         >
-          <NuxtLink
+          <div
             v-for="(country, index) in sliderGroup"
             :key="`reverse-${groupIndex}-${country.id}-${index}`"
-            :to="`/transfers/${country.slug}`"
             class="countries-sec__pill"
+            @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
           >
             <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
             <span class="countries-sec__pill-name">{{ country.name }}</span>
-          </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -192,6 +192,11 @@ const showResults = computed(() => query.value.trim().length > 0 && filteredCoun
 
 function clearQuery() {
   query.value = ''
+}
+
+function goToCountry(path) {
+  if (!path) return
+  navigateTo(path)
 }
 
 let countriesAnimation
