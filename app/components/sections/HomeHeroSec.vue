@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="home-hero-sec">
+  <section class="home-hero-sec">
     <div class="container home-hero-sec__inner">
       <div class="home-hero-sec__left">
         <div class="home-hero-sec__title-wrap">
@@ -76,7 +76,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
 import swiftImage from '~/assets/images/swift.png'
 import cardsImage from '~/assets/images/gr-5.png'
 import coin1 from '~/assets/images/coin-1.png'
@@ -89,8 +88,6 @@ const props = defineProps({
     default: null,
   },
 })
-
-const sectionRef = ref(null)
 
 const defaultStatsCards = [
   { id: 1, value: 'с 10 до 22', text: 'на связи', dark: false },
@@ -119,57 +116,5 @@ const statsCards = computed(() => {
     text: item.subtitle || '',
     dark: !item.subtitle,
   }))
-})
-
-let heroAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  heroAnimation = gsap.context(() => {
-    gsap.from('.home-hero-sec__title-wrap', {
-      opacity: 0,
-      y: 32,
-      duration: 0.7,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.home-hero-sec__subtitle', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      delay: 0.1,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.home-hero-sec__stat', {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      stagger: 0.08,
-      delay: 0.2,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.payment-calc', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      delay: 0.15,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.home-hero-sec__deals', {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      delay: 0.35,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  heroAnimation?.revert()
 })
 </script>
