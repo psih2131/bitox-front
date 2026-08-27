@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   ssr: true,
 
   routeRules: {
-    '/': { swr: 600 },
+    '/': { swr: 6000 },
   },
 
   app: {
