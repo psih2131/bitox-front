@@ -132,11 +132,22 @@ const docsPagesCol3 = computed(() => docsPages.value.filter((_, index) => index 
 
 const contacts = computed(() => footer.value?.contacts_list ?? [])
 
+function getSocialLabel(link, alternativeText) {
+  const alt = alternativeText?.trim()
+  if (alt) return alt
+
+  const value = (link || '').toLowerCase()
+  if (value.includes('t.me') || value.includes('telegram') || value.startsWith('tg://')) return 'Telegram'
+  if (value.includes('whatsapp') || value.includes('wa.me')) return 'WhatsApp'
+  if (value.includes('max.ru')) return 'MAX'
+  return 'Социальная сеть'
+}
+
 const socials = computed(() =>
   (footer.value?.socials_media_links ?? []).map((item) => ({
     id: item.id,
     link: item.link,
-    name: item.icon?.alternativeText || '',
+    name: getSocialLabel(item.link, item.icon?.alternativeText),
     icon: getStrapiMediaUrl(item.icon, urlApi),
   })),
 )
