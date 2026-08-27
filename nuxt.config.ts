@@ -12,7 +12,8 @@ export default defineNuxtConfig({
   ssr: true,
 
   routeRules: {
-    '/': { swr: 6000 },
+    '/**': { swr: 600 },
+    '/api/forms/**': { cache: false },
   },
 
   app: {
@@ -38,10 +39,10 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          key: 'chatapp-widget',
+          key: 'yandex-metrika',
           type: 'text/javascript',
-          tagPosition: 'bodyClose',
-          innerHTML: `(function(w,d,u,j){ var s=d.createElement('script');s.defer=true; s.onload = function () { var s=d.createElement('script'); s.defer=true;s.src=j+'?'+(Date.now()/60000|0); var h=d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s,h);};s.src=u+'?'+(Date.now()/60000|0); var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h); })(window,document, "https://cdn-us-east-1.chatapp.online/cabinet.chatapp.online/widgetsFiles/83456/2026/07/03/51b84000-95fe-4ce5-b901-c756b326f944.js", "https://cdn-us-east-1.chatapp.online/cabinet.chatapp.online/external/widget/v3/index.js")`,
+          tagPosition: 'head',
+          innerHTML: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=110824008','ym');ym(110824008,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});`,
         },
       ],
     },
