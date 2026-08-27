@@ -1,5 +1,5 @@
 <template>
-  <section v-if="apiReviews.length" ref="sectionRef" class="home-reviews-sec">
+  <section v-if="apiReviews.length" class="home-reviews-sec">
     <div class="container">
       <h2 class="home-reviews-sec__title">Отзывы о Bitox</h2>
 
@@ -154,7 +154,6 @@
 
 
 <script setup>
-import gsap from 'gsap'
 import logo2gis from '~/assets/images/logos/review-2gis.svg'
 import logoZoon from '~/assets/images/logos/review-zoon.svg'
 import logoYandex from '~/assets/images/logos/review-yandex.svg'
@@ -175,7 +174,6 @@ const [{ data: reviewsResponse }, { data: categoriesResponse }] = await Promise.
   useFetch(`${urlApi}/api/reviews-categories?populate[img]=true&pagination[pageSize]=100`),
 ])
 
-const sectionRef = ref(null)
 const viewportRef = ref(null)
 const trackRef = ref(null)
 const activeCategoryId = ref(null)
@@ -386,7 +384,6 @@ function goToPage(index) {
   offset.value = currentIndex.value * getSlideStep()
 }
 
-let reviewsAnimation
 let resizeObserver
 
 onMounted(() => {
@@ -404,30 +401,9 @@ onMounted(() => {
   if (viewportRef.value) {
     resizeObserver.observe(viewportRef.value)
   }
-
-  if (!sectionRef.value) return
-
-  reviewsAnimation = gsap.context(() => {
-    gsap.from('.home-reviews-sec__title', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.home-reviews-sec__filters, .home-reviews-sec__count', {
-      opacity: 0,
-      y: 16,
-      duration: 0.5,
-      stagger: 0.1,
-      delay: 0.15,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
 })
 
 onUnmounted(() => {
   resizeObserver?.disconnect()
-  reviewsAnimation?.revert()
 })
 </script>

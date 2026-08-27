@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="offers-sec">
+  <section class="offers-sec">
     <div class="container">
       <div class="offers-sec__head">
         <h2 class="offers-sec__title">{{ sectionTitle }}</h2>
@@ -54,7 +54,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
 import AppBannerBtn from '~/components/buttons/AppBannerBtn.vue'
 import banner1 from '~/assets/images/banner-1.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
@@ -75,7 +74,6 @@ function openConsultationModal() {
 
 const apiUrl = useRuntimeConfig().public.apiUrl
 
-const sectionRef = ref(null)
 const swiperRef = ref(null)
 
 const defaultSlides = [
@@ -125,41 +123,5 @@ watch(slides, async () => {
 
   await nextTick()
   reInitialize()
-})
-
-let offersAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  offersAnimation = gsap.context(() => {
-    gsap.from('.offers-sec__title', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.offers-sec__slide-content > *', {
-      opacity: 0,
-      y: 24,
-      duration: 0.6,
-      stagger: 0.1,
-      delay: 0.25,
-      ease: 'power2.out',
-    })
-
-    gsap.from('.offers-sec__slide-img', {
-      opacity: 0,
-      x: 40,
-      duration: 0.7,
-      delay: 0.35,
-      ease: 'power2.out',
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  offersAnimation?.revert()
 })
 </script>

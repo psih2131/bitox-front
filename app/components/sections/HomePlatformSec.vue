@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="platform-sec">
+  <section class="platform-sec">
     <div class="container">
       <h2 class="platform-sec__title">
         {{ sectionTitle }}
@@ -117,13 +117,9 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gr1 from '~/assets/images/gr-1.png'
 import gr2 from '~/assets/images/gr-2.png'
 import { getStrapiMediaUrl, mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const props = defineProps({
   section: {
@@ -157,8 +153,6 @@ const [{ data: businessPagesResponse }, { data: individualsPagesResponse }] = aw
   ),
 ])
 
-const sectionRef = ref(null)
-
 const businessPages = computed(() =>
   mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [], urlApi),
 )
@@ -166,53 +160,4 @@ const businessPages = computed(() =>
 const individualsPages = computed(() =>
   mapStrapiIndividualsPages(individualsPagesResponse.value?.data ?? [], urlApi),
 )
-
-let platformAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  platformAnimation = gsap.context(() => {
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.value,
-        start: 'top 80%',
-        once: true,
-      },
-    })
-
-    timeline
-      .from('.platform-sec__title', {
-        opacity: 0,
-        y: 24,
-        duration: 0.6,
-        ease: 'power2.out',
-      })
-      .from('.platform-sec__card', {
-        opacity: 0,
-        y: 32,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: 'power2.out',
-      }, '-=0.3')
-      .from('.platform-sec__card-img', {
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power2.out',
-      }, '-=0.5')
-      .from('.platform-sec__item', {
-        opacity: 0,
-        y: 16,
-        duration: 0.5,
-        stagger: 0.06,
-        ease: 'power2.out',
-      }, '-=0.35')
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  platformAnimation?.revert()
-})
 </script>

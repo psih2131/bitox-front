@@ -1,5 +1,5 @@
 <template>
-  <section v-if="cards.length" ref="sectionRef" class="benefits-sec">
+  <section v-if="cards.length" class="benefits-sec">
     <div class="container">
       <h2 class="benefits-sec__title">{{ sectionTitle }}</h2>
 
@@ -42,16 +42,11 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const urlApi = useRuntimeConfig().public.apiUrl
-const sectionRef = ref(null)
 
 const { data: benefitsResponse } = await useFetch(
   `${urlApi}/api/benefits-component?populate[benefits_sec][populate][benefits_items]=true&populate[benefits_sec][populate][image_for_box_2]=true`,
@@ -75,46 +70,5 @@ const cards = computed(() => {
     dark: index === items.length - 1,
     image: index === 1 ? box2Image.value : null,
   }))
-})
-
-let benefitsAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  benefitsAnimation = gsap.context(() => {
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.value,
-        start: 'top 80%',
-        once: true,
-      },
-    })
-
-    timeline
-      .from('.benefits-sec__title', {
-        opacity: 0,
-        y: 24,
-        duration: 0.6,
-        ease: 'power2.out',
-      })
-      .from('.benefits-sec__card', {
-        opacity: 0,
-        y: 32,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: 'power2.out',
-      }, '-=0.3')
-      .from('.benefits-sec__card-img', {
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.6,
-        ease: 'power2.out',
-      }, '-=0.4')
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  benefitsAnimation?.revert()
 })
 </script>

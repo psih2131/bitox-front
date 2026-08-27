@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="countries-sec">
+  <section class="countries-sec">
     <div class="container countries-sec__top">
       <h2 v-if="sectionTitle" class="countries-sec__title">
         {{ sectionTitle }}
@@ -112,8 +112,6 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import flag1 from '~/assets/images/flags/x1.jpg'
 import flag2 from '~/assets/images/flags/x2.jpg'
 import flag3 from '~/assets/images/flags/x3.jpg'
@@ -129,8 +127,6 @@ function openCallbackModal() {
   modalStore.open(MODAL_NAMES.callback)
 }
 
-gsap.registerPlugin(ScrollTrigger)
-
 const props = defineProps({
   section: {
     type: Object,
@@ -140,7 +136,6 @@ const props = defineProps({
 
 const apiUrl = useRuntimeConfig().public.apiUrl
 
-const sectionRef = ref(null)
 const query = ref('')
 
 const defaultCountries = [
@@ -200,56 +195,4 @@ function goToCountry(path) {
   if (!path) return
   navigateTo(path)
 }
-
-let countriesAnimation
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  countriesAnimation = gsap.context(() => {
-    const isMobile = window.matchMedia('(max-width: 760px)').matches
-
-    const timeline = gsap.timeline({ paused: true })
-
-    timeline
-      .from('.countries-sec__title', {
-        opacity: 0,
-        y: 24,
-        duration: 0.6,
-        ease: 'power2.out',
-      })
-      .from('.countries-sec__search-wrap', {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power2.out',
-      }, '-=0.3')
-      .from('#countries-slider-main', {
-        opacity: 0,
-        y: 16,
-        duration: 0.6,
-        ease: 'power2.out',
-      }, '-=0.2')
-
-    if (isMobile) {
-      timeline.from('#countries-slider-reverse', {
-        opacity: 0,
-        y: 16,
-        duration: 0.6,
-        ease: 'power2.out',
-      }, '-=0.25')
-    }
-
-    ScrollTrigger.create({
-      trigger: sectionRef.value,
-      start: 'top 80%',
-      once: true,
-      animation: timeline,
-    })
-  }, sectionRef.value)
-})
-
-onUnmounted(() => {
-  countriesAnimation?.revert()
-})
 </script>
