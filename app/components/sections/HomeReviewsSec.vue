@@ -29,6 +29,7 @@
               width="34"
               height="34"
               class="home-reviews-sec__filter-icon"
+              loading="lazy"
             />
             <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
           </a>

@@ -19,6 +19,7 @@
                 <img
                   :src="card.dark ? confBlack : confWhite"
                   alt=""
+                  loading="lazy"
                 />
               </span>
               <div class="benefits-sec__card-title">{{ card.title }}</div>
@@ -31,6 +32,7 @@
               :src="card.image"
               alt=""
               class="benefits-sec__card-img"
+              loading="lazy"
             />
           </div>
         </article>
