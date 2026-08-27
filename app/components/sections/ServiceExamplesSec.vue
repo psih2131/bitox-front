@@ -99,7 +99,6 @@
 
 <script setup>
 import gsap from 'gsap'
-import exampleImage from '~/assets/images/exm-1.jpg'
 import { formatShortDate, getStrapiMediaUrl } from '~/utils/strapi'
 
 const props = defineProps({
@@ -124,7 +123,7 @@ const defaultExamples = [
     id: 1,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
-    image: exampleImage,
+    image: '',
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -137,7 +136,7 @@ const defaultExamples = [
     id: 2,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
-    image: exampleImage,
+    image: '',
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -150,7 +149,7 @@ const defaultExamples = [
     id: 3,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
-    image: exampleImage,
+    image: '',
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -163,7 +162,7 @@ const defaultExamples = [
     id: 4,
     title: 'Оплата валютного контракта',
     date: '11.11.2026',
-    image: exampleImage,
+    image: '',
     fields: [
       { label: 'Клиент', value: 'Российская фабрика мебели' },
       { label: 'Страна перевода', value: 'Польша' },
@@ -197,7 +196,7 @@ const examples = computed(() => {
         id: item.id,
         title: post.post_title,
         date: formatShortDate(post.publishedAt),
-        image: getStrapiMediaUrl(post.post_image, apiUrl) || exampleImage,
+        image: getStrapiMediaUrl(post.post_image, apiUrl) || '',
         fields: mapExampleFields(item),
         postLink: `/blog/${post.slug}`,
       }

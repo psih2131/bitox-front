@@ -43,7 +43,6 @@
 
 <script setup>
 import gsap from 'gsap'
-import fallbackHeroImage from '~/assets/images/gr-8.png'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
@@ -58,7 +57,7 @@ const apiUrl = useRuntimeConfig().public.apiUrl
 const modalStore = useModalStore()
 
 const heroImageUrl = computed(
-  () => getStrapiMediaUrl(props.section.image, apiUrl) || fallbackHeroImage,
+  () => getStrapiMediaUrl(props.section.image, apiUrl) || '',
 )
 
 function openConsultationModal() {

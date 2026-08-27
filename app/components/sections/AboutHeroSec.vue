@@ -51,7 +51,6 @@
 import gsap from 'gsap'
 import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
-import fallbackHeroImage from '~/assets/images/gr-13.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
 const props = defineProps({
@@ -63,7 +62,7 @@ const props = defineProps({
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const heroImageSrc = computed(
-  () => getStrapiMediaUrl(props.section?.image, urlApi) || fallbackHeroImage,
+  () => getStrapiMediaUrl(props.section?.image, urlApi) || '',
 )
 
 const sectionRef = ref(null)

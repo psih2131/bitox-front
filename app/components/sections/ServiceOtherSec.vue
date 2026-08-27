@@ -38,7 +38,7 @@
         >
           <div class="service-other-sec__preview">
             <img
-              :src="item.image || previewImage"
+              :src="item.image || ''"
               alt=""
               class="service-other-sec__preview-img"
             />
@@ -61,7 +61,7 @@
               >
                 <div class="service-other-sec__preview">
                   <img
-                    :src="item.image || previewImage"
+                    :src="item.image || ''"
                     alt=""
                     class="service-other-sec__preview-img"
                   />
@@ -82,7 +82,6 @@
 
 <script setup>
 import gsap from 'gsap'
-import previewImage from '~/assets/images/serv-prev.jpg'
 import { mapStrapiBusinessPages } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl

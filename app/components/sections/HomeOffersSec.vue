@@ -55,7 +55,6 @@
 
 <script setup>
 import AppBannerBtn from '~/components/buttons/AppBannerBtn.vue'
-import banner1 from '~/assets/images/banner-1.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
@@ -83,7 +82,7 @@ const defaultSlides = [
     text: 'Выгодные условия для новых клиентов',
     btn: 'Узнать подробнее',
     link: null,
-    image: banner1,
+    image: '',
   },
 ]
 
@@ -98,7 +97,7 @@ const slides = computed(() => {
     text: banner.subtitle,
     btn: banner.button_text,
     link: banner.button_link || null,
-    image: getStrapiMediaUrl(banner.banner_image, apiUrl) || banner1,
+    image: getStrapiMediaUrl(banner.banner_image, apiUrl) || '',
   }))
 })
 

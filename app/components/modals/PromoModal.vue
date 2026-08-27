@@ -102,7 +102,6 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '~/stores/modal'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 import flagRu from '~/assets/images/flags/russian.png'
-import fallbackImage from '~/assets/images/gr-18.png'
 import closeIcon from '~/assets/images/promo-modal/close.svg'
 import telegramIcon from '~/assets/images/promo-modal/telegram.svg'
 import phoneIcon from '~/assets/images/promo-modal/phone.svg'
@@ -136,7 +135,7 @@ const phoneHref = computed(() => {
 })
 
 const imageUrl = computed(
-  () => getStrapiMediaUrl(modalData.value?.image, urlApi) || fallbackImage,
+  () => getStrapiMediaUrl(modalData.value?.image, urlApi) || '',
 )
 
 const phone = ref('+7 ')

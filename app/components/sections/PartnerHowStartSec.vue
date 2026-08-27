@@ -78,7 +78,6 @@
 
 <script setup>
 import gsap from 'gsap'
-import fallbackIllustration from '~/assets/images/gr-12.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
 const props = defineProps({
@@ -91,7 +90,7 @@ const props = defineProps({
 const apiUrl = useRuntimeConfig().public.apiUrl
 
 const box2ImageUrl = computed(
-  () => getStrapiMediaUrl(props.section.image_for_box_2, apiUrl) || fallbackIllustration,
+  () => getStrapiMediaUrl(props.section.image_for_box_2, apiUrl) || '',
 )
 
 const sectionRef = ref(null)

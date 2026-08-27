@@ -115,8 +115,6 @@
 </template>
 
 <script setup>
-import gr1 from '~/assets/images/gr-1.png'
-import gr2 from '~/assets/images/gr-2.png'
 import { getStrapiMediaUrl, mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
 
 const props = defineProps({
@@ -139,8 +137,8 @@ const col2Title = computed(() => props.section?.col_2_title || 'Частным �
 const col2Subtitle = computed(
   () => props.section?.col_2_subtitle || 'от 500$ с удобным процессом и сопровождением до зачисления',
 )
-const col1Img = computed(() => getStrapiMediaUrl(props.section?.col_1_img, urlApi) || gr1)
-const col2Img = computed(() => getStrapiMediaUrl(props.section?.col_2_img, urlApi) || gr2)
+const col1Img = computed(() => getStrapiMediaUrl(props.section?.col_1_img, urlApi) || '')
+const col2Img = computed(() => getStrapiMediaUrl(props.section?.col_2_img, urlApi) || '')
 
 const [{ data: businessPagesResponse }, { data: individualsPagesResponse }] = await Promise.all([
   useFetch(

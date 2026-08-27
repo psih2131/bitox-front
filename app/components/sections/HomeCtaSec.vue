@@ -26,7 +26,6 @@
 </template>
 
 <script setup>
-import fallbackCtaImage from '~/assets/images/gr-4.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 
@@ -50,9 +49,7 @@ const props = defineProps({
   },
 })
 
-const ctaImage = computed(() => (
-  getStrapiMediaUrl(props.section?.image, urlApi) || fallbackCtaImage
-))
+const ctaImage = computed(() => getStrapiMediaUrl(props.section?.image, urlApi) || '')
 
 const sectionTitleLines = computed(() => (
   props.section.title ? props.section.title.split('\n') : []
