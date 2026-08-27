@@ -29,6 +29,7 @@
               width="34"
               height="34"
               class="home-reviews-sec__filter-icon"
+              loading="lazy"
             />
             <span v-if="filter.label" class="home-reviews-sec__filter-label">{{ filter.label }}</span>
           </a>
@@ -37,7 +38,9 @@
 
       <p class="home-reviews-sec__count" v-if="reviewsCountStore">{{ reviewsCountStore  }}</p>
     </div>
+     
 
+    
     <div class="home-reviews-sec__slider-outer">
       <button
         type="button"

@@ -23,6 +23,7 @@
               :src="item.logo"
               :alt="item.source"
               class="media-sec__card-logo"
+              loading="lazy"
             />
             <span v-else class="media-sec__card-logo-text">{{ item.source }}</span>
 

@@ -45,63 +45,65 @@
               :to="`/transfers/${country.slug}`"
               class="countries-sec__result-link"
             >
-              <img :src="country.flag" alt="" class="countries-sec__result-flag" />
+              <img :src="country.flag" alt="" class="countries-sec__result-flag" loading="lazy" />
               <span class="countries-sec__result-name">{{ country.name }}</span>
             </NuxtLink>
 
             <template v-else>
-              <img :src="country.flag" alt="" class="countries-sec__result-flag" />
+              <img :src="country.flag" alt="" class="countries-sec__result-flag" loading="lazy" />
               <span class="countries-sec__result-name">{{ country.name }}</span>
             </template>
           </li>
         </ul>
       </div>
     </div>
-
-    <div id="countries-slider-main" class="countries-sec__slider">
-      <div class="countries-sec__slider-track" :style="{ animationDuration: sliderDuration }">
-        <div
-          v-for="groupIndex in 2"
-          :key="groupIndex"
-          class="countries-sec__slider-group"
-          :aria-hidden="groupIndex === 2"
-        >
+    
+    <ClientOnly>
+      <div id="countries-slider-main" class="countries-sec__slider">
+        <div class="countries-sec__slider-track" :style="{ animationDuration: sliderDuration }">
           <div
-            v-for="(country, index) in sliderGroup"
-            :key="`${groupIndex}-${country.id}-${index}`"
-            class="countries-sec__pill"
-            @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
+            v-for="groupIndex in 2"
+            :key="groupIndex"
+            class="countries-sec__slider-group"
+            :aria-hidden="groupIndex === 2"
           >
-            <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
-            <span class="countries-sec__pill-name">{{ country.name }}</span>
+            <div
+              v-for="(country, index) in sliderGroup"
+              :key="`${groupIndex}-${country.id}-${index}`"
+              class="countries-sec__pill"
+              @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
+            >
+              <img :src="country.flag" alt="" class="countries-sec__pill-flag" loading="lazy" />
+              <span class="countries-sec__pill-name">{{ country.name }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="countries-slider-reverse" class="countries-sec__slider countries-sec__slider--reverse">
-      <div
-        class="countries-sec__slider-track countries-sec__slider-track--reverse"
-        :style="{ animationDuration: sliderDuration }"
-      >
+      <div id="countries-slider-reverse" class="countries-sec__slider countries-sec__slider--reverse">
         <div
-          v-for="groupIndex in 2"
-          :key="`reverse-${groupIndex}`"
-          class="countries-sec__slider-group"
-          :aria-hidden="groupIndex === 2"
+          class="countries-sec__slider-track countries-sec__slider-track--reverse"
+          :style="{ animationDuration: sliderDuration }"
         >
           <div
-            v-for="(country, index) in sliderGroup"
-            :key="`reverse-${groupIndex}-${country.id}-${index}`"
-            class="countries-sec__pill"
-            @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
+            v-for="groupIndex in 2"
+            :key="`reverse-${groupIndex}`"
+            class="countries-sec__slider-group"
+            :aria-hidden="groupIndex === 2"
           >
-            <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
-            <span class="countries-sec__pill-name">{{ country.name }}</span>
+            <div
+              v-for="(country, index) in sliderGroup"
+              :key="`reverse-${groupIndex}-${country.id}-${index}`"
+              class="countries-sec__pill"
+              @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
+            >
+              <img :src="country.flag" alt="" class="countries-sec__pill-flag" loading="lazy" />
+              <span class="countries-sec__pill-name">{{ country.name }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ClientOnly>
 
     <div class="container countries-sec__bottom">
       <AppBannerBtn @click="openCallbackModal">{{ buttonTitle }}</AppBannerBtn>

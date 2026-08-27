@@ -1,26 +1,39 @@
 <template>
   <main v-if="transfer" class="service-page">
     <ServiceHeroSec v-if="transfer.service_hero_sec" :section="transfer.service_hero_sec" />
+
     <CryptoExchangeCalcSec />
+    
     <HomeStatsSec />
+
     <ServiceInvoicesSec v-if="transfer.services_invoice_sec" :section="transfer.services_invoice_sec" />
+
     <ServiceEconomySec />
+
     <HomeChoiceSec />
+
     <HomeBenefitsSec />
+
     <BusinessCountriesSec
       v-if="transfersPages.length"
       :title="transfer.service_county_sec_v2?.title_section"
       :countries="transfersPages"
       link-base="/transfers"
     />
+
     <BusinessOtherSec />
+
     <ServiceExamplesSec
       v-if="transfer.services_invoice_example_sec"
       :section="transfer.services_invoice_example_sec"
     />
+
     <HomeReviewsSec />
+
     <HomeMediaSec v-if="transfer.service_media_about_us_sec" :section="transfer.service_media_about_us_sec" />
+
     <HomeFaqSec v-if="transfer.services_faq_sec" :section="transfer.services_faq_sec" />
+
     <ServiceContactSec />
   </main>
 </template>
