@@ -11,6 +11,10 @@ export default defineNuxtConfig({
 
   ssr: true,
 
+  routeRules: {
+    '/': { swr: 600 },
+  },
+
   app: {
     head: {
       meta: [
