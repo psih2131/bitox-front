@@ -146,7 +146,7 @@ const navLinks = [
   { label: 'О Bitox', to: '/about' },
   { label: 'Контакты', to: '/contacts' },
   { label: 'Партнерская программа', to: '/partners' },
-  { label: 'Обмен криптовалюты', to: '/exchange' },
+  { label: 'Обмен криптовалюты', to: '/crypto-exchange' },
   { label: 'Блог', to: '/blog' },
 ]
 </script>
