@@ -45,12 +45,12 @@
               :to="`/transfers/${country.slug}`"
               class="countries-sec__result-link"
             >
-              <img :src="country.flag" alt="" class="countries-sec__result-flag" loading="lazy" />
+              <img :src="country.flag" alt="" class="countries-sec__result-flag" />
               <span class="countries-sec__result-name">{{ country.name }}</span>
             </NuxtLink>
 
             <template v-else>
-              <img :src="country.flag" alt="" class="countries-sec__result-flag" loading="lazy" />
+              <img :src="country.flag" alt="" class="countries-sec__result-flag" />
               <span class="countries-sec__result-name">{{ country.name }}</span>
             </template>
           </li>
@@ -73,7 +73,7 @@
               class="countries-sec__pill"
               @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
             >
-              <img :src="country.flag" alt="" class="countries-sec__pill-flag" loading="lazy" />
+              <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
               <span class="countries-sec__pill-name">{{ country.name }}</span>
             </div>
           </div>
@@ -97,7 +97,7 @@
               class="countries-sec__pill"
               @click="goToCountry(country.slug ? `/transfers/${country.slug}` : null)"
             >
-              <img :src="country.flag" alt="" class="countries-sec__pill-flag" loading="lazy" />
+              <img :src="country.flag" alt="" class="countries-sec__pill-flag" />
               <span class="countries-sec__pill-name">{{ country.name }}</span>
             </div>
           </div>

@@ -7,7 +7,6 @@
         class="cta-sec__img"
         width="606"
         height="446"
-        loading="lazy"
       />
 
       <div class="cta-sec__content">

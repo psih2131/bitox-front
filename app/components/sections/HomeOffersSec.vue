@@ -43,7 +43,7 @@
               </div>
 
               <div class="offers-sec__slide-img">
-                <img :src="slide.image" alt="" loading="lazy" />
+                <img :src="slide.image" alt="" />
               </div>
             </div>
           </swiper-slide>

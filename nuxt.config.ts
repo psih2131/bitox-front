@@ -11,26 +11,6 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  routeRules: {
-    '/**': {
-      swr: 600,
-      headers: {
-        'Cache-Control': 'public, max-age=600, s-maxage=600, stale-while-revalidate=60',
-      },
-    },
-    '/_nuxt/**': {
-      headers: {
-        'Cache-Control': 'public, max-age=31536000, immutable',
-      },
-    },
-    '/api/forms/**': {
-      cache: false,
-      headers: {
-        'Cache-Control': 'no-store',
-      },
-    },
-  },
-
   app: {
     head: {
       meta: [

@@ -19,7 +19,6 @@
               :src="col1Img"
               :alt="col1Title"
               class="platform-sec__card-img"
-              loading="lazy"
             />
           </div>
 
@@ -72,7 +71,6 @@
               :src="col2Img"
               :alt="col2Title"
               class="platform-sec__card-img"
-              loading="lazy"
             />
           </div>
 
