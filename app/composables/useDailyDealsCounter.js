@@ -124,8 +124,8 @@ export function useDailyDealsCounter() {
     totalAmountToday.value = formatDailyDealsAmount(amount)
   }
 
-  updateAmount()
-
+  // Value depends on "now" — compute only after mount to avoid SSR/client hydration mismatch
+  // (especially with cached HTML / swr).
   onMounted(() => {
     updateAmount()
     timer = setInterval(updateAmount, 1000)
