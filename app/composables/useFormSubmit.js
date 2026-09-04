@@ -1,6 +1,8 @@
 import { MODAL_NAMES, useModalStore } from '~/stores/modal'
 
 const YANDEX_COUNTER_ID = 110824008
+const UTM_STORAGE_KEY = 'bitox_utm'
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 
 function reachYandexGoal(goal) {
   if (!import.meta.client || !goal) return
@@ -14,6 +16,41 @@ function reachYandexGoal(goal) {
 
 function getErrorStatus(error) {
   return error?.statusCode || error?.status || error?.response?.status || null
+}
+
+function readStoredUtm() {
+  try {
+    const raw = sessionStorage.getItem(UTM_STORAGE_KEY)
+    if (!raw) return {}
+    const parsed = JSON.parse(raw)
+    return parsed && typeof parsed === 'object' ? parsed : {}
+  } catch {
+    return {}
+  }
+}
+
+/** First-touch UTM из URL; если в адресе нет — берём сохранённые за сессию. */
+function getUtmParams() {
+  if (!import.meta.client) return {}
+
+  const fromUrl = {}
+  const params = new URLSearchParams(window.location.search)
+
+  for (const key of UTM_KEYS) {
+    const value = params.get(key)?.trim()
+    if (value) fromUrl[key] = value
+  }
+
+  if (Object.keys(fromUrl).length) {
+    try {
+      sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(fromUrl))
+    } catch {
+      // ignore quota / private mode
+    }
+    return fromUrl
+  }
+
+  return readStoredUtm()
 }
 
 export function useFormSubmit() {
@@ -45,6 +82,7 @@ export function useFormSubmit() {
         body: {
           ...body,
           url_page: body.url_page || getPageUrl(),
+          utm: body.utm || getUtmParams(),
         },
       })
 

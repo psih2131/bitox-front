@@ -39,6 +39,7 @@ export default defineEventHandler(async (event) => {
     title: titleForm,
     phone,
     urlPage,
+    utm: body?.utm,
     personalConsent,
     offerConsent,
     marketingConsent,

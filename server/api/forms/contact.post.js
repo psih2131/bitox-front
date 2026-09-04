@@ -38,6 +38,7 @@ export default defineEventHandler(async (event) => {
     name: firstName,
     phone,
     urlPage,
+    utm: body?.utm,
     consent,
   })
 

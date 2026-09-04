@@ -9,8 +9,44 @@ function normalizeWebhookUrl(url) {
 
 function compactFields(fields) {
   return Object.fromEntries(
-    Object.entries(fields).filter(([, value]) => value !== undefined && value !== null),
+    Object.entries(fields).filter(([, value]) => value !== undefined && value !== null && value !== ''),
   )
+}
+
+const UTM_QUERY_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+
+/**
+ * Достаёт UTM из явных полей и/или из URL страницы.
+ * Маппит в стандартные поля лида Bitrix24.
+ */
+export function buildBitrixUtmFields(urlPage = '', explicitUtm = {}) {
+  const fromUrl = {}
+
+  if (urlPage) {
+    try {
+      const url = new URL(urlPage, 'https://bitox.global')
+      for (const key of UTM_QUERY_KEYS) {
+        const value = url.searchParams.get(key)?.trim()
+        if (value) fromUrl[key] = value
+      }
+    } catch {
+      // ignore invalid url
+    }
+  }
+
+  const pick = (key) => {
+    const explicit = explicitUtm?.[key]
+    if (typeof explicit === 'string' && explicit.trim()) return explicit.trim()
+    return fromUrl[key] || undefined
+  }
+
+  return compactFields({
+    UTM_SOURCE: pick('utm_source'),
+    UTM_MEDIUM: pick('utm_medium'),
+    UTM_CAMPAIGN: pick('utm_campaign'),
+    UTM_CONTENT: pick('utm_content'),
+    UTM_TERM: pick('utm_term'),
+  })
 }
 
 /**
@@ -47,6 +83,7 @@ export function buildConsultationBitrixFields({
   title,
   phone,
   urlPage,
+  utm,
   personalConsent,
   offerConsent,
   marketingConsent,
@@ -60,6 +97,7 @@ export function buildConsultationBitrixFields({
     UF_CRM_1785501316992: toBitrixYesNo(personalConsent),
     UF_CRM_1785501333531: toBitrixYesNo(offerConsent),
     UF_CRM_1785501354530: toBitrixYesNo(marketingConsent),
+    ...buildBitrixUtmFields(urlPage, utm),
   })
 }
 
@@ -67,6 +105,7 @@ export function buildPaymentCalcBitrixFields({
   title,
   phone,
   urlPage,
+  utm,
   amount,
   currency,
   sourceId = 'WEB',
@@ -83,6 +122,7 @@ export function buildPaymentCalcBitrixFields({
     // Согласие на ПД / рекламу (в форме калькулятора всегда да)
     UF_CRM_1785501279928: toBitrixYesNo(true),
     UF_CRM_1785501316992: toBitrixYesNo(true),
+    ...buildBitrixUtmFields(urlPage, utm),
   })
 }
 
@@ -91,6 +131,7 @@ export function buildContactBitrixFields({
   name,
   phone,
   urlPage,
+  utm,
   consent,
   sourceId = 'WEB',
 }) {
@@ -101,5 +142,6 @@ export function buildContactBitrixFields({
     PHONE: phone ? [{ VALUE: phone, VALUE_TYPE: 'WORK' }] : undefined,
     UF_CRM_1785502332723: urlPage || '',
     UF_CRM_1785501316992: toBitrixYesNo(consent),
+    ...buildBitrixUtmFields(urlPage, utm),
   })
 }
