@@ -50,42 +50,6 @@
         </div>
       </label>
 
-      <label class="consultation-modal__field">
-        <span class="consultation-modal__label">Опишите вашу проблему</span>
-
-        <div class="consultation-modal__control">
-          <input
-            v-model="problem"
-            type="text"
-            class="consultation-modal__input"
-          />
-        </div>
-      </label>
-
-      <label class="consultation-modal__field">
-        <span class="consultation-modal__label">Объем платежа</span>
-
-        <div class="consultation-modal__control">
-          <input
-            v-model="paymentVolume"
-            type="text"
-            class="consultation-modal__input"
-          />
-        </div>
-      </label>
-
-      <label class="consultation-modal__field">
-        <span class="consultation-modal__label">Какие страны и валюты вас интересуют</span>
-
-        <div class="consultation-modal__control">
-          <input
-            v-model="countriesCurrencies"
-            type="text"
-            class="consultation-modal__input"
-          />
-        </div>
-      </label>
-
       <label class="consultation-modal__checkbox">
         <input v-model="personalConsent" type="checkbox" />
         <span class="consultation-modal__checkbox-text">
@@ -128,9 +92,6 @@ const { isSubmitting, submit } = useFormSubmit()
 
 const userName = ref('')
 const phone = ref('+7 ')
-const problem = ref('')
-const paymentVolume = ref('')
-const countriesCurrencies = ref('')
 const personalConsent = ref(true)
 const offerConsent = ref(true)
 const marketingConsent = ref(true)
@@ -164,9 +125,6 @@ async function handleSubmit() {
     title_form: 'Обратный звонок',
     name: userName.value.trim(),
     phone: phone.value.trim(),
-    problem: problem.value.trim(),
-    paymentVolume: paymentVolume.value.trim(),
-    countriesCurrencies: countriesCurrencies.value.trim(),
     personalConsent: personalConsent.value,
     offerConsent: offerConsent.value,
     marketingConsent: marketingConsent.value,

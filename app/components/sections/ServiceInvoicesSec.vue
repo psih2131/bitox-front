@@ -33,6 +33,12 @@
                 {{ tag }}
               </span>
             </div>
+
+            <div v-if="card.pageLink" class="service-invoices-sec__card-link">
+              <NuxtLink :to="card.pageLink" class="app-btn">
+                Подробнее
+              </NuxtLink>
+            </div>
           </div>
         </article>
       </div>
@@ -59,6 +65,7 @@ const cards = computed(() =>
     title: item.title,
     text: item.subtitle,
     image: getStrapiMediaUrl(item.invoice_image, apiUrl),
+    pageLink: item.page_link?.trim() || '',
     tags: (item.invoice_element_list_items ?? [])
       .map((tag) => tag.name)
       .filter(Boolean),

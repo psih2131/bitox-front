@@ -5,9 +5,6 @@ export default defineEventHandler(async (event) => {
 
   const name = body?.name?.trim()
   const phone = body?.phone?.trim()
-  const problem = body?.problem?.trim()
-  const paymentVolume = body?.paymentVolume?.trim()
-  const countriesCurrencies = body?.countriesCurrencies?.trim()
   const titleForm = body?.title_form?.trim() || 'Обратный звонок'
   const urlPage = body?.url_page?.trim() || ''
   const personalConsent = Boolean(body?.personalConsent)
@@ -33,9 +30,6 @@ export default defineEventHandler(async (event) => {
     url_page: urlPage,
     name,
     phone,
-    text_1: problem || '',
-    text_2: paymentVolume || '',
-    text_3: countriesCurrencies || '',
   })
 
   const message = [
@@ -44,9 +38,6 @@ export default defineEventHandler(async (event) => {
     `<b>Страница:</b> ${escapeHtml(urlPage || '—')}`,
     `<b>Имя:</b> ${escapeHtml(name)}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
-    `<b>Проблема:</b> ${escapeHtml(problem || '—')}`,
-    `<b>Объем платежа:</b> ${escapeHtml(paymentVolume || '—')}`,
-    `<b>Страны и валюты:</b> ${escapeHtml(countriesCurrencies || '—')}`,
     '',
     `<b>Согласие на обработку ПД:</b> ${formatConsent(personalConsent)}`,
     `<b>Согласие с офертой:</b> ${formatConsent(offerConsent)}`,

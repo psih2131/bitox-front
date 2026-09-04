@@ -376,7 +376,7 @@ const tabs = [
   { id: 'invoice', label: 'Оплата инвойсов' },
 ]
 
-const activeTab = ref('cashless')
+const activeTab = ref('invoice')
 
 const calcPopulate = [
   'populate[calc][populate][exchange_data][populate][without_cache][populate][exchange_list][populate]=what_you_get',

@@ -60,9 +60,9 @@
 
 .service-hero-sec__title {
   margin-bottom: 46px;
-  max-width: 717px;
+  max-width: 650px;
   font-weight: 800;
-  font-size: 80px;
+  font-size: 65px;
   line-height: 0.84;
   color: $gray;
 }
@@ -71,7 +71,7 @@
   max-width: 430px;
   margin-bottom: 39px;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 22px;
   line-height: 1.23;
   color: $gray-83;
 }
@@ -158,6 +158,9 @@
 }
 
 .service-invoices-sec__card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 15px 30px 30px 30px;
 }
 
@@ -205,6 +208,11 @@
     grid-column: 1 / -1;
     justify-self: center;
   }
+}
+
+.service-invoices-sec__card-link {
+  margin-top: 20px;
+  text-align: center;
 }
 
 .service-economy-sec {
