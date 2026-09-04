@@ -398,8 +398,9 @@
 }
 
 .stats-sec__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 17px;
 }
 
@@ -408,7 +409,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 146px;
+  box-sizing: border-box;
+  flex: 0 0 calc((100% - 17px * 2) / 3);
+  width: calc((100% - 17px * 2) / 3);
+  min-height: 130px;
   padding: 30px 20px;
   border-radius: 20px;
   background: $white;
@@ -418,7 +422,7 @@
 .stats-sec__value {
   margin-bottom: 16px;
   font-weight: 800;
-  font-size: 40px;
+  font-size: 34px;
   line-height: 0.88;
   color: $gray-92;
 }
@@ -2748,7 +2752,6 @@ display: block;
     padding: 50px 0;
   }
   .stats-sec__grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
   .stats-sec__value{
@@ -2759,10 +2762,12 @@ display: block;
     font-size: 14px;
   }
   .stats-sec__item{
+    flex: 0 0 calc((100% - 10px) / 2);
+    width: calc((100% - 10px) / 2);
     padding: 20px 10px;
     border-radius: 20px;
     min-height: 0;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 10px;
   }
   .offers-sec{

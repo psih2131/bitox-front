@@ -79,8 +79,8 @@ const { isSubmitting, submit } = useFormSubmit()
 
 const phone = ref('+7 ')
 const personalConsent = ref(true)
-const offerConsent = ref(false)
-const marketingConsent = ref(false)
+const offerConsent = ref(true)
+const marketingConsent = ref(true)
 
 const canSubmit = computed(
   () => phone.value.replace(/\D/g, '').length === 11 && personalConsent.value && offerConsent.value,

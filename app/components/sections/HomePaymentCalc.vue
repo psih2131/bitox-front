@@ -8,10 +8,13 @@
         <div class="payment-calc__input-wrap">
           <span v-if="selectedCurrency?.symbol" class="payment-calc__currency-symbol">{{ selectedCurrency.symbol }}</span>
           <input
-            v-model="amount"
+            :value="amount"
             type="text"
+            inputmode="numeric"
             class="payment-calc__input"
             placeholder=""
+            @keydown="onAmountKeydown"
+            @input="onAmountInput"
           />
 
           <div
@@ -155,6 +158,17 @@ const canSubmit = computed(
     && phone.value.replace(/\D/g, '').length === 11
     && Boolean(selectedCurrency.value?.code),
 )
+
+function onAmountKeydown(event) {
+  const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']
+  if (allowed.includes(event.key) || event.ctrlKey || event.metaKey) return
+  if (!/^\d$/.test(event.key)) event.preventDefault()
+}
+
+function onAmountInput({ target }) {
+  amount.value = target.value.replace(/\D/g, '')
+  target.value = amount.value
+}
 
 function onPhoneKeydown(event) {
   const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']

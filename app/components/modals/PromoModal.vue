@@ -140,7 +140,7 @@ const imageUrl = computed(
 
 const phone = ref('+7 ')
 const personalConsent = ref(true)
-const offerConsent = ref(false)
+const offerConsent = ref(true)
 
 const canSubmit = computed(
   () => phone.value.replace(/\D/g, '').length === 11 && personalConsent.value && offerConsent.value,
@@ -168,7 +168,7 @@ async function handleSubmit() {
     phone: phone.value.trim(),
     personalConsent: personalConsent.value,
     offerConsent: offerConsent.value,
-    marketingConsent: false,
+    marketingConsent: true,
   }, {
     yandexGoal: 'popup_success',
     validate: () => canSubmit.value,

@@ -496,7 +496,7 @@ const transfersMega = computed(() => {
 const aboutMega = [
   {
     id: 'about-1',
-    title: 'О Bitox',
+    title: 'О нас',
     links: [
       { key: 'about', label: 'О нас', to: '/about' },
       { key: 'partners', label: 'Партнерская программа', to: '/partners' },
@@ -511,7 +511,7 @@ const navItems = computed(() => [
   { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
   { label: 'Международные расчеты', to: '/transfers', mega: transfersMega.value },
   { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
-  { label: 'О Bitox', mega: aboutMega, clickable: false },
+  { label: 'О нас', mega: aboutMega, clickable: false },
 ])
 
 const route = useRoute()

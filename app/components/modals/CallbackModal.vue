@@ -132,8 +132,8 @@ const problem = ref('')
 const paymentVolume = ref('')
 const countriesCurrencies = ref('')
 const personalConsent = ref(true)
-const offerConsent = ref(false)
-const marketingConsent = ref(false)
+const offerConsent = ref(true)
+const marketingConsent = ref(true)
 
 const canSubmit = computed(
   () =>

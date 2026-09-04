@@ -1,9 +1,11 @@
 const START_AMOUNT = 200_000
 const END_AMOUNT_BASE = 3_000_000
-const DAY_START_HOUR_MSK = 8
+const DAY_START_HOUR_MSK = 10
+const DAY_START_MINUTE_MSK = 30
 const DAY_END_HOUR_MSK = 24
 const MSK_TZ = 'Europe/Moscow'
-const DAY_DURATION_SECONDS = (DAY_END_HOUR_MSK - DAY_START_HOUR_MSK) * 3600
+const DAY_START_SECONDS = DAY_START_HOUR_MSK * 3600 + DAY_START_MINUTE_MSK * 60
+const DAY_DURATION_SECONDS = DAY_END_HOUR_MSK * 3600 - DAY_START_SECONDS
 
 const dayPlanCache = new Map()
 
@@ -59,12 +61,11 @@ function getMskNow() {
 
 function getSecondsSinceStart(msk) {
   const elapsed = msk.hour * 3600 + msk.minute * 60 + msk.second
-  const start = DAY_START_HOUR_MSK * 3600
 
-  if (elapsed < start) return -1
+  if (elapsed < DAY_START_SECONDS) return -1
   if (elapsed >= DAY_END_HOUR_MSK * 3600) return DAY_DURATION_SECONDS
 
-  return elapsed - start
+  return elapsed - DAY_START_SECONDS
 }
 
 function buildDayPlan(dateKey) {
