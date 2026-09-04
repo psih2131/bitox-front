@@ -1343,9 +1343,9 @@ display: block;
 .home-reviews-sec__filter-icon {
   display: block;
   flex-shrink: 0;
-  width: 34px;
+  // width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: 0;
 }
 .home-reviews-sec__stars{
   display: flex;
