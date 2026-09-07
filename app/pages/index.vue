@@ -6,9 +6,11 @@
 
     <HomeOffersSec v-if="home?.home_offers_banners_sec" :section="home.home_offers_banners_sec" />
 
+    <HomePlatformSec :section="home?.home_platform_sec" />
+
     <HomeChoiceSec />
 
-    <HomePlatformSec :section="home?.home_platform_sec" />
+    
 
     <HomeCountriesSec v-if="home?.home_countries_sec" :section="home.home_countries_sec" />
 

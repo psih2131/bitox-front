@@ -410,8 +410,8 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  flex: 0 0 calc((100% - 17px * 2) / 3);
-  width: calc((100% - 17px * 2) / 3);
+  flex: 0 0 calc((100% - 17px * 3) / 4);
+  width: calc((100% - 17px * 3) / 4);
   min-height: 130px;
   padding: 30px 20px;
   border-radius: 20px;
@@ -774,7 +774,7 @@
 }
 
 .platform-sec {
-  padding: 100px 0 0;
+  padding: 100px 0 ;
   background: $bg-platform;
   overflow: hidden;
 }

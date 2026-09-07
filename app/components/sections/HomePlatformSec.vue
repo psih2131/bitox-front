@@ -1,7 +1,7 @@
 <template>
   <section class="platform-sec">
     <div class="container">
-      <h2 class="platform-sec__title">
+      <h2 class="platform-sec__title" v-if="sectionTitle">
         {{ sectionTitle }}
       </h2>
 
@@ -129,15 +129,15 @@ const props = defineProps({
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const sectionTitle = computed(
-  () => props.section?.section_title || 'Единая платформа для бизнеса и частных клиентов',
+  () => props.section?.section_title || null,
 )
-const col1Title = computed(() => props.section?.col_1_title || 'Бизнесу')
+const col1Title = computed(() => props.section?.col_1_title || null)
 const col1Subtitle = computed(
-  () => props.section?.col_1_subtitle || 'от 1000$ с контролем комплаенса и минимизацией рисков',
+  () => props.section?.col_1_subtitle || null,
 )
-const col2Title = computed(() => props.section?.col_2_title || 'Частным лицам')
+const col2Title = computed(() => props.section?.col_2_title || null)
 const col2Subtitle = computed(
-  () => props.section?.col_2_subtitle || 'от 500$ с удобным процессом и сопровождением до зачисления',
+  () => props.section?.col_2_subtitle || null,
 )
 const col1Img = computed(() => getStrapiMediaUrl(props.section?.col_1_img, urlApi) || '')
 const col2Img = computed(() => getStrapiMediaUrl(props.section?.col_2_img, urlApi) || '')
