@@ -1344,7 +1344,8 @@ display: block;
   display: block;
   flex-shrink: 0;
   // width: 34px;
-  height: 34px;
+  height: 32px;
+  width: auto;
   border-radius: 0;
 }
 .home-reviews-sec__stars{
@@ -3255,6 +3256,9 @@ margin-bottom: 10px;
     top: -25px; 
     font-size: 12px;
     padding: 8px 10px;
+  }
+  .home-reviews-sec__filter-icon{
+    height: 28px;
   }
 
 }
