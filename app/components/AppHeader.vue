@@ -171,6 +171,20 @@
               v-if="item.mega?.length && openMobAccordion === item.label"
               class="mob-menu__mega"
             >
+              <div v-if="item.to" class="mob-menu__mega-card">
+                <ul class="mob-menu__mega-list">
+                  <li>
+                    <NuxtLink
+                      :to="item.to"
+                      class="mob-menu__mega-link"
+                      @click="closeMobMenu"
+                    >
+                      {{ item.label }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+
               <div
                 v-for="card in item.mega"
                 :key="card.id"
@@ -496,9 +510,9 @@ const transfersMega = computed(() => {
 const aboutMega = [
   {
     id: 'about-1',
-    title: 'О нас',
+    title: 'О компании',
     links: [
-      { key: 'about', label: 'О нас', to: '/about' },
+      { key: 'about', label: 'О компании', to: '/about' },
       { key: 'partners', label: 'Партнерская программа', to: '/partners' },
       { key: 'contacts', label: 'Официальные аккаунты', to: '/contacts' },
     ],
@@ -508,10 +522,10 @@ const aboutMega = [
 
 const navItems = computed(() => [
   { label: 'Бизнесу', to: '/business', mega: businessMega.value },
-  { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
+  { label: 'Частным клиентам', to: '/individuals', mega: privateClientsMega.value },
   { label: 'Международные расчеты', to: '/transfers', mega: transfersMega.value },
   { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
-  { label: 'О нас', mega: aboutMega, clickable: false },
+  { label: 'О компании', mega: aboutMega, clickable: false },
 ])
 
 const route = useRoute()

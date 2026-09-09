@@ -115,7 +115,7 @@
 .header__nav {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .header__nav-item {
@@ -186,6 +186,17 @@
   box-shadow: 0 16px 48px rgba(49, 49, 50, 0.12);
   // только видимый контент перехватывает клики, прозрачный отступ сверху пропускает их к ссылке
   pointer-events: auto;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: none;
+  }
 
   &--single {
     display: flex;
@@ -198,17 +209,6 @@
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 10px;
     align-items: stretch;
-    position: relative;
-
-    &::before{
-      content: '';
-      position: absolute;
-      top: -40px;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      background: none;
-    }
 
     .header__mega-card {
       min-width: 0;
