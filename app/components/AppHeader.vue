@@ -18,6 +18,9 @@
           </div>
 
           <div class="header__top-right">
+
+            <TgBotButtonLink :type="'header-1'" />
+
             <a
               v-for="contact in contacts"
               :key="contact.id"
@@ -264,6 +267,8 @@
 </template>
 
 <script setup>
+
+import TgBotButtonLink from '~/components/buttons/TgBotButtonLink.vue'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 import { getStrapiMediaUrl, mapStrapiBusinessPages, mapStrapiIndividualsPages } from '~/utils/strapi'
 
