@@ -29,7 +29,7 @@ const { $TgAnalitika } = useNuxtApp()
 
 // async function checkLeadByToken() {
 //   const token = "58c6ff88176245af86c7f8ae1d499f47"
-//   const url = `${urlApi}/api/lead-analytics?filters[token][$eq]=${encodeURIComponent(token)}`
+  const url = `${urlApi}/api/lead-analytics?filters[token][$eq]=58c6ff88176245af86c7f8ae1d499f47`
 
 //   try {
 //     const response = await fetch(url)

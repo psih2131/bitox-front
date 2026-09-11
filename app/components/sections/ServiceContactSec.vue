@@ -2,10 +2,8 @@
   <section ref="sectionRef" class="service-contact-sec">
     <div class="container service-contact-sec__inner">
       <div class="service-contact-sec__content">
-        <h2 class="service-contact-sec__title">
-          Ваша задача —<br />
-          наше решение
-        </h2>
+        <h2 class="service-contact-sec__title" v-html="sectionTitle" />
+
 
         <p class="service-contact-sec__subtitle">
           Оставьте заявку, а мы сделаем остальное
@@ -59,6 +57,13 @@
 
 <script setup>
 import gsap from 'gsap'
+
+const props = defineProps({
+  sectionTitle: {
+    type: String,
+    default: ' Ваша задача —<br/> наше решение',
+  },
+})
 
 const sectionRef = ref(null)
 const { isSubmitting, submit } = useFormSubmit()

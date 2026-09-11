@@ -1,7 +1,7 @@
 <template>
   <section v-if="otherServices.length" ref="sectionRef" class="service-other-sec">
     <div class="container">
-      <h2 class="service-other-sec__title">Другие наши услуги</h2>
+      <h3 class="service-other-sec__title">Другие наши услуги</h3>
 
       <div class="service-other-sec__nav">
         <button
@@ -45,7 +45,7 @@
           </div>
 
           <div class="service-other-sec__body">
-            <h3 class="service-other-sec__card-title">{{ item.title }}</h3>
+            <p class="service-other-sec__card-title">{{ item.title }}</p>
             <p v-if="item.subtitle" class="service-other-sec__card-text">{{ item.subtitle }}</p>
           </div>
         </NuxtLink>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="service-other-sec__body">
-                  <h3 class="service-other-sec__card-title">{{ item.title }}</h3>
+                  <p class="service-other-sec__card-title">{{ item.title }}</p>
                   <p v-if="item.subtitle" class="service-other-sec__card-text">{{ item.subtitle }}</p>
                 </div>
               </NuxtLink>

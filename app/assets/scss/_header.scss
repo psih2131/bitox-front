@@ -663,9 +663,15 @@
   .header__logo{
     width: 150px;
   }
+  .header__location span, .header__time span, .header__contact span{
+    font-size: 11px;
+  }
+  .header__callback{
+    font-size: 11px;
+  }
 }
 
-@media only screen and (max-width: 3650px) {
+@media only screen and (max-width: 365px) {
 
 }
 

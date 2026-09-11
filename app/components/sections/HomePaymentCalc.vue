@@ -1,6 +1,7 @@
 <template>
   <div class="payment-calc">
-    <div class="payment-calc__title">Рассчитайте платеж</div>
+    <h2 v-if="typeHeaderH === true" class="payment-calc__title" v-html="componentTitle"></h2>
+    <div v-else class="payment-calc__title" v-html="componentTitle"></div>
 
     <form class="payment-calc__form" @submit.prevent="handleSubmit">
       <label class="payment-calc__field">
@@ -109,6 +110,17 @@
 
 <script setup>
 import { getStrapiMediaUrl } from '~/utils/strapi'
+
+const props = defineProps({
+  componentTitle: {
+    type: String,
+    default: 'Рассчитайте платеж',
+  },
+  typeHeaderH: {
+    type: Boolean,
+    default: false,
+  },
+})
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const amount = ref('')

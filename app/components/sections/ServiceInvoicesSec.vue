@@ -54,7 +54,9 @@ const props = defineProps({
   section: {
     type: Object,
     required: true,
+    
   },
+
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl

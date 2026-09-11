@@ -1,0 +1,254 @@
+.invoice-terms-sec {
+  padding: 85px 0;
+  background: $bg-platform;
+}
+
+.invoice-terms-sec__title {
+  margin-bottom: 40px;
+  font-weight: 800;
+  font-size: 45px;
+  line-height: 0.92;
+  color: $gray;
+}
+
+.invoice-terms-sec__card {
+  padding: 36px 44px;
+  border-radius: 20px;
+  background: $white;
+}
+
+.invoice-terms-sec__layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 55%) minmax(240px, 45%);
+  gap: 56px;
+  align-items: start;
+}
+
+.invoice-terms-sec__list {
+  min-width: 0;
+}
+
+.invoice-terms-sec__item {
+  border-bottom: 1px solid rgba(49, 49, 50, 0.12);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.invoice-terms-sec__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 20px 16px 20px 14px;
+  border: none;
+  border-left: 3px solid transparent;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: $mainFont;
+  color: $gray;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  .invoice-terms-sec__item--active & {
+    border-left-color: $yellow;
+    background: $bg-platform;
+  }
+}
+
+.invoice-terms-sec__num {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  color: $gray-83;
+  transition: color 0.2s ease;
+
+  .invoice-terms-sec__item--active & {
+    color: $gray;
+  }
+}
+
+.invoice-terms-sec__question {
+  flex: 1;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+  color: $gray-83;
+  transition: color 0.2s ease;
+
+  .invoice-terms-sec__item--active & {
+    font-weight: 800;
+    color: $gray;
+  }
+}
+
+.invoice-terms-sec__arrow {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: $light-gray;
+  transition: color 0.2s ease;
+
+  .invoice-terms-sec__item--active & {
+    color: $gray;
+  }
+}
+
+.invoice-terms-sec__mobile-panel {
+  display: none;
+}
+
+.invoice-terms-sec__panel {
+  min-width: 0;
+  padding-top: 12px;
+}
+
+.invoice-terms-sec__body {
+  padding: 4px 0 22px 17px;
+}
+
+.invoice-terms-sec__subtitle {
+  margin-bottom: 16px;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.15;
+  color: $gray;
+}
+
+.invoice-terms-sec__text {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.45;
+  color: $gray-83;
+}
+
+.invoice-terms-sec__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid $yellow;
+  background: rgba(255, 221, 45, 0.16);
+}
+
+.invoice-terms-sec__note-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: $gray;
+}
+
+.invoice-terms-sec__note-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3;
+  color: $gray;
+}
+
+@media only screen and (max-width: 1150px) {
+  .invoice-terms-sec {
+    padding: 70px 0;
+  }
+
+  .invoice-terms-sec__title {
+    margin-bottom: 30px;
+    font-size: 40px;
+  }
+
+  .invoice-terms-sec__card {
+    padding: 28px 32px;
+  }
+
+  .invoice-terms-sec__layout {
+    gap: 36px;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .invoice-terms-sec__title {
+    font-size: 36px;
+  }
+
+  .invoice-terms-sec__layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .invoice-terms-sec__panel {
+    display: none;
+  }
+
+  .invoice-terms-sec__mobile-panel {
+    display: block;
+  }
+
+  .invoice-terms-sec__card {
+    padding: 12px 20px;
+  }
+
+  .invoice-terms-sec__question {
+    font-size: 16px;
+  }
+
+  .invoice-terms-sec__subtitle {
+    font-size: 18px;
+  }
+  .invoice-terms-sec__body{
+    padding-top: 15px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .invoice-terms-sec {
+    padding: 50px 0;
+  }
+
+  .invoice-terms-sec__title {
+    margin-bottom: 24px;
+    font-size: 32px;
+  }
+
+  .invoice-terms-sec__card {
+    padding: 8px 14px;
+    border-radius: 16px;
+  }
+
+  .invoice-terms-sec__header {
+    gap: 8px;
+    padding: 16px 10px 16px 11px;
+  }
+
+  .invoice-terms-sec__question {
+    font-size: 15px;
+  }
+
+  .invoice-terms-sec__subtitle {
+    font-size: 16px;
+  }
+
+  .invoice-terms-sec__text {
+    font-size: 14px;
+  }
+
+  .invoice-terms-sec__body {
+    padding: 15px 0 18px 14px;
+  }
+  
+}
+
+@media only screen and (max-width: 365px) {
+  .invoice-terms-sec__title {
+    font-size: 28px;
+  }
+
+  .invoice-terms-sec__card {
+    padding: 4px 10px;
+  }
+}

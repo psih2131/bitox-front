@@ -1,26 +1,40 @@
 <template>
   <main v-if="invoice" class="service-page">
-    <ServiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" />
-    <CryptoExchangeCalcSec />
+    <!-- <ServiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" /> -->
+    <InvoiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" :countryName="invoice.title_mutation || invoice.title"/>
+    <!-- <CryptoExchangeCalcSec :sectionTitle="'Калькулятор инвойса'"/> -->
     <HomeStatsSec />
+
+    <InvoiceTermsSec :country-name="invoice.title_mutation || invoice.title" />
+
     <ServiceInvoicesSec v-if="invoice.services_invoice_sec" :section="invoice.services_invoice_sec" />
+    
     <ServiceEconomySec />
+
+    <InvoiceProcessSec :country-name="invoice.title_mutation || invoice.title" />
+
     <HomeChoiceSec />
+
     <HomeBenefitsSec />
+
     <BusinessCountriesSec
       v-if="invoices.length"
       :title="invoice.service_county_sec_v2?.title_section"
       :countries="invoices"
     />
     <BusinessOtherSec />
+
     <ServiceExamplesSec
       v-if="invoice.services_invoice_example_sec"
       :section="invoice.services_invoice_example_sec"
     />
     <HomeReviewsSec />
+
     <HomeMediaSec v-if="invoice.service_media_about_us_sec" :section="invoice.service_media_about_us_sec" />
+    
     <HomeFaqSec v-if="invoice.services_faq_sec" :section="invoice.services_faq_sec" />
-    <ServiceContactSec />
+    
+    <ServiceContactSec :sectionTitle="`Оплатить инвойс в ${invoice.title_mutation || invoice.title}`" />
   </main>
 </template>
 
@@ -40,6 +54,7 @@ const populate = [
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
   'populate[services_faq_sec][populate]=questions_list',
+  'populate[invoices_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
 
@@ -50,14 +65,51 @@ const { data: invoiceResponse } = await useFetch(
 
 // список всех инвойсов (стран) для секции BusinessCountriesSec
 const { data: invoicesResponse } = await useFetch(
-  `${urlApi}/api/invoices?fields[0]=title&fields[1]=slug&populate=flag&pagination[pageSize]=100`,
+  `${urlApi}/api/invoices?fields[0]=title&fields[1]=slug&populate[0]=flag&populate[1]=invoices_pages_region&pagination[pageSize]=100`,
 )
 
 const invoice = computed(() => invoiceResponse.value?.data?.[0])
 
-const invoices = computed(() =>
-  mapStrapiInvoices(invoicesResponse.value?.data ?? [], urlApi),
-)
+function getInvoiceRegionKey(item) {
+  const region = item?.invoices_pages_region
+  if (!region) return null
+  return region.documentId || region.id || null
+}
+
+const invoices = computed(() => {
+  const allInvoices = invoicesResponse.value?.data ?? []
+  const current = invoice.value
+  const currentRegionKey = getInvoiceRegionKey(current)
+  const currentKey = current?.documentId || current?.id || current?.slug
+
+  let list = []
+
+  for (let i = 0; i < allInvoices.length; i++) {
+    const item = allInvoices[i]
+    const itemKey = item.documentId || item.id || item.slug
+
+    if (currentKey && itemKey === currentKey) continue
+    if (current?.slug && item.slug === current.slug) continue
+
+    list.push(item)
+  }
+
+  if (currentRegionKey) {
+    const sameRegion = []
+
+    for (let i = 0; i < list.length; i++) {
+      if (getInvoiceRegionKey(list[i]) === currentRegionKey) {
+        sameRegion.push(list[i])
+      }
+    }
+
+    if (sameRegion.length) {
+      list = sameRegion
+    }
+  }
+
+  return mapStrapiInvoices(list, urlApi)
+})
 
 if (!slug.value || !invoice.value) {
   throw createError({
