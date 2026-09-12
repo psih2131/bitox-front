@@ -8,6 +8,13 @@
 
     <TransferStatsSec :countryName="transfersPage.title_mutation || transfersPage.title" />
 
+    <TransferFeaturesSec
+      :country-name="transfersPage.title_mutation || transfersPage.title"
+      :country-cities="transfersPage.country_cities"
+    />
+
+    <TransferProcessSec :country-name="transfersPage.title_mutation || transfersPage.title" />
+
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
     <ServiceEconomySec />
     <HomeChoiceSec />
@@ -46,6 +53,7 @@ const populate = [
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
   'populate[services_faq_sec][populate]=questions_list',
+  'populate[country_cities]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
 
