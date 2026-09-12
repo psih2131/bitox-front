@@ -16,9 +16,13 @@
     <TransferProcessSec :country-name="transfersPage.title_mutation || transfersPage.title" />
 
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
+    
     <ServiceEconomySec />
+    
     <HomeChoiceSec />
+    
     <HomeBenefitsSec />
+    
     <BusinessCountriesSec
       v-if="transfersPages.length"
       :title="transfersPage.service_county_sec_v2?.title_section"
@@ -26,13 +30,17 @@
       link-base="/transfers"
     />
     <BusinessOtherSec />
+    
     <ServiceExamplesSec
       v-if="transfersPage.services_invoice_example_sec"
       :section="transfersPage.services_invoice_example_sec"
     />
     <HomeReviewsSec />
+    
     <HomeMediaSec v-if="transfersPage.service_media_about_us_sec" :section="transfersPage.service_media_about_us_sec" />
+    
     <HomeFaqSec v-if="transfersPage.services_faq_sec" :section="transfersPage.services_faq_sec" />
+    
     <ServiceContactSec />
   </main>
 </template>
@@ -54,6 +62,7 @@ const populate = [
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
   'populate[services_faq_sec][populate]=questions_list',
   'populate[country_cities]=true',
+  'populate[transfers_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
 
@@ -63,14 +72,51 @@ const { data: transfersPageResponse } = await useFetch(
 )
 
 const { data: transfersPagesResponse } = await useFetch(
-  `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&populate=flag&pagination[pageSize]=100`,
+  `${urlApi}/api/transfers-pages?fields[0]=title&fields[1]=slug&populate[0]=flag&populate[1]=transfers_pages_region&pagination[pageSize]=100`,
 )
 
 const transfersPage = computed(() => transfersPageResponse.value?.data?.[0])
 
-const transfersPages = computed(() =>
-  mapStrapiInvoices(transfersPagesResponse.value?.data ?? [], urlApi),
-)
+function getTransfersRegionKey(item) {
+  const region = item?.transfers_pages_region
+  if (!region) return null
+  return region.documentId || region.id || null
+}
+
+const transfersPages = computed(() => {
+  const allPages = transfersPagesResponse.value?.data ?? []
+  const current = transfersPage.value
+  const currentRegionKey = getTransfersRegionKey(current)
+  const currentKey = current?.documentId || current?.id || current?.slug
+
+  let list = []
+
+  for (let i = 0; i < allPages.length; i++) {
+    const item = allPages[i]
+    const itemKey = item.documentId || item.id || item.slug
+
+    if (currentKey && itemKey === currentKey) continue
+    if (current?.slug && item.slug === current.slug) continue
+
+    list.push(item)
+  }
+
+  if (currentRegionKey) {
+    const sameRegion = []
+
+    for (let i = 0; i < list.length; i++) {
+      if (getTransfersRegionKey(list[i]) === currentRegionKey) {
+        sameRegion.push(list[i])
+      }
+    }
+
+    if (sameRegion.length) {
+      list = sameRegion
+    }
+  }
+
+  return mapStrapiInvoices(list, urlApi)
+})
 
 if (!slug.value || !transfersPage.value) {
   throw createError({
