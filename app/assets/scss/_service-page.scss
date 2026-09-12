@@ -822,6 +822,7 @@
   gap: 48px;
   align-items: start;
   padding: 65px 0 0;
+  padding-bottom: 60px;
 }
 
 .invoice-hero-sec{
@@ -830,6 +831,7 @@
 
 
 @media only screen and (max-width: 1150px) {
+  
   .service-contact-sec__title {
     padding-right: 0;
   }
@@ -997,8 +999,10 @@
     padding-bottom: 30px;
   }
   .invoice-hero-sec__inner{
-    gap: 70px
+    gap: 70px;
+    padding-bottom: 0px;
   }
+  
 }
 
 @media only screen and (max-width: 880px) {

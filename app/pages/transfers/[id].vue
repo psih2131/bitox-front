@@ -1,8 +1,13 @@
 <template>
   <main v-if="transfersPage" class="service-page">
-    <ServiceHeroSec v-if="transfersPage.service_hero_sec" :section="transfersPage.service_hero_sec" />
-    <CryptoExchangeCalcSec :countryName="transfersPage.title" />
-    <HomeStatsSec />
+    <!-- <ServiceHeroSec v-if="transfersPage.service_hero_sec" :section="transfersPage.service_hero_sec" /> -->
+
+    <InvoiceHeroSec v-if="transfersPage.service_hero_sec" :section="transfersPage.service_hero_sec" :countryName="transfersPage.title_mutation || transfersPage.title"/>
+
+    <!-- <CryptoExchangeCalcSec :countryName="transfersPage.title" /> -->
+
+    <TransferStatsSec :countryName="transfersPage.title_mutation || transfersPage.title" />
+
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
     <ServiceEconomySec />
     <HomeChoiceSec />

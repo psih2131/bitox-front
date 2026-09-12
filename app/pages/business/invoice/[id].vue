@@ -3,7 +3,7 @@
     <!-- <ServiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" /> -->
     <InvoiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" :countryName="invoice.title_mutation || invoice.title"/>
     <!-- <CryptoExchangeCalcSec :sectionTitle="'Калькулятор инвойса'"/> -->
-    <HomeStatsSec />
+    <InvoiceStatsSec :countryName="invoice.title_mutation || invoice.title" />
 
     <InvoiceTermsSec :country-name="invoice.title_mutation || invoice.title" />
 
