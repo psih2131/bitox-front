@@ -2,7 +2,7 @@
   <main class="home-page">
     <HomeHeroSec v-if="home?.home_hero_sec" :section="home.home_hero_sec" />
 
-    <HomeStatsSec />
+    <!-- <HomeStatsSec /> -->
 
     <HomePlatformSec :section="home?.home_platform_sec" />
 
