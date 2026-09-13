@@ -4,7 +4,10 @@
       <div class="service-economy-sec__card">
         <div class="service-economy-sec__content">
           <div class="service-economy-sec__content-top">
-            <h2 v-if="section.title" class="service-economy-sec__title">
+            <h2 v-if="sectionTitle" class="service-economy-sec__title">
+              {{ sectionTitle }}
+            </h2>
+            <h2 v-else="section.title" class="service-economy-sec__title">
               {{ section.title }}
             </h2>
 
@@ -48,6 +51,13 @@ import gsap from 'gsap'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+
+const props = defineProps({
+  sectionTitle: {
+    type: String,
+    default: null,
+  },
+})
 
 const modalStore = useModalStore()
 

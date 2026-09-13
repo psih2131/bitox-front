@@ -402,7 +402,7 @@ const businessMega = computed(() => {
 
   const importLinks = [
     { key: 'business-invoice', label: 'Оплата инвойсов', to: '/business/invoice' },
-    { key: 'business-invoice-servers', label: 'Платежи для серверов', to: '/business/invoice' },
+    { key: 'business-invoice-servers', label: 'Платежи для селлеров', to: '/business/invoice' },
     ...pages
       .filter((page) => page.type === 'import')
       .map((page) => ({

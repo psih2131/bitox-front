@@ -11,35 +11,40 @@
           :key="card.id"
           class="service-invoices-sec__card"
         >
-          <div class="service-invoices-sec__card-media">
-            <img
-              v-if="card.image"
-              :src="card.image"
-              alt=""
-              class="service-invoices-sec__card-img"
-            />
-          </div>
-
-          <div class="service-invoices-sec__card-body">
-            <h3 v-if="card.title" class="service-invoices-sec__card-title">{{ card.title }}</h3>
-            <p v-if="card.text" class="service-invoices-sec__card-text">{{ card.text }}</p>
-
-            <div v-if="card.tags.length" class="service-invoices-sec__tags">
-              <span
-                v-for="tag in card.tags"
-                :key="tag"
-                class="service-invoices-sec__tag"
-              >
-                {{ tag }}
-              </span>
+          <div class="service-invoices-sec__card-top">
+            <div class="service-invoices-sec__card-media">
+              <img
+                v-if="card.image"
+                :src="card.image"
+                alt=""
+                class="service-invoices-sec__card-img"
+              />
             </div>
 
-            <div v-if="card.pageLink" class="service-invoices-sec__card-link">
+            <div class="service-invoices-sec__card-body">
+              <h3 v-if="card.title" class="service-invoices-sec__card-title">{{ card.title }}</h3>
+              <p v-if="card.text" class="service-invoices-sec__card-text">{{ card.text }}</p>
+
+              <div v-if="card.tags.length" class="service-invoices-sec__tags">
+                <span
+                  v-for="tag in card.tags"
+                  :key="tag"
+                  class="service-invoices-sec__tag"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+
+              
+            </div>
+          </div>
+          
+
+          <div v-if="card.pageLink" class="service-invoices-sec__card-link">
               <NuxtLink :to="card.pageLink" class="app-btn">
                 Подробнее
               </NuxtLink>
             </div>
-          </div>
         </article>
       </div>
     </div>

@@ -17,7 +17,7 @@
 
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
     
-    <ServiceEconomySec />
+    <ServiceEconomySec :sectionTitle="`Экономия на международных платежах и переводах в ${transfersPage.title_mutation || transfersPage.title} `" />
     
     <HomeChoiceSec />
     
@@ -25,7 +25,7 @@
     
     <BusinessCountriesSec
       v-if="transfersPages.length"
-      :title="transfersPage.service_county_sec_v2?.title_section"
+      :title="`Международные платежи в  ${transfersPage.title_mutation || transfersPage.title} и по всему миру`"
       :countries="transfersPages"
       link-base="/transfers"
     />
@@ -41,7 +41,7 @@
     
     <HomeFaqSec v-if="transfersPage.services_faq_sec" :section="transfersPage.services_faq_sec" />
     
-    <ServiceContactSec />
+    <ServiceContactSec :sectionTitle="`Заказать международный перевод в ${transfersPage.title_mutation || transfersPage.title}`"  />
   </main>
 </template>
 

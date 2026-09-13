@@ -9,7 +9,7 @@
 
     <ServiceInvoicesSec v-if="invoice.services_invoice_sec" :section="invoice.services_invoice_sec" />
     
-    <ServiceEconomySec />
+    <ServiceEconomySec :sectionTitle="`Экономия на оплате инвойсов в ${transfersPage.title_mutation || transfersPage.title}  с Bitox`"/>
 
     <InvoiceProcessSec :country-name="invoice.title_mutation || invoice.title" />
 
