@@ -71,12 +71,12 @@
               >
                 {{ item.label }}
               </NuxtLink>
-              <span
+              <div
                 v-else
                 class="header__nav-link header__nav-link--static"
               >
                 {{ item.label }}
-              </span>
+              </div>
 
               <div v-if="item.mega?.length" class="header__mega">
                 <div class="container">
@@ -527,7 +527,7 @@ const aboutMega = [
 
 const navItems = computed(() => [
   { label: 'Бизнесу', to: '/business', mega: businessMega.value },
-  { label: 'Частным клиентам', to: '/individuals', mega: privateClientsMega.value },
+  { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
   { label: 'Международные расчеты', to: '/transfers', mega: transfersMega.value },
   { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
   { label: 'О компании', mega: aboutMega, clickable: false },

@@ -6,7 +6,6 @@ export default defineSitemapEventHandler(() => {
     return [
         { loc: `${urlApi}`, _sitemap: 'pages' },
         { loc: `${urlApi}/business`, _sitemap: 'pages' },
-        { loc: `${urlApi}/individuals`, _sitemap: 'pages' },
         { loc: `${urlApi}/transfers`, _sitemap: 'pages' },
         { loc: `${urlApi}/crypto-exchange`, _sitemap: 'pages' },
         { loc: `${urlApi}/about`, _sitemap: 'pages' },
