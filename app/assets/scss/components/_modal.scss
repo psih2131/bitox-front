@@ -359,6 +359,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 30px;
+  cursor: pointer;
 }
 
 .promo-modal__contact {
@@ -377,6 +378,10 @@
   }
 
   img {
+    display: block;
+    flex-shrink: 0;
+  }
+  svg{
     display: block;
     flex-shrink: 0;
   }

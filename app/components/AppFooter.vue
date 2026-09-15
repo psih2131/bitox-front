@@ -46,6 +46,8 @@
           <div class="app-footer__col app-footer__col-3 ">
             <div class="app-footer__col-main">
               <div v-if="contacts.length" class="app-footer__contacts">
+
+                
                 <a
                   v-for="contact in contacts"
                   :key="contact.id"
@@ -57,6 +59,9 @@
               </div>
 
               <div v-if="socials.length" class="app-footer__socials">
+
+                <TgBotButtonLink :type="'footer-1'" />
+                
                 <a
                   v-for="social in socials"
                   :key="social.id"
@@ -110,6 +115,7 @@
 </template>
 
 <script setup>
+import TgBotButtonLink from '~/components/buttons/TgBotButtonLink.vue'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl

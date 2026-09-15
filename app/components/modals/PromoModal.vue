@@ -68,16 +68,9 @@
         </p>
 
         <div class="promo-modal__contacts">
-          <a
-            v-if="telegramHref"
-            :href="telegramHref"
-            class="promo-modal__contact"
-            :target="isExternalTelegram ? '_blank' : undefined"
-            :rel="isExternalTelegram ? 'noopener noreferrer' : undefined"
-          >
-            <img :src="telegramIcon" alt="" width="15" height="14" />
-            <span>Telegram</span>
-          </a>
+
+          <TgBotButtonLink :type="'modal-1'" />
+          
 
           <a
             v-if="phoneDisplay"

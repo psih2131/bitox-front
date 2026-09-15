@@ -98,11 +98,17 @@
   border-radius: 6px;
   background: #606061;
   transition: background-color 0.2s ease;
+  cursor: pointer;
 
   img {
     display: block;
     max-width: 18px;
     max-height: 18px;
+  }
+  svg{
+    width: 18px;
+    height: 18px;
+    display: block;
   }
 
   &:hover {

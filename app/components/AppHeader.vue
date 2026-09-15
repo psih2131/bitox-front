@@ -243,6 +243,10 @@
         </div>
 
         <div v-if="socials.length" class="mob-menu__socials">
+
+
+          <TgBotButtonLink :type="'header-2'" />
+
           <a
             v-for="social in socials"
             :key="social.id"
