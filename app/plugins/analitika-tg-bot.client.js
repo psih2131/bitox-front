@@ -45,7 +45,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     async function trackEvent() {
 
         const objectData = {
-            utm_sourсe: utmData.utm_source || 'direct',
+            utm_source: utmData.utm_source || 'direct',
             utm_medium: utmData.utm_medium || null,
             utm_campaign: utmData.utm_campaign || null,
             utm_content: utmData.utm_content || null,
