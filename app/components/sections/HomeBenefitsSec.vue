@@ -46,13 +46,34 @@ import confBlack from '~/assets/images/icons/conf-black.png'
 import confWhite from '~/assets/images/icons/conf-white.png'
 import { getStrapiMediaUrl } from '~/utils/strapi'
 
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
 const urlApi = useRuntimeConfig().public.apiUrl
 
+function isBenefitsSectionFilled(section) {
+  if (!section) return false
+  if (typeof section.title_section === 'string' && section.title_section.trim()) return true
+  if (section.benefits_items?.length) return true
+  return false
+}
+
+const useExternalSection = isBenefitsSectionFilled(props.section)
+
 const { data: benefitsResponse } = await useFetch(
-  `${urlApi}/api/benefits-component?populate[benefits_sec][populate][benefits_items]=true&populate[benefits_sec][populate][image_for_box_2]=true`,
+  () => (useExternalSection
+    ? null
+    : `${urlApi}/api/benefits-component?populate[benefits_sec][populate][benefits_items]=true&populate[benefits_sec][populate][image_for_box_2]=true`),
 )
 
-const section = computed(() => benefitsResponse.value?.data?.benefits_sec)
+const section = computed(() => {
+  if (useExternalSection) return props.section
+  return benefitsResponse.value?.data?.benefits_sec
+})
 
 const sectionTitle = computed(() => section.value?.title_section || 'Выгоды работы с нами')
 

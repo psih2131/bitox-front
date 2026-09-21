@@ -5,17 +5,25 @@
       :country-name="individualsPage.title"
       :calc-title="individualsPage.calculator_title"
     />
+
     <HomeStatsSec />
+
     <ServiceInvoicesSec v-if="individualsPage.services_invoice_sec" :section="individualsPage.services_invoice_sec" />
+    
     <ServiceEconomySec :section="individualsPage.service_economy_sec" />
 
     <HomeChoiceSec :section="individualsPage.choice_section" />
+
+    <HomeBenefitsSec :section="individualsPage.services_benefits_sec" />
+
+
     <BusinessCountriesSec
       v-if="transfersPages.length"
       :title="individualsPage.service_county_sec_v2?.title_section"
       :countries="transfersPages"
       link-base="/transfers"
     />
+
     <BusinessOtherSec />
     <ServiceExamplesSec
       v-if="individualsPage.services_invoice_example_sec"
@@ -42,6 +50,8 @@ const populate = [
   'populate[services_invoice_sec][populate][invoice_elements][populate][invoice_element_list_items]=true',
   'populate[service_economy_sec][populate][economy_list_items][populate]=image',
   'populate[choice_section][populate]=table_row',
+  'populate[services_benefits_sec][populate][benefits_items]=true',
+  'populate[services_benefits_sec][populate][image_for_box_2]=true',
   'populate[service_county_sec_v2]=true',
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
