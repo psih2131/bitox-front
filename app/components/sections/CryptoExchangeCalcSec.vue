@@ -3,8 +3,9 @@
     <div class="container">
       <div class="exchange-calc-sec__layout">
         <div class="exchange-calc-sec__form-card">
-          <h2 class="exchange-calc-sec__title"  v-if="countryName">{{ sectionTitle }} в {{ countryName }}</h2>
-          <h2 class="exchange-calc-sec__title"  v-else>{{ sectionTitle }}</h2>
+          <p v-if="calcTitle" class="exchange-calc-sec__title">{{ calcTitle }}</p>
+          <p v-else-if="countryName" class="exchange-calc-sec__title">{{ sectionTitle }} в {{ countryName }}</p>
+          <p v-else class="exchange-calc-sec__title">{{ sectionTitle }}</p>
 
           <div class="exchange-calc-sec__tabs" role="tablist" aria-label="Тип заявки">
             <button
@@ -363,6 +364,10 @@ const props = defineProps({
   sectionTitle: {
     type: String,
     default: 'Калькулятор перевода',
+  },
+  calcTitle: {
+    type: String,
+    default: '',
   },
 })
 

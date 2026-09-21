@@ -1825,5 +1825,140 @@
     "accusative": "Японию",
     "instrumental": "Японией",
     "prepositional": "Японии"
+  },
+  {
+    "original": "Европа",
+    "nominative": "Европа",
+    "genitive": "Европы",
+    "dative": "Европе",
+    "accusative": "Европу",
+    "instrumental": "Европой",
+    "prepositional": "Европе"
+  },
+  {
+    "original": "Азия",
+    "nominative": "Азия",
+    "genitive": "Азии",
+    "dative": "Азии",
+    "accusative": "Азию",
+    "instrumental": "Азией",
+    "prepositional": "Азии"
+  },
+  {
+    "original": "Африка",
+    "nominative": "Африка",
+    "genitive": "Африки",
+    "dative": "Африке",
+    "accusative": "Африку",
+    "instrumental": "Африкой",
+    "prepositional": "Африке"
+  },
+  {
+    "original": "Америка",
+    "nominative": "Америка",
+    "genitive": "Америки",
+    "dative": "Америке",
+    "accusative": "Америку",
+    "instrumental": "Америкой",
+    "prepositional": "Америке"
+  },
+  {
+    "original": "Северная Америка",
+    "nominative": "Северная Америка",
+    "genitive": "Северной Америки",
+    "dative": "Северной Америке",
+    "accusative": "Северную Америку",
+    "instrumental": "Северной Америкой",
+    "prepositional": "Северной Америке"
+  },
+  {
+    "original": "Южная Америка",
+    "nominative": "Южная Америка",
+    "genitive": "Южной Америки",
+    "dative": "Южной Америке",
+    "accusative": "Южную Америку",
+    "instrumental": "Южной Америкой",
+    "prepositional": "Южной Америке"
+  },
+  {
+    "original": "Латинская Америка",
+    "nominative": "Латинская Америка",
+    "genitive": "Латинской Америки",
+    "dative": "Латинской Америке",
+    "accusative": "Латинскую Америку",
+    "instrumental": "Латинской Америкой",
+    "prepositional": "Латинской Америке"
+  },
+  {
+    "original": "Океания",
+    "nominative": "Океания",
+    "genitive": "Океании",
+    "dative": "Океании",
+    "accusative": "Океанию",
+    "instrumental": "Океанией",
+    "prepositional": "Океании"
+  },
+  {
+    "original": "Антарктида",
+    "nominative": "Антарктида",
+    "genitive": "Антарктиды",
+    "dative": "Антарктиде",
+    "accusative": "Антарктиду",
+    "instrumental": "Антарктидой",
+    "prepositional": "Антарктиде"
+  },
+  {
+    "original": "Евразия",
+    "nominative": "Евразия",
+    "genitive": "Евразии",
+    "dative": "Евразии",
+    "accusative": "Евразию",
+    "instrumental": "Евразией",
+    "prepositional": "Евразии"
+  },
+  {
+    "original": "Ближний Восток",
+    "nominative": "Ближний Восток",
+    "genitive": "Ближнего Востока",
+    "dative": "Ближнему Востоку",
+    "accusative": "Ближний Восток",
+    "instrumental": "Ближним Востоком",
+    "prepositional": "Ближнем Востоке"
+  },
+  {
+    "original": "Средняя Азия",
+    "nominative": "Средняя Азия",
+    "genitive": "Средней Азии",
+    "dative": "Средней Азии",
+    "accusative": "Среднюю Азию",
+    "instrumental": "Средней Азией",
+    "prepositional": "Средней Азии"
+  },
+  {
+    "original": "Центральная Азия",
+    "nominative": "Центральная Азия",
+    "genitive": "Центральной Азии",
+    "dative": "Центральной Азии",
+    "accusative": "Центральную Азию",
+    "instrumental": "Центральной Азией",
+    "prepositional": "Центральной Азии"
+  },
+  {
+    "original": "Юго-Восточная Азия",
+    "nominative": "Юго-Восточная Азия",
+    "genitive": "Юго-Восточной Азии",
+    "dative": "Юго-Восточной Азии",
+    "accusative": "Юго-Восточную Азию",
+    "instrumental": "Юго-Восточной Азией",
+    "prepositional": "Юго-Восточной Азии"
+  },
+  {
+    "original": "СНГ",
+    "nominative": "СНГ",
+    "genitive": "СНГ",
+    "dative": "СНГ",
+    "accusative": "СНГ",
+    "instrumental": "СНГ",
+    "prepositional": "СНГ"
   }
 ]
