@@ -1,0 +1,1829 @@
+[
+  {
+    "original": "Австралия",
+    "nominative": "Австралия",
+    "genitive": "Австралии",
+    "dative": "Австралии",
+    "accusative": "Австралию",
+    "instrumental": "Австралией",
+    "prepositional": "Австралии"
+  },
+  {
+    "original": "Австрия",
+    "nominative": "Австрия",
+    "genitive": "Австрии",
+    "dative": "Австрии",
+    "accusative": "Австрию",
+    "instrumental": "Австрией",
+    "prepositional": "Австрии"
+  },
+  {
+    "original": "Азербайджан",
+    "nominative": "Азербайджан",
+    "genitive": "Азербайджана",
+    "dative": "Азербайджану",
+    "accusative": "Азербайджан",
+    "instrumental": "Азербайджаном",
+    "prepositional": "Азербайджане"
+  },
+  {
+    "original": "Албания",
+    "nominative": "Албания",
+    "genitive": "Албании",
+    "dative": "Албании",
+    "accusative": "Албанию",
+    "instrumental": "Албанией",
+    "prepositional": "Албании"
+  },
+  {
+    "original": "Алжир",
+    "nominative": "Алжир",
+    "genitive": "Алжира",
+    "dative": "Алжиру",
+    "accusative": "Алжир",
+    "instrumental": "Алжиром",
+    "prepositional": "Алжире"
+  },
+  {
+    "original": "Ангола",
+    "nominative": "Ангола",
+    "genitive": "Анголы",
+    "dative": "Анголе",
+    "accusative": "Анголу",
+    "instrumental": "Анголой",
+    "prepositional": "Анголе"
+  },
+  {
+    "original": "Андорра",
+    "nominative": "Андорра",
+    "genitive": "Андорры",
+    "dative": "Андорре",
+    "accusative": "Андорру",
+    "instrumental": "Андоррой",
+    "prepositional": "Андорре"
+  },
+  {
+    "original": "Антигуа и Барбуда",
+    "nominative": "Антигуа и Барбуда",
+    "genitive": "Антигуа и Барбуды",
+    "dative": "Антигуа и Барбуде",
+    "accusative": "Антигуа и Барбуду",
+    "instrumental": "Антигуа и Барбудой",
+    "prepositional": "Антигуа и Барбуде"
+  },
+  {
+    "original": "Аргентина",
+    "nominative": "Аргентина",
+    "genitive": "Аргентины",
+    "dative": "Аргентине",
+    "accusative": "Аргентину",
+    "instrumental": "Аргентиной",
+    "prepositional": "Аргентине"
+  },
+  {
+    "original": "Армения",
+    "nominative": "Армения",
+    "genitive": "Армении",
+    "dative": "Армении",
+    "accusative": "Армению",
+    "instrumental": "Арменией",
+    "prepositional": "Армении"
+  },
+  {
+    "original": "Афганистан",
+    "nominative": "Афганистан",
+    "genitive": "Афганистана",
+    "dative": "Афганистану",
+    "accusative": "Афганистан",
+    "instrumental": "Афганистаном",
+    "prepositional": "Афганистане"
+  },
+  {
+    "original": "Багамские Острова",
+    "nominative": "Багамские Острова",
+    "genitive": "Багамских Островов",
+    "dative": "Багамским Островам",
+    "accusative": "Багамские Острова",
+    "instrumental": "Багамскими Островами",
+    "prepositional": "Багамских Островах"
+  },
+  {
+    "original": "Бангладеш",
+    "nominative": "Бангладеш",
+    "genitive": "Бангладеш",
+    "dative": "Бангладеш",
+    "accusative": "Бангладеш",
+    "instrumental": "Бангладеш",
+    "prepositional": "Бангладеш"
+  },
+  {
+    "original": "Барбадос",
+    "nominative": "Барбадос",
+    "genitive": "Барбадоса",
+    "dative": "Барбадосу",
+    "accusative": "Барбадос",
+    "instrumental": "Барбадосом",
+    "prepositional": "Барбадосе"
+  },
+  {
+    "original": "Бахрейн",
+    "nominative": "Бахрейн",
+    "genitive": "Бахрейна",
+    "dative": "Бахрейну",
+    "accusative": "Бахрейн",
+    "instrumental": "Бахрейном",
+    "prepositional": "Бахрейне"
+  },
+  {
+    "original": "Беларусь",
+    "nominative": "Беларусь",
+    "genitive": "Беларуси",
+    "dative": "Беларуси",
+    "accusative": "Беларусь",
+    "instrumental": "Беларусью",
+    "prepositional": "Беларуси"
+  },
+  {
+    "original": "Белиз",
+    "nominative": "Белиз",
+    "genitive": "Белиза",
+    "dative": "Белизу",
+    "accusative": "Белиз",
+    "instrumental": "Белизом",
+    "prepositional": "Белизе"
+  },
+  {
+    "original": "Бельгия",
+    "nominative": "Бельгия",
+    "genitive": "Бельгии",
+    "dative": "Бельгии",
+    "accusative": "Бельгию",
+    "instrumental": "Бельгией",
+    "prepositional": "Бельгии"
+  },
+  {
+    "original": "Бенин",
+    "nominative": "Бенин",
+    "genitive": "Бенина",
+    "dative": "Бенину",
+    "accusative": "Бенин",
+    "instrumental": "Бенином",
+    "prepositional": "Бенине"
+  },
+  {
+    "original": "Болгария",
+    "nominative": "Болгария",
+    "genitive": "Болгарии",
+    "dative": "Болгарии",
+    "accusative": "Болгарию",
+    "instrumental": "Болгарией",
+    "prepositional": "Болгарии"
+  },
+  {
+    "original": "Боливия",
+    "nominative": "Боливия",
+    "genitive": "Боливии",
+    "dative": "Боливии",
+    "accusative": "Боливию",
+    "instrumental": "Боливией",
+    "prepositional": "Боливии"
+  },
+  {
+    "original": "Босния и Герцеговина",
+    "nominative": "Босния и Герцеговина",
+    "genitive": "Боснии и Герцеговины",
+    "dative": "Боснии и Герцеговине",
+    "accusative": "Боснию и Герцеговину",
+    "instrumental": "Боснией и Герцеговиной",
+    "prepositional": "Боснии и Герцеговине"
+  },
+  {
+    "original": "Ботсвана",
+    "nominative": "Ботсвана",
+    "genitive": "Ботсваны",
+    "dative": "Ботсване",
+    "accusative": "Ботсвану",
+    "instrumental": "Ботсваной",
+    "prepositional": "Ботсване"
+  },
+  {
+    "original": "Бразилия",
+    "nominative": "Бразилия",
+    "genitive": "Бразилии",
+    "dative": "Бразилии",
+    "accusative": "Бразилию",
+    "instrumental": "Бразилией",
+    "prepositional": "Бразилии"
+  },
+  {
+    "original": "Бруней",
+    "nominative": "Бруней",
+    "genitive": "Брунея",
+    "dative": "Брунею",
+    "accusative": "Бруней",
+    "instrumental": "Брунеем",
+    "prepositional": "Брунее"
+  },
+  {
+    "original": "Буркина-Фасо",
+    "nominative": "Буркина-Фасо",
+    "genitive": "Буркина-Фасо",
+    "dative": "Буркина-Фасо",
+    "accusative": "Буркина-Фасо",
+    "instrumental": "Буркина-Фасо",
+    "prepositional": "Буркина-Фасо"
+  },
+  {
+    "original": "Бурунди",
+    "nominative": "Бурунди",
+    "genitive": "Бурунди",
+    "dative": "Бурунди",
+    "accusative": "Бурунди",
+    "instrumental": "Бурунди",
+    "prepositional": "Бурунди"
+  },
+  {
+    "original": "Бутан",
+    "nominative": "Бутан",
+    "genitive": "Бутана",
+    "dative": "Бутану",
+    "accusative": "Бутан",
+    "instrumental": "Бутаном",
+    "prepositional": "Бутане"
+  },
+  {
+    "original": "Вануату",
+    "nominative": "Вануату",
+    "genitive": "Вануату",
+    "dative": "Вануату",
+    "accusative": "Вануату",
+    "instrumental": "Вануату",
+    "prepositional": "Вануату"
+  },
+  {
+    "original": "Ватикан",
+    "nominative": "Ватикан",
+    "genitive": "Ватикана",
+    "dative": "Ватикану",
+    "accusative": "Ватикан",
+    "instrumental": "Ватиканом",
+    "prepositional": "Ватикане"
+  },
+  {
+    "original": "Великобритания",
+    "nominative": "Великобритания",
+    "genitive": "Великобритании",
+    "dative": "Великобритании",
+    "accusative": "Великобританию",
+    "instrumental": "Великобританией",
+    "prepositional": "Великобритании"
+  },
+  {
+    "original": "Венгрия",
+    "nominative": "Венгрия",
+    "genitive": "Венгрии",
+    "dative": "Венгрии",
+    "accusative": "Венгрию",
+    "instrumental": "Венгрией",
+    "prepositional": "Венгрии"
+  },
+  {
+    "original": "Венесуэла",
+    "nominative": "Венесуэла",
+    "genitive": "Венесуэлы",
+    "dative": "Венесуэле",
+    "accusative": "Венесуэлу",
+    "instrumental": "Венесуэлой",
+    "prepositional": "Венесуэле"
+  },
+  {
+    "original": "Вьетнам",
+    "nominative": "Вьетнам",
+    "genitive": "Вьетнама",
+    "dative": "Вьетнаму",
+    "accusative": "Вьетнам",
+    "instrumental": "Вьетнамом",
+    "prepositional": "Вьетнаме"
+  },
+  {
+    "original": "Габон",
+    "nominative": "Габон",
+    "genitive": "Габона",
+    "dative": "Габону",
+    "accusative": "Габон",
+    "instrumental": "Габоном",
+    "prepositional": "Габоне"
+  },
+  {
+    "original": "Гаити",
+    "nominative": "Гаити",
+    "genitive": "Гаити",
+    "dative": "Гаити",
+    "accusative": "Гаити",
+    "instrumental": "Гаити",
+    "prepositional": "Гаити"
+  },
+  {
+    "original": "Гайана",
+    "nominative": "Гайана",
+    "genitive": "Гайаны",
+    "dative": "Гайане",
+    "accusative": "Гайану",
+    "instrumental": "Гайаной",
+    "prepositional": "Гайане"
+  },
+  {
+    "original": "Гамбия",
+    "nominative": "Гамбия",
+    "genitive": "Гамбии",
+    "dative": "Гамбии",
+    "accusative": "Гамбию",
+    "instrumental": "Гамбией",
+    "prepositional": "Гамбии"
+  },
+  {
+    "original": "Гана",
+    "nominative": "Гана",
+    "genitive": "Ганы",
+    "dative": "Гане",
+    "accusative": "Гану",
+    "instrumental": "Ганой",
+    "prepositional": "Гане"
+  },
+  {
+    "original": "Гватемала",
+    "nominative": "Гватемала",
+    "genitive": "Гватемалы",
+    "dative": "Гватемале",
+    "accusative": "Гватемалу",
+    "instrumental": "Гватемалой",
+    "prepositional": "Гватемале"
+  },
+  {
+    "original": "Гвинея",
+    "nominative": "Гвинея",
+    "genitive": "Гвинеи",
+    "dative": "Гвинее",
+    "accusative": "Гвинею",
+    "instrumental": "Гвинеей",
+    "prepositional": "Гвинее"
+  },
+  {
+    "original": "Гвинея-Бисау",
+    "nominative": "Гвинея-Бисау",
+    "genitive": "Гвинеи-Бисау",
+    "dative": "Гвинее-Бисау",
+    "accusative": "Гвинею-Бисау",
+    "instrumental": "Гвинеей-Бисау",
+    "prepositional": "Гвинее-Бисау"
+  },
+  {
+    "original": "Германия",
+    "nominative": "Германия",
+    "genitive": "Германии",
+    "dative": "Германии",
+    "accusative": "Германию",
+    "instrumental": "Германией",
+    "prepositional": "Германии"
+  },
+  {
+    "original": "Гондурас",
+    "nominative": "Гондурас",
+    "genitive": "Гондураса",
+    "dative": "Гондурасу",
+    "accusative": "Гондурас",
+    "instrumental": "Гондурасом",
+    "prepositional": "Гондурасе"
+  },
+  {
+    "original": "Гонконг",
+    "nominative": "Гонконг",
+    "genitive": "Гонконга",
+    "dative": "Гонконгу",
+    "accusative": "Гонконг",
+    "instrumental": "Гонконгом",
+    "prepositional": "Гонконге"
+  },
+  {
+    "original": "Гренада",
+    "nominative": "Гренада",
+    "genitive": "Гренады",
+    "dative": "Гренаде",
+    "accusative": "Гренаду",
+    "instrumental": "Гренадой",
+    "prepositional": "Гренаде"
+  },
+  {
+    "original": "Греция",
+    "nominative": "Греция",
+    "genitive": "Греции",
+    "dative": "Греции",
+    "accusative": "Грецию",
+    "instrumental": "Грецией",
+    "prepositional": "Греции"
+  },
+  {
+    "original": "Грузия",
+    "nominative": "Грузия",
+    "genitive": "Грузии",
+    "dative": "Грузии",
+    "accusative": "Грузию",
+    "instrumental": "Грузией",
+    "prepositional": "Грузии"
+  },
+  {
+    "original": "Дания",
+    "nominative": "Дания",
+    "genitive": "Дании",
+    "dative": "Дании",
+    "accusative": "Данию",
+    "instrumental": "Данией",
+    "prepositional": "Дании"
+  },
+  {
+    "original": "Демократическая Республика Конго",
+    "nominative": "Демократическая Республика Конго",
+    "genitive": "Демократической Республики Конго",
+    "dative": "Демократической Республике Конго",
+    "accusative": "Демократическую Республику Конго",
+    "instrumental": "Демократической Республикой Конго",
+    "prepositional": "Демократической Республике Конго"
+  },
+  {
+    "original": "Джибути",
+    "nominative": "Джибути",
+    "genitive": "Джибути",
+    "dative": "Джибути",
+    "accusative": "Джибути",
+    "instrumental": "Джибути",
+    "prepositional": "Джибути"
+  },
+  {
+    "original": "Доминика",
+    "nominative": "Доминика",
+    "genitive": "Доминики",
+    "dative": "Доминике",
+    "accusative": "Доминику",
+    "instrumental": "Доминикой",
+    "prepositional": "Доминике"
+  },
+  {
+    "original": "Доминиканская Республика",
+    "nominative": "Доминиканская Республика",
+    "genitive": "Доминиканской Республики",
+    "dative": "Доминиканской Республике",
+    "accusative": "Доминиканскую Республику",
+    "instrumental": "Доминиканской Республикой",
+    "prepositional": "Доминиканской Республике"
+  },
+  {
+    "original": "Египет",
+    "nominative": "Египет",
+    "genitive": "Египта",
+    "dative": "Египту",
+    "accusative": "Египет",
+    "instrumental": "Египтом",
+    "prepositional": "Египте"
+  },
+  {
+    "original": "Замбия",
+    "nominative": "Замбия",
+    "genitive": "Замбии",
+    "dative": "Замбии",
+    "accusative": "Замбию",
+    "instrumental": "Замбией",
+    "prepositional": "Замбии"
+  },
+  {
+    "original": "Зимбабве",
+    "nominative": "Зимбабве",
+    "genitive": "Зимбабве",
+    "dative": "Зимбабве",
+    "accusative": "Зимбабве",
+    "instrumental": "Зимбабве",
+    "prepositional": "Зимбабве"
+  },
+  {
+    "original": "Израиль",
+    "nominative": "Израиль",
+    "genitive": "Израиля",
+    "dative": "Израилю",
+    "accusative": "Израиль",
+    "instrumental": "Израилем",
+    "prepositional": "Израиле"
+  },
+  {
+    "original": "Индия",
+    "nominative": "Индия",
+    "genitive": "Индии",
+    "dative": "Индии",
+    "accusative": "Индию",
+    "instrumental": "Индией",
+    "prepositional": "Индии"
+  },
+  {
+    "original": "Индонезия",
+    "nominative": "Индонезия",
+    "genitive": "Индонезии",
+    "dative": "Индонезии",
+    "accusative": "Индонезию",
+    "instrumental": "Индонезией",
+    "prepositional": "Индонезии"
+  },
+  {
+    "original": "Иордания",
+    "nominative": "Иордания",
+    "genitive": "Иордании",
+    "dative": "Иордании",
+    "accusative": "Иорданию",
+    "instrumental": "Иорданией",
+    "prepositional": "Иордании"
+  },
+  {
+    "original": "Ирак",
+    "nominative": "Ирак",
+    "genitive": "Ирака",
+    "dative": "Ираку",
+    "accusative": "Ирак",
+    "instrumental": "Ираком",
+    "prepositional": "Ираке"
+  },
+  {
+    "original": "Иран",
+    "nominative": "Иран",
+    "genitive": "Ирана",
+    "dative": "Ирану",
+    "accusative": "Иран",
+    "instrumental": "Ираном",
+    "prepositional": "Иране"
+  },
+  {
+    "original": "Ирландия",
+    "nominative": "Ирландия",
+    "genitive": "Ирландии",
+    "dative": "Ирландии",
+    "accusative": "Ирландию",
+    "instrumental": "Ирландией",
+    "prepositional": "Ирландии"
+  },
+  {
+    "original": "Исландия",
+    "nominative": "Исландия",
+    "genitive": "Исландии",
+    "dative": "Исландии",
+    "accusative": "Исландию",
+    "instrumental": "Исландией",
+    "prepositional": "Исландии"
+  },
+  {
+    "original": "Испания",
+    "nominative": "Испания",
+    "genitive": "Испании",
+    "dative": "Испании",
+    "accusative": "Испанию",
+    "instrumental": "Испанией",
+    "prepositional": "Испании"
+  },
+  {
+    "original": "Италия",
+    "nominative": "Италия",
+    "genitive": "Италии",
+    "dative": "Италии",
+    "accusative": "Италию",
+    "instrumental": "Италией",
+    "prepositional": "Италии"
+  },
+  {
+    "original": "Йемен",
+    "nominative": "Йемен",
+    "genitive": "Йемена",
+    "dative": "Йемену",
+    "accusative": "Йемен",
+    "instrumental": "Йеменом",
+    "prepositional": "Йемене"
+  },
+  {
+    "original": "Кабо-Верде",
+    "nominative": "Кабо-Верде",
+    "genitive": "Кабо-Верде",
+    "dative": "Кабо-Верде",
+    "accusative": "Кабо-Верде",
+    "instrumental": "Кабо-Верде",
+    "prepositional": "Кабо-Верде"
+  },
+  {
+    "original": "Казахстан",
+    "nominative": "Казахстан",
+    "genitive": "Казахстана",
+    "dative": "Казахстану",
+    "accusative": "Казахстан",
+    "instrumental": "Казахстаном",
+    "prepositional": "Казахстане"
+  },
+  {
+    "original": "Камбоджа",
+    "nominative": "Камбоджа",
+    "genitive": "Камбоджи",
+    "dative": "Камбодже",
+    "accusative": "Камбоджу",
+    "instrumental": "Камбоджей",
+    "prepositional": "Камбодже"
+  },
+  {
+    "original": "Камерун",
+    "nominative": "Камерун",
+    "genitive": "Камеруна",
+    "dative": "Камеруну",
+    "accusative": "Камерун",
+    "instrumental": "Камеруном",
+    "prepositional": "Камеруне"
+  },
+  {
+    "original": "Канада",
+    "nominative": "Канада",
+    "genitive": "Канады",
+    "dative": "Канаде",
+    "accusative": "Канаду",
+    "instrumental": "Канадой",
+    "prepositional": "Канаде"
+  },
+  {
+    "original": "Катар",
+    "nominative": "Катар",
+    "genitive": "Катара",
+    "dative": "Катару",
+    "accusative": "Катар",
+    "instrumental": "Катаром",
+    "prepositional": "Катаре"
+  },
+  {
+    "original": "Кения",
+    "nominative": "Кения",
+    "genitive": "Кении",
+    "dative": "Кении",
+    "accusative": "Кению",
+    "instrumental": "Кенией",
+    "prepositional": "Кении"
+  },
+  {
+    "original": "Кипр",
+    "nominative": "Кипр",
+    "genitive": "Кипра",
+    "dative": "Кипру",
+    "accusative": "Кипр",
+    "instrumental": "Кипром",
+    "prepositional": "Кипре"
+  },
+  {
+    "original": "Киргизия",
+    "nominative": "Киргизия",
+    "genitive": "Киргизии",
+    "dative": "Киргизии",
+    "accusative": "Киргизию",
+    "instrumental": "Киргизией",
+    "prepositional": "Киргизии"
+  },
+  {
+    "original": "Кирибати",
+    "nominative": "Кирибати",
+    "genitive": "Кирибати",
+    "dative": "Кирибати",
+    "accusative": "Кирибати",
+    "instrumental": "Кирибати",
+    "prepositional": "Кирибати"
+  },
+  {
+    "original": "Китай",
+    "nominative": "Китай",
+    "genitive": "Китая",
+    "dative": "Китаю",
+    "accusative": "Китай",
+    "instrumental": "Китаем",
+    "prepositional": "Китае"
+  },
+  {
+    "original": "Колумбия",
+    "nominative": "Колумбия",
+    "genitive": "Колумбии",
+    "dative": "Колумбии",
+    "accusative": "Колумбию",
+    "instrumental": "Колумбией",
+    "prepositional": "Колумбии"
+  },
+  {
+    "original": "Коморы",
+    "nominative": "Коморы",
+    "genitive": "Комор",
+    "dative": "Коморам",
+    "accusative": "Коморы",
+    "instrumental": "Коморами",
+    "prepositional": "Коморах"
+  },
+  {
+    "original": "Конго",
+    "nominative": "Конго",
+    "genitive": "Конго",
+    "dative": "Конго",
+    "accusative": "Конго",
+    "instrumental": "Конго",
+    "prepositional": "Конго"
+  },
+  {
+    "original": "Корея",
+    "nominative": "Корея",
+    "genitive": "Кореи",
+    "dative": "Корее",
+    "accusative": "Корею",
+    "instrumental": "Кореей",
+    "prepositional": "Корее"
+  },
+  {
+    "original": "Коста-Рика",
+    "nominative": "Коста-Рика",
+    "genitive": "Коста-Рики",
+    "dative": "Коста-Рике",
+    "accusative": "Коста-Рику",
+    "instrumental": "Коста-Рикой",
+    "prepositional": "Коста-Рике"
+  },
+  {
+    "original": "Кот-д’Ивуар",
+    "nominative": "Кот-д’Ивуар",
+    "genitive": "Кот-д’Ивуара",
+    "dative": "Кот-д’Ивуару",
+    "accusative": "Кот-д’Ивуар",
+    "instrumental": "Кот-д’Ивуаром",
+    "prepositional": "Кот-д’Ивуаре"
+  },
+  {
+    "original": "Куба",
+    "nominative": "Куба",
+    "genitive": "Кубы",
+    "dative": "Кубе",
+    "accusative": "Кубу",
+    "instrumental": "Кубой",
+    "prepositional": "Кубе"
+  },
+  {
+    "original": "Кувейт",
+    "nominative": "Кувейт",
+    "genitive": "Кувейта",
+    "dative": "Кувейту",
+    "accusative": "Кувейт",
+    "instrumental": "Кувейтом",
+    "prepositional": "Кувейте"
+  },
+  {
+    "original": "Кыргызстан",
+    "nominative": "Кыргызстан",
+    "genitive": "Кыргызстана",
+    "dative": "Кыргызстану",
+    "accusative": "Кыргызстан",
+    "instrumental": "Кыргызстаном",
+    "prepositional": "Кыргызстане"
+  },
+  {
+    "original": "Лаос",
+    "nominative": "Лаос",
+    "genitive": "Лаоса",
+    "dative": "Лаосу",
+    "accusative": "Лаос",
+    "instrumental": "Лаосом",
+    "prepositional": "Лаосе"
+  },
+  {
+    "original": "Латвия",
+    "nominative": "Латвия",
+    "genitive": "Латвии",
+    "dative": "Латвии",
+    "accusative": "Латвию",
+    "instrumental": "Латвией",
+    "prepositional": "Латвии"
+  },
+  {
+    "original": "Лесото",
+    "nominative": "Лесото",
+    "genitive": "Лесото",
+    "dative": "Лесото",
+    "accusative": "Лесото",
+    "instrumental": "Лесото",
+    "prepositional": "Лесото"
+  },
+  {
+    "original": "Либерия",
+    "nominative": "Либерия",
+    "genitive": "Либерии",
+    "dative": "Либерии",
+    "accusative": "Либерию",
+    "instrumental": "Либерией",
+    "prepositional": "Либерии"
+  },
+  {
+    "original": "Ливан",
+    "nominative": "Ливан",
+    "genitive": "Ливана",
+    "dative": "Ливану",
+    "accusative": "Ливан",
+    "instrumental": "Ливаном",
+    "prepositional": "Ливане"
+  },
+  {
+    "original": "Ливия",
+    "nominative": "Ливия",
+    "genitive": "Ливии",
+    "dative": "Ливии",
+    "accusative": "Ливию",
+    "instrumental": "Ливией",
+    "prepositional": "Ливии"
+  },
+  {
+    "original": "Литва",
+    "nominative": "Литва",
+    "genitive": "Литвы",
+    "dative": "Литве",
+    "accusative": "Литву",
+    "instrumental": "Литвой",
+    "prepositional": "Литве"
+  },
+  {
+    "original": "Лихтенштейн",
+    "nominative": "Лихтенштейн",
+    "genitive": "Лихтенштейна",
+    "dative": "Лихтенштейну",
+    "accusative": "Лихтенштейн",
+    "instrumental": "Лихтенштейном",
+    "prepositional": "Лихтенштейне"
+  },
+  {
+    "original": "Люксембург",
+    "nominative": "Люксембург",
+    "genitive": "Люксембурга",
+    "dative": "Люксембургу",
+    "accusative": "Люксембург",
+    "instrumental": "Люксембургом",
+    "prepositional": "Люксембурге"
+  },
+  {
+    "original": "Маврикий",
+    "nominative": "Маврикий",
+    "genitive": "Маврикия",
+    "dative": "Маврикию",
+    "accusative": "Маврикий",
+    "instrumental": "Маврикием",
+    "prepositional": "Маврикии"
+  },
+  {
+    "original": "Мавритания",
+    "nominative": "Мавритания",
+    "genitive": "Мавритании",
+    "dative": "Мавритании",
+    "accusative": "Мавританию",
+    "instrumental": "Мавританией",
+    "prepositional": "Мавритании"
+  },
+  {
+    "original": "Мадагаскар",
+    "nominative": "Мадагаскар",
+    "genitive": "Мадагаскара",
+    "dative": "Мадагаскару",
+    "accusative": "Мадагаскар",
+    "instrumental": "Мадагаскаром",
+    "prepositional": "Мадагаскаре"
+  },
+  {
+    "original": "Малави",
+    "nominative": "Малави",
+    "genitive": "Малави",
+    "dative": "Малави",
+    "accusative": "Малави",
+    "instrumental": "Малави",
+    "prepositional": "Малави"
+  },
+  {
+    "original": "Малайзия",
+    "nominative": "Малайзия",
+    "genitive": "Малайзии",
+    "dative": "Малайзии",
+    "accusative": "Малайзию",
+    "instrumental": "Малайзией",
+    "prepositional": "Малайзии"
+  },
+  {
+    "original": "Мали",
+    "nominative": "Мали",
+    "genitive": "Мали",
+    "dative": "Мали",
+    "accusative": "Мали",
+    "instrumental": "Мали",
+    "prepositional": "Мали"
+  },
+  {
+    "original": "Мальдивы",
+    "nominative": "Мальдивы",
+    "genitive": "Мальдив",
+    "dative": "Мальдивам",
+    "accusative": "Мальдивы",
+    "instrumental": "Мальдивами",
+    "prepositional": "Мальдивах"
+  },
+  {
+    "original": "Мальта",
+    "nominative": "Мальта",
+    "genitive": "Мальты",
+    "dative": "Мальте",
+    "accusative": "Мальту",
+    "instrumental": "Мальтой",
+    "prepositional": "Мальте"
+  },
+  {
+    "original": "Марокко",
+    "nominative": "Марокко",
+    "genitive": "Марокко",
+    "dative": "Марокко",
+    "accusative": "Марокко",
+    "instrumental": "Марокко",
+    "prepositional": "Марокко"
+  },
+  {
+    "original": "Маршалловы Острова",
+    "nominative": "Маршалловы Острова",
+    "genitive": "Маршалловых Островов",
+    "dative": "Маршалловым Островам",
+    "accusative": "Маршалловы Острова",
+    "instrumental": "Маршалловыми Островами",
+    "prepositional": "Маршалловых Островах"
+  },
+  {
+    "original": "Мексика",
+    "nominative": "Мексика",
+    "genitive": "Мексики",
+    "dative": "Мексике",
+    "accusative": "Мексику",
+    "instrumental": "Мексикой",
+    "prepositional": "Мексике"
+  },
+  {
+    "original": "Микронезия",
+    "nominative": "Микронезия",
+    "genitive": "Микронезии",
+    "dative": "Микронезии",
+    "accusative": "Микронезию",
+    "instrumental": "Микронезией",
+    "prepositional": "Микронезии"
+  },
+  {
+    "original": "Мозамбик",
+    "nominative": "Мозамбик",
+    "genitive": "Мозамбика",
+    "dative": "Мозамбику",
+    "accusative": "Мозамбик",
+    "instrumental": "Мозамбиком",
+    "prepositional": "Мозамбике"
+  },
+  {
+    "original": "Молдова",
+    "nominative": "Молдова",
+    "genitive": "Молдовы",
+    "dative": "Молдове",
+    "accusative": "Молдову",
+    "instrumental": "Молдовой",
+    "prepositional": "Молдове"
+  },
+  {
+    "original": "Монако",
+    "nominative": "Монако",
+    "genitive": "Монако",
+    "dative": "Монако",
+    "accusative": "Монако",
+    "instrumental": "Монако",
+    "prepositional": "Монако"
+  },
+  {
+    "original": "Монголия",
+    "nominative": "Монголия",
+    "genitive": "Монголии",
+    "dative": "Монголии",
+    "accusative": "Монголию",
+    "instrumental": "Монголией",
+    "prepositional": "Монголии"
+  },
+  {
+    "original": "Мьянма",
+    "nominative": "Мьянма",
+    "genitive": "Мьянмы",
+    "dative": "Мьянме",
+    "accusative": "Мьянму",
+    "instrumental": "Мьянмой",
+    "prepositional": "Мьянме"
+  },
+  {
+    "original": "Намибия",
+    "nominative": "Намибия",
+    "genitive": "Намибии",
+    "dative": "Намибии",
+    "accusative": "Намибию",
+    "instrumental": "Намибией",
+    "prepositional": "Намибии"
+  },
+  {
+    "original": "Науру",
+    "nominative": "Науру",
+    "genitive": "Науру",
+    "dative": "Науру",
+    "accusative": "Науру",
+    "instrumental": "Науру",
+    "prepositional": "Науру"
+  },
+  {
+    "original": "Непал",
+    "nominative": "Непал",
+    "genitive": "Непала",
+    "dative": "Непалу",
+    "accusative": "Непал",
+    "instrumental": "Непалом",
+    "prepositional": "Непале"
+  },
+  {
+    "original": "Нигер",
+    "nominative": "Нигер",
+    "genitive": "Нигера",
+    "dative": "Нигеру",
+    "accusative": "Нигер",
+    "instrumental": "Нигером",
+    "prepositional": "Нигере"
+  },
+  {
+    "original": "Нигерия",
+    "nominative": "Нигерия",
+    "genitive": "Нигерии",
+    "dative": "Нигерии",
+    "accusative": "Нигерию",
+    "instrumental": "Нигерией",
+    "prepositional": "Нигерии"
+  },
+  {
+    "original": "Нидерланды",
+    "nominative": "Нидерланды",
+    "genitive": "Нидерландов",
+    "dative": "Нидерландам",
+    "accusative": "Нидерланды",
+    "instrumental": "Нидерландами",
+    "prepositional": "Нидерландах"
+  },
+  {
+    "original": "Никарагуа",
+    "nominative": "Никарагуа",
+    "genitive": "Никарагуа",
+    "dative": "Никарагуа",
+    "accusative": "Никарагуа",
+    "instrumental": "Никарагуа",
+    "prepositional": "Никарагуа"
+  },
+  {
+    "original": "Новая Зеландия",
+    "nominative": "Новая Зеландия",
+    "genitive": "Новой Зеландии",
+    "dative": "Новой Зеландии",
+    "accusative": "Новую Зеландию",
+    "instrumental": "Новой Зеландией",
+    "prepositional": "Новой Зеландии"
+  },
+  {
+    "original": "Норвегия",
+    "nominative": "Норвегия",
+    "genitive": "Норвегии",
+    "dative": "Норвегии",
+    "accusative": "Норвегию",
+    "instrumental": "Норвегией",
+    "prepositional": "Норвегии"
+  },
+  {
+    "original": "ОАЭ",
+    "nominative": "ОАЭ",
+    "genitive": "ОАЭ",
+    "dative": "ОАЭ",
+    "accusative": "ОАЭ",
+    "instrumental": "ОАЭ",
+    "prepositional": "ОАЭ"
+  },
+  {
+    "original": "Объединённые Арабские Эмираты",
+    "nominative": "Объединённые Арабские Эмираты",
+    "genitive": "Объединённых Арабских Эмиратов",
+    "dative": "Объединённым Арабским Эмиратам",
+    "accusative": "Объединённые Арабские Эмираты",
+    "instrumental": "Объединёнными Арабскими Эмиратами",
+    "prepositional": "Объединённых Арабских Эмиратах"
+  },
+  {
+    "original": "Оман",
+    "nominative": "Оман",
+    "genitive": "Омана",
+    "dative": "Оману",
+    "accusative": "Оман",
+    "instrumental": "Оманом",
+    "prepositional": "Омане"
+  },
+  {
+    "original": "Пакистан",
+    "nominative": "Пакистан",
+    "genitive": "Пакистана",
+    "dative": "Пакистану",
+    "accusative": "Пакистан",
+    "instrumental": "Пакистаном",
+    "prepositional": "Пакистане"
+  },
+  {
+    "original": "Палау",
+    "nominative": "Палау",
+    "genitive": "Палау",
+    "dative": "Палау",
+    "accusative": "Палау",
+    "instrumental": "Палау",
+    "prepositional": "Палау"
+  },
+  {
+    "original": "Палестина",
+    "nominative": "Палестина",
+    "genitive": "Палестины",
+    "dative": "Палестине",
+    "accusative": "Палестину",
+    "instrumental": "Палестиной",
+    "prepositional": "Палестине"
+  },
+  {
+    "original": "Панама",
+    "nominative": "Панама",
+    "genitive": "Панамы",
+    "dative": "Панаме",
+    "accusative": "Панаму",
+    "instrumental": "Панамой",
+    "prepositional": "Панаме"
+  },
+  {
+    "original": "Папуа — Новая Гвинея",
+    "nominative": "Папуа — Новая Гвинея",
+    "genitive": "Папуа — Новой Гвинеи",
+    "dative": "Папуа — Новой Гвинее",
+    "accusative": "Папуа — Новую Гвинею",
+    "instrumental": "Папуа — Новой Гвинеей",
+    "prepositional": "Папуа — Новой Гвинее"
+  },
+  {
+    "original": "Парагвай",
+    "nominative": "Парагвай",
+    "genitive": "Парагвая",
+    "dative": "Парагваю",
+    "accusative": "Парагвай",
+    "instrumental": "Парагваем",
+    "prepositional": "Парагвае"
+  },
+  {
+    "original": "Перу",
+    "nominative": "Перу",
+    "genitive": "Перу",
+    "dative": "Перу",
+    "accusative": "Перу",
+    "instrumental": "Перу",
+    "prepositional": "Перу"
+  },
+  {
+    "original": "Польша",
+    "nominative": "Польша",
+    "genitive": "Польши",
+    "dative": "Польше",
+    "accusative": "Польшу",
+    "instrumental": "Польшей",
+    "prepositional": "Польше"
+  },
+  {
+    "original": "Португалия",
+    "nominative": "Португалия",
+    "genitive": "Португалии",
+    "dative": "Португалии",
+    "accusative": "Португалию",
+    "instrumental": "Португалией",
+    "prepositional": "Португалии"
+  },
+  {
+    "original": "Россия",
+    "nominative": "Россия",
+    "genitive": "России",
+    "dative": "России",
+    "accusative": "Россию",
+    "instrumental": "Россией",
+    "prepositional": "России"
+  },
+  {
+    "original": "Руанда",
+    "nominative": "Руанда",
+    "genitive": "Руанды",
+    "dative": "Руанде",
+    "accusative": "Руанду",
+    "instrumental": "Руандой",
+    "prepositional": "Руанде"
+  },
+  {
+    "original": "Румыния",
+    "nominative": "Румыния",
+    "genitive": "Румынии",
+    "dative": "Румынии",
+    "accusative": "Румынию",
+    "instrumental": "Румынией",
+    "prepositional": "Румынии"
+  },
+  {
+    "original": "Сальвадор",
+    "nominative": "Сальвадор",
+    "genitive": "Сальвадора",
+    "dative": "Сальвадору",
+    "accusative": "Сальвадор",
+    "instrumental": "Сальвадором",
+    "prepositional": "Сальвадоре"
+  },
+  {
+    "original": "Самоа",
+    "nominative": "Самоа",
+    "genitive": "Самоа",
+    "dative": "Самоа",
+    "accusative": "Самоа",
+    "instrumental": "Самоа",
+    "prepositional": "Самоа"
+  },
+  {
+    "original": "Сан-Марино",
+    "nominative": "Сан-Марино",
+    "genitive": "Сан-Марино",
+    "dative": "Сан-Марино",
+    "accusative": "Сан-Марино",
+    "instrumental": "Сан-Марино",
+    "prepositional": "Сан-Марино"
+  },
+  {
+    "original": "Сан-Томе и Принсипи",
+    "nominative": "Сан-Томе и Принсипи",
+    "genitive": "Сан-Томе и Принсипи",
+    "dative": "Сан-Томе и Принсипи",
+    "accusative": "Сан-Томе и Принсипи",
+    "instrumental": "Сан-Томе и Принсипи",
+    "prepositional": "Сан-Томе и Принсипи"
+  },
+  {
+    "original": "Саудовская Аравия",
+    "nominative": "Саудовская Аравия",
+    "genitive": "Саудовской Аравии",
+    "dative": "Саудовской Аравии",
+    "accusative": "Саудовскую Аравию",
+    "instrumental": "Саудовской Аравией",
+    "prepositional": "Саудовской Аравии"
+  },
+  {
+    "original": "Северная Корея",
+    "nominative": "Северная Корея",
+    "genitive": "Северной Кореи",
+    "dative": "Северной Корее",
+    "accusative": "Северную Корею",
+    "instrumental": "Северной Кореей",
+    "prepositional": "Северной Корее"
+  },
+  {
+    "original": "Северная Македония",
+    "nominative": "Северная Македония",
+    "genitive": "Северной Македонии",
+    "dative": "Северной Македонии",
+    "accusative": "Северную Македонию",
+    "instrumental": "Северной Македонией",
+    "prepositional": "Северной Македонии"
+  },
+  {
+    "original": "Сейшельские Острова",
+    "nominative": "Сейшельские Острова",
+    "genitive": "Сейшельских Островов",
+    "dative": "Сейшельским Островам",
+    "accusative": "Сейшельские Острова",
+    "instrumental": "Сейшельскими Островами",
+    "prepositional": "Сейшельских Островах"
+  },
+  {
+    "original": "Сенегал",
+    "nominative": "Сенегал",
+    "genitive": "Сенегала",
+    "dative": "Сенегалу",
+    "accusative": "Сенегал",
+    "instrumental": "Сенегалом",
+    "prepositional": "Сенегале"
+  },
+  {
+    "original": "Сент-Винсент и Гренадины",
+    "nominative": "Сент-Винсент и Гренадины",
+    "genitive": "Сент-Винсента и Гренадин",
+    "dative": "Сент-Винсенту и Гренадинам",
+    "accusative": "Сент-Винсент и Гренадины",
+    "instrumental": "Сент-Винсентом и Гренадинами",
+    "prepositional": "Сент-Винсенте и Гренадинах"
+  },
+  {
+    "original": "Сент-Китс и Невис",
+    "nominative": "Сент-Китс и Невис",
+    "genitive": "Сент-Китса и Невиса",
+    "dative": "Сент-Китсу и Невису",
+    "accusative": "Сент-Китс и Невис",
+    "instrumental": "Сент-Китсом и Невисом",
+    "prepositional": "Сент-Китсе и Невисе"
+  },
+  {
+    "original": "Сент-Люсия",
+    "nominative": "Сент-Люсия",
+    "genitive": "Сент-Люсии",
+    "dative": "Сент-Люсии",
+    "accusative": "Сент-Люсию",
+    "instrumental": "Сент-Люсией",
+    "prepositional": "Сент-Люсии"
+  },
+  {
+    "original": "Сербия",
+    "nominative": "Сербия",
+    "genitive": "Сербии",
+    "dative": "Сербии",
+    "accusative": "Сербию",
+    "instrumental": "Сербией",
+    "prepositional": "Сербии"
+  },
+  {
+    "original": "Сингапур",
+    "nominative": "Сингапур",
+    "genitive": "Сингапура",
+    "dative": "Сингапуру",
+    "accusative": "Сингапур",
+    "instrumental": "Сингапуром",
+    "prepositional": "Сингапуре"
+  },
+  {
+    "original": "Сирия",
+    "nominative": "Сирия",
+    "genitive": "Сирии",
+    "dative": "Сирии",
+    "accusative": "Сирию",
+    "instrumental": "Сирией",
+    "prepositional": "Сирии"
+  },
+  {
+    "original": "Словакия",
+    "nominative": "Словакия",
+    "genitive": "Словакии",
+    "dative": "Словакии",
+    "accusative": "Словакию",
+    "instrumental": "Словакией",
+    "prepositional": "Словакии"
+  },
+  {
+    "original": "Словения",
+    "nominative": "Словения",
+    "genitive": "Словении",
+    "dative": "Словении",
+    "accusative": "Словению",
+    "instrumental": "Словенией",
+    "prepositional": "Словении"
+  },
+  {
+    "original": "Соединённые Штаты Америки",
+    "nominative": "Соединённые Штаты Америки",
+    "genitive": "Соединённых Штатов Америки",
+    "dative": "Соединённым Штатам Америки",
+    "accusative": "Соединённые Штаты Америки",
+    "instrumental": "Соединёнными Штатами Америки",
+    "prepositional": "Соединённых Штатах Америки"
+  },
+  {
+    "original": "Соломоновы Острова",
+    "nominative": "Соломоновы Острова",
+    "genitive": "Соломоновых Островов",
+    "dative": "Соломоновым Островам",
+    "accusative": "Соломоновы Острова",
+    "instrumental": "Соломоновыми Островами",
+    "prepositional": "Соломоновых Островах"
+  },
+  {
+    "original": "Сомали",
+    "nominative": "Сомали",
+    "genitive": "Сомали",
+    "dative": "Сомали",
+    "accusative": "Сомали",
+    "instrumental": "Сомали",
+    "prepositional": "Сомали"
+  },
+  {
+    "original": "Судан",
+    "nominative": "Судан",
+    "genitive": "Судана",
+    "dative": "Судану",
+    "accusative": "Судан",
+    "instrumental": "Суданом",
+    "prepositional": "Судане"
+  },
+  {
+    "original": "Суринам",
+    "nominative": "Суринам",
+    "genitive": "Суринама",
+    "dative": "Суринаму",
+    "accusative": "Суринам",
+    "instrumental": "Суринамом",
+    "prepositional": "Суринаме"
+  },
+  {
+    "original": "США",
+    "nominative": "США",
+    "genitive": "США",
+    "dative": "США",
+    "accusative": "США",
+    "instrumental": "США",
+    "prepositional": "США"
+  },
+  {
+    "original": "Сьерра-Леоне",
+    "nominative": "Сьерра-Леоне",
+    "genitive": "Сьерра-Леоне",
+    "dative": "Сьерра-Леоне",
+    "accusative": "Сьерра-Леоне",
+    "instrumental": "Сьерра-Леоне",
+    "prepositional": "Сьерра-Леоне"
+  },
+  {
+    "original": "Таджикистан",
+    "nominative": "Таджикистан",
+    "genitive": "Таджикистана",
+    "dative": "Таджикистану",
+    "accusative": "Таджикистан",
+    "instrumental": "Таджикистаном",
+    "prepositional": "Таджикистане"
+  },
+  {
+    "original": "Таиланд",
+    "nominative": "Таиланд",
+    "genitive": "Таиланда",
+    "dative": "Таиланду",
+    "accusative": "Таиланд",
+    "instrumental": "Таиландом",
+    "prepositional": "Таиланде"
+  },
+  {
+    "original": "Тайвань",
+    "nominative": "Тайвань",
+    "genitive": "Тайваня",
+    "dative": "Тайваню",
+    "accusative": "Тайвань",
+    "instrumental": "Тайванем",
+    "prepositional": "Тайване"
+  },
+  {
+    "original": "Танзания",
+    "nominative": "Танзания",
+    "genitive": "Танзании",
+    "dative": "Танзании",
+    "accusative": "Танзанию",
+    "instrumental": "Танзанией",
+    "prepositional": "Танзании"
+  },
+  {
+    "original": "Тимор-Лесте",
+    "nominative": "Тимор-Лесте",
+    "genitive": "Тимор-Лесте",
+    "dative": "Тимор-Лесте",
+    "accusative": "Тимор-Лесте",
+    "instrumental": "Тимор-Лесте",
+    "prepositional": "Тимор-Лесте"
+  },
+  {
+    "original": "Того",
+    "nominative": "Того",
+    "genitive": "Того",
+    "dative": "Того",
+    "accusative": "Того",
+    "instrumental": "Того",
+    "prepositional": "Того"
+  },
+  {
+    "original": "Тонга",
+    "nominative": "Тонга",
+    "genitive": "Тонга",
+    "dative": "Тонга",
+    "accusative": "Тонга",
+    "instrumental": "Тонга",
+    "prepositional": "Тонга"
+  },
+  {
+    "original": "Тринидад и Тобаго",
+    "nominative": "Тринидад и Тобаго",
+    "genitive": "Тринидада и Тобаго",
+    "dative": "Тринидаду и Тобаго",
+    "accusative": "Тринидад и Тобаго",
+    "instrumental": "Тринидадом и Тобаго",
+    "prepositional": "Тринидаде и Тобаго"
+  },
+  {
+    "original": "Тувалу",
+    "nominative": "Тувалу",
+    "genitive": "Тувалу",
+    "dative": "Тувалу",
+    "accusative": "Тувалу",
+    "instrumental": "Тувалу",
+    "prepositional": "Тувалу"
+  },
+  {
+    "original": "Тунис",
+    "nominative": "Тунис",
+    "genitive": "Туниса",
+    "dative": "Тунису",
+    "accusative": "Тунис",
+    "instrumental": "Тунисом",
+    "prepositional": "Тунисе"
+  },
+  {
+    "original": "Туркменистан",
+    "nominative": "Туркменистан",
+    "genitive": "Туркменистана",
+    "dative": "Туркменистану",
+    "accusative": "Туркменистан",
+    "instrumental": "Туркменистаном",
+    "prepositional": "Туркменистане"
+  },
+  {
+    "original": "Турция",
+    "nominative": "Турция",
+    "genitive": "Турции",
+    "dative": "Турции",
+    "accusative": "Турцию",
+    "instrumental": "Турцией",
+    "prepositional": "Турции"
+  },
+  {
+    "original": "Уганда",
+    "nominative": "Уганда",
+    "genitive": "Уганды",
+    "dative": "Уганде",
+    "accusative": "Уганду",
+    "instrumental": "Угандой",
+    "prepositional": "Уганде"
+  },
+  {
+    "original": "Узбекистан",
+    "nominative": "Узбекистан",
+    "genitive": "Узбекистана",
+    "dative": "Узбекистану",
+    "accusative": "Узбекистан",
+    "instrumental": "Узбекистаном",
+    "prepositional": "Узбекистане"
+  },
+  {
+    "original": "Украина",
+    "nominative": "Украина",
+    "genitive": "Украины",
+    "dative": "Украине",
+    "accusative": "Украину",
+    "instrumental": "Украиной",
+    "prepositional": "Украине"
+  },
+  {
+    "original": "Уругвай",
+    "nominative": "Уругвай",
+    "genitive": "Уругвая",
+    "dative": "Уругваю",
+    "accusative": "Уругвай",
+    "instrumental": "Уругваем",
+    "prepositional": "Уругвае"
+  },
+  {
+    "original": "Федеративные Штаты Микронезии",
+    "nominative": "Федеративные Штаты Микронезии",
+    "genitive": "Федеративных Штатов Микронезии",
+    "dative": "Федеративным Штатам Микронезии",
+    "accusative": "Федеративные Штаты Микронезии",
+    "instrumental": "Федеративными Штатами Микронезии",
+    "prepositional": "Федеративных Штатах Микронезии"
+  },
+  {
+    "original": "Фиджи",
+    "nominative": "Фиджи",
+    "genitive": "Фиджи",
+    "dative": "Фиджи",
+    "accusative": "Фиджи",
+    "instrumental": "Фиджи",
+    "prepositional": "Фиджи"
+  },
+  {
+    "original": "Филиппины",
+    "nominative": "Филиппины",
+    "genitive": "Филиппин",
+    "dative": "Филиппинам",
+    "accusative": "Филиппины",
+    "instrumental": "Филиппинами",
+    "prepositional": "Филиппинах"
+  },
+  {
+    "original": "Финляндия",
+    "nominative": "Финляндия",
+    "genitive": "Финляндии",
+    "dative": "Финляндии",
+    "accusative": "Финляндию",
+    "instrumental": "Финляндией",
+    "prepositional": "Финляндии"
+  },
+  {
+    "original": "Франция",
+    "nominative": "Франция",
+    "genitive": "Франции",
+    "dative": "Франции",
+    "accusative": "Францию",
+    "instrumental": "Францией",
+    "prepositional": "Франции"
+  },
+  {
+    "original": "Хорватия",
+    "nominative": "Хорватия",
+    "genitive": "Хорватии",
+    "dative": "Хорватии",
+    "accusative": "Хорватию",
+    "instrumental": "Хорватией",
+    "prepositional": "Хорватии"
+  },
+  {
+    "original": "Центральноафриканская Республика",
+    "nominative": "Центральноафриканская Республика",
+    "genitive": "Центральноафриканской Республики",
+    "dative": "Центральноафриканской Республике",
+    "accusative": "Центральноафриканскую Республику",
+    "instrumental": "Центральноафриканской Республикой",
+    "prepositional": "Центральноафриканской Республике"
+  },
+  {
+    "original": "Чад",
+    "nominative": "Чад",
+    "genitive": "Чада",
+    "dative": "Чаду",
+    "accusative": "Чад",
+    "instrumental": "Чадом",
+    "prepositional": "Чаде"
+  },
+  {
+    "original": "Черногория",
+    "nominative": "Черногория",
+    "genitive": "Черногории",
+    "dative": "Черногории",
+    "accusative": "Черногорию",
+    "instrumental": "Черногорией",
+    "prepositional": "Черногории"
+  },
+  {
+    "original": "Чехия",
+    "nominative": "Чехия",
+    "genitive": "Чехии",
+    "dative": "Чехии",
+    "accusative": "Чехию",
+    "instrumental": "Чехией",
+    "prepositional": "Чехии"
+  },
+  {
+    "original": "Чили",
+    "nominative": "Чили",
+    "genitive": "Чили",
+    "dative": "Чили",
+    "accusative": "Чили",
+    "instrumental": "Чили",
+    "prepositional": "Чили"
+  },
+  {
+    "original": "Швейцария",
+    "nominative": "Швейцария",
+    "genitive": "Швейцарии",
+    "dative": "Швейцарии",
+    "accusative": "Швейцарию",
+    "instrumental": "Швейцарией",
+    "prepositional": "Швейцарии"
+  },
+  {
+    "original": "Швеция",
+    "nominative": "Швеция",
+    "genitive": "Швеции",
+    "dative": "Швеции",
+    "accusative": "Швецию",
+    "instrumental": "Швецией",
+    "prepositional": "Швеции"
+  },
+  {
+    "original": "Шри-Ланка",
+    "nominative": "Шри-Ланка",
+    "genitive": "Шри-Ланки",
+    "dative": "Шри-Ланке",
+    "accusative": "Шри-Ланку",
+    "instrumental": "Шри-Ланкой",
+    "prepositional": "Шри-Ланке"
+  },
+  {
+    "original": "Эквадор",
+    "nominative": "Эквадор",
+    "genitive": "Эквадора",
+    "dative": "Эквадору",
+    "accusative": "Эквадор",
+    "instrumental": "Эквадором",
+    "prepositional": "Эквадоре"
+  },
+  {
+    "original": "Экваториальная Гвинея",
+    "nominative": "Экваториальная Гвинея",
+    "genitive": "Экваториальной Гвинеи",
+    "dative": "Экваториальной Гвинее",
+    "accusative": "Экваториальную Гвинею",
+    "instrumental": "Экваториальной Гвинеей",
+    "prepositional": "Экваториальной Гвинее"
+  },
+  {
+    "original": "Эритрея",
+    "nominative": "Эритрея",
+    "genitive": "Эритреи",
+    "dative": "Эритрее",
+    "accusative": "Эритрею",
+    "instrumental": "Эритреей",
+    "prepositional": "Эритрее"
+  },
+  {
+    "original": "Эсватини",
+    "nominative": "Эсватини",
+    "genitive": "Эсватини",
+    "dative": "Эсватини",
+    "accusative": "Эсватини",
+    "instrumental": "Эсватини",
+    "prepositional": "Эсватини"
+  },
+  {
+    "original": "Эстония",
+    "nominative": "Эстония",
+    "genitive": "Эстонии",
+    "dative": "Эстонии",
+    "accusative": "Эстонию",
+    "instrumental": "Эстонией",
+    "prepositional": "Эстонии"
+  },
+  {
+    "original": "Эфиопия",
+    "nominative": "Эфиопия",
+    "genitive": "Эфиопии",
+    "dative": "Эфиопии",
+    "accusative": "Эфиопию",
+    "instrumental": "Эфиопией",
+    "prepositional": "Эфиопии"
+  },
+  {
+    "original": "ЮАР",
+    "nominative": "ЮАР",
+    "genitive": "ЮАР",
+    "dative": "ЮАР",
+    "accusative": "ЮАР",
+    "instrumental": "ЮАР",
+    "prepositional": "ЮАР"
+  },
+  {
+    "original": "Южная Африка",
+    "nominative": "Южная Африка",
+    "genitive": "Южной Африки",
+    "dative": "Южной Африке",
+    "accusative": "Южную Африку",
+    "instrumental": "Южной Африкой",
+    "prepositional": "Южной Африке"
+  },
+  {
+    "original": "Южная Корея",
+    "nominative": "Южная Корея",
+    "genitive": "Южной Кореи",
+    "dative": "Южной Корее",
+    "accusative": "Южную Корею",
+    "instrumental": "Южной Кореей",
+    "prepositional": "Южной Корее"
+  },
+  {
+    "original": "Южный Судан",
+    "nominative": "Южный Судан",
+    "genitive": "Южного Судана",
+    "dative": "Южному Судану",
+    "accusative": "Южный Судан",
+    "instrumental": "Южным Суданом",
+    "prepositional": "Южном Судане"
+  },
+  {
+    "original": "Ямайка",
+    "nominative": "Ямайка",
+    "genitive": "Ямайки",
+    "dative": "Ямайке",
+    "accusative": "Ямайку",
+    "instrumental": "Ямайкой",
+    "prepositional": "Ямайке"
+  },
+  {
+    "original": "Япония",
+    "nominative": "Япония",
+    "genitive": "Японии",
+    "dative": "Японии",
+    "accusative": "Японию",
+    "instrumental": "Японией",
+    "prepositional": "Японии"
+  }
+]

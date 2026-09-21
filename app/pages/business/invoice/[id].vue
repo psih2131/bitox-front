@@ -32,7 +32,7 @@
 
     <HomeMediaSec v-if="invoice.service_media_about_us_sec" :section="invoice.service_media_about_us_sec" />
     
-    <HomeFaqSec v-if="invoice.services_faq_sec" :section="invoice.services_faq_sec" />
+    <InvoiceFaqSec :country-name="invoice.title" />
     
     <ServiceContactSec :sectionTitle="`Оплатить инвойс в ${invoice.title_mutation || invoice.title}`" />
   </main>
@@ -53,7 +53,6 @@ const populate = [
   'populate[service_county_sec_v2]=true',
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
-  'populate[services_faq_sec][populate]=questions_list',
   'populate[invoices_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')

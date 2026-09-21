@@ -39,7 +39,7 @@
     
     <HomeMediaSec v-if="transfersPage.service_media_about_us_sec" :section="transfersPage.service_media_about_us_sec" />
     
-    <HomeFaqSec v-if="transfersPage.services_faq_sec" :section="transfersPage.services_faq_sec" />
+    <TransferFaqSec :country-name="transfersPage.title" />
     
     <ServiceContactSec :sectionTitle="`Заказать международный перевод в ${transfersPage.title_mutation || transfersPage.title}`"  />
   </main>
@@ -60,7 +60,6 @@ const populate = [
   'populate[service_county_sec_v2]=true',
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
-  'populate[services_faq_sec][populate]=questions_list',
   'populate[country_cities]=true',
   'populate[transfers_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
