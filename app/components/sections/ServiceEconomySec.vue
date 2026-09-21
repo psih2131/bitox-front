@@ -7,7 +7,7 @@
             <h2 v-if="sectionTitle" class="service-economy-sec__title">
               {{ sectionTitle }}
             </h2>
-            <h2 v-else="section.title" class="service-economy-sec__title">
+            <h2 v-else-if="section.title" class="service-economy-sec__title">
               {{ section.title }}
             </h2>
 
@@ -57,6 +57,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  section: {
+    type: Object,
+    default: null,
+  },
 })
 
 const modalStore = useModalStore()
@@ -65,10 +69,10 @@ const apiUrl = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
 
 const { data: economyResponse } = await useFetch(
-  `${apiUrl}/api/economy-component?populate[economy_section][populate][economy_list_items][populate]=image`,
+  () => (props.section ? null : `${apiUrl}/api/economy-component?populate[economy_section][populate][economy_list_items][populate]=image`),
 )
 
-const section = computed(() => economyResponse.value?.data?.economy_section)
+const section = computed(() => props.section || economyResponse.value?.data?.economy_section)
 
 const features = computed(() =>
   (section.value?.economy_list_items ?? []).map((item) => ({
