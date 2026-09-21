@@ -135,6 +135,13 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  section: {
+    type: Object,
+    default: null,
+  },
+})
+
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const tabs = [
@@ -145,8 +152,17 @@ const tabs = [
 
 const activeTab = ref('bitox')
 
+function isChoiceSectionFilled(section) {
+  if (!section) return false
+  if (typeof section.title_section === 'string' && section.title_section.trim()) return true
+  if (section.table_row?.length) return true
+  return false
+}
+
+const useExternalSection = isChoiceSectionFilled(props.section)
+
 const { data: choiceResponse, error: choiceError } = await useFetch(
-  `${urlApi}/api/choise-component?populate=table_row`,
+  () => (useExternalSection ? null : `${urlApi}/api/choise-component?populate=table_row`),
 )
 
 function cellValue(value) {
@@ -154,13 +170,18 @@ function cellValue(value) {
   return text || '—'
 }
 
+const sectionData = computed(() => {
+  if (useExternalSection) return props.section
+  return choiceResponse.value?.data
+})
+
 const sectionTitle = computed(() => {
-  const title = choiceResponse.value?.data?.title_section
+  const title = sectionData.value?.title_section
   return typeof title === 'string' ? title.trim() : ''
 })
 
 const rows = computed(() => {
-  const items = choiceResponse.value?.data?.table_row
+  const items = sectionData.value?.table_row
 
   if (!items?.length) return []
 
@@ -175,5 +196,8 @@ const rows = computed(() => {
     }))
 })
 
-const showSection = computed(() => !choiceError.value && !!sectionTitle.value)
+const showSection = computed(() => {
+  if (useExternalSection) return !!sectionTitle.value
+  return !choiceError.value && !!sectionTitle.value
+})
 </script>
