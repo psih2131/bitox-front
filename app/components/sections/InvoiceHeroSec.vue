@@ -18,7 +18,7 @@
         </div>
         <div class="invoice-hero-sec__calc-wrapper">
             <HomePaymentCalc 
-            :componentTitle="`Рассчитайте комиссию по инвойсу в ${getCountryPrepositional(countryName, 'dative')}`"
+            :componentTitle="`Рассчитайте комиссию по инвойсу в ${getCountryPrepositional(countryName, 'accusative')}`"
             :typeHeaderH="true"
             />
         </div>

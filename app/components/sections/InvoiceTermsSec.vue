@@ -54,6 +54,9 @@
 <script setup>
 import { Vue3SlideUpDown } from 'vue3-slide-up-down'
 
+//функция для добавления страны в нужном падеже
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
+
 const props = defineProps({
   countryName: {
     type: String,
@@ -80,7 +83,7 @@ if (section?.term_items) {
     let text = item.text || ''
 
     if (props.countryName && text.includes('СТРАНУ')) {
-      text = text.split('СТРАНУ').join(props.countryName)
+      text = text.split('СТРАНУ').join(getCountryPrepositional(props.countryName, 'accusative'))
     }
 
     items.push({

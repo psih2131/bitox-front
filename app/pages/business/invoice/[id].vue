@@ -1,17 +1,23 @@
 <template>
   <main v-if="invoice" class="service-page">
     <!-- <ServiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" /> -->
-    <InvoiceHeroSec v-if="invoice.service_hero_sec" :section="invoice.service_hero_sec" :countryName="invoice.title_mutation || invoice.title"/>
+    
+    <InvoiceHeroSec 
+    v-if="invoice.service_hero_sec" 
+    :section="invoice.service_hero_sec" 
+    :countryName="invoice.title"/>
+   
     <!-- <CryptoExchangeCalcSec :sectionTitle="'Калькулятор инвойса'"/> -->
-    <InvoiceStatsSec :countryName="invoice.title_mutation || invoice.title" />
 
-    <InvoiceTermsSec :country-name="invoice.title_mutation || invoice.title" />
+    <InvoiceStatsSec :countryName="invoice.title" />
+
+    <InvoiceTermsSec :country-name="invoice.title" />
 
     <ServiceInvoicesSec v-if="invoice.services_invoice_sec" :section="invoice.services_invoice_sec" />
     
-    <ServiceEconomySec :sectionTitle="`Экономия на оплате инвойсов в ${invoice.title_mutation || invoice.title} с Bitox`"/>
+    <ServiceEconomySec :sectionTitle="`Экономия на оплате инвойсов в ${getCountryPrepositional(invoice.title, 'prepositional')} с Bitox`"/>
 
-    <InvoiceProcessSec :country-name="invoice.title_mutation || invoice.title" />
+    <InvoiceProcessSec :country-name="invoice.title" />
 
     <HomeChoiceSec />
 
@@ -34,12 +40,15 @@
     
     <InvoiceFaqSec :country-name="invoice.title" />
     
-    <ServiceContactSec :sectionTitle="`Оплатить инвойс в ${invoice.title_mutation || invoice.title}`" />
+    <ServiceContactSec :sectionTitle="`Оплатить инвойс в ${getCountryPrepositional(invoice.title, 'accusative')}`" />
   </main>
 </template>
 
 <script setup>
 import { buildStrapiSlugFilter, mapStrapiInvoices, STRAPI_SEO_POPULATE_PARTS } from '~/utils/strapi'
+
+//функция для добавления страны в нужном падеже
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const route = useRoute()

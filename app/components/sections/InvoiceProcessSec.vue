@@ -26,6 +26,9 @@
 </template>
 
 <script setup>
+//функция для добавления страны в нужном падеже
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
+
 const props = defineProps({
   countryName: {
     type: String,
@@ -47,7 +50,7 @@ if (section?.section_base_title) {
   sectionTitle = section.section_base_title
 
   if (props.countryName) {
-    sectionTitle = sectionTitle + ' ' + props.countryName
+    sectionTitle = sectionTitle + ' ' + getCountryPrepositional(props.countryName, 'prepositional')
   }
 }
 
