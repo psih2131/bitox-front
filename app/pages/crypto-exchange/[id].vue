@@ -1,7 +1,9 @@
 <template>
   <main class="exchange-page">
     <CryptoExchangeHeroSec v-if="exchange?.exchange_hero_sec" :section="exchange.exchange_hero_sec" />
-    <CryptoExchangeCalcSec />
+    
+    <CryptoExchangeCalcSec :openTab="'cashless'"/>
+    
     <HomeStatsSec />
     <ExchangeBenefitsSec v-if="exchange?.benefits_sec" :section="exchange.benefits_sec" />
     <ExchangeClientsSec v-if="exchange?.exchange_client_use_sec" :section="exchange.exchange_client_use_sec" />

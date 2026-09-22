@@ -1,21 +1,31 @@
 <template>
     <main class="exchange-page">
       <CryptoExchangeHeroSec v-if="exchange?.exchange_hero_sec" :section="exchange.exchange_hero_sec" />
-      <CryptoExchangeCalcSec />
+      
+      <CryptoExchangeCalcSec :openTab="'cashless'"/>
+      
       <HomeStatsSec />
+      
       <ExchangeBenefitsSec v-if="exchange?.benefits_sec" :section="exchange.benefits_sec" />
+      
       <ExchangeClientsSec v-if="exchange?.exchange_client_use_sec" :section="exchange.exchange_client_use_sec" />
+      
       <ExchangeProcessSec v-if="exchange?.exchange_sec_staps" :section="exchange.exchange_sec_staps" />
+      
       <HomeReviewsSec />
+      
       <HomeMediaSec v-if="mediaSection" :section="mediaSection" />
+      
       <HomeFaqSec v-if="exchange?.exchange_faq_sec" :section="exchange.exchange_faq_sec" bg-color="#F6F7F8" />
+      
       <ExchangeSeoSec v-if="exchange?.exhange_seo_sec?.length" :sections="exchange.exhange_seo_sec" />
+      
       <ServiceContactSec />
     </main>
   </template>
   
   <script setup>
-  import { getStrapiMediaUrl } from '~/utils/strapi'
+  // import { getStrapiMediaUrl } from '~/utils/strapi'
   
   const urlApi = useRuntimeConfig().public.apiUrl
   

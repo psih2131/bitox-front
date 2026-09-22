@@ -369,6 +369,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  openTab: {
+    type: String,
+    default: 'invoice',
+  },
 })
 
 const urlApi = useRuntimeConfig().public.apiUrl
@@ -385,7 +390,15 @@ const tabs = [
   { id: 'invoice', label: 'Оплата инвойсов' },
 ]
 
-const activeTab = ref('invoice')
+function resolveOpenTab(value) {
+  for (let i = 0; i < tabs.length; i++) {
+    if (tabs[i].id === value) return value
+  }
+
+  return 'invoice'
+}
+
+const activeTab = ref(resolveOpenTab(props.openTab))
 
 const calcPopulate = [
   'populate[calc][populate][exchange_data][populate][without_cache][populate][exchange_list][populate]=what_you_get',
