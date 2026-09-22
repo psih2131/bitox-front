@@ -2,7 +2,7 @@
   <section class="transfer-features-sec">
     <div class="container">
       <h2 class="transfer-features-sec__title">
-        Быстрые международные переводы в {{ countryName }}
+        Быстрые международные переводы в {{ getCountryPrepositional(countryName, 'accusative') }}
       </h2>
 
       <div class="transfer-features-sec__grid">
@@ -26,7 +26,7 @@
           </div>
 
           <p class="transfer-features-sec__text">
-            Безопасно и законно отправляйте деньги в {{ countryName }} : USD, EUR, GBP, RUB
+            Безопасно и законно отправляйте деньги в {{ getCountryPrepositional(countryName, 'accusative') }} : USD, EUR, GBP, RUB
           </p>
         </article>
 
@@ -40,7 +40,7 @@
           </div>
 
           <p class="transfer-features-sec__text" v-if="citiesText">
-            Получайте наличные или оплачивайте услуги в <span v-if="citiesText"> {{ citiesText }}</span>
+            Получайте наличные или оплачивайте услуги в <span v-if="citiesText"> {{ getCountryPrepositional(citiesText, 'accusative') }}</span>
           </p>
           <p class="transfer-features-sec__text" v-else>
             Получайте наличные или оплачивайте услуги
@@ -58,7 +58,7 @@
           </div>
 
           <p class="transfer-features-sec__text">
-            Оплачивайте счета в рублях — мы конвертируем и переведем валюту вашим партнерам в {{ countryName }}
+            Оплачивайте счета в рублях — мы конвертируем и переведем валюту вашим партнерам в {{ getCountryPrepositional(countryName, 'accusative') }}
           </p>
         </article>
       </div>
@@ -68,6 +68,7 @@
 
 <script setup>
 import walletImage from '~/assets/images/gr-19.png'
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
 
 const props = defineProps({
   countryName: {

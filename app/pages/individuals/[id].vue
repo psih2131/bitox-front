@@ -31,6 +31,7 @@
     />
     <HomeReviewsSec />
     <HomeMediaSec v-if="individualsPage.service_media_about_us_sec" :section="individualsPage.service_media_about_us_sec" />
+    
     <HomeFaqSec v-if="individualsPage.services_faq_sec" :section="individualsPage.services_faq_sec" />
     <ServiceContactSec />
   </main>

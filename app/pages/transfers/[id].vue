@@ -2,22 +2,26 @@
   <main v-if="transfersPage" class="service-page">
     <!-- <ServiceHeroSec v-if="transfersPage.service_hero_sec" :section="transfersPage.service_hero_sec" /> -->
 
-    <InvoiceHeroSec v-if="transfersPage.service_hero_sec" :section="transfersPage.service_hero_sec" :countryName="transfersPage.title_mutation || transfersPage.title"/>
+    <InvoiceHeroSec 
+    v-if="transfersPage.service_hero_sec" 
+    :section="transfersPage.service_hero_sec" 
+    :countryName="transfersPage.title"/>
 
     <!-- <CryptoExchangeCalcSec :countryName="transfersPage.title" /> -->
 
-    <TransferStatsSec :countryName="transfersPage.title_mutation || transfersPage.title" />
+    <TransferStatsSec :countryName="transfersPage.title" />
 
     <TransferFeaturesSec
-      :country-name="transfersPage.title_mutation || transfersPage.title"
+      :country-name="transfersPage.title"
       :country-cities="transfersPage.country_cities"
     />
 
-    <TransferProcessSec :country-name="transfersPage.title_mutation || transfersPage.title" />
+    <TransferProcessSec :country-name="transfersPage.title" />
 
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
     
-    <ServiceEconomySec :sectionTitle="`Экономия на международных платежах и переводах в ${transfersPage.title_mutation || transfersPage.title} `" />
+    <ServiceEconomySec 
+    :sectionTitle="`Экономия на международных платежах и переводах в ${getCountryPrepositional(transfersPage.title, 'accusative')} `" />
     
     <HomeChoiceSec />
     
@@ -25,7 +29,7 @@
     
     <BusinessCountriesSec
       v-if="transfersPages.length"
-      :title="`Международные платежи в  ${transfersPage.title_mutation || transfersPage.title} и по всему миру`"
+      :title="`Международные платежи в  ${getCountryPrepositional(transfersPage.title, 'accusative')} и по всему миру`"
       :countries="transfersPages"
       link-base="/transfers"
     />
@@ -35,18 +39,20 @@
       v-if="transfersPage.services_invoice_example_sec"
       :section="transfersPage.services_invoice_example_sec"
     />
+
     <HomeReviewsSec />
     
     <HomeMediaSec v-if="transfersPage.service_media_about_us_sec" :section="transfersPage.service_media_about_us_sec" />
     
     <TransferFaqSec :country-name="transfersPage.title" />
     
-    <ServiceContactSec :sectionTitle="`Заказать международный перевод в ${transfersPage.title_mutation || transfersPage.title}`"  />
+    <ServiceContactSec :sectionTitle="`Заказать международный перевод в ${getCountryPrepositional(transfersPage.title, 'accusative')}`"  />
   </main>
 </template>
 
 <script setup>
 import { buildStrapiSlugFilter, mapStrapiInvoices, STRAPI_SEO_POPULATE_PARTS } from '~/utils/strapi'
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 const route = useRoute()

@@ -58,6 +58,7 @@
 <script setup>
 import gsap from 'gsap'
 
+
 const props = defineProps({
   sectionTitle: {
     type: String,

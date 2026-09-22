@@ -28,6 +28,7 @@
 
 <script setup>
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
 
 const props = defineProps({
   countryName: {
@@ -50,7 +51,7 @@ if (section?.section_title) {
   sectionTitle = section.section_title
 
   if (props.countryName) {
-    sectionTitle = sectionTitle + ' ' + props.countryName
+    sectionTitle = sectionTitle + ' ' + getCountryPrepositional(props.countryName, 'accusative')
   }
 }
 

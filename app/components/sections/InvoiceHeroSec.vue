@@ -18,7 +18,7 @@
         </div>
         <div class="invoice-hero-sec__calc-wrapper">
             <HomePaymentCalc 
-            :componentTitle="`Рассчитайте комиссию по инвойсу в ${countryName}`"
+            :componentTitle="`Рассчитайте комиссию по инвойсу в ${getCountryPrepositional(countryName, 'dative')}`"
             :typeHeaderH="true"
             />
         </div>
@@ -31,6 +31,9 @@
   import gsap from 'gsap'
   import { useModalStore, MODAL_NAMES } from '~/stores/modal'
   import { getStrapiMediaUrl } from '~/utils/strapi'
+  
+  //функция для добавления страны в нужном падеже
+  import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
   
   const props = defineProps({
     section: {

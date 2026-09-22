@@ -4,7 +4,8 @@
         <div class="stats-sec__grid">
           <div v-for="item in stats" :key="item.id ?? item.value" class="stats-sec__item">
             <p class="stats-sec__value">{{ item.value }}</p>
-            <p class="stats-sec__text">{{ item.text }} <span v-if="item.add_country_to_end_text === true && countryName"> {{ countryName }}</span></p>
+            <p class="stats-sec__text">{{ item.text }} 
+              <span v-if="item.add_country_to_end_text === true && getCountryPrepositional(countryName, 'accusative')"> {{ getCountryPrepositional(countryName, 'accusative') }}</span></p>
           </div>
         </div>
       </div>
@@ -12,6 +13,9 @@
   </template>
   
   <script setup>
+  //функция для добавления страны в нужном падеже
+  import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
+
   const props = defineProps({
     countryName: {
       type: String,

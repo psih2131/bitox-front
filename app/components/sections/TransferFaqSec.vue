@@ -16,7 +16,8 @@
 </template>
 
 <script setup>
-import countryCases from '~/data/country-cases.json'
+
+import { getCountryPrepositional } from '~/utils/getCountryPrepositional'
 
 const props = defineProps({
   countryName: {
@@ -33,17 +34,7 @@ const { data: faqResponse } = await useFetch(
 
 const section = faqResponse.value?.data?.faq_sec || null
 
-function getCountryPrepositional(countryName) {
-  if (!countryName) return ''
 
-  for (let i = 0; i < countryCases.length; i++) {
-    if (countryCases[i].original === countryName) {
-      return countryCases[i].prepositional || countryName
-    }
-  }
-
-  return countryName
-}
 
 function replaceCountryPlaceholder(text) {
   if (!text) return ''
