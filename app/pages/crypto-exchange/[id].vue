@@ -2,7 +2,8 @@
   <main class="exchange-page">
     <CryptoExchangeHeroSec v-if="exchange?.exchange_hero_sec" :section="exchange.exchange_hero_sec" />
     
-    <CryptoExchangeCalcStaticSec />
+    <CryptoExchangeCalcSec />
+    <!-- <CryptoExchangeCalcStaticSec /> -->
     
     <HomeStatsSec />
     <ExchangeBenefitsSec v-if="exchange?.benefits_sec" :section="exchange.benefits_sec" />
