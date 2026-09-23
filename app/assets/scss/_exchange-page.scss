@@ -383,6 +383,58 @@
   margin-top: auto;
 }
 
+.exchange-calc-offline {
+  width: 100%;
+}
+
+.exchange-calc-offline__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  min-height: 540px;
+  padding: 40px;
+  border-radius: 20px;
+  background: $white;
+  box-sizing: border-box;
+}
+
+.exchange-calc-offline__badge {
+  display: inline-flex;
+  margin-bottom: 18px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  background: $bg-platform;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.2;
+  color: $gray-83;
+}
+
+.exchange-calc-offline__title {
+  max-width: 640px;
+  margin-bottom: 14px;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1.1;
+  color: $gray;
+}
+
+.exchange-calc-offline__text {
+  max-width: 520px;
+  margin-bottom: 28px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  color: $gray-83;
+}
+
+.exchange-calc-offline__btn {
+  width: auto;
+  min-width: 280px;
+}
+
 
 
 .exchange-benefits-sec {
@@ -857,6 +909,13 @@
   .exchange-calc-sec{
     padding: 60px 0;
   }
+  .exchange-calc-offline__card{
+    min-height: 480px;
+    padding: 36px 32px;
+  }
+  .exchange-calc-offline__title{
+    font-size: 28px;
+  }
   .exchange-calc-sec__form-card{
     width: calc(50% -  10px);
     padding: 25px;
@@ -975,6 +1034,17 @@
   .crypto-hero-sec__img{
     width: 300px;
   }
+  .exchange-calc-offline__card{
+    min-height: 420px;
+    padding: 32px 24px;
+  }
+  .exchange-calc-offline__title{
+    font-size: 24px;
+  }
+  .exchange-calc-offline__btn{
+    width: 100%;
+    min-width: 0;
+  }
   .exchange-calc-sec__title{
     font-size: 16px;
     margin-bottom: 20px;
@@ -1083,6 +1153,27 @@
   }
   .exchange-calc-sec{
     padding: 50px 0;
+  }
+  .exchange-calc-offline__card{
+    min-height: 380px;
+    padding: 28px 18px;
+    border-radius: 16px;
+  }
+  .exchange-calc-offline__badge{
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+  .exchange-calc-offline__title{
+    margin-bottom: 12px;
+    font-size: 22px;
+  }
+  .exchange-calc-offline__text{
+    margin-bottom: 22px;
+    font-size: 14px;
+  }
+  .exchange-calc-offline__btn{
+    width: 100%;
+    min-width: 0;
   }
   .exchange-calc-sec__layout{
     flex-wrap: wrap;
