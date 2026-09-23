@@ -46,13 +46,18 @@
               v-if="activeTab === 'cashless'"
               :items="cashlessItems"
               :countries="cashlessCountries"
+              :default-amount="defaultAmount"
             />
             <ExchangeCalcCashTab
               v-else-if="activeTab === 'cash'"
               :items="casheItems"
               :countries="cashCountries"
+              :default-amount="defaultAmount"
             />
-            <ExchangeCalcInvoiceTab v-else />
+            <ExchangeCalcInvoiceTab
+              v-else
+              :default-amount="defaultAmount"
+            />
           </form>
         </div>
 
@@ -107,6 +112,7 @@ const props = defineProps({
 
 const modalStore = useModalStore()
 const isCalcDisabled = ref(false)
+const defaultAmount = '100000'
 
 function openConsultationModal() {
   modalStore.open(MODAL_NAMES.consultation)

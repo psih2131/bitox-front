@@ -100,12 +100,16 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  defaultAmount: {
+    type: String,
+    default: '100000',
+  },
 })
 
 const selectedFrom = ref('')
 const selectedTo = ref('')
 const selectedCountry = ref('')
-const amount = ref('100000')
+const amount = ref(props.defaultAmount || '100000')
 
 const fromOptions = computed(() => buildUniqueFromOptions(props.items))
 const toOptions = computed(() => buildUniqueToOptions(props.items, selectedFrom.value))

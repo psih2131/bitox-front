@@ -110,6 +110,13 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  defaultAmount: {
+    type: String,
+    default: '100000',
+  },
+})
+
 const urlApi = useRuntimeConfig().public.apiUrl
 
 const calcPopulate = [
@@ -155,7 +162,7 @@ const invoiceCurrencies = computed(() =>
 const invoice = reactive({
   country: '',
   currencyId: '',
-  amount: '120000',
+  amount: props.defaultAmount || '100000',
   purpose: '',
   comment: '',
 })
