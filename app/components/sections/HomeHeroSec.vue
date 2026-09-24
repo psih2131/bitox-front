@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import swiftImage from '~/assets/images/swift.png'
+import swiftImage from '~/assets/images/swift2.svg'
 import cardsImage from '~/assets/images/gr-5.png'
 import coin1 from '~/assets/images/coin-1.png'
 import coin2 from '~/assets/images/coin-2.png'
