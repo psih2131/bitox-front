@@ -16,8 +16,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /root/opt/bitox-front
-            git pull
-            npm install
+            git fetch origin main
+            git reset --hard origin/main
+            npm ci
             npm run build
             pm2 restart bitox-front
