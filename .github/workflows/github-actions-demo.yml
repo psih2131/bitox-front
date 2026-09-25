@@ -18,7 +18,8 @@ jobs:
           script: |
             set -e
             cd /root/opt/bitox-front
-            git pull
+            git fetch origin main
+            git reset --hard origin/main
             npm i
             git restore package-lock.json
             npm run build
