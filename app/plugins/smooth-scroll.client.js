@@ -23,6 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     event.preventDefault()
     history.pushState(null, '', hash)
     scrollToHash(hash)
+    
   })
 
   nuxtApp.hook('page:finish', () => {
