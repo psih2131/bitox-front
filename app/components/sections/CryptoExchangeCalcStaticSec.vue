@@ -151,7 +151,7 @@ const cashCountries = computed(() =>
 
 async function getExchangeData() {
   try {
-    const data = await $fetch('/api/exchange-rates')
+    const data = await $fetch('/nuxt-api/exchange-rates')
     return data.items || []
   } catch (error) {
     console.error('Failed to load exchange rates', error)

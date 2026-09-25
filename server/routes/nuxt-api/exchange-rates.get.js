@@ -1,4 +1,4 @@
-import { fetchExchangeRates } from '../utils/parserXmlCalc'
+import { fetchExchangeRates } from '../../utils/parserXmlCalc'
 
 export default defineEventHandler(async () => {
   try {
