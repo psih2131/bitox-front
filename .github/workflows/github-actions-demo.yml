@@ -20,6 +20,6 @@ jobs:
             cd /root/opt/bitox-front
             git fetch origin main
             git reset --hard origin/main
-            npm ci
+            npm i
             npm run build
             pm2 restart bitox-front
