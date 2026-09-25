@@ -72,6 +72,16 @@ const { data: termsResponse } = await useFetch(
 
 const section = termsResponse.value?.data || null
 
+function replaceCountryPlaceholder(text) {
+  if (!text) return ''
+  if (!props.countryName) return text
+  if (!text.includes('{{}}')) return text
+
+  const countryForm = getCountryPrepositional(props.countryName, 'accusative')
+
+  return text.split('{{}}').join(countryForm)
+}
+
 const items = []
 
 if (section?.term_items) {
@@ -80,16 +90,10 @@ if (section?.term_items) {
 
     if (!item.title && !item.text) continue
 
-    let text = item.text || ''
-
-    if (props.countryName && text.includes('СТРАНУ')) {
-      text = text.split('СТРАНУ').join(getCountryPrepositional(props.countryName, 'accusative'))
-    }
-
     items.push({
       id: item.id || i + 1,
-      title: item.title || '',
-      text,
+      title: replaceCountryPlaceholder(item.title || ''),
+      text: replaceCountryPlaceholder(item.text || ''),
     })
   }
 }
