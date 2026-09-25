@@ -41,7 +41,7 @@ function replaceCountryPlaceholder(text) {
   if (!props.countryName) return text
   if (!text.includes('{{}}')) return text
 
-  const countryForm = getCountryPrepositional(props.countryName)
+  const countryForm = getCountryPrepositional(props.countryName, 'accusative')
 
   return text.split('{{}}').join(countryForm)
 }
