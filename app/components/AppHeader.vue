@@ -524,6 +524,7 @@ const aboutMega = [
       { key: 'about', label: 'О компании', to: '/about' },
       { key: 'partners', label: 'Партнерская программа', to: '/partners' },
       { key: 'contacts', label: 'Официальные аккаунты', to: '/contacts' },
+      { key: 'blog', label: 'Блог', to: '/blog' },
     ],
     columns: 1,
   },
