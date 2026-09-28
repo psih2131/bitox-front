@@ -313,7 +313,7 @@ const [
     ].join('&'),
   ),
   useFetch(
-    `${urlApi}/api/exchange-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100`,
+    `${urlApi}/api/exchange-pages?fields[0]=title&fields[1]=slug&pagination[pageSize]=100&sort=title:desc`,
   ),
 ])
 
