@@ -147,6 +147,7 @@ const { data: calcResponse } = useFetch(
   `${urlApi}/api/exchange-calc-component?${locationPopulate}`,
 )
 
+
 const calcData = computed(() => calcResponse.value?.data?.calc?.exchange_data)
 const cashlessCountries = computed(() =>
   sortByLabel(calcData.value?.without_cache ?? [], (item) => item.name_country),
@@ -158,7 +159,10 @@ const cashCountries = computed(() =>
 async function getExchangeData() {
   try {
     const data = await $fetch('/nuxt-api/exchange-rates')
+
+    console.log('calcData', data)
     return data.items || []
+    
   } catch (error) {
     console.error('Failed to load exchange rates', error)
     return []
@@ -177,7 +181,7 @@ function sortItems(items) {
       ...item,
     }
 
-    if (item.from.includes('CASH')) {
+    if (item.from.includes('CASH') || item.to.includes('CASH')) {
       casheItems.value.push(newItem)
     } else {
       cashlessItems.value.push(newItem)

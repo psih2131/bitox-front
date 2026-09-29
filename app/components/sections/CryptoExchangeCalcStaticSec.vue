@@ -171,7 +171,7 @@ function sortItems(items) {
       ...item,
     }
 
-    if (item.from.includes('CASH')) {
+    if (item.from.includes('CASH') || item.to.includes('CASH')) {
       casheItems.value.push(newItem)
     } else {
       cashlessItems.value.push(newItem)
