@@ -1,3 +1,16 @@
+import { calcCurrencyOrder } from '~/data/calc-currency-order'
+
+function sortByCurrencyOrder(options, key) {
+  const rank = (code) => {
+    const i = calcCurrencyOrder.indexOf(code)
+    return i === -1 ? Infinity : i
+  }
+  return options
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => rank(a.item[key]) - rank(b.item[key]) || a.index - b.index)
+    .map(({ item }) => item)
+}
+
 export function parseAmount(value) {
   const normalized = String(value || '')
     .replace(/\s/g, '')
@@ -28,7 +41,7 @@ export function buildUniqueFromOptions(list) {
     }
   }
 
-  return Array.from(seen.values())
+  return sortByCurrencyOrder(Array.from(seen.values()), 'from')
 }
 
 export function buildUniqueToOptions(list, fromCode) {
@@ -45,7 +58,7 @@ export function buildUniqueToOptions(list, fromCode) {
     }
   }
 
-  return Array.from(seen.values())
+  return sortByCurrencyOrder(Array.from(seen.values()), 'to')
 }
 
 export function findRate(list, fromCode, toCode, preferCity) {
