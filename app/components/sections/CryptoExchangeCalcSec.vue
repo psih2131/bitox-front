@@ -149,12 +149,8 @@ const { data: calcResponse } = useFetch(
 
 
 const calcData = computed(() => calcResponse.value?.data?.calc?.exchange_data)
-const cashlessCountries = computed(() =>
-  sortByLabel(calcData.value?.without_cache ?? [], (item) => item.name_country),
-)
-const cashCountries = computed(() =>
-  sortByLabel(calcData.value?.cache ?? [], (item) => item.name_country),
-)
+const cashlessCountries = computed(() => calcData.value?.without_cache ?? [])
+const cashCountries = computed(() => calcData.value?.cache ?? [])
 
 async function getExchangeData() {
   try {
