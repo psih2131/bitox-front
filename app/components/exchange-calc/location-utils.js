@@ -25,11 +25,9 @@ export function getCityOptions(countries, countryName) {
   const country = getCountryByName(countries, countryName)
   if (!country?.citys?.length) return []
 
-  return sortByLabel(
-    country.citys
-      .map((item) => item.city_name)
-      .filter(Boolean),
-  )
+  return country.citys
+    .map((item) => item.city_name)
+    .filter(Boolean)
 }
 
 const CITY_CODE_MAP = {
