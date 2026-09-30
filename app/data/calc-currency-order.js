@@ -6,4 +6,7 @@ export const calcCurrencyOrder = [
   'USDTTRC20',
   'USDTERC20',
   'USDTBEP20',
+  'SBPRUB',
+  'SBERRUB',
+  'TCSBRUB',
 ]
