@@ -68,7 +68,7 @@
 
     <div class="exchange-calc-sec__result-block">
       <p class="exchange-calc-sec__result-label">Курс</p>
-      <p class="exchange-calc-sec__result-value">× {{ coefDisplay }}</p>
+      <p class="exchange-calc-sec__result-value">{{ xmlRateDisplay }}</p>
       <p class="exchange-calc-sec__result-note">Зафиксирован на 15 мин</p>
     </div>
 
@@ -136,6 +136,12 @@ const toLabel = computed(() => selectedRate.value?.nameRuTo || '—')
 const giveDisplay = computed(() => formatAmount(giveAmount.value, 2))
 const receiveDisplay = computed(() => formatAmount(receiveAmount.value, 2))
 const coefDisplay = computed(() => formatAmount(coef.value, 2))
+const xmlRateDisplay = computed(() => {
+  const rateIn = Number(selectedRate.value?.in)
+  const rateOut = Number(selectedRate.value?.out)
+  if (!Number.isFinite(rateIn) || !Number.isFinite(rateOut)) return '—'
+  return formatAmount(Math.max(rateIn, rateOut), 4)
+})
 
 watch(
   () => props.countries,
