@@ -96,6 +96,10 @@
         <strong>≈ {{ receiveDisplay }} {{ toLabel }}</strong>
       </div>
       <div class="exchange-calc-sec__params-row">
+        <span>Курс</span>
+        <strong>~ {{ xmlRateDisplay }}</strong>
+      </div>
+      <div class="exchange-calc-sec__params-row">
         <span>Локация</span>
         <strong>{{ locationDisplay }}</strong>
       </div>
@@ -159,6 +163,12 @@ const fromLabel = computed(() => selectedRate.value?.nameRuFrom || '—')
 const toLabel = computed(() => selectedRate.value?.nameRuTo || '—')
 const giveDisplay = computed(() => formatAmount(giveAmount.value, 2))
 const receiveDisplay = computed(() => formatAmount(receiveAmount.value, 2))
+const xmlRateDisplay = computed(() => {
+  const rateIn = Number(selectedRate.value?.in)
+  const rateOut = Number(selectedRate.value?.out)
+  if (!Number.isFinite(rateIn) || !Number.isFinite(rateOut)) return '—'
+  return formatAmount(Math.max(rateIn, rateOut), 4)
+})
 const locationDisplay = computed(() => {
   const parts = [selectedCountry.value, selectedCity.value].filter(Boolean)
   return parts.length ? parts.join(', ') : '—'
