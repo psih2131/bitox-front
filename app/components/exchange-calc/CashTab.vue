@@ -97,7 +97,7 @@
       </div>
       <div class="exchange-calc-sec__params-row">
         <span>Курс</span>
-        <strong>~ {{ xmlRateDisplay }}</strong>
+        <strong>≈ {{ xmlRateDisplay }}</strong>
       </div>
       <div class="exchange-calc-sec__params-row">
         <span>Локация</span>
