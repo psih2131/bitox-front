@@ -1222,6 +1222,12 @@
   .exchange-calc-sec__result-block--accent{
     width: 100%;
   }
+  #exchange-calc-sidebar{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
   .exchange-calc-sec__sidebar{
     min-height: 0;
     display: flex;
