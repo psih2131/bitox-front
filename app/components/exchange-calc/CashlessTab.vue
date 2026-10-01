@@ -67,7 +67,7 @@
     </div>
 
     <div class="exchange-calc-sec__result-block">
-      <p class="exchange-calc-sec__result-label">Коэффициент</p>
+      <p class="exchange-calc-sec__result-label">Курс</p>
       <p class="exchange-calc-sec__result-value">× {{ coefDisplay }}</p>
       <p class="exchange-calc-sec__result-note">Зафиксирован на 15 мин</p>
     </div>
