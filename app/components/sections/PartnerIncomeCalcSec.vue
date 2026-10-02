@@ -153,8 +153,8 @@
 <script setup>
 import gsap from 'gsap'
 import flagUsd from '~/assets/images/flags/United-states_flag_icon_round.svg'
-import flagEur from '~/assets/images/flags/x1.jpg'
-import flagGbp from '~/assets/images/flags/x2.jpg'
+import flagEur from '~/assets/images/flags/Flag_of_Europe.svg'
+import flagGbp from '~/assets/images/flags/x1.jpg'
 import cardsImage from '~/assets/images/gr-5.png'
 import coin1 from '~/assets/images/coin-1.png'
 import coin2 from '~/assets/images/coin-2.png'
