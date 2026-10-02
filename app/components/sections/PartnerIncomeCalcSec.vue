@@ -152,7 +152,7 @@
 
 <script setup>
 import gsap from 'gsap'
-import flagUsd from '~/assets/images/flags/x3.jpg'
+import flagUsd from '~/assets/images/flags/United-states_flag_icon_round.svg'
 import flagEur from '~/assets/images/flags/x1.jpg'
 import flagGbp from '~/assets/images/flags/x2.jpg'
 import cardsImage from '~/assets/images/gr-5.png'
