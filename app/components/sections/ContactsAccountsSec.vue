@@ -38,13 +38,11 @@
           </p>
 
           <p v-if="getTgUsers(section).length" class="contacts-accounts-sec__card-login">
-            Логин:<br>
             <template v-for="(user, userIndex) in getTgUsers(section)" :key="user.id ?? userIndex">
               <template v-if="userIndex > 0">, а также </template>
               <a
-                :href="user.link"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#"
+                @click.prevent="openTelegramBot"
               >{{ user.title }}</a>
             </template>
           </p>
@@ -70,6 +68,13 @@ defineProps({
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl
+
+const { $TgAnalitika } = useNuxtApp()
+
+async function openTelegramBot() {
+  const result = await $TgAnalitika.trackEvent()
+  if (result?.data?.link) window.open(result.data.link, '_blank')
+}
 
 function getAvatarStyle(section) {
   const avatarUrl = getStrapiMediaUrl(section?.telegram_img, apiUrl)
