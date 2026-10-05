@@ -161,6 +161,10 @@
   transform: none;
 }
 
+.header__nav-item--active .header__nav-link {
+  background: $bg-section;
+}
+
 .header__mega {
   position: absolute;
   top: 0;
