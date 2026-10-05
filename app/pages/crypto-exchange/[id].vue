@@ -5,7 +5,7 @@
     <CryptoExchangeCalcSec />
     <!-- <CryptoExchangeCalcStaticSec /> -->
     
-    <HomeStatsSec />
+    <!-- <HomeStatsSec /> -->
     <ExchangeBenefitsSec v-if="exchange?.benefits_sec" :section="exchange.benefits_sec" />
     <ExchangeClientsSec v-if="exchange?.exchange_client_use_sec" :section="exchange.exchange_client_use_sec" />
     <ExchangeProcessSec v-if="exchange?.exchange_sec_staps" :section="exchange.exchange_sec_staps" />
