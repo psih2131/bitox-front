@@ -14,9 +14,20 @@
             class="about-contacts-sec__card"
           >
             <span class="about-contacts-sec__card-icon" v-html="item.icon" />
-            <p class="about-contacts-sec__card-text">
+            <p class="about-contacts-sec__card-text">              
+              <span
+                v-if="item.id === 'telegram'"
+                class="about-contacts-sec__card-link"
+                role="link"
+                tabindex="0"
+                style="cursor: pointer"
+                @click="openTelegramBot"
+                @keydown.enter="openTelegramBot"
+              >
+                {{ item.text }}
+              </span>
               <a
-                v-if="item.href"
+                v-else-if="item.href"
                 :href="item.href"
                 class="about-contacts-sec__card-link"
                 target="_blank"
@@ -24,6 +35,7 @@
               >
                 {{ item.text }}
               </a>
+              
               <template v-else>{{ item.text }}</template>
             </p>
           </article>
@@ -52,6 +64,13 @@ const props = defineProps({
 })
 
 const sectionRef = ref(null)
+
+const { $TgAnalitika } = useNuxtApp()
+
+async function openTelegramBot() {
+  const result = await $TgAnalitika.trackEvent()
+  if (result?.data?.link) window.open(result.data.link, '_blank')
+}
 
 const mapData = computed(() => {
   return parseMapCoordinates(props.section.map_coordinates_yandex) ?? {
