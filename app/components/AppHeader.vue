@@ -62,7 +62,7 @@
               v-for="item in navItems"
               :key="item.label"
               class="header__nav-item"
-              :class="{ 'header__nav-item--has-mega': item.mega?.length }"
+              :class="{ 'header__nav-item--has-mega': item.mega?.length, 'header__nav-item--active': isNavItemActive(item) }"
             >
               <NuxtLink
                 v-if="item.clickable !== false"
@@ -539,6 +539,14 @@ const navItems = computed(() => [
 ])
 
 const route = useRoute()
+
+function isNavItemActive(item) {
+  const paths = [
+    item.to,
+    ...(item.mega || []).flatMap((card) => (card.links || []).map((link) => link.to)),
+  ].filter(Boolean)
+  return paths.some((p) => p !== '/' && (route.path === p || route.path.startsWith(`${p}/`)))
+}
 
 watch(() => route.path, closeMobMenu)
 </script>
