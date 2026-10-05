@@ -37,9 +37,9 @@
           <input v-model="consent" type="checkbox" />
           <span class="service-contact-sec__checkbox-text">
             Отправляя данную форму, вы подтверждаете
-            <a href="#">Согласие на обработку персональных данных</a>
+            <a href="/docs/obrabotka-dannyh" target="_blank" @click.stop>Согласие на обработку персональных данных</a>
             в соответствии с
-            <a href="#">Условиями использования</a>
+            <a href="/docs/pravila-okazaniya-uslug" target="_blank" @click.stop>Условиями использования</a>
           </span>
         </label>
 
