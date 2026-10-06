@@ -1,4 +1,5 @@
 import { createFormRequest, escapeHtml, formatConsent, notifyTelegramSafe } from '../../utils/form-request'
+import { isValidPhone } from '../../utils/phone'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -17,7 +18,9 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Name and phone are required',
     })
   }
-
+  if (!isValidPhone(phone)) {
+    return { ok: true }
+  }
   if (!personalConsent || !offerConsent) {
     throw createError({
       statusCode: 400,
