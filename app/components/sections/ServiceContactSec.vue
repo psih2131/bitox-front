@@ -34,6 +34,8 @@
             aria-label="Телефон"
             @keydown="onPhoneKeydown"
             @input="onPhoneInput"
+            @focus="onPhoneFocus"
+            @blur="onPhoneBlur"
           />
         </label>
 
@@ -74,7 +76,7 @@ const sectionRef = ref(null)
 const { isSubmitting, submit } = useFormSubmit()
 
 const firstName = ref('')
-const phone = ref('+7 ')
+const phone = ref('')
 const consent = ref(false)
 
 const canSubmit = computed(
@@ -95,6 +97,14 @@ function onPhoneInput({ target }) {
   target.value = phone.value
 }
 
+function onPhoneFocus() {
+  if (!phone.value) phone.value = '+7 '
+}
+
+function onPhoneBlur() {
+  if (phone.value.replace(/\D/g, '').length <= 1) phone.value = ''
+}
+
 async function handleSubmit() {
   if (isSubmitting.value) return
 
@@ -110,7 +120,7 @@ async function handleSubmit() {
   if (!success) return
 
   firstName.value = ''
-  phone.value = '+7 '
+  phone.value = ''
   consent.value = false
 }
 
