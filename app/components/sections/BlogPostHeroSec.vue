@@ -37,10 +37,10 @@
           :src="`${apiUrl}${post.post_image.url}`"
         />
 
-        <BlogPostTocSidebar
+        <!-- <BlogPostTocSidebar
           class="blog-post-hero-sec__toc"
           :data-toc="post.post_content_builder"
-        />
+        /> -->
       </div>
     </div>
   </section>
