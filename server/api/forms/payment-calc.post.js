@@ -1,5 +1,6 @@
 import { buildPaymentCalcBitrixFields, notifyBitrixLeadSafe } from '../../utils/bitrix'
 import { createFormRequest, escapeHtml, notifyTelegramSafe } from '../../utils/form-request'
+import { isValidPhone } from '../../utils/phone'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -16,7 +17,9 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Phone is required',
     })
   }
-
+  if (!isValidPhone(phone)) {
+    return { ok: true }
+  }
   const message = [
     `<b>Новая заявка: ${escapeHtml(titleForm)}</b>`,
     '',
