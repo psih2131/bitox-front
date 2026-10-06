@@ -24,12 +24,16 @@
 
         <label class="service-contact-sec__field service-contact-sec__field--full">
           <input
-            v-model="phone"
+            :value="phone"
             type="tel"
+            maxlength="18"
+            inputmode="numeric"
             class="service-contact-sec__input"
-            placeholder="+7 999 999 99 99"
+            placeholder="+7 (999) 999 99 99"
             autocomplete="tel"
             aria-label="Телефон"
+            @keydown="onPhoneKeydown"
+            @input="onPhoneInput"
           />
         </label>
 
@@ -74,8 +78,22 @@ const phone = ref('')
 const consent = ref(false)
 
 const canSubmit = computed(
-  () => consent.value && phone.value.trim(),
+  () => consent.value && phone.value.replace(/\D/g, '').length === 11,
 )
+
+function onPhoneKeydown(event) {
+  const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']
+  if (allowed.includes(event.key) || event.ctrlKey || event.metaKey) return
+  if (!/^\d$/.test(event.key)) event.preventDefault()
+}
+
+function onPhoneInput({ target }) {
+  const n = target.value.replace(/\D/g, '').replace(/^[78]/, '').slice(0, 10)
+  phone.value = n
+    ? `+7 (${n.slice(0, 3)}${n.length > 3 ? `) ${n.slice(3, 6)}` : ''}${n.length > 6 ? ` ${n.slice(6, 8)}` : ''}${n.length > 8 ? ` ${n.slice(8, 10)}` : ''}`
+    : ''
+  target.value = phone.value
+}
 
 async function handleSubmit() {
   if (isSubmitting.value) return
