@@ -74,7 +74,7 @@ const sectionRef = ref(null)
 const { isSubmitting, submit } = useFormSubmit()
 
 const firstName = ref('')
-const phone = ref('')
+const phone = ref('+7 ')
 const consent = ref(false)
 
 const canSubmit = computed(
@@ -91,7 +91,7 @@ function onPhoneInput({ target }) {
   const n = target.value.replace(/\D/g, '').replace(/^[78]/, '').slice(0, 10)
   phone.value = n
     ? `+7 (${n.slice(0, 3)}${n.length > 3 ? `) ${n.slice(3, 6)}` : ''}${n.length > 6 ? ` ${n.slice(6, 8)}` : ''}${n.length > 8 ? ` ${n.slice(8, 10)}` : ''}`
-    : ''
+    : '+7 '
   target.value = phone.value
 }
 
@@ -110,7 +110,7 @@ async function handleSubmit() {
   if (!success) return
 
   firstName.value = ''
-  phone.value = ''
+  phone.value = '+7 '
   consent.value = false
 }
 
