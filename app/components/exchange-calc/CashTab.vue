@@ -147,22 +147,26 @@ const fromOptions = computed(() => buildUniqueFromOptions(props.items))
 const toOptions = computed(() => buildUniqueToOptions(props.items, selectedFrom.value))
 const cityOptions = computed(() => getCityOptions(props.countries, selectedCountry.value))
 
-const selectedRate = computed(() =>
-  findRate(
-    props.items,
-    selectedFrom.value,
-    selectedTo.value,
-    resolveCityCode(selectedCity.value),
-  ),
+const cityCode = computed(() => resolveCityCode(selectedCity.value))
+
+// Пара из выгрузки — нужна для названий валют
+const rateItem = computed(() =>
+  findRate(props.items, selectedFrom.value, selectedTo.value, cityCode.value),
 )
+
+// Курс показываем только для Москвы и Санкт-Петербурга
+const selectedRate = computed(() => (cityCode.value ? rateItem.value : null))
 
 const giveAmount = computed(() => parseAmount(amount.value))
 const receiveAmount = computed(() => calcReceiveAmount(giveAmount.value, selectedRate.value))
 
-const fromLabel = computed(() => selectedRate.value?.nameRuFrom || '—')
-const toLabel = computed(() => selectedRate.value?.nameRuTo || '—')
+const fromLabel = computed(() => rateItem.value?.nameRuFrom || '—')
+const toLabel = computed(() => rateItem.value?.nameRuTo || '—')
+
 const giveDisplay = computed(() => formatAmount(giveAmount.value, 2))
-const receiveDisplay = computed(() => formatAmount(receiveAmount.value, 2))
+const receiveDisplay = computed(() =>
+  selectedRate.value ? formatAmount(receiveAmount.value, 2) : '—',
+)
 const xmlRateDisplay = computed(() => {
   const rateIn = Number(selectedRate.value?.in)
   const rateOut = Number(selectedRate.value?.out)
