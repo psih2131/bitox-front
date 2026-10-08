@@ -93,11 +93,11 @@
       </div>
       <div class="exchange-calc-sec__params-row">
         <span>Получаете</span>
-        <strong>≈ {{ receiveDisplay }} {{ toLabel }}</strong>
+        <strong>{{ selectedRate ? `≈ ${receiveDisplay} ${toLabel}` : toLabel }}</strong>
       </div>
       <div class="exchange-calc-sec__params-row">
         <span>Курс</span>
-        <strong>≈ {{ xmlRateDisplay }}</strong>
+        <strong>{{ selectedRate ? `≈ ${xmlRateDisplay}` : 'Уточняйте у менеджера' }}</strong>
       </div>
       <div class="exchange-calc-sec__params-row">
         <span>Локация</span>
