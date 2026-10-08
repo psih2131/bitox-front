@@ -1,3 +1,4 @@
+import { buildConsultationBitrixFields, notifyBitrixLeadSafe } from '../../utils/bitrix'
 import { createFormRequest, escapeHtml, formatConsent, notifyTelegramSafe } from '../../utils/form-request'
 import { isValidPhone } from '../../utils/phone'
 
@@ -47,7 +48,23 @@ export default defineEventHandler(async (event) => {
     `<b>Рекламная рассылка:</b> ${formatConsent(marketingConsent)}`,
   ].join('\n')
 
-  await notifyTelegramSafe(event, message)
+  const bitrixFields = {
+    ...buildConsultationBitrixFields({
+      title: titleForm,
+      phone,
+      urlPage,
+      utm: body?.utm,
+      personalConsent,
+      offerConsent,
+      marketingConsent,
+    }),
+    NAME: name,
+  }
 
+  await Promise.allSettled([
+    notifyTelegramSafe(event, message),
+    notifyBitrixLeadSafe(event, bitrixFields),
+  ])
+  
   return { ok: true }
 })
