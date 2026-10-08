@@ -25,7 +25,7 @@
 
           <ul v-if="businessPages.length" class="platform-sec__list">
             <li v-for="page in businessPages" :key="page.id">
-              <NuxtLink :to="`/business/${page.slug}`" class="platform-sec__item">
+              <NuxtLink :to="page.link" class="platform-sec__item">
                 <div class="platform-sec__item-content">
                   <p class="platform-sec__item-title">{{ page.title }}</p>
                   <p v-if="page.subtitle" class="platform-sec__item-text">{{ page.subtitle }}</p>
@@ -78,7 +78,7 @@
 
           <ul v-if="individualsPages.length" class="platform-sec__list">
             <li v-for="page in individualsPages" :key="page.id">
-              <NuxtLink :to="`/individuals/${page.slug}`" class="platform-sec__item">
+              <NuxtLink :to="page.link" class="platform-sec__item">
                 <div class="platform-sec__item-content">
                   <p class="platform-sec__item-title">{{ page.title }}</p>
                   <p v-if="page.subtitle" class="platform-sec__item-text">{{ page.subtitle }}</p>
@@ -151,11 +151,32 @@ const [{ data: businessPagesResponse }, { data: individualsPagesResponse }] = aw
   ),
 ])
 
-const businessPages = computed(() =>
-  mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [], urlApi),
-)
+// Карточки из админки (Home → home_platform_sec → col_1_links / col_2_links)
+function mapPlatformLinks(links) {
+  return links
+    .filter((item) => item?.title && item?.link)
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      subtitle: item.text,
+      link: item.link,
+    }))
+}
 
-const individualsPages = computed(() =>
-  mapStrapiIndividualsPages(individualsPagesResponse.value?.data ?? [], urlApi),
-)
+const businessPages = computed(() => {
+  const links = props.section?.col_1_links
+  if (Array.isArray(links)) return mapPlatformLinks(links)
+
+  return mapStrapiBusinessPages(businessPagesResponse.value?.data ?? [], urlApi)
+    .map((page) => ({ ...page, link: `/business/${page.slug}` }))
+})
+
+const individualsPages = computed(() => {
+  const links = props.section?.col_2_links
+  if (Array.isArray(links)) return mapPlatformLinks(links)
+
+  return mapStrapiIndividualsPages(individualsPagesResponse.value?.data ?? [], urlApi)
+    .map((page) => ({ ...page, link: `/individuals/${page.slug}` }))
+})
+
 </script>
