@@ -47,9 +47,8 @@ export default defineNuxtConfig({
         },
         {
           key: 'ai-up-tags',
-          src: 'https://px.ai-up.ru/pixel/tags/61b61351-1c67-3492-8470-743f3c7b5a63',
-          async: true,
           tagPosition: 'head',
+          innerHTML: `window.addEventListener('load',function(){var s=document.createElement('script');s.async=true;s.src='https://px.ai-up.ru/pixel/tags/61b61351-1c67-3492-8470-743f3c7b5a63';document.head.appendChild(s)})`,
         },
         {
           key: 'ai-up-hit',
