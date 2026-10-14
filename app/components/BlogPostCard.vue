@@ -19,7 +19,7 @@
       
 
       <div class="blog-post-card__body">
-        <p class="blog-post-card__date">{{ formatDate(postData.publishedAt) }}</p>
+        <p class="blog-post-card__date">{{ formatPostDate(getPostPublishedDate(postData)) }}</p>
         <h3 class="blog-post-card__title" v-if="postData.post_title" v-html="postData.post_title"></h3>
         <p class="blog-post-card__text" v-if="postData.post_description" v-html="postData.post_description"></p>
       </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { formatDate } from '~/utils/formatDate'
+import { formatPostDate, getPostPublishedDate } from '~/utils/postDates'
 
 const apiUrl = useRuntimeConfig().public.apiUrl
 defineProps({
