@@ -1085,3 +1085,64 @@
     font-size: 12px;
   }
 }
+// Источники в конце статьи
+.blog-post-article-sec__sources {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid $light-gray;
+}
+
+.blog-post-article-sec__sources-title {
+  margin: 0 0 18px;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.1;
+  color: $gray;
+}
+
+.blog-post-article-sec__sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+  list-style: decimal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.35;
+  color: $gray-83;
+}
+
+.blog-post-article-sec__sources-item {
+  display: list-item;
+  list-style: decimal;
+  padding-left: 4px;
+}
+
+.blog-post-article-sec__sources-link {
+  color: $gray;
+  text-decoration: underline;
+  text-decoration-color: rgba(49, 49, 50, 0.35);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  transition: text-decoration-color 0.2s ease;
+
+  &:hover {
+    text-decoration-color: $gray;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .blog-post-article-sec__sources {
+    margin-top: 40px;
+    padding-top: 24px;
+  }
+
+  .blog-post-article-sec__sources-title {
+    font-size: 16px;
+  }
+
+  .blog-post-article-sec__sources-list {
+    font-size: 14px;
+  }
+}
