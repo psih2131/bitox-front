@@ -2,6 +2,7 @@
   <main class="blog-post-page">
     <BlogPostHeroSec v-if="post" :post="post" />
     <BlogPostArticleSec v-if="post" :post="post" />
+    <BlogOtherPostsSec v-if="post" :current-slug="post.slug" :category-id="post.category?.id ?? null" />
     <ServiceContactSec />
   </main>
 </template>
@@ -9,6 +10,7 @@
 <script setup>
 import BlogPostHeroSec from '~/components/sections/BlogPostHeroSec.vue'
 import BlogPostArticleSec from '~/components/sections/BlogPostArticleSec.vue'
+import BlogOtherPostsSec from '~/components/sections/BlogOtherPostsSec.vue'
 import { buildStrapiSlugFilter, getStrapiMediaUrl, getStrapiSeoPopulateParts, STRAPI_BLOG_POSTS_API } from '~/utils/strapi'
 
 const urlApi = useRuntimeConfig().public.apiUrl
