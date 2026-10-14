@@ -913,6 +913,7 @@
 
   .blog-other-posts-sec__card {
     flex: 0 0 66%;
+    height: auto;
     scroll-snap-align: start;
 
     &:hover {
