@@ -100,6 +100,7 @@
 <script setup>
 import gsap from 'gsap'
 import { formatShortDate, getStrapiMediaUrl } from '~/utils/strapi'
+import { getPostPublishedDate } from '~/utils/postDates'
 
 const props = defineProps({
   section: {
@@ -195,7 +196,7 @@ const examples = computed(() => {
       return {
         id: item.id,
         title: post.post_title,
-        date: formatShortDate(post.publishedAt),
+        date: formatShortDate(getPostPublishedDate(post)),
         image: getStrapiMediaUrl(post.post_image, apiUrl) || '',
         fields: mapExampleFields(item),
         postLink: `/blog/${post.slug}`,
