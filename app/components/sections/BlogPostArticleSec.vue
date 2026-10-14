@@ -21,6 +21,11 @@
               class="text-editor"
               v-html="renderMarkdown(block.quote_text_element)"
             />
+
+            <BlogCommercialBlock
+              v-else-if="block.__component === 'shared.commercial-block'"
+              :block="block"
+            />
           </div>
         </div>
 
@@ -43,7 +48,7 @@
 
       <BlogPostTocSidebar
         class="blog-post-article-sec__sidebar blog-post-article-sec__sidebar--sticky"
-        :data-toc="post.post_content_builder"
+        :data-toc="tocItems"
       />
     </div>
   </section>
@@ -52,15 +57,19 @@
 <script setup>
 import gsap from 'gsap'
 import MarkdownIt from 'markdown-it';
+import BlogCommercialBlock from '~/components/BlogCommercialBlock.vue'
 
-
-
-defineProps({
+const props = defineProps({
   post: {
     type: Object,
     required: true,
   },
 })
+
+// В оглавление попадают только разделы с названием (коммерческие блоки — нет)
+const tocItems = computed(() =>
+  (props.post.post_content_builder ?? []).filter((block) => block.section_title_for_nav_post_menu),
+)
 
 const md = new MarkdownIt();
 
