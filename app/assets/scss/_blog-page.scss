@@ -817,3 +817,122 @@
 @media only screen and (max-width: 365px) {
 
 }
+
+
+// Блок «Другие статьи:» под статьёй
+.blog-other-posts-sec {
+  padding: 0 0 80px;
+  background: $bg-section;
+}
+
+.blog-other-posts-sec__title {
+  margin-bottom: 24px;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1.1;
+  color: $gray;
+}
+
+.blog-other-posts-sec__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.blog-other-posts-sec__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 20px;
+  background: $white;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(49, 49, 50, 0.08);
+  }
+}
+
+.blog-other-posts-sec__media {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: #E3E5E7;
+}
+
+.blog-other-posts-sec__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-other-posts-sec__name {
+  padding: 16px 18px 20px;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1.15;
+  color: $gray;
+}
+
+@media only screen and (max-width: 991px) {
+  .blog-other-posts-sec__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .blog-other-posts-sec {
+    padding-bottom: 50px;
+    --other-posts-side: calc((100vw - 355px) / 2);
+  }
+
+  .blog-other-posts-sec__title {
+    margin-bottom: 18px;
+    font-size: 24px;
+  }
+
+  // Горизонтальная прокрутка: видна одна карточка и половина следующей
+  .blog-other-posts-sec__grid {
+    display: flex;
+    gap: 10px;
+    margin: 0 calc(var(--other-posts-side) * -1);
+    padding: 0 var(--other-posts-side);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--other-posts-side);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .blog-other-posts-sec__card {
+    flex: 0 0 66%;
+    scroll-snap-align: start;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .blog-other-posts-sec__media {
+    height: 130px;
+  }
+
+  .blog-other-posts-sec__name {
+    padding: 12px 12px 14px;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 365px) {
+  .blog-other-posts-sec {
+    --other-posts-side: calc((100vw - 325px) / 2);
+  }
+}
