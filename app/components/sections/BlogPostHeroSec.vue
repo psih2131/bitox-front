@@ -15,7 +15,9 @@
       <div class="blog-post-hero-sec__head">
         <div class="blog-post-hero-sec__main">
           <div class="blog-post-hero-sec__meta">
-            <span class="blog-post-hero-sec__date" v-if="post.publishedAt">{{ formatDate(post.publishedAt) }}</span>
+              <span class="blog-post-hero-sec__date" v-if="publishedDate">
+                Опубликовано: {{ formatPostDate(publishedDate) }}<template v-if="updatedDate"> | Обновлено: {{ formatPostDate(updatedDate) }}</template>
+            </span>
           </div>
 
           <h1 class="blog-post-hero-sec__title" v-if="post.post_title" v-html="post.post_title"></h1>
@@ -25,7 +27,7 @@
           v-if="post.author"
           class="blog-post-hero-sec__author"
           :author="post.author"
-          :updated-at="post.updatedAt"
+          :updated-at="updatedDate || ''"
           :time-to-read="post.time_read_post"
         />
       </div>
@@ -48,15 +50,18 @@
 
 <script setup>
 
-defineProps({
+const props = defineProps({
   post: {
     type: Object,
     required: true,
   },
 })
 
+const publishedDate = computed(() => getPostPublishedDate(props.post))
+const updatedDate = computed(() => getPostUpdatedDate(props.post))
+
 import gsap from 'gsap'
-import { formatDate } from '~/utils/formatDate'
+import { formatPostDate, getPostPublishedDate, getPostUpdatedDate } from '~/utils/postDates'
 import { truncateText } from '~/utils/truncateText'
 const apiUrl = useRuntimeConfig().public.apiUrl
 const sectionRef = ref(null)
