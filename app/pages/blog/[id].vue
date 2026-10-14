@@ -22,7 +22,7 @@ const populate = [
   'populate[post_image]=true',
   'populate[category]=true',
   'populate[author]=true',
-  'populate[post_content_builder]=true',
+  'populate[post_content_builder][populate]=*',
   'populate[post_questions_section][populate]=post_questions',
   ...getStrapiSeoPopulateParts('seo_cluster'),
 ].join('&')
