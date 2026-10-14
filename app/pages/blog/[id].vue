@@ -24,6 +24,7 @@ const populate = [
   'populate[author]=true',
   'populate[post_content_builder][populate]=*',
   'populate[post_questions_section][populate]=post_questions',
+  'populate[post_sources]=true',
   ...getStrapiSeoPopulateParts('seo_cluster'),
 ].join('&')
 
