@@ -44,6 +44,14 @@
             />
           </div>
         </div>
+        <div v-if="sources.length" class="blog-post-article-sec__sources">
+          <p class="blog-post-article-sec__sources-title">Источники</p>
+          <ol class="blog-post-article-sec__sources-list">
+            <li v-for="item in sources" :key="item.id" class="blog-post-article-sec__sources-item">
+              <a :href="item.url" target="_blank" rel="noopener" class="blog-post-article-sec__sources-link">{{ item.title }}</a>
+            </li>
+          </ol>
+        </div>
       </div>
 
       <BlogPostTocSidebar
@@ -69,6 +77,10 @@ const props = defineProps({
 // В оглавление попадают только разделы с названием (коммерческие блоки — нет)
 const tocItems = computed(() =>
   (props.post.post_content_builder ?? []).filter((block) => block.section_title_for_nav_post_menu),
+)
+// Источники в конце статьи (законы, ЦБ, налоговая и т. п.)
+const sources = computed(() =>
+  (props.post.post_sources ?? []).filter((item) => item?.title && item?.url),
 )
 
 const md = new MarkdownIt();
