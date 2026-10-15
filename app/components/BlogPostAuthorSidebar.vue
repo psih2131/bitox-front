@@ -11,13 +11,6 @@
         <div class="blog-post-sidebar__author-main">
           <p class="blog-post-sidebar__name">{{ author.name }}</p>
           <p v-if="author.position" class="blog-post-sidebar__position">{{ author.position }}</p>
-
-          <div class="blog-post-sidebar__stats">
-            <span class="blog-post-sidebar__stat">
-              <span class="blog-post-sidebar__stat-icon" aria-hidden="true">🕒</span>
-              {{ readTime }}
-            </span>
-          </div>
         </div>
       </div>
 
@@ -55,11 +48,5 @@ const avatarUrl = computed(() => {
   const url = media?.formats?.thumbnail?.url || media?.formats?.small?.url || media?.url
   if (!url) return authorAvatar
   return url.startsWith('http') ? url : `${urlApi}${url}`
-})
-
-// «5» → «5 мин чтения»; если в админке уже написан текст — выводим как есть
-const readTime = computed(() => {
-  const value = String(props.timeToRead || '5').trim()
-  return /^\d+$/.test(value) ? `${value} мин чтения` : value
 })
 </script>
