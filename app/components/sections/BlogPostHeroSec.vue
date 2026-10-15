@@ -9,18 +9,24 @@
         <span
           v-if="post.post_title"
           class="blog-post-hero-sec__breadcrumb-current"
-        >{{ truncateText(post.post_title) }}</span>
+        >{{ truncateText(post.post_title, 300) }}</span>
       </nav>
 
       <div class="blog-post-hero-sec__head">
         <div class="blog-post-hero-sec__main">
-          <div class="blog-post-hero-sec__meta">
-              <span class="blog-post-hero-sec__date" v-if="publishedDate">
-                Опубликовано: {{ formatPostDate(publishedDate) }}<template v-if="updatedDate"> | Обновлено: {{ formatPostDate(updatedDate) }}</template>
-            </span>
-          </div>
-
           <h1 class="blog-post-hero-sec__title" v-if="post.post_title" v-html="post.post_title"></h1>
+
+          <div class="blog-post-hero-sec__info">
+            <span class="blog-post-hero-sec__info-item">
+              <span aria-hidden="true">🕒</span> {{ readTime }}
+            </span>
+            <template v-if="shownDate">
+              <span class="blog-post-hero-sec__info-dot" aria-hidden="true">·</span>
+              <span class="blog-post-hero-sec__info-item">
+                {{ shownDate.label }}: <time :datetime="shownDate.value">{{ formatPostDate(shownDate.value) }}</time>
+              </span>
+            </template>
+          </div>
         </div>
 
         <BlogPostAuthorSidebar
@@ -59,6 +65,19 @@ const props = defineProps({
 
 const publishedDate = computed(() => getPostPublishedDate(props.post))
 const updatedDate = computed(() => getPostUpdatedDate(props.post))
+
+// Одна дата: если статью обновляли — дата обновления, иначе — дата публикации
+const shownDate = computed(() => {
+  if (updatedDate.value) return { label: 'Обновлено', value: updatedDate.value }
+  if (publishedDate.value) return { label: 'Опубликовано', value: publishedDate.value }
+  return null
+})
+
+// «5» → «5 мин чтения»; если в админке уже написан текст — выводим как есть
+const readTime = computed(() => {
+  const value = String(props.post.time_read_post || '5').trim()
+  return /^\d+$/.test(value) ? `${value} мин чтения` : value
+})
 
 import gsap from 'gsap'
 import { formatPostDate, getPostPublishedDate, getPostUpdatedDate } from '~/utils/postDates'
