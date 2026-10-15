@@ -3,27 +3,27 @@
     <div class="blog-post-sidebar__author-wrap">
       <div class="blog-post-sidebar__author-card">
         <img
-          :src="`${urlApi}${authorData.data.avatar.url}` || authorAvatar"
-          alt=""
+          :src="avatarUrl"
+          :alt="author.name || ''"
           class="blog-post-sidebar__avatar"
         />
 
         <div class="blog-post-sidebar__author-main">
-          <h3 class="blog-post-sidebar__name">{{ author.name }}</h3>
+          <p class="blog-post-sidebar__name">{{ author.name }}</p>
+          <p v-if="author.position" class="blog-post-sidebar__position">{{ author.position }}</p>
 
           <div class="blog-post-sidebar__stats">
             <span class="blog-post-sidebar__stat">
               <span class="blog-post-sidebar__stat-icon" aria-hidden="true">🕒</span>
-              {{ timeToRead || '5 мин чтения' }}
+              {{ readTime }}
             </span>
           </div>
         </div>
       </div>
 
-      <ul class="blog-post-sidebar__meta">
-        <li v-if="author?.verified_author">Проверенный автор</li>
-        <li v-if="author?.about_autor">{{ author.about_autor }}</li>
-        <li v-if="updatedAt">Дата обновления: {{ formatDate(updatedAt) }}</li>
+      <ul v-if="author.verified_author || author.about_autor" class="blog-post-sidebar__meta">
+        <li v-if="author.verified_author">Проверенный автор</li>
+        <li v-if="author.about_autor">{{ author.about_autor }}</li>
       </ul>
     </div>
   </aside>
@@ -31,8 +31,6 @@
 
 <script setup>
 import authorAvatar from '~/assets/images/team/team-member-1-227797.png'
-
-import { formatDate } from '~/utils/formatDate'
 
 const urlApi = useRuntimeConfig().public.apiUrl
 
@@ -51,5 +49,17 @@ const props = defineProps({
   },
 })
 
-const {data: authorData} = await useFetch(`${urlApi}/api/authors/${props.author.documentId}?populate=avatar`)
+// Фото автора из админки; если не загружено — стандартная аватарка
+const avatarUrl = computed(() => {
+  const media = props.author?.avatar
+  const url = media?.formats?.thumbnail?.url || media?.formats?.small?.url || media?.url
+  if (!url) return authorAvatar
+  return url.startsWith('http') ? url : `${urlApi}${url}`
+})
+
+// «5» → «5 мин чтения»; если в админке уже написан текст — выводим как есть
+const readTime = computed(() => {
+  const value = String(props.timeToRead || '5').trim()
+  return /^\d+$/.test(value) ? `${value} мин чтения` : value
+})
 </script>
