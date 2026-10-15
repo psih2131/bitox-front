@@ -63,16 +63,17 @@ if (section?.transfer_stap_item) {
 
     if (!item.title && !item.text) continue
 
-    let text = item.text || ''
+    let title = item.title || ''
 
+    // Галочка add_country_to_end_text дописывает страну к заголовку: «Перевод денег в Китай»
     if (item.add_country_to_end_text && props.countryName) {
-      text = text + ' ' + props.countryName
+      title = title + ' ' + getCountryPrepositional(props.countryName, 'accusative')
     }
 
     steps.push({
       id: item.id || i + 1,
-      title: item.title || '',
-      text,
+      title,
+      text: item.text || '',
     })
   }
 }
