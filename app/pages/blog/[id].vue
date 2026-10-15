@@ -21,7 +21,7 @@ const slug = computed(() => route.params.id)
 const populate = [
   'populate[post_image]=true',
   'populate[category]=true',
-  'populate[author]=true',
+  'populate[author][populate]=avatar',
   'populate[post_content_builder][populate]=*',
   'populate[post_questions_section][populate]=post_questions',
   'populate[post_sources]=true',
