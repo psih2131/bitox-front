@@ -1367,27 +1367,10 @@
 // Колонка под калькулятор чуть шире, чем под форму «Рассчитайте платеж»
 .invoice-hero-sec__inner:has(.hero-calc) {
   grid-template-columns: minmax(0, 1fr) 440px;
-  align-items: stretch;
 
-  // Кнопка слева и кнопка калькулятора — на одной высоте
-  .service-hero-sec__content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .service-hero-sec__btn {
-    align-self: flex-start;
-    margin-top: auto;
-    margin-bottom: 24px;
-  }
-
-  .invoice-hero-sec__calc-wrapper {
-    display: flex;
-  }
-
-  // Лишняя высота делится поровну между всеми строками калькулятора
-  .hero-calc {
-    justify-content: space-between;
+  // Длинные слова без пробелов переносим, чтобы текст не залезал под калькулятор
+  .service-hero-sec__text {
+    overflow-wrap: anywhere;
   }
 }
 
