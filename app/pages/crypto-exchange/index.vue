@@ -1,8 +1,10 @@
 <template>
     <main class="exchange-page">
-      <CryptoExchangeHeroSec v-if="exchange?.exchange_hero_sec" :section="exchange.exchange_hero_sec" />
-      
-      <CryptoExchangeCalcSec :openTab="'cashless'"/>
+      <!-- Шапка с формой «Рассчитайте платеж» вместо картинки -->
+      <InvoiceHeroSec v-if="exchange?.exchange_hero_sec" :section="exchange.exchange_hero_sec" breadcrumb-title="Обмен криптовалюты" />
+         
+      <!-- Калькулятор показывается, только если в админке включено show_calc_sec -->
+      <CryptoExchangeCalcSec v-if="exchange?.show_calc_sec" :openTab="'cashless'"/>
       
       <HomeStatsSec />
       
