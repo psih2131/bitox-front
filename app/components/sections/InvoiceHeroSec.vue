@@ -5,7 +5,7 @@
           <nav class="service-hero-sec__breadcrumbs" aria-label="Хлебные крошки">
             <NuxtLink to="/" class="service-hero-sec__breadcrumb-link">Главная</NuxtLink>
             <span class="service-hero-sec__breadcrumb-sep">/</span>
-            <span class="service-hero-sec__breadcrumb-current">{{ section.title }}</span>
+            <span class="service-hero-sec__breadcrumb-current">{{ breadcrumbTitle || section.title }}</span>
           </nav>
   
           <h1 v-if="section.title" class="service-hero-sec__title">{{ section.title }}</h1>
@@ -13,7 +13,7 @@
           <p v-if="section.subtitle" class="service-hero-sec__text">{{ section.subtitle }}</p>
   
           <AppClientBtn class="service-hero-sec__btn" @click="openConsultationModal">
-            Оставить заявку
+            {{ section.button_text || 'Оставить заявку' }}
           </AppClientBtn>
         </div>
         <div class="invoice-hero-sec__calc-wrapper">
@@ -44,6 +44,12 @@
       type: String,
       default: null,
     },
+    // Текст последней «хлебной крошки», если он отличается от заголовка
+    breadcrumbTitle: {
+      type: String,
+      default: null,
+    },
+  })
   })
   
   const apiUrl = useRuntimeConfig().public.apiUrl
