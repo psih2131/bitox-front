@@ -1,5 +1,3 @@
-
-
 export default defineNuxtPlugin((nuxtApp) => {
     const router = useRouter()
     const urlApi = useRuntimeConfig().public.apiUrl
@@ -42,9 +40,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
     
     // TODO: add token to the request
-    async function trackEvent() {
+    // extraData — дополнительные поля для записи (например, расчёт из калькулятора)
+    async function trackEvent(extraData = {}) {
 
         const objectData = {
+            ...extraData,
             utm_source: utmData.utm_source || 'direct',
             utm_medium: utmData.utm_medium || null,
             utm_campaign: utmData.utm_campaign || null,
