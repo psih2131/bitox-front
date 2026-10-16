@@ -1601,7 +1601,7 @@
 .calc-select__list {
   max-height: 260px;
   margin: 0;
-  padding: 6px 16px 6px 6px;
+  padding: 6px;
   overflow-y: auto;
   overscroll-behavior: contain;
   list-style: none;
@@ -1609,6 +1609,10 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+  // Место справа под ползунок — только когда он есть
+  &--scroll {
+    padding-right: 16px;
   }
 }
 
