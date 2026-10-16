@@ -17,10 +17,13 @@
           </AppClientBtn>
         </div>
         <div class="invoice-hero-sec__calc-wrapper">
+          <!-- Справа по умолчанию форма «Рассчитайте платеж»; страница может подставить свой блок -->
+          <slot name="aside">
             <HomePaymentCalc 
             :componentTitle="countryName ? `Рассчитайте комиссию по инвойсу в ${getCountryPrepositional(countryName, 'accusative')}` : 'Рассчитайте платеж'"
             :typeHeaderH="true"
             />
+          </slot>
         </div>
         
       </div>
