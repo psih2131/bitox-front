@@ -78,7 +78,7 @@
 
       <p class="hero-calc__rate">{{ rateText }}</p>
 
-      <AppClientBtn class="hero-calc__btn" @click="openConsultationModal">
+      <AppClientBtn class="hero-calc__btn" @click="openTelegramBot">
         Перейти к заявке в Telegram
       </AppClientBtn>
     </template>
@@ -176,6 +176,49 @@ const rateText = computed(() => {
   if (!Number.isFinite(rateIn) || !Number.isFinite(rateOut)) return ''
   return `Курс ≈ ${formatAmount(Math.max(rateIn, rateOut), 4)} · зафиксирован на 15 мин`
 })
+
+// Данные расчёта уходят в админку вместе с меткой, по ней бот покажет их клиенту
+function getCalcLeadData() {
+  const fromAmount = parseAmount(amount.value)
+  const rate = selectedRate.value
+  const toAmount = rate ? calcReceiveAmount(fromAmount, rate) : null
+  const rateValue = rate ? Math.max(Number(rate.in), Number(rate.out)) : null
+
+  return {
+    calc_type: activeTab.value,
+    calc_from_amount: fromAmount || null,
+    calc_from_currency: selectedFrom.value || null,
+    calc_from_name: fromOptions.value.find((item) => item.from === selectedFrom.value)?.nameRuFrom || null,
+    calc_to_amount: Number.isFinite(toAmount) ? Math.round(toAmount * 100) / 100 : null,
+    calc_to_currency: selectedTo.value || null,
+    calc_to_name: toOptions.value.find((item) => item.to === selectedTo.value)?.nameRuTo || null,
+    calc_rate: Number.isFinite(rateValue) ? rateValue : null,
+    calc_country: selectedCountry.value || null,
+    calc_city: isCash.value ? selectedCity.value || null : null,
+  }
+}
+
+const { $TgAnalitika } = useNuxtApp()
+const isOpeningBot = ref(false)
+
+async function openTelegramBot() {
+  if (isOpeningBot.value) return
+  isOpeningBot.value = true
+
+  // Вкладку открываем сразу по клику, иначе браузер может заблокировать её как всплывающее окно
+  const tab = window.open('', '_blank')
+
+  try {
+    const result = await $TgAnalitika.trackEvent(getCalcLeadData())
+    const link = result?.data?.link
+
+    if (tab && link) tab.location.href = link
+    else if (link) window.location.href = link
+    else tab?.close()
+  } finally {
+    isOpeningBot.value = false
+  }
+}
 
 watch(countries, (list) => syncRefSelect(selectedCountry, list, (item) => item.name_country), { immediate: true })
 watch(cityOptions, (list) => syncRefSelect(selectedCity, list), { immediate: true })
