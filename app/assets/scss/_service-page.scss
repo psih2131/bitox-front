@@ -1385,19 +1385,18 @@
     display: flex;
   }
 
+  // Лишняя высота делится поровну между всеми строками калькулятора
   .hero-calc {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hero-calc__btn {
-    margin-top: auto;
+    justify-content: space-between;
   }
 }
 
 .hero-calc {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   width: 440px;
   padding: 22px 22px 24px;
   border-radius: 20px;
@@ -1408,7 +1407,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
-  margin-bottom: 18px;
   padding: 4px;
   border-radius: 100px;
   background: $bg-platform;
@@ -1435,7 +1433,6 @@
 
 .hero-calc__field {
   display: block;
-  margin-bottom: 12px;
 }
 
 .hero-calc__label {
@@ -1479,7 +1476,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
-  margin-bottom: 12px;
 
   &--2 {
     grid-template-columns: 1fr 1fr;
@@ -1488,7 +1484,7 @@
 
 .hero-calc__rate {
   min-height: 18px;
-  margin: 0 0 16px;
+  margin: 0;
   font-weight: 600;
   font-size: 13px;
   line-height: 1.35;
@@ -1610,6 +1606,7 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
   // Место справа под ползунок — только когда он есть
   &--scroll {
     padding-right: 16px;
