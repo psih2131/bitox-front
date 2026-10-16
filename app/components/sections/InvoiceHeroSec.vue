@@ -50,7 +50,6 @@
       default: null,
     },
   })
-  })
   
   const apiUrl = useRuntimeConfig().public.apiUrl
   const modalStore = useModalStore()
