@@ -29,6 +29,7 @@
           ref="listRef"
           class="calc-select__list"
           :style="{ maxHeight: `${listMaxHeight}px` }"
+          :class="{ 'calc-select__list--scroll': thumb.visible }"
           role="listbox"
           :aria-label="ariaLabel"
           @scroll="updateThumb"
