@@ -38,13 +38,12 @@
             class="hero-calc__amount"
             aria-label="Сумма"
           />
-          <div class="hero-calc__select-wrap">
-            <select v-model="selectedFrom" class="hero-calc__select" aria-label="Валюта, которую отдаете">
-              <option v-for="item in fromOptions" :key="item.from" :value="item.from">
-                {{ item.nameRuFrom }}
-              </option>
-            </select>
-          </div>
+          <HeroCalcSelect
+            v-model="selectedFrom"
+            :options="fromSelectOptions"
+            variant="inline"
+            aria-label="Валюта, которую отдаете"
+          />
         </div>
       </div>
 
@@ -52,33 +51,29 @@
         <span class="hero-calc__label">Получаете</span>
         <div class="hero-calc__combo">
           <span class="hero-calc__amount hero-calc__amount--result">{{ receiveText }}</span>
-          <div class="hero-calc__select-wrap">
-            <select v-model="selectedTo" class="hero-calc__select" aria-label="Валюта, которую получаете">
-              <option v-for="item in toOptions" :key="item.to" :value="item.to">
-                {{ item.nameRuTo }}
-              </option>
-            </select>
-          </div>
+          <HeroCalcSelect
+            v-model="selectedTo"
+            :options="toSelectOptions"
+            variant="inline"
+            aria-label="Валюта, которую получаете"
+          />
         </div>
       </div>
 
       <!-- Безнал: только страна. Наличные: страна и город в одну строку -->
       <div class="hero-calc__row" :class="{ 'hero-calc__row--2': isCash }">
-        <div class="hero-calc__select-wrap hero-calc__select-wrap--full">
-          <select v-model="selectedCountry" class="hero-calc__select" aria-label="Страна">
-            <option v-for="country in countries" :key="country.id" :value="country.name_country">
-              {{ country.name_country }}
-            </option>
-          </select>
-        </div>
+        <HeroCalcSelect
+          v-model="selectedCountry"
+          :options="countrySelectOptions"
+          aria-label="Страна"
+        />
 
-        <div v-if="isCash" class="hero-calc__select-wrap hero-calc__select-wrap--full">
-          <select v-model="selectedCity" class="hero-calc__select" aria-label="Город">
-            <option v-for="city in cityOptions" :key="city" :value="city">
-              {{ city }}
-            </option>
-          </select>
-        </div>
+        <HeroCalcSelect
+          v-if="isCash"
+          v-model="selectedCity"
+          :options="citySelectOptions"
+          aria-label="Город"
+        />
       </div>
 
       <p class="hero-calc__rate">{{ rateText }}</p>
@@ -101,6 +96,7 @@ import {
   parseAmount,
 } from './rate-utils'
 import { getCityOptions, resolveCityCode, syncRefSelect } from './location-utils'
+import HeroCalcSelect from './HeroCalcSelect.vue'
 import { useModalStore, MODAL_NAMES } from '~/stores/modal'
 import { isExchangeCalcOffline } from '~/utils/isExchangeCalcOffline'
 
@@ -152,6 +148,12 @@ const fromOptions = computed(() => buildUniqueFromOptions(items.value))
 const toOptions = computed(() => buildUniqueToOptions(items.value, selectedFrom.value))
 const cityOptions = computed(() => (isCash.value ? getCityOptions(countries.value, selectedCountry.value) : []))
 const cityCode = computed(() => (isCash.value ? resolveCityCode(selectedCity.value) : null))
+
+// Варианты для выпадающих списков: { value, label }
+const fromSelectOptions = computed(() => fromOptions.value.map((item) => ({ value: item.from, label: item.nameRuFrom })))
+const toSelectOptions = computed(() => toOptions.value.map((item) => ({ value: item.to, label: item.nameRuTo })))
+const countrySelectOptions = computed(() => countries.value.map((item) => ({ value: item.name_country, label: item.name_country })))
+const citySelectOptions = computed(() => cityOptions.value.map((city) => ({ value: city, label: city })))
 
 const rateItem = computed(() => findRate(items.value, selectedFrom.value, selectedTo.value, cityCode.value))
 
