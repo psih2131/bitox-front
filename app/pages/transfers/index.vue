@@ -1,8 +1,10 @@
 <template>
   <main v-if="transfer" class="service-page">
-    <ServiceHeroSec v-if="transfer.service_hero_sec" :section="transfer.service_hero_sec" />
+    <!-- Шапка с формой «Рассчитайте платеж» вместо картинки -->
+    <InvoiceHeroSec v-if="transfer.service_hero_sec" :section="transfer.service_hero_sec" />
 
-    <CryptoExchangeCalcSec />
+    <!-- Калькулятор показывается, только если в админке включено show_calc_sec -->
+    <CryptoExchangeCalcSec v-if="transfer.show_calc_sec" />
     
     <HomeStatsSec />
 
