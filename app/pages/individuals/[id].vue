@@ -1,7 +1,10 @@
 <template>
   <main v-if="individualsPage" class="service-page">
-    <ServiceHeroSec v-if="individualsPage.service_hero_sec" :section="individualsPage.service_hero_sec" />
+    <!-- Шапка с формой «Рассчитайте платеж» вместо картинки -->
+    <InvoiceHeroSec v-if="individualsPage.service_hero_sec" :section="individualsPage.service_hero_sec" />
+    <!-- Калькулятор показывается, только если в админке включено show_calc_sec -->
     <CryptoExchangeCalcSec
+      v-if="individualsPage.show_calc_sec"
       :country-name="individualsPage.title"
       :calc-title="individualsPage.calculator_title"
     />
