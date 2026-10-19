@@ -28,10 +28,12 @@
   max-width: 717px;
 }
 
+// Хлебные крошки всегда в одну строку: длинное название страницы обрезается многоточием
 .service-hero-sec__breadcrumbs {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  min-width: 0;
   gap: 8px;
   margin-bottom: 57px;
   font-weight: 600;
@@ -40,6 +42,8 @@
 }
 
 .service-hero-sec__breadcrumb-link {
+  flex-shrink: 0;
+  white-space: nowrap;
   color: $gray-83;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -50,10 +54,15 @@
 }
 
 .service-hero-sec__breadcrumb-sep {
+  flex-shrink: 0;
   color: $gray-83;
 }
 
 .service-hero-sec__breadcrumb-current {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-weight: 700;
   color: $gray;
 }
