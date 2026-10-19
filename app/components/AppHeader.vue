@@ -183,7 +183,7 @@
                       class="mob-menu__mega-link"
                       @click="closeMobMenu"
                     >
-                      {{ item.label }}
+                      {{ item.mobAllLabel || item.label }}
                     </NuxtLink>
                   </li>
                 </ul>
@@ -532,10 +532,11 @@ const aboutMega = [
 ]
 
 const navItems = computed(() => [
-  { label: 'Бизнесу', to: '/business', mega: businessMega.value },
+  // mobAllLabel — подпись ссылки на страницу раздела в мобильном меню, чтобы не дублировать название раздела
+  { label: 'Бизнесу', to: '/business', mega: businessMega.value, mobAllLabel: 'Все услуги для бизнеса' },
   { label: 'Частным клиентам', mega: privateClientsMega.value, clickable: false },
-  { label: 'Международные расчеты', to: '/transfers', mega: transfersMega.value },
-  { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value },
+  { label: 'Международные расчеты', to: '/transfers', mega: transfersMega.value, mobAllLabel: 'Все страны' },
+  { label: 'Обмен криптовалюты', to: '/crypto-exchange', mega: exchangeMega.value, mobAllLabel: 'Все направления обмена' },
   { label: 'О компании', mega: aboutMega, clickable: false },
 ])
 
