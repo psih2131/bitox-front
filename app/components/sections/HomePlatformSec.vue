@@ -1,5 +1,5 @@
 <template>
-  <section class="platform-sec">
+  <section ref="sectionRef" class="platform-sec">
     <div class="container">
       <h2 class="platform-sec__title" v-if="sectionTitle">
         {{ sectionTitle }}
@@ -179,4 +179,41 @@ const individualsPages = computed(() => {
     .map((page) => ({ ...page, link: `/individuals/${page.slug}` }))
 })
 
+
+// Все карточки-ссылки в обеих колонках одной высоты — по самой высокой.
+// Высота считается по фактическому тексту, поэтому подстраивается под правки в админке и ширину экрана.
+const sectionRef = ref(null)
+let resizeObserver = null
+let lastWidth = 0
+
+function equalizeItems() {
+  const root = sectionRef.value
+  if (!root) return
+
+  root.style.removeProperty('--platform-item-height')
+  const items = root.querySelectorAll('.platform-sec__item')
+  let max = 0
+  items.forEach((item) => {
+    max = Math.max(max, item.offsetHeight)
+  })
+  if (max) root.style.setProperty('--platform-item-height', `${max}px`)
+}
+
+onMounted(() => {
+  equalizeItems()
+  document.fonts?.ready.then(equalizeItems)
+
+  // Пересчитываем, только когда меняется ширина (поворот экрана, ресайз окна)
+  resizeObserver = new ResizeObserver(([entry]) => {
+    const width = Math.round(entry.contentRect.width)
+    if (width === lastWidth) return
+    lastWidth = width
+    requestAnimationFrame(equalizeItems)
+  })
+  if (sectionRef.value) resizeObserver.observe(sectionRef.value)
+})
+
+watch([businessPages, individualsPages], () => nextTick(equalizeItems))
+
+onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
