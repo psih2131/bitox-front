@@ -5,8 +5,8 @@
         <h2 v-if="sectionTitle" class="invoice-process-sec__title">
           {{ sectionTitle }}
         </h2>
-        <p v-if="section.section_subtitle" class="invoice-process-sec__subtitle">
-          {{ section.section_subtitle }}
+        <p v-if="sectionSubtitle" class="invoice-process-sec__subtitle">
+          {{ sectionSubtitle }}
         </p>
       </div>
 
@@ -44,6 +44,24 @@ const { data: processResponse } = await useFetch(
 
 const section = processResponse.value?.data || null
 
+// Метки страны в текстах шагов (в админке): «в {{куда}}» → «в Австрию», «в {{где}}» → «в Австрии»,
+// «из {{откуда}}» → «из Австрии», {{кому}}, {{чем}}, {{что}} — остальные падежи
+const COUNTRY_CASES = { '': 'accusative', 'куда': 'accusative', 'где': 'prepositional', 'откуда': 'genitive', 'кому': 'dative', 'чем': 'instrumental', 'что': 'nominative' }
+// Если страны нет, вместо метки подставляем слово «страна» в том же падеже
+const FALLBACK = { accusative: 'страну', prepositional: 'стране', genitive: 'страны', dative: 'стране', instrumental: 'страной', nominative: 'страна' }
+
+function replaceCountryPlaceholder(text) {
+  if (!text) return ''
+
+  return text.replace(/\{\{\s*([а-яё]*)\s*\}\}/gi, (match, key) => {
+    const caseName = COUNTRY_CASES[key.toLowerCase()]
+    if (!caseName) return match
+    return props.countryName ? getCountryPrepositional(props.countryName, caseName) : FALLBACK[caseName]
+  })
+}
+
+const sectionSubtitle = replaceCountryPlaceholder(section?.section_subtitle)
+
 let sectionTitle = ''
 
 if (section?.section_base_title) {
@@ -61,7 +79,11 @@ if (section?.process_item) {
     const item = section.process_item[i]
 
     if (item.title || item.subtitle) {
-      steps.push(item)
+      steps.push({
+        ...item,
+        title: replaceCountryPlaceholder(item.title),
+        subtitle: replaceCountryPlaceholder(item.subtitle),
+      })
     }
   }
 }
