@@ -473,6 +473,30 @@
 .form-result-modal__btn {
   width: 100%;
   min-height: 55px;
+
+  &--tg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+.form-result-modal__link {
+  display: block;
+  margin: 14px auto 0;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  font-family: $mainFont;
+  font-weight: 600;
+  font-size: 15px;
+  color: $gray-83;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray;
+  }
 }
 
 
