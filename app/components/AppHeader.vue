@@ -68,6 +68,7 @@
                 v-if="item.clickable !== false"
                 :to="item.to"
                 class="header__nav-link"
+                @click="rememberNavSource(item, item.to)"
               >
                 {{ item.label }}
               </NuxtLink>
@@ -100,7 +101,7 @@
                         :class="{ [`header__mega-list--cols-${card.columns}`]: card.columns }"
                       >
                         <li v-for="link in card.links" :key="link.key">
-                          <NuxtLink :to="link.to" class="header__mega-link">
+                          <NuxtLink :to="link.to" class="header__mega-link" @click="rememberNavSource(item, link.to)">
                             {{ link.label }}
                           </NuxtLink>
                         </li>
@@ -540,12 +541,42 @@ const navItems = computed(() => [
 
 const route = useRoute()
 
-function isNavItemActive(item) {
+function isPathUnder(path, base) {
+  return base && base !== '/' && (path === base || path.startsWith(`${base}/`))
+}
+
+function navItemMatchesRoute(item) {
   const paths = [
     item.to,
     ...(item.mega || []).flatMap((card) => (card.links || []).map((link) => link.to)),
-  ].filter(Boolean)
-  return paths.some((p) => p !== '/' && (route.path === p || route.path.startsWith(`${p}/`)))
+  ]
+  return paths.some((p) => isPathUnder(route.path, p))
+}
+
+// Из какого пункта меню перешли на страницу
+const navSource = useState('header-nav-source', () => null)
+
+function rememberNavSource(item, to) {
+  navSource.value = { label: item.label, path: to }
+}
+
+// Если ссылка на страницу есть в нескольких пунктах меню, подсвечиваем один:
+// тот, из которого перешли, а если перешли не из меню — раздел, к которому страница относится по адресу
+const activeNavLabel = computed(() => {
+  const matches = navItems.value.filter(navItemMatchesRoute)
+  if (matches.length <= 1) return matches[0]?.label ?? null
+
+  const source = navSource.value
+  if (source && source.path === route.path && matches.some((item) => item.label === source.label)) {
+    return source.label
+  }
+
+  const ownSection = matches.find((item) => isPathUnder(route.path, item.to))
+  return (ownSection ?? matches[0]).label
+})
+
+function isNavItemActive(item) {
+  return activeNavLabel.value === item.label
 }
 
 watch(() => route.path, closeMobMenu)
