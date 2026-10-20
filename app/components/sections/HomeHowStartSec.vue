@@ -7,7 +7,7 @@
         <div class="how-start-sec__title">
           {{ sectionTitle }}
 
-          <h2  class="how-start-sec__badge">Наши кейсы</h2>
+          <div class="how-start-sec__badge">Наши кейсы</div>
         </div>
 
       </div>
@@ -19,10 +19,11 @@
         role="tablist"
         aria-label="Тип операции"
       >
-        <h2
-          v-for="cluster in clusters"
+        <!-- Заголовок H2 только у первой вкладки («Этапы проведения международного платежа»), остальные — обычный текст -->
+        <component
+          :is="index === 0 ? 'h2' : 'div'"
+          v-for="(cluster, index) in clusters"
           :key="cluster.id"
-          type="button"
           class="how-start-sec__tab"
           :class="{ 'how-start-sec__tab--active': activeTab === cluster.id }"
           role="tab"
@@ -30,7 +31,7 @@
           @click="activeTab = cluster.id"
         >
           {{ cluster.label }}
-        </h2>
+        </component>
       </div>
 
       <div class="how-start-sec__grid">
