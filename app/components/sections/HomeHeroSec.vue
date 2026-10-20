@@ -49,7 +49,7 @@
       </div>
 
       <div class="home-hero-sec__right">
-        <HomePaymentCalc />
+        <HomePaymentCalc :typeHeaderH="true" />
 
         <img
           :src="cardsImage"
