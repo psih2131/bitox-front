@@ -1,7 +1,7 @@
 <template>
   <aside class="blog-post-sidebar blog-post-sidebar--toc-only">
     <div class="blog-post-sidebar__toc">
-      <h4 class="blog-post-sidebar__toc-title">В статье расскажем</h4>
+      <p class="blog-post-sidebar__toc-title">В статье расскажем</p>
 
       <ul class="blog-post-sidebar__toc-list" v-if="dataToc?.length > 0">
         <li
