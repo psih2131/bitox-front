@@ -24,3 +24,12 @@ jobs:
             git restore package-lock.json
             npm run build
             pm2 restart bitox-front
+
+            # Прогрев кэша: открываем все страницы из sitemap, чтобы первые посетители
+            # и поисковые роботы сразу получали страницы из кэша. Ошибки не ломают деплой.
+            sleep 5
+            SITE=https://bitox.global
+            curl -s --max-time 20 "$SITE/sitemap_index.xml" | grep -o "<loc>[^<]*" | sed "s/<loc>//" \
+              | xargs -r -n1 curl -s --max-time 20 | grep -o "<loc>[^<]*" | sed "s/<loc>//" | sort -u \
+              | xargs -r -P 3 -n1 curl -s -o /dev/null --max-time 30 || true
+            echo "Кэш прогрет"
