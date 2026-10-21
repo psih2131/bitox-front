@@ -100,6 +100,9 @@ export default defineNuxtConfig({
 
   // 301-редиректы со старых адресов
   routeRules: {
+    '/**': { swr: 60 },
+    '/api/**': { swr: false, cache: false },
+    '/nuxt-api/**': { swr: false, cache: false },
     '/transfers/europa': { redirect: { to: '/transfers/europe', statusCode: 301 } },
     '/transfers/europa/': { redirect: { to: '/transfers/europe', statusCode: 301 } },
   },
