@@ -10,9 +10,9 @@
     </button>
 
     <div class="promo-modal__content">
-      <h2 id="promo-modal-title" class="promo-modal__title">
+      <div id="promo-modal-title" class="promo-modal__title">
         {{ title }}
-      </h2>
+      </div>
 
       <p v-if="text" class="promo-modal__text">
         {{ text }}
