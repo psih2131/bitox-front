@@ -36,14 +36,20 @@ const section = faqResponse.value?.data?.faq_sec || null
 
 
 
+// Метки страны в текстах (в админке): «в {{куда}}» или «в {{}}» → «в Австрию», «в {{где}}» → «в Австрии»,
+// «из {{откуда}}» → «из Австрии», {{кому}}, {{чем}}, {{что}} — остальные падежи
+const COUNTRY_CASES = { '': 'accusative', 'куда': 'accusative', 'где': 'prepositional', 'откуда': 'genitive', 'кому': 'dative', 'чем': 'instrumental', 'что': 'nominative' }
+// Если страны нет, вместо метки подставляем слово «страна» в том же падеже
+const FALLBACK = { accusative: 'страну', prepositional: 'стране', genitive: 'страны', dative: 'стране', instrumental: 'страной', nominative: 'страна' }
+
 function replaceCountryPlaceholder(text) {
   if (!text) return ''
-  if (!props.countryName) return text
-  if (!text.includes('{{}}')) return text
 
-  const countryForm = getCountryPrepositional(props.countryName, 'accusative')
-
-  return text.split('{{}}').join(countryForm)
+  return text.replace(/\{\{\s*([а-яё]*)\s*\}\}/gi, (match, key) => {
+    const caseName = COUNTRY_CASES[key.toLowerCase()]
+    if (!caseName) return match
+    return props.countryName ? getCountryPrepositional(props.countryName, caseName) : FALLBACK[caseName]
+  })
 }
 
 let faqTitle = ''
