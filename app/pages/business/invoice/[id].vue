@@ -44,7 +44,7 @@
     
     <InvoiceFaqSec :country-name="invoice.title" />
     
-    <ServiceContactSec :sectionTitle="`Оплатить инвойс в ${getCountryPrepositional(invoice.title, 'accusative')}`" />
+    <ServiceContactSec :sectionTitle="`Оплатить инвойс в ${getCountryPrepositional(invoice.title, 'prepositional')}`" />
   </main>
 </template>
 
