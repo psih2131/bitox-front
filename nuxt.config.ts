@@ -98,6 +98,12 @@ export default defineNuxtConfig({
 
   
 
+  // 301-редиректы со старых адресов
+  routeRules: {
+    '/transfers/europa': { redirect: { to: '/transfers/europe', statusCode: 301 } },
+    '/transfers/europa/': { redirect: { to: '/transfers/europe', statusCode: 301 } },
+  },
+
   site: {
     url: 'https://bitox.global',
   },
