@@ -1,8 +1,8 @@
 <template>
   <section v-if="section" ref="sectionRef" class="service-invoices-sec">
     <div class="container service-invoices-sec__inner">
-      <h2 v-if="section.title" class="service-invoices-sec__title">
-        {{ section.title }}
+      <h2 v-if="sectionTitle || section.title" class="service-invoices-sec__title">
+        {{ sectionTitle || section.title }}
       </h2>
 
       <div class="service-invoices-sec__grid">
@@ -61,7 +61,11 @@ const props = defineProps({
     required: true,
     
   },
-
+  // Заголовок из кода вместо заголовка из админки (например, со страной)
+  sectionTitle: {
+    type: String,
+    default: '',
+  },
 })
 
 const apiUrl = useRuntimeConfig().public.apiUrl
