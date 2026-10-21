@@ -13,7 +13,11 @@
 
     <InvoiceTermsSec :country-name="invoice.title" />
 
-    <ServiceInvoicesSec v-if="invoice.services_invoice_sec" :section="invoice.services_invoice_sec" />
+    <ServiceInvoicesSec
+      v-if="invoice.services_invoice_sec"
+      :section="invoice.services_invoice_sec"
+      :sectionTitle="`Какие инвойсы в ${getCountryPrepositional(invoice.title, 'accusative')} мы помогаем оплачивать`"
+    />
     
     <ServiceEconomySec :sectionTitle="`Экономия на оплате инвойсов в ${getCountryPrepositional(invoice.title, 'prepositional')} с Bitox`"/>
 
