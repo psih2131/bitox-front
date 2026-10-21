@@ -19,7 +19,7 @@
       :sectionTitle="`Какие инвойсы в ${getCountryPrepositional(invoice.title, 'accusative')} мы помогаем оплачивать`"
     />
     
-    <ServiceEconomySec :sectionTitle="`Экономия на оплате инвойсов в ${getCountryPrepositional(invoice.title, 'prepositional')} с Bitox`"/>
+    <ServiceEconomySec :sectionTitle="`Экономия на оплате инвойсов в ${getCountryPrepositional(invoice.title, 'accusative')} с Bitox`"/>
 
     <InvoiceProcessSec :country-name="invoice.title" />
 
