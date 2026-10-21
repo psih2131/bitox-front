@@ -64,7 +64,7 @@ export default defineNuxtConfig({
 
   yandexMaps: {
     apikey: 'af5a38a2-5bf8-44de-bfbe-b30e278e9df4',
-    initializeOn: 'onPluginInit',
+    initializeOn: 'onComponentMount',
     lang: 'ru_RU',
   },
 
