@@ -15,6 +15,8 @@
     <TransferFeaturesSec
       :country-name="transfersPage.title"
       :country-cities="transfersPage.country_cities"
+      :features-banks="transfersPage.features_banks"
+      :features-text="transfersPage.features_text"
     />
 
     <TransferProcessSec :country-name="transfersPage.title" />
