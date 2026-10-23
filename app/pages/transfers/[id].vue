@@ -22,7 +22,8 @@
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
     
     <ServiceEconomySec 
-    :sectionTitle="`Экономия на международных платежах и переводах в ${getCountryPrepositional(transfersPage.title, 'accusative')} `" />
+    :sectionTitle="`Экономия на международных платежах и переводах в ${getCountryPrepositional(transfersPage.title, 'accusative')} `"
+    :featureOverrides="[{ text: `Вы платите в рублях внутри РФ. Bitox переводит деньги получателю в ${getCountryPrepositional(transfersPage.title, 'prepositional')} с зарубежного счёта.` }]" />
     
     <HomeChoiceSec />
     
