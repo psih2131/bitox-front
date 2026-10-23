@@ -4,14 +4,21 @@
       <div class="app-footer__card">
         <div class="app-footer__grid">
           <div class="app-footer__col app-footer__col-1">
-            <NuxtLink to="/" class="app-footer__logo">
-              <img
-                v-if="footerLogoUrl"
-                :src="footerLogoUrl"
-                :alt="footer?.logo_text || 'Bitox'"
-              />
-              <span v-else>{{ footer?.logo_text || 'Bitox' }}</span>
-            </NuxtLink>
+            <div class="app-footer__brand">
+              <NuxtLink to="/" class="app-footer__logo">
+                <img
+                  v-if="footerLogoUrl"
+                  :src="footerLogoUrl"
+                  :alt="footer?.logo_text || 'Bitox'"
+                />
+                <span v-else>{{ footer?.logo_text || 'Bitox' }}</span>
+              </NuxtLink>
+
+              <!-- Юр. данные из админки (_footer_component → legal_info), каждая строка отдельно -->
+              <div v-if="legalLines.length" class="app-footer__requisites">
+                <p v-for="(line, index) in legalLines" :key="index" class="app-footer__requisites-line">{{ line }}</p>
+              </div>
+            </div>
             <p class="app-footer__legal footer_copy">© 2026 Bitox</p>
           </div>
 
@@ -137,6 +144,13 @@ const docsPagesCol2 = computed(() => docsPages.value.filter((_, index) => index 
 const docsPagesCol3 = computed(() => docsPages.value.filter((_, index) => index % 2 === 1))
 
 const contacts = computed(() => footer.value?.contacts_list ?? [])
+
+const legalLines = computed(() =>
+  (footer.value?.legal_info || '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean),
+)
 
 function getSocialLabel(link, alternativeText) {
   const alt = alternativeText?.trim()
