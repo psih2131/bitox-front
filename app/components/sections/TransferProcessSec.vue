@@ -1,5 +1,5 @@
 <template>
-  <section v-if="section && steps.length" class="transfer-process-sec">
+  <section v-if="steps.length" class="transfer-process-sec">
     <div class="container">
       <h2 v-if="sectionTitle" class="transfer-process-sec__title">
         {{ sectionTitle }}
@@ -17,9 +17,9 @@
         </article>
       </div>
 
-      <div v-if="section.button_text" class="transfer-process-sec__btn-wrap">
+      <div v-if="buttonText" class="transfer-process-sec__btn-wrap">
         <AppButton type="button" @click="openConsultationModal">
-          {{ section.button_text }}
+          {{ buttonText }}
         </AppButton>
       </div>
     </div>
@@ -35,6 +35,12 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  // Блок transfer_process_sec со страницы страны (админка).
+  // Пустые поля — берём общий блок _process_transfer_component
+  section: {
+    type: Object,
+    default: null,
+  },
 })
 
 const urlApi = useRuntimeConfig().public.apiUrl
@@ -43,40 +49,62 @@ const { data: processResponse } = await useFetch(
   `${urlApi}/api/process-transfer-component?populate[transfer_stap_item]=true`,
 )
 
-const section = processResponse.value?.data || null
+const common = processResponse.value?.data || null
+const own = props.section || null
+
+// Метки страны в текстах (в админке): «в {{куда}}» → «в Китай», «в {{где}}» → «в Китае»,
+// «из {{откуда}}» → «из Китая», {{кому}}, {{чем}}, {{что}} — остальные падежи
+const COUNTRY_CASES = { '': 'accusative', 'куда': 'accusative', 'где': 'prepositional', 'откуда': 'genitive', 'кому': 'dative', 'чем': 'instrumental', 'что': 'nominative' }
+const FALLBACK = { accusative: 'страну', prepositional: 'стране', genitive: 'страны', dative: 'стране', instrumental: 'страной', nominative: 'страна' }
+
+function replaceCountryPlaceholder(text) {
+  if (!text) return ''
+
+  return text.replace(/\{\{\s*([а-яё]*)\s*\}\}/gi, (match, key) => {
+    const caseName = COUNTRY_CASES[key.toLowerCase()]
+    if (!caseName) return match
+    return props.countryName ? getCountryPrepositional(props.countryName, caseName) : FALLBACK[caseName]
+  })
+}
 
 let sectionTitle = ''
 
-if (section?.section_title) {
-  sectionTitle = section.section_title
+if (own?.section_title?.trim()) {
+  // Свой заголовок страны — как написан, страна только через метки
+  sectionTitle = replaceCountryPlaceholder(own.section_title.trim())
+} else if (common?.section_title) {
+  sectionTitle = common.section_title
 
   if (props.countryName) {
     sectionTitle = sectionTitle + ' ' + getCountryPrepositional(props.countryName, 'accusative')
   }
 }
 
+// Свои шаги страны, если заполнены, иначе общие
+const sourceSteps = own?.steps?.length ? own.steps : (common?.transfer_stap_item || [])
+
 const steps = []
 
-if (section?.transfer_stap_item) {
-  for (let i = 0; i < section.transfer_stap_item.length; i++) {
-    const item = section.transfer_stap_item[i]
+for (let i = 0; i < sourceSteps.length; i++) {
+  const item = sourceSteps[i]
 
-    if (!item.title && !item.text) continue
+  if (!item.title && !item.text) continue
 
-    let title = item.title || ''
+  let title = replaceCountryPlaceholder(item.title || '')
 
-    // Галочка add_country_to_end_text дописывает страну к заголовку: «Перевод денег в Китай»
-    if (item.add_country_to_end_text && props.countryName) {
-      title = title + ' ' + getCountryPrepositional(props.countryName, 'accusative')
-    }
-
-    steps.push({
-      id: item.id || i + 1,
-      title,
-      text: item.text || '',
-    })
+  // Галочка add_country_to_end_text дописывает страну к заголовку: «Перевод денег в Китай»
+  if (item.add_country_to_end_text && props.countryName) {
+    title = title + ' ' + getCountryPrepositional(props.countryName, 'accusative')
   }
+
+  steps.push({
+    id: item.id || i + 1,
+    title,
+    text: replaceCountryPlaceholder(item.text || ''),
+  })
 }
+
+const buttonText = own?.button_text?.trim() || common?.button_text || ''
 
 const modalStore = useModalStore()
 
