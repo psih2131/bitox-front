@@ -18,7 +18,7 @@
       :section="transfersPage.transfer_features_sec"
     />
 
-    <TransferProcessSec :country-name="transfersPage.title" />
+    <TransferProcessSec :country-name="transfersPage.title" :section="transfersPage.transfer_process_sec" />
 
     <ServiceInvoicesSec v-if="transfersPage.services_invoice_sec" :section="transfersPage.services_invoice_sec" />
     
@@ -71,6 +71,7 @@ const populate = [
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
   'populate[country_cities]=true',
   'populate[transfer_features_sec]=true',
+  'populate[transfer_process_sec][populate]=steps',
   'populate[transfers_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
