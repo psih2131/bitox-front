@@ -24,7 +24,9 @@
     
     <ServiceEconomySec 
     :sectionTitle="`Экономия на международных платежах и переводах в ${getCountryPrepositional(transfersPage.title, 'accusative')} `"
-    :featureOverrides="[{ text: `Вы платите в рублях внутри РФ. Bitox переводит деньги получателю в ${getCountryPrepositional(transfersPage.title, 'prepositional')} с зарубежного счёта.` }]" />
+    :featureOverrides="[{ text: `Вы платите в рублях внутри РФ. Bitox переводит деньги получателю в ${getCountryPrepositional(transfersPage.title, 'prepositional')} с зарубежного счёта.` }]"
+    :override="transfersPage.transfer_economy_sec"
+    :countryName="transfersPage.title" />
     
     <HomeChoiceSec />
     
@@ -72,6 +74,7 @@ const populate = [
   'populate[country_cities]=true',
   'populate[transfer_features_sec]=true',
   'populate[transfer_process_sec][populate]=steps',
+  'populate[transfer_economy_sec][populate][economy_list_items][populate]=image',
   'populate[transfers_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
