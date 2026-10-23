@@ -140,6 +140,26 @@
   display: none;
 }
 
+.app-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app-footer__requisites {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.app-footer__requisites-line {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.42);
+  overflow-wrap: anywhere;
+}
+
 @media only screen and (max-width: 1150px) {
   .app-footer__contact-link{
     font-size: 18px;
@@ -242,5 +262,30 @@
   .app-footer__col-legal{
     gap: 5px;
     margin-top: 5px;
+  }
+
+  // Юр. данные на телефоне — в самом низу футера
+  .app-footer__col-1,
+  .app-footer__brand {
+    display: contents;
+  }
+  .app-footer__logo {
+    width: 100%;
+  }
+  .app-footer__requisites {
+    order: 10;
+    width: 100%;
+  }
+
+  // Копирайт — последней строкой, под юр. данными
+  .app-footer__col-4 {
+    display: contents;
+  }
+  .app-footer__col-4 .app-footer__col-legal {
+    width: 100%;
+  }
+  .app-footer__col-4 .footer_copy {
+    order: 11;
+    width: 100%;
   }
 }
