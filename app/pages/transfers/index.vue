@@ -10,7 +10,7 @@
 
     <ServiceInvoicesSec v-if="transfer.services_invoice_sec" :section="transfer.services_invoice_sec" />
 
-    <ServiceEconomySec />
+    <ServiceEconomySec :featureOverrides="[{ text: 'Вы платите в рублях внутри РФ. Bitox переводит деньги получателю за рубежом с зарубежного счёта.' }]" />
 
     <HomeChoiceSec />
 
