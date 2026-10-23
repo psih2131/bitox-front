@@ -20,7 +20,7 @@
           <!-- Справа по умолчанию форма «Рассчитайте платеж»; страница может подставить свой блок -->
           <slot name="aside">
             <HomePaymentCalc 
-            :componentTitle="countryName ? `Рассчитайте комиссию по инвойсу в ${getCountryPrepositional(countryName, 'accusative')}` : 'Рассчитайте платеж'"
+            :componentTitle="calcTitle || (countryName ? `Рассчитайте комиссию по инвойсу в ${getCountryPrepositional(countryName, 'accusative')}` : 'Рассчитайте платеж')"
             :typeHeaderH="true"
             />
           </slot>
@@ -49,6 +49,11 @@
     },
     // Текст последней «хлебной крошки», если он отличается от заголовка
     breadcrumbTitle: {
+      type: String,
+      default: null,
+    },
+    // Свой заголовок калькулятора (например, для страниц переводов)
+    calcTitle: {
       type: String,
       default: null,
     },
