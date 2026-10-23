@@ -61,6 +61,12 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  // Замена текстов карточек по порядку: [{ title?, text? }, ...]
+  // (например, на страницах переводов вместо общих текстов из админки)
+  featureOverrides: {
+    type: Array,
+    default: () => [],
+  },
 })
 
 const modalStore = useModalStore()
@@ -75,10 +81,10 @@ const { data: economyResponse } = await useFetch(
 const section = computed(() => props.section || economyResponse.value?.data?.economy_section)
 
 const features = computed(() =>
-  (section.value?.economy_list_items ?? []).map((item) => ({
+  (section.value?.economy_list_items ?? []).map((item, index) => ({
     id: item.id,
-    title: item.title,
-    text: item.text,
+    title: props.featureOverrides[index]?.title || item.title,
+    text: props.featureOverrides[index]?.text || item.text,
     image: getStrapiMediaUrl(item.image, apiUrl),
   })),
 )
