@@ -15,8 +15,7 @@
     <TransferFeaturesSec
       :country-name="transfersPage.title"
       :country-cities="transfersPage.country_cities"
-      :features-banks="transfersPage.features_banks"
-      :features-text="transfersPage.features_text"
+      :section="transfersPage.transfer_features_sec"
     />
 
     <TransferProcessSec :country-name="transfersPage.title" />
@@ -71,6 +70,7 @@ const populate = [
   'populate[services_invoice_example_sec][populate][examples_items][populate][blog][populate]=post_image',
   'populate[service_media_about_us_sec][populate][posts][populate]=logo',
   'populate[country_cities]=true',
+  'populate[transfer_features_sec]=true',
   'populate[transfers_pages_region]=true',
   ...STRAPI_SEO_POPULATE_PARTS,
 ].join('&')
