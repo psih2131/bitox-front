@@ -174,7 +174,7 @@ const rateText = computed(() => {
   const rateIn = Number(selectedRate.value.in)
   const rateOut = Number(selectedRate.value.out)
   if (!Number.isFinite(rateIn) || !Number.isFinite(rateOut)) return ''
-  return `Курс ≈ ${formatAmount(Math.max(rateIn, rateOut), 4)} · зафиксирован на 15 мин`
+  return `Курс ≈ ${formatAmount(Math.max(rateIn, rateOut), 4)}`
 })
 
 // Данные расчёта уходят в админку вместе с меткой, по ней бот покажет их клиенту
