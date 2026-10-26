@@ -15,8 +15,11 @@
               </NuxtLink>
 
               <!-- Юр. данные из админки (_footer_component → legal_info), каждая строка отдельно -->
-              <div v-if="legalLines.length" class="app-footer__requisites">
-                <p v-for="(line, index) in legalLines" :key="index" class="app-footer__requisites-line">{{ line }}</p>
+              <!-- Пустая строка в админке — отступ между группами -->
+              <div v-if="legalGroups.length" class="app-footer__requisites">
+                <div v-for="(group, groupIndex) in legalGroups" :key="groupIndex" class="app-footer__requisites-group">
+                  <p v-for="(line, index) in group" :key="index" class="app-footer__requisites-line">{{ line }}</p>
+                </div>
               </div>
             </div>
             <p class="app-footer__legal footer_copy">© 2026 Bitox</p>
@@ -145,11 +148,12 @@ const docsPagesCol3 = computed(() => docsPages.value.filter((_, index) => index 
 
 const contacts = computed(() => footer.value?.contacts_list ?? [])
 
-const legalLines = computed(() =>
+// Строки юр. данных; пустая строка между ними делит их на группы с отступом
+const legalGroups = computed(() =>
   (footer.value?.legal_info || '')
-    .split('\n')
-    .map((line) => line.trim())
-    .filter(Boolean),
+    .split(/\n\s*\n/)
+    .map((group) => group.split('\n').map((line) => line.trim()).filter(Boolean))
+    .filter((group) => group.length),
 )
 
 function getSocialLabel(link, alternativeText) {
